@@ -1,0 +1,329 @@
+# MetaSearchMCP
+
+Open-source metasearch backend for MCP, AI agents, and LLM workflows.
+
+MetaSearchMCP aggregates results from multiple search providers, normalizes them into a stable JSON schema, and exposes both an HTTP API and an MCP server for agent tooling.
+
+## Positioning
+
+- MCP-first metasearch backend
+- Structured search API for AI pipelines
+- Multi-provider search orchestration with deduplication and fallback
+- Python FastAPI alternative to browser-first metasearch projects
+
+## Why It Exists
+
+Most search aggregators are designed around browser UX: HTML pages, pagination, and interactive result cards. Agents and LLM workflows need a different contract: predictable JSON, stable field names, partial-failure tolerance, and provider-level execution metadata.
+
+MetaSearchMCP is built for that machine-consumable workflow. It is not a SearXNG clone. The design is centered on search orchestration, normalized contracts, and MCP integration.
+
+## Core Features
+
+- Concurrent multi-provider aggregation
+- Unified result schema for web, academic, developer, and knowledge sources
+- Provider-level timeout isolation and partial-failure handling
+- Result deduplication across engines
+- HTTP API with OpenAPI docs
+- MCP server over stdio for Claude Desktop, Cline, Continue, and similar clients
+- Configurable provider allowlist via environment variables
+
+## Google Support
+
+Google is intentionally not scraped directly in this project.
+
+In practice, Google's anti-bot and risk-control systems make self-hosted scraping brittle and expensive to maintain. For a backend intended for reliable MCP and AI workloads, hosted Google providers are the more practical option.
+
+Currently supported Google providers:
+
+| Provider | Env var | Notes |
+|---|---|---|
+| [serpbase.dev](https://serpbase.dev) | `SERPBASE_API_KEY` | Pay-per-use; typically cheaper for low-volume usage |
+| [serper.dev](https://serper.dev) | `SERPER_API_KEY` | Includes a free tier, then pay-per-use |
+
+Both are low-cost options. For smaller or occasional workloads, `serpbase.dev` is usually the lower-cost choice.
+
+## Supported Providers
+
+### Google
+
+| Provider | Name | Method |
+|---|---|---|
+| SerpBase | `google_serpbase` | Hosted Google SERP API |
+| Serper | `google_serper` | Hosted Google SERP API |
+
+### Web Search
+
+| Provider | Name | Method |
+|---|---|---|
+| DuckDuckGo | `duckduckgo` | HTML scraping |
+| Bing | `bing` | HTML scraping |
+| Yahoo | `yahoo` | HTML scraping |
+| Brave | `brave` | Official Search API |
+| Ecosia | `ecosia` | HTML scraping |
+| Mojeek | `mojeek` | HTML scraping |
+| Startpage | `startpage` | HTML scraping, best effort |
+| Qwant | `qwant` | Internal JSON API, best effort |
+| Yandex | `yandex` | HTML scraping, best effort |
+| Baidu | `baidu` | HTML scraping, best effort |
+
+### Knowledge And Reference
+
+| Provider | Name | Method |
+|---|---|---|
+| Wikipedia | `wikipedia` | MediaWiki API |
+| Wikidata | `wikidata` | Wikidata API |
+| Internet Archive | `internet_archive` | Advanced Search API |
+
+### Developer Sources
+
+| Provider | Name | Method |
+|---|---|---|
+| GitHub | `github` | GitHub REST API |
+| Stack Overflow | `stackoverflow` | Stack Exchange API |
+| Hacker News | `hackernews` | Algolia HN API |
+| Reddit | `reddit` | Reddit API |
+| npm | `npm` | npm registry API |
+| PyPI | `pypi` | HTML scraping |
+| crates.io | `crates` | crates.io API |
+
+### Academic Sources
+
+| Provider | Name | Method |
+|---|---|---|
+| arXiv | `arxiv` | Atom API |
+| PubMed | `pubmed` | NCBI E-utilities |
+| Semantic Scholar | `semanticscholar` | Graph API |
+| CrossRef | `crossref` | REST API |
+
+## Installation
+
+```bash
+git clone https://github.com/your-org/MetaSearchMCP
+cd MetaSearchMCP
+pip install -e ".[dev]"
+```
+
+Or with `uv`:
+
+```bash
+uv pip install -e ".[dev]"
+```
+
+## Configuration
+
+Copy `.env.example` to `.env` and configure any providers you want to enable.
+
+```bash
+cp .env.example .env
+```
+
+Key settings:
+
+```env
+HOST=0.0.0.0
+PORT=8000
+DEFAULT_TIMEOUT=10
+AGGREGATOR_TIMEOUT=15
+
+SERPBASE_API_KEY=
+SERPER_API_KEY=
+BRAVE_API_KEY=
+GITHUB_TOKEN=
+STACKEXCHANGE_API_KEY=
+REDDIT_CLIENT_ID=
+REDDIT_CLIENT_SECRET=
+NCBI_API_KEY=
+SEMANTIC_SCHOLAR_API_KEY=
+
+ENABLED_PROVIDERS=
+ALLOW_UNSTABLE_PROVIDERS=false
+MAX_RESULTS_PER_PROVIDER=10
+```
+
+## Running
+
+### HTTP API
+
+```bash
+python -m metasearchmcp.server
+# or
+metasearchmcp
+```
+
+The API starts on `http://localhost:8000`.
+
+### MCP Server
+
+```bash
+python -m metasearchmcp.broker
+# or
+metasearchmcp-mcp
+```
+
+The MCP server communicates over stdio.
+
+### Docker
+
+```bash
+docker build -t metasearchmcp .
+docker run --rm -p 8000:8000 --env-file .env metasearchmcp
+```
+
+Or with Compose:
+
+```bash
+docker compose up --build
+```
+
+## HTTP API
+
+### `POST /search`
+
+Aggregate across all enabled providers or a selected provider subset.
+
+```bash
+curl -X POST http://localhost:8000/search \
+  -H "Content-Type: application/json" \
+  -d '{
+    "query": "rust async runtime",
+    "providers": ["duckduckgo", "wikipedia"],
+    "params": {"num_results": 5, "language": "en"}
+  }'
+```
+
+### `POST /search/google`
+
+Search Google through a configured hosted provider.
+
+```bash
+curl -X POST http://localhost:8000/search/google \
+  -H "Content-Type: application/json" \
+  -d '{"query": "site:github.com rust tokio"}'
+```
+
+### `GET /providers`
+
+Return the currently available provider catalog.
+
+### `GET /health`
+
+Simple health check endpoint.
+
+## Response Schema
+
+Every aggregated response includes:
+
+- `engine`
+- `query`
+- `results`
+- `related_searches`
+- `suggestions`
+- `answer_box`
+- `timing_ms`
+- `providers`
+- `errors`
+
+Every result item includes:
+
+- `title`
+- `url`
+- `snippet`
+- `source`
+- `rank`
+- `provider`
+- `published_date`
+- `extra`
+
+Example response:
+
+```json
+{
+  "engine": "metasearchmcp",
+  "query": "rust async runtime",
+  "results": [
+    {
+      "title": "Tokio - An asynchronous Rust runtime",
+      "url": "https://tokio.rs",
+      "snippet": "Tokio is an event-driven, non-blocking I/O platform...",
+      "source": "tokio.rs",
+      "rank": 1,
+      "provider": "duckduckgo",
+      "published_date": null,
+      "extra": {}
+    }
+  ],
+  "related_searches": [],
+  "suggestions": [],
+  "answer_box": null,
+  "timing_ms": 843.2,
+  "providers": [
+    {
+      "name": "duckduckgo",
+      "success": true,
+      "result_count": 10,
+      "latency_ms": 840.1,
+      "error": null
+    }
+  ],
+  "errors": []
+}
+```
+
+## MCP Tools
+
+MetaSearchMCP exposes these MCP tools:
+
+- `search_web`
+- `search_google`
+- `search_academic`
+- `search_github`
+- `compare_engines`
+
+Example Claude Desktop config:
+
+```json
+{
+  "mcpServers": {
+    "MetaSearchMCP": {
+      "command": "metasearchmcp-mcp",
+      "env": {
+        "SERPBASE_API_KEY": "your_key",
+        "SERPER_API_KEY": "your_key"
+      }
+    }
+  }
+}
+```
+
+## Development
+
+```bash
+pip install -e ".[dev]"
+pytest
+uvicorn metasearchmcp.server:app --reload
+```
+
+## Architecture
+
+The public package is organized around these modules:
+
+- `contracts.py`: request and response models
+- `catalog.py`: provider discovery and selection
+- `orchestrator.py`: concurrent search execution and response assembly
+- `merge.py`: URL normalization and deduplication
+- `server.py`: FastAPI entrypoint
+- `broker.py`: MCP entrypoint
+
+Legacy module names are kept as compatibility shims for earlier imports.
+
+## Roadmap
+
+- Caching and provider-aware query reuse
+- Better scoring and ranking signals across providers
+- Streaming aggregation responses
+- Provider health telemetry
+- More first-party API integrations where they improve reliability
+
+## License
+
+MIT

@@ -75,6 +75,7 @@ Both are low-cost options. For smaller or occasional workloads, `serpbase.dev` i
 | Wikipedia | `wikipedia` | MediaWiki API |
 | Wikidata | `wikidata` | Wikidata API |
 | Internet Archive | `internet_archive` | Advanced Search API |
+| Open Library | `openlibrary` | Open Library search API |
 
 ### Developer Sources
 
@@ -86,7 +87,9 @@ Both are low-cost options. For smaller or occasional workloads, `serpbase.dev` i
 | Reddit | `reddit` | Reddit API |
 | npm | `npm` | npm registry API |
 | PyPI | `pypi` | HTML scraping |
+| RubyGems | `rubygems` | RubyGems search API |
 | crates.io | `crates` | crates.io API |
+| Docker Hub | `dockerhub` | Docker Hub search API |
 
 ### Academic Sources
 

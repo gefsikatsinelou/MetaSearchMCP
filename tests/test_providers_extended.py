@@ -1,10 +1,12 @@
 """Parse/adapter tests for the new providers added in the second batch."""
+
 from __future__ import annotations
 
 
 # ---------------------------------------------------------------------------
 # HackerNews
 # ---------------------------------------------------------------------------
+
 
 def _hn_response() -> dict:
     return {
@@ -21,7 +23,7 @@ def _hn_response() -> dict:
             {
                 "objectID": "99999",
                 "title": "Show HN: My new project",
-                "url": "",   # self post, no external URL
+                "url": "",  # self post, no external URL
                 "author": "maker",
                 "points": 50,
                 "num_comments": 10,
@@ -33,6 +35,7 @@ def _hn_response() -> dict:
 
 def test_hackernews_parse():
     from metasearchmcp.providers.hackernews import HackerNewsProvider
+
     p = HackerNewsProvider()
     result = p._parse(_hn_response())
 
@@ -47,6 +50,7 @@ def test_hackernews_parse():
 
 def test_hackernews_self_post_uses_hn_url():
     from metasearchmcp.providers.hackernews import HackerNewsProvider
+
     p = HackerNewsProvider()
     result = p._parse(_hn_response())
     # second result has no external URL -> should use HN permalink
@@ -57,6 +61,7 @@ def test_hackernews_self_post_uses_hn_url():
 # ---------------------------------------------------------------------------
 # npm
 # ---------------------------------------------------------------------------
+
 
 def _npm_response() -> dict:
     return {
@@ -78,6 +83,7 @@ def _npm_response() -> dict:
 
 def test_npm_parse():
     from metasearchmcp.providers.npm import NpmProvider
+
     p = NpmProvider()
     result = p._parse(_npm_response())
 
@@ -94,6 +100,7 @@ def test_npm_parse():
 # ---------------------------------------------------------------------------
 # crates.io
 # ---------------------------------------------------------------------------
+
 
 def _crates_response() -> dict:
     return {
@@ -112,6 +119,7 @@ def _crates_response() -> dict:
 
 def test_crates_parse():
     from metasearchmcp.providers.crates import CratesIoProvider
+
     p = CratesIoProvider()
     result = p._parse(_crates_response())
 
@@ -127,6 +135,7 @@ def test_crates_parse():
 # ---------------------------------------------------------------------------
 # Reddit
 # ---------------------------------------------------------------------------
+
 
 def _reddit_response() -> dict:
     return {
@@ -152,6 +161,7 @@ def _reddit_response() -> dict:
 
 def test_reddit_parse():
     from metasearchmcp.providers.reddit import RedditProvider
+
     p = RedditProvider()
     result = p._parse(_reddit_response())
 
@@ -166,6 +176,7 @@ def test_reddit_parse():
 # ---------------------------------------------------------------------------
 # Stack Overflow
 # ---------------------------------------------------------------------------
+
 
 def _so_response() -> dict:
     return {
@@ -184,6 +195,7 @@ def _so_response() -> dict:
 
 def test_stackoverflow_parse():
     from metasearchmcp.providers.stackoverflow import StackOverflowProvider
+
     p = StackOverflowProvider()
     result = p._parse(_so_response())
 
@@ -198,6 +210,7 @@ def test_stackoverflow_parse():
 # ---------------------------------------------------------------------------
 # Wikidata
 # ---------------------------------------------------------------------------
+
 
 def _wikidata_response() -> dict:
     return {
@@ -215,6 +228,7 @@ def _wikidata_response() -> dict:
 
 def test_wikidata_parse():
     from metasearchmcp.providers.wikidata import WikidataProvider
+
     p = WikidataProvider()
     result = p._parse(_wikidata_response(), "en")
 
@@ -229,6 +243,7 @@ def test_wikidata_parse():
 # ---------------------------------------------------------------------------
 # Internet Archive
 # ---------------------------------------------------------------------------
+
 
 def _ia_response() -> dict:
     return {
@@ -249,6 +264,7 @@ def _ia_response() -> dict:
 
 def test_internet_archive_parse():
     from metasearchmcp.providers.internet_archive import InternetArchiveProvider
+
     p = InternetArchiveProvider()
     result = p._parse(_ia_response())
 
@@ -262,6 +278,7 @@ def test_internet_archive_parse():
 # ---------------------------------------------------------------------------
 # Semantic Scholar
 # ---------------------------------------------------------------------------
+
 
 def _s2_response() -> dict:
     return {
@@ -287,6 +304,7 @@ def _s2_response() -> dict:
 
 def test_semanticscholar_parse():
     from metasearchmcp.providers.semanticscholar import SemanticScholarProvider
+
     p = SemanticScholarProvider()
     result = p._parse(_s2_response())
 
@@ -302,6 +320,7 @@ def test_semanticscholar_parse():
 # ---------------------------------------------------------------------------
 # CrossRef
 # ---------------------------------------------------------------------------
+
 
 def _crossref_response() -> dict:
     return {
@@ -328,6 +347,7 @@ def _crossref_response() -> dict:
 
 def test_crossref_parse():
     from metasearchmcp.providers.crossref import CrossrefProvider
+
     p = CrossrefProvider()
     result = p._parse(_crossref_response())
 
@@ -344,6 +364,7 @@ def test_crossref_parse():
 # ---------------------------------------------------------------------------
 # PubMed
 # ---------------------------------------------------------------------------
+
 
 def _pubmed_summary() -> dict:
     return {
@@ -363,6 +384,7 @@ def _pubmed_summary() -> dict:
 
 def test_pubmed_parse():
     from metasearchmcp.providers.pubmed import PubMedProvider
+
     p = PubMedProvider()
     result = p._parse(_pubmed_summary(), ["12345"])
 
@@ -378,10 +400,96 @@ def test_pubmed_parse():
 # Registry integration
 # ---------------------------------------------------------------------------
 
+
+def _rubygems_response() -> list[dict]:
+    return [
+        {
+            "name": "rails",
+            "version": "8.0.0",
+            "downloads": 987654321,
+            "authors": "David Heinemeier Hansson",
+            "info": "Full-stack web application framework.",
+        }
+    ]
+
+
+def test_rubygems_parse():
+    from metasearchmcp.providers.rubygems import RubyGemsProvider
+
+    p = RubyGemsProvider()
+    result = p._parse(_rubygems_response())
+
+    assert len(result.results) == 1
+    r = result.results[0]
+    assert r.title == "rails"
+    assert r.url == "https://rubygems.org/gems/rails"
+    assert r.provider == "rubygems"
+    assert r.extra["downloads"] == 987654321
+
+
+def _dockerhub_response() -> dict:
+    return {
+        "summaries": [
+            {
+                "name": "nginx",
+                "namespace": "library",
+                "short_description": "Official build of Nginx.",
+                "star_count": 15000,
+                "pull_count": 1000000000,
+                "is_official": True,
+            }
+        ]
+    }
+
+
+def test_dockerhub_parse():
+    from metasearchmcp.providers.dockerhub import DockerHubProvider
+
+    p = DockerHubProvider()
+    result = p._parse(_dockerhub_response())
+
+    assert len(result.results) == 1
+    r = result.results[0]
+    assert r.title == "library/nginx"
+    assert r.url == "https://hub.docker.com/r/library/nginx"
+    assert r.provider == "dockerhub"
+    assert r.extra["is_official"] is True
+
+
+def _openlibrary_response() -> dict:
+    return {
+        "docs": [
+            {
+                "key": "/works/OL45883W",
+                "title": "The Pragmatic Programmer",
+                "author_name": ["Andrew Hunt", "David Thomas"],
+                "first_publish_year": 1999,
+                "edition_count": 12,
+                "language": ["eng"],
+            }
+        ]
+    }
+
+
+def test_openlibrary_parse():
+    from metasearchmcp.providers.openlibrary import OpenLibraryProvider
+
+    p = OpenLibraryProvider()
+    result = p._parse(_openlibrary_response())
+
+    assert len(result.results) == 1
+    r = result.results[0]
+    assert r.title == "The Pragmatic Programmer"
+    assert r.url == "https://openlibrary.org/works/OL45883W"
+    assert r.provider == "openlibrary"
+    assert r.published_date == "1999"
+
+
 def test_registry_imports_all_providers():
     """Smoke test: all provider classes can be instantiated without error."""
     from metasearchmcp.providers.registry import _ALL_PROVIDER_CLASSES
-    assert len(_ALL_PROVIDER_CLASSES) >= 26
+
+    assert len(_ALL_PROVIDER_CLASSES) >= 29
     for cls in _ALL_PROVIDER_CLASSES:
         instance = cls()
         assert instance.name != ""

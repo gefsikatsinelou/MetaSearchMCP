@@ -1,0 +1,69 @@
+from __future__ import annotations
+
+from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
+from .base import BaseProvider
+
+_API_URL = "https://openlibrary.org/search.json"
+
+
+class OpenLibraryProvider(BaseProvider):
+    """Open Library search via the public search API."""
+
+    name = "openlibrary"
+    tags = ["web", "academic", "knowledge", "books"]
+
+    async def search(self, query: str, params: SearchParams) -> ProviderResult:
+        qp = {
+            "q": query,
+            "limit": min(params.num_results, self._max_results, 20),
+            "fields": "key,title,author_name,first_publish_year,edition_count,language",
+        }
+
+        async with self._client() as client:
+            resp = await client.get(_API_URL, params=qp)
+            resp.raise_for_status()
+            data = resp.json()
+
+        return self._parse(data)
+
+    def _parse(self, data: dict) -> ProviderResult:
+        results: list[SearchResult] = []
+
+        for i, doc in enumerate(data.get("docs", []), start=1):
+            key = doc.get("key", "")
+            if not key:
+                continue
+            title = doc.get("title", key.rsplit("/", 1)[-1])
+            authors = doc.get("author_name") or []
+            year = doc.get("first_publish_year")
+            edition_count = doc.get("edition_count", 0)
+            languages = doc.get("language") or []
+
+            snippet_parts = []
+            if authors:
+                snippet_parts.append(", ".join(authors[:3]))
+            if year:
+                snippet_parts.append(f"First published: {year}")
+            if edition_count:
+                snippet_parts.append(f"Editions: {edition_count}")
+            if languages:
+                snippet_parts.append(f"Languages: {', '.join(languages[:3])}")
+
+            results.append(
+                SearchResult(
+                    title=title,
+                    url=f"https://openlibrary.org{key}",
+                    snippet=" | ".join(snippet_parts),
+                    source="openlibrary.org",
+                    rank=i,
+                    provider=self.name,
+                    published_date=str(year) if year else None,
+                    extra={
+                        "authors": authors,
+                        "edition_count": edition_count,
+                        "languages": languages,
+                    },
+                )
+            )
+
+        return ProviderResult(results=results)

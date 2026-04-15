@@ -33,13 +33,16 @@ from .hackernews import HackerNewsProvider
 from .reddit import RedditProvider
 from .npm import NpmProvider
 from .pypi import PyPIProvider
+from .rubygems import RubyGemsProvider
 from .crates import CratesIoProvider
+from .dockerhub import DockerHubProvider
 
 # Academic
 from .arxiv import ArxivProvider
 from .pubmed import PubMedProvider
 from .semanticscholar import SemanticScholarProvider
 from .crossref import CrossrefProvider
+from .openlibrary import OpenLibraryProvider
 
 
 # Ordered list of all provider classes.
@@ -70,12 +73,15 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     RedditProvider,
     NpmProvider,
     PyPIProvider,
+    RubyGemsProvider,
     CratesIoProvider,
+    DockerHubProvider,
     # Academic
     ArxivProvider,
     PubMedProvider,
     SemanticScholarProvider,
     CrossrefProvider,
+    OpenLibraryProvider,
 ]
 
 

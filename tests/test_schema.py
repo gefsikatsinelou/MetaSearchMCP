@@ -53,6 +53,7 @@ def test_search_request_requires_query():
 def test_search_request_defaults():
     req = SearchEnvelope(query="hello world")
     assert req.providers == []
+    assert req.tags == []
     assert req.params.num_results == 10
 
 

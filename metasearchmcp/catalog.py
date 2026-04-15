@@ -24,3 +24,18 @@ def pick_tagged_providers(
     return {
         name: provider for name, provider in catalog.items() if tag in provider.tags
     }
+
+
+def pick_providers_by_tags(
+    catalog: dict[str, BaseProvider],
+    tags: list[str],
+) -> dict[str, BaseProvider]:
+    if not tags:
+        return catalog
+
+    requested = set(tags)
+    return {
+        name: provider
+        for name, provider in catalog.items()
+        if requested.intersection(provider.tags)
+    }

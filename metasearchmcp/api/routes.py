@@ -1,10 +1,11 @@
 from __future__ import annotations
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Query
 
 from metasearchmcp.catalog import (
     build_provider_catalog,
     pick_named_providers,
+    pick_providers_by_tags,
     pick_tagged_providers,
 )
 from metasearchmcp.contracts import (
@@ -33,11 +34,15 @@ async def search(
     req: SearchEnvelope,
     registry=Depends(_get_registry),
 ) -> SearchReport:
-    providers_map = pick_named_providers(registry, req.providers)
+    providers_map = pick_providers_by_tags(registry, req.tags)
+    providers_map = pick_named_providers(providers_map, req.providers)
     if not providers_map:
         raise HTTPException(
             status_code=503,
-            detail="No providers available. Check configuration and API keys.",
+            detail=(
+                "No providers available for the requested filters. "
+                "Check provider names, tags, configuration, and API keys."
+            ),
         )
     return await run_search_plan(req.query, list(providers_map.values()), req.params)
 
@@ -84,8 +89,13 @@ async def health() -> dict:
 @router.get(
     "/providers", summary="List all configured providers and their availability"
 )
-async def providers(registry=Depends(_get_registry)) -> dict:
+async def providers(
+    tag: list[str] | None = Query(default=None),
+    registry=Depends(_get_registry),
+) -> dict:
+    filtered = pick_providers_by_tags(registry, tag or [])
     return {
-        "available": [{"name": p.name, "tags": p.tags} for p in registry.values()],
-        "count": len(registry),
+        "available": [{"name": p.name, "tags": p.tags} for p in filtered.values()],
+        "count": len(filtered),
+        "filters": {"tags": tag or []},
     }

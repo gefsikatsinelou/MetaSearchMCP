@@ -54,6 +54,10 @@ class SearchEnvelope(BaseModel):
         default_factory=list,
         description="Explicit provider list; empty = use all enabled providers",
     )
+    tags: list[str] = Field(
+        default_factory=list,
+        description="Optional provider tags used to narrow the provider set",
+    )
     params: SearchOptions = Field(default_factory=SearchOptions)
 
 

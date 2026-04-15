@@ -15,6 +15,7 @@ from mcp.server.models import InitializationOptions
 from metasearchmcp.catalog import (
     build_provider_catalog,
     pick_named_providers,
+    pick_providers_by_tags,
     pick_tagged_providers,
 )
 from metasearchmcp.contracts import SearchOptions
@@ -37,6 +38,11 @@ _TOOLS = [
                     "type": "array",
                     "items": {"type": "string"},
                     "description": "Explicit provider list; empty = all enabled.",
+                },
+                "tags": {
+                    "type": "array",
+                    "items": {"type": "string"},
+                    "description": "Optional provider tags used to narrow the provider set.",
                 },
                 "num_results": {
                     "type": "integer",
@@ -146,7 +152,10 @@ async def dispatch_tool(name: str, arguments: dict[str, Any]) -> dict[str, Any]:
             language=arguments.get("language", "en"),
             country=arguments.get("country", "us"),
         )
-        selected = pick_named_providers(_catalog, arguments.get("providers") or [])
+        selected = pick_providers_by_tags(_catalog, arguments.get("tags") or [])
+        selected = pick_named_providers(selected, arguments.get("providers") or [])
+        if not selected:
+            return {"error": "No providers available for the requested filters."}
         return (
             await run_search_plan(query, list(selected.values()), options)
         ).model_dump()

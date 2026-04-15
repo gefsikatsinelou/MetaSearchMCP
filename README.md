@@ -23,6 +23,7 @@ MetaSearchMCP is built for that machine-consumable workflow. It is not a SearXNG
 - Unified result schema for web, academic, developer, and knowledge sources
 - Provider-level timeout isolation and partial-failure handling
 - Result deduplication across engines
+- Provider selection by explicit names or semantic tags such as `web`, `academic`, `code`, and `google`
 - HTTP API with OpenAPI docs
 - MCP server over stdio for Claude Desktop, Cline, Continue, and similar clients
 - Configurable provider allowlist via environment variables
@@ -191,6 +192,18 @@ curl -X POST http://localhost:8000/search \
   }'
 ```
 
+You can also narrow providers by tags:
+
+```bash
+curl -X POST http://localhost:8000/search \
+  -H "Content-Type: application/json" \
+  -d '{
+    "query": "transformer attention",
+    "tags": ["academic", "knowledge"],
+    "params": {"num_results": 5}
+  }'
+```
+
 ### `POST /search/google`
 
 Search Google through a configured hosted provider.
@@ -204,6 +217,12 @@ curl -X POST http://localhost:8000/search/google \
 ### `GET /providers`
 
 Return the currently available provider catalog.
+
+You can filter the catalog by tag:
+
+```bash
+curl "http://localhost:8000/providers?tag=academic&tag=web"
+```
 
 ### `GET /health`
 
@@ -278,6 +297,8 @@ MetaSearchMCP exposes these MCP tools:
 - `search_academic`
 - `search_github`
 - `compare_engines`
+
+`search_web` also accepts optional `tags` so agents can limit search to categories such as `web`, `academic`, `code`, or `google`.
 
 Example Claude Desktop config:
 

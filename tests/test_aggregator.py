@@ -7,7 +7,7 @@ from unittest.mock import AsyncMock, MagicMock
 
 import pytest
 
-from metasearchmcp.contracts import ProviderPayload, SearchHit
+from metasearchmcp.contracts import ProviderPayload, SearchHit, SearchOptions
 from metasearchmcp.orchestrator import run_search_plan
 
 
@@ -130,3 +130,34 @@ async def test_aggregate_empty_providers():
     resp = await run_search_plan("test", [])
     assert resp.results == []
     assert resp.providers == []
+
+
+@pytest.mark.asyncio
+async def test_aggregate_respects_max_total_results():
+    p1 = _make_provider(
+        "p1",
+        [
+            _result("https://a.com", "p1"),
+            _result("https://b.com", "p1"),
+        ],
+    )
+    p2 = _make_provider(
+        "p2",
+        [
+            _result("https://c.com", "p2"),
+            _result("https://d.com", "p2"),
+        ],
+    )
+
+    resp = await run_search_plan(
+        "test",
+        [p1, p2],
+        SearchOptions(num_results=10, max_total_results=3),
+    )
+
+    assert [result.url for result in resp.results] == [
+        "https://a.com",
+        "https://b.com",
+        "https://c.com",
+    ]
+    assert [result.rank for result in resp.results] == [1, 2, 3]

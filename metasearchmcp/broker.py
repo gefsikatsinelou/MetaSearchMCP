@@ -50,6 +50,13 @@ _TOOLS = [
                     "minimum": 1,
                     "maximum": 50,
                 },
+                "max_total_results": {
+                    "type": "integer",
+                    "default": 20,
+                    "minimum": 1,
+                    "maximum": 100,
+                    "description": "Cap the final merged result set returned to the agent.",
+                },
                 "language": {"type": "string", "default": "en"},
                 "country": {"type": "string", "default": "us"},
             },
@@ -69,6 +76,7 @@ _TOOLS = [
                     "default": "",
                 },
                 "num_results": {"type": "integer", "default": 10},
+                "max_total_results": {"type": "integer", "default": 20},
             },
             "required": ["query"],
         },
@@ -81,6 +89,7 @@ _TOOLS = [
             "properties": {
                 "query": {"type": "string", "description": "Search query"},
                 "num_results": {"type": "integer", "default": 10},
+                "max_total_results": {"type": "integer", "default": 20},
             },
             "required": ["query"],
         },
@@ -93,6 +102,7 @@ _TOOLS = [
             "properties": {
                 "query": {"type": "string", "description": "Search query"},
                 "num_results": {"type": "integer", "default": 10},
+                "max_total_results": {"type": "integer", "default": 20},
             },
             "required": ["query"],
         },
@@ -110,6 +120,7 @@ _TOOLS = [
                     "description": "Providers to compare. Empty = all enabled.",
                 },
                 "num_results": {"type": "integer", "default": 5},
+                "max_total_results": {"type": "integer", "default": 20},
             },
             "required": ["query"],
         },
@@ -144,11 +155,16 @@ async def call_tool(name: str, arguments: dict[str, Any]) -> list[types.TextCont
 async def dispatch_tool(name: str, arguments: dict[str, Any]) -> dict[str, Any]:
     query = arguments["query"]
     num_results = int(arguments.get("num_results", 10))
-    options = SearchOptions(num_results=num_results)
+    max_total_results = int(arguments.get("max_total_results", 20))
+    options = SearchOptions(
+        num_results=num_results,
+        max_total_results=max_total_results,
+    )
 
     if name == "search_web":
         options = SearchOptions(
             num_results=num_results,
+            max_total_results=max_total_results,
             language=arguments.get("language", "en"),
             country=arguments.get("country", "us"),
         )
@@ -199,7 +215,14 @@ async def dispatch_tool(name: str, arguments: dict[str, Any]) -> dict[str, Any]:
             return {"error": "No providers available for comparison."}
 
         jobs = [
-            run_search_plan(query, [provider], SearchOptions(num_results=num_results))
+            run_search_plan(
+                query,
+                [provider],
+                SearchOptions(
+                    num_results=num_results,
+                    max_total_results=max_total_results,
+                ),
+            )
             for provider in selected.values()
         ]
         responses = await asyncio.gather(*jobs, return_exceptions=True)

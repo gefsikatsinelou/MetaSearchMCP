@@ -43,6 +43,7 @@ class ProviderReport(BaseModel):
 
 class SearchOptions(BaseModel):
     num_results: int = Field(default=10, ge=1, le=50)
+    max_total_results: int = Field(default=20, ge=1, le=100)
     language: str = "en"
     country: str = "us"
     safe_search: bool = True

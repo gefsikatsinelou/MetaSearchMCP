@@ -24,6 +24,7 @@ MetaSearchMCP is built for that machine-consumable workflow. It is not a SearXNG
 - Provider-level timeout isolation and partial-failure handling
 - Result deduplication across engines
 - Provider selection by explicit names or semantic tags such as `web`, `academic`, `code`, and `google`
+- Final result caps for agent-friendly payload sizing
 - HTTP API with OpenAPI docs
 - MCP server over stdio for Claude Desktop, Cline, Continue, and similar clients
 - Configurable provider allowlist via environment variables
@@ -188,7 +189,7 @@ curl -X POST http://localhost:8000/search \
   -d '{
     "query": "rust async runtime",
     "providers": ["duckduckgo", "wikipedia"],
-    "params": {"num_results": 5, "language": "en"}
+    "params": {"num_results": 5, "max_total_results": 8, "language": "en"}
   }'
 ```
 
@@ -200,9 +201,11 @@ curl -X POST http://localhost:8000/search \
   -d '{
     "query": "transformer attention",
     "tags": ["academic", "knowledge"],
-    "params": {"num_results": 5}
+    "params": {"num_results": 5, "max_total_results": 6}
   }'
 ```
+
+`num_results` controls how many results each provider can contribute. `max_total_results` caps the final merged response after deduplication.
 
 ### `POST /search/google`
 
@@ -299,6 +302,7 @@ MetaSearchMCP exposes these MCP tools:
 - `compare_engines`
 
 `search_web` also accepts optional `tags` so agents can limit search to categories such as `web`, `academic`, `code`, or `google`.
+All search tools accept `max_total_results` to keep the final payload compact.
 
 Example Claude Desktop config:
 

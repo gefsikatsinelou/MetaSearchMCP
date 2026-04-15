@@ -34,6 +34,7 @@ def test_search_result_empty_url_ok():
 def test_search_params_defaults():
     p = SearchOptions()
     assert p.num_results == 10
+    assert p.max_total_results == 20
     assert p.language == "en"
     assert p.safe_search is True
 
@@ -43,6 +44,10 @@ def test_search_params_bounds():
         SearchOptions(num_results=0)
     with pytest.raises(ValidationError):
         SearchOptions(num_results=51)
+    with pytest.raises(ValidationError):
+        SearchOptions(max_total_results=0)
+    with pytest.raises(ValidationError):
+        SearchOptions(max_total_results=101)
 
 
 def test_search_request_requires_query():
@@ -55,6 +60,7 @@ def test_search_request_defaults():
     assert req.providers == []
     assert req.tags == []
     assert req.params.num_results == 10
+    assert req.params.max_total_results == 20
 
 
 def test_search_response_serializable():

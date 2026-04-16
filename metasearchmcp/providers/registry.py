@@ -20,6 +20,7 @@ from .baidu import BaiduProvider
 
 # Web search — API
 from .brave import BraveProvider
+from .mwmbl import MwmblProvider
 
 # Knowledge / reference
 from .wikipedia import WikipediaProvider
@@ -28,6 +29,7 @@ from .internet_archive import InternetArchiveProvider
 
 # Developer
 from .github import GitHubProvider
+from .gitlab import GitLabProvider
 from .stackoverflow import StackOverflowProvider
 from .hackernews import HackerNewsProvider
 from .reddit import RedditProvider
@@ -35,7 +37,10 @@ from .npm import NpmProvider
 from .pypi import PyPIProvider
 from .rubygems import RubyGemsProvider
 from .crates import CratesIoProvider
+from .lib_rs import LibRsProvider
 from .dockerhub import DockerHubProvider
+from .pkg_go_dev import PkgGoDevProvider
+from .metacpan import MetaCPANProvider
 
 # Academic
 from .arxiv import ArxivProvider
@@ -56,6 +61,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     BingProvider,
     YahooProvider,
     BraveProvider,
+    MwmblProvider,
     EcosiaProvider,
     MojeekProvider,
     StartpageProvider,
@@ -68,6 +74,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     InternetArchiveProvider,
     # Developer
     GitHubProvider,
+    GitLabProvider,
     StackOverflowProvider,
     HackerNewsProvider,
     RedditProvider,
@@ -75,7 +82,10 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     PyPIProvider,
     RubyGemsProvider,
     CratesIoProvider,
+    LibRsProvider,
     DockerHubProvider,
+    PkgGoDevProvider,
+    MetaCPANProvider,
     # Academic
     ArxivProvider,
     PubMedProvider,

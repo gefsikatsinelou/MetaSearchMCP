@@ -25,6 +25,7 @@ class Settings(BaseSettings):
 
     # API keys — web providers
     brave_api_key: str = ""
+    tavily_api_key: str = ""
 
     # API keys — developer providers
     github_token: str = ""

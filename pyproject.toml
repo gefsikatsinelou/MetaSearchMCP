@@ -18,6 +18,7 @@ dependencies = [
     "lxml>=5.2.0",
     "mcp>=1.0.0",
     "python-dotenv>=1.0.0",
+    "tavily-python>=0.5.0",
 ]
 
 [project.optional-dependencies]

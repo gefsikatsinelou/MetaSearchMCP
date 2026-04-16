@@ -20,18 +20,22 @@ class TavilyProvider(BaseProvider):
     def __init__(self) -> None:
         super().__init__()
         self._api_key = get_settings().tavily_api_key
+        self._tavily: AsyncTavilyClient | None = None
         if self._api_key:
-            self._client = AsyncTavilyClient(api_key=self._api_key)
+            self._tavily = AsyncTavilyClient(api_key=self._api_key)
 
     def is_available(self) -> bool:
         return bool(self._api_key)
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
+        if self._tavily is None:
+            raise RuntimeError("TavilyProvider: no API key configured")
+
         max_results = min(params.num_results, self._max_results, 20)
 
         # Note: Tavily's search API does not support language, country, or
         # safe_search filtering. These SearchParams fields are silently ignored.
-        response = await self._client.search(
+        response = await self._tavily.search(
             query=query,
             max_results=max_results,
             search_depth="basic",

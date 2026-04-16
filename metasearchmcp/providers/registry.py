@@ -20,6 +20,7 @@ from .baidu import BaiduProvider
 
 # Web search — API
 from .brave import BraveProvider
+from .tavily import TavilyProvider
 
 # Knowledge / reference
 from .wikipedia import WikipediaProvider
@@ -56,6 +57,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     BingProvider,
     YahooProvider,
     BraveProvider,
+    TavilyProvider,
     EcosiaProvider,
     MojeekProvider,
     StartpageProvider,

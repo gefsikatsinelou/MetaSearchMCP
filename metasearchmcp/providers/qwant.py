@@ -1,11 +1,14 @@
 from __future__ import annotations
 
+from bs4 import BeautifulSoup
+
 from metasearchmcp.config import get_settings
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
 from .base import BaseProvider
 
 # Qwant's internal search API (used by their web frontend)
 _API_URL = "https://api.qwant.com/v3/search/web"
+_LITE_URL = "https://lite.qwant.com/"
 
 
 class QwantProvider(BaseProvider):
@@ -38,20 +41,29 @@ class QwantProvider(BaseProvider):
 
         async with self._scraper_client() as client:
             resp = await client.get(_API_URL, params=qp, headers=extra_headers)
-            if resp.status_code == 403:
-                raise RuntimeError(
-                    "Qwant rejected the request with 403; browser session likely required"
-                )
-            resp.raise_for_status()
-            data = resp.json()
+            if resp.status_code != 403:
+                resp.raise_for_status()
+                data = resp.json()
+                if data.get("status") == "success":
+                    return self._parse(data)
 
-        if data.get("status") != "success":
-            error_code = data.get("data", {}).get("error_code")
-            raise RuntimeError(
-                f"Qwant search failed with status={data.get('status')} error_code={error_code}"
+            lite = await client.get(
+                _LITE_URL,
+                params={
+                    "q": query,
+                    "locale": f"{params.language}_{params.country.upper()}".lower(),
+                    "l": params.language.split("-")[0].lower(),
+                    "s": 1 if params.safe_search else 0,
+                    "p": 1,
+                },
+                headers=extra_headers,
             )
+            lite.raise_for_status()
 
-        return self._parse(data)
+        if "Service unavailable" in lite.text or "Unavailable" in lite.text[:500]:
+            raise RuntimeError("Qwant Lite is currently unavailable from this network")
+
+        return self._parse_lite(lite.text)
 
     def _parse(self, data: dict) -> ProviderResult:
         results: list[SearchResult] = []
@@ -77,5 +89,39 @@ class QwantProvider(BaseProvider):
                 )
                 if rank >= self._max_results:
                     return ProviderResult(results=results)
+
+        return ProviderResult(results=results)
+
+    def _parse_lite(self, html: str) -> ProviderResult:
+        soup = BeautifulSoup(html, "lxml")
+        results: list[SearchResult] = []
+
+        for i, article in enumerate(soup.select("section article"), start=1):
+            if article.select_one("span.tooltip"):
+                continue
+
+            title_node = article.select_one("h2 a")
+            url_node = article.select_one("span.url.partner")
+            snippet_node = article.select_one("p")
+            if not title_node or not url_node:
+                continue
+
+            url = url_node.get_text(" ", strip=True)
+            if not url.startswith("http"):
+                url = f"https://{url.lstrip('/')}"
+
+            results.append(
+                SearchResult(
+                    title=title_node.get_text(" ", strip=True),
+                    url=url,
+                    snippet=snippet_node.get_text(" ", strip=True)
+                    if snippet_node
+                    else "",
+                    rank=i,
+                    provider=self.name,
+                )
+            )
+            if i >= self._max_results:
+                break
 
         return ProviderResult(results=results)

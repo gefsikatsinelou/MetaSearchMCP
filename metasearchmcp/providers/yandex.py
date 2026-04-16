@@ -6,7 +6,8 @@ from metasearchmcp.config import get_settings
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
 from .base import BaseProvider
 
-_SEARCH_URL = "https://yandex.com/search/"
+_SEARCH_URL = "https://yandex.com/search/site/"
+_SUPPORTED_LANGS = {"ru", "en", "be", "fr", "de", "id", "kk", "tt", "tr", "uk"}
 
 
 class YandexProvider(BaseProvider):
@@ -26,14 +27,25 @@ class YandexProvider(BaseProvider):
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
         qp = {
+            "tmpl_version": "releases",
             "text": query,
-            "numdoc": min(params.num_results, self._max_results, 10),
-            "lang": params.language,
+            "web": "1",
+            "frame": "1",
+            "searchid": "3131712",
+        }
+        lang = params.language.split("-")[0].lower()
+        if lang in _SUPPORTED_LANGS:
+            qp["lang"] = lang
+        cookies = {
+            "cookie": "yp=1716337604.sp.family%3A0#1685406411.szm.1:1920x1080:1920x999"
         }
 
         async with self._scraper_client() as client:
-            resp = await client.get(_SEARCH_URL, params=qp)
+            resp = await client.get(_SEARCH_URL, params=qp, cookies=cookies)
             resp.raise_for_status()
+
+        if resp.headers.get("x-yandex-captcha") == "captcha":
+            raise RuntimeError("Yandex requested a captcha challenge for this network")
 
         return self._parse(resp.text)
 

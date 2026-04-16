@@ -1,11 +1,13 @@
 from __future__ import annotations
 
+from collections import OrderedDict
+
 from bs4 import BeautifulSoup
 
-from metasearchmcp.config import get_settings
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
 from .base import BaseProvider
 
+_BASE_URL = "https://www.startpage.com"
 _SEARCH_URL = "https://www.startpage.com/sp/search"
 
 
@@ -21,19 +23,57 @@ class StartpageProvider(BaseProvider):
     name = "startpage"
     tags = ["web", "privacy", "google"]
 
-    def is_available(self) -> bool:
-        return get_settings().allow_unstable_providers
-
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
+        headers = {
+            "Origin": _BASE_URL,
+            "Referer": f"{_BASE_URL}/",
+        }
+        engine_language = params.language.split("-")[0].lower()
+        engine_region = f"{params.country.lower()}-{engine_language}"
+
         form_data = {
             "query": query,
             "cat": "web",
-            "pl": "ext-ff",
-            "language": params.language,
+            "t": "device",
+            "language": engine_language,
+            "lui": engine_language,
+            "abp": "1",
+            "abd": "1",
+            "abe": "1",
+        }
+        preferences = OrderedDict(
+            [
+                ("date_time", "world"),
+                ("disable_family_filter", "1" if params.safe_search else "0"),
+                ("disable_open_in_new_window", "0"),
+                ("enable_post_method", "1"),
+                ("enable_proxy_safety_suggest", "1"),
+                ("enable_stay_control", "1"),
+                ("instant_answers", "1"),
+                ("lang_homepage", f"s/device/{engine_language}/"),
+                ("num_of_results", str(min(params.num_results, self._max_results, 10))),
+                ("suggestions", "1"),
+                ("wt_unit", "celsius"),
+                ("language", engine_language),
+                ("language_ui", engine_language),
+                ("search_results_region", engine_region),
+            ]
+        )
+        cookies = {
+            "preferences": "N1N".join(
+                f"{key}EEE{value}" for key, value in preferences.items()
+            )
         }
 
         async with self._scraper_client() as client:
-            resp = await client.post(_SEARCH_URL, data=form_data)
+            home = await client.get(f"{_BASE_URL}/", headers=headers)
+            home.raise_for_status()
+            sc_code = self._extract_sc_code(home.text)
+            form_data["sc"] = sc_code
+
+            resp = await client.post(
+                _SEARCH_URL, data=form_data, cookies=cookies, headers=headers
+            )
             resp.raise_for_status()
 
         if (
@@ -44,7 +84,23 @@ class StartpageProvider(BaseProvider):
                 "Startpage temporarily suspended requests from this network (Error 883)"
             )
 
+        if (
+            "/sp/feedback2" in str(resp.url)
+            or "prevent possible abuse of our service" in resp.text
+        ):
+            raise RuntimeError("Startpage rejected the request as automated traffic")
+
         return self._parse(resp.text)
+
+    @staticmethod
+    def _extract_sc_code(html: str) -> str:
+        soup = BeautifulSoup(html, "lxml")
+        sc_input = soup.select_one('form#search input[name="sc"]') or soup.select_one(
+            'input[name="sc"]'
+        )
+        if not sc_input or not sc_input.get("value"):
+            raise RuntimeError("Startpage did not expose an sc token for this session")
+        return sc_input["value"]
 
     def _parse(self, html: str) -> ProviderResult:
         soup = BeautifulSoup(html, "lxml")

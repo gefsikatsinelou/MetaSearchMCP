@@ -21,6 +21,7 @@ class StartpageProvider(BaseProvider):
     """
 
     name = "startpage"
+    description = "Privacy-focused web search via Startpage without tracking."
     tags = ["web", "privacy", "google"]
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:

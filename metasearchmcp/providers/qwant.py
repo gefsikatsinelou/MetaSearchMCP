@@ -20,6 +20,7 @@ class QwantProvider(BaseProvider):
     """
 
     name = "qwant"
+    description = "Privacy-focused European web search via Qwant."
     tags = ["web", "privacy"]
 
     def is_available(self) -> bool:

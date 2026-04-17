@@ -9,6 +9,7 @@ class GoogleSerpbaseProvider(BaseProvider):
     """Google search via serpbase.dev API."""
 
     name = "google_serpbase"
+    description = "Google web search proxied through the SerpBase API."
     tags = ["google", "web"]
 
     _API_URL = "https://api.serpbase.dev/google/search"

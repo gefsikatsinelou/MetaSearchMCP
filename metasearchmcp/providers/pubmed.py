@@ -17,6 +17,7 @@ class PubMedProvider(BaseProvider):
     """
 
     name = "pubmed"
+    description = "Search biomedical and life-science literature via PubMed / NCBI."
     tags = ["academic", "web", "medical"]
 
     def __init__(self) -> None:

@@ -15,6 +15,7 @@ class GitHubProvider(BaseProvider):
     """
 
     name = "github"
+    description = "Search GitHub repositories, code, issues, and pull requests."
     tags = ["code", "web"]
 
     def __init__(self) -> None:

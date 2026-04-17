@@ -17,6 +17,7 @@ class MojeekProvider(BaseProvider):
     """
 
     name = "mojeek"
+    description = "Independent web search via Mojeek own crawler index."
     tags = ["web", "privacy"]
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:

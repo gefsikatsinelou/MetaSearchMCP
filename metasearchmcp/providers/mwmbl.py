@@ -13,6 +13,7 @@ class MwmblProvider(BaseProvider):
     """
 
     name = "mwmbl"
+    description = "Non-commercial open-source web search via the Mwmbl community index."
     tags = ["web", "general"]
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:

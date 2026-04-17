@@ -28,6 +28,7 @@ class YahooFinanceProvider(BaseProvider):
     """
 
     name = "yahoo_finance"
+    description = "Stock quotes, summaries, and market data via Yahoo Finance."
     tags = ["finance", "stocks"]
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:

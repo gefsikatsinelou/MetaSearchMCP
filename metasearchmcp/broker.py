@@ -125,6 +125,42 @@ _TOOLS = [
             "required": ["query"],
         },
     ),
+    types.Tool(
+        name="search_finance",
+        description=(
+            "Search stock tickers, company names, and financial instruments "
+            "across finance providers (Yahoo Finance, Alpha Vantage, Finnhub)."
+        ),
+        inputSchema={
+            "type": "object",
+            "properties": {
+                "query": {
+                    "type": "string",
+                    "description": "Ticker symbol or company name, e.g. 'AAPL' or 'Tesla'",
+                },
+                "num_results": {"type": "integer", "default": 10},
+                "max_total_results": {"type": "integer", "default": 20},
+            },
+            "required": ["query"],
+        },
+    ),
+    types.Tool(
+        name="search_code",
+        description=(
+            "Search code repositories, packages, and developer resources across "
+            "GitHub, GitLab, npm, PyPI, crates.io, pkg.go.dev, MetaCPAN, lib.rs, "
+            "RubyGems, Docker Hub, Stack Overflow, and Hacker News."
+        ),
+        inputSchema={
+            "type": "object",
+            "properties": {
+                "query": {"type": "string", "description": "Search query"},
+                "num_results": {"type": "integer", "default": 10},
+                "max_total_results": {"type": "integer", "default": 20},
+            },
+            "required": ["query"],
+        },
+    ),
 ]
 
 
@@ -212,6 +248,9 @@ async def dispatch_tool(name: str, arguments: dict[str, Any]) -> dict[str, Any]:
     if name == "compare_engines":
         selected = pick_named_providers(_catalog, arguments.get("providers") or [])
         if not selected:
+            # Fall back to all enabled providers instead of erroring silently
+            selected = _catalog
+        if not selected:
             return {"error": "No providers available for comparison."}
 
         jobs = [
@@ -236,6 +275,28 @@ async def dispatch_tool(name: str, arguments: dict[str, Any]) -> dict[str, Any]:
                     "timing_ms": response.timing_ms,
                 }
         return comparison
+
+    if name == "search_finance":
+        selected = pick_tagged_providers(_catalog, "finance")
+        if not selected:
+            return {
+                "error": (
+                    "No finance providers available. "
+                    "yahoo_finance is enabled by default; "
+                    "set ALPHA_VANTAGE_API_KEY or FINNHUB_API_KEY for additional providers."
+                )
+            }
+        return (
+            await run_search_plan(query, list(selected.values()), options)
+        ).model_dump()
+
+    if name == "search_code":
+        selected = pick_tagged_providers(_catalog, "code")
+        if not selected:
+            return {"error": "No code/developer providers available."}
+        return (
+            await run_search_plan(query, list(selected.values()), options)
+        ).model_dump()
 
     return {"error": f"Unknown tool: {name}"}
 

@@ -40,6 +40,7 @@ class MetaCPANProvider(BaseProvider):
     """
 
     name = "metacpan"
+    description = "Search Perl modules and distributions on MetaCPAN."
     tags = ["web", "code", "developer", "packages"]
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:

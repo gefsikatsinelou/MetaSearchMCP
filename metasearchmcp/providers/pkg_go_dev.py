@@ -15,6 +15,7 @@ class PkgGoDevProvider(BaseProvider):
     """
 
     name = "pkg_go_dev"
+    description = "Search Go modules and packages on pkg.go.dev."
     tags = ["web", "code", "developer", "packages"]
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:

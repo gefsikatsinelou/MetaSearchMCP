@@ -22,6 +22,7 @@ class RedditProvider(BaseProvider):
     """
 
     name = "reddit"
+    description = "Search Reddit posts, comments, and communities."
     tags = ["web", "news", "developer"]
 
     def __init__(self) -> None:

@@ -18,6 +18,7 @@ class LibRsProvider(BaseProvider):
     """
 
     name = "lib_rs"
+    description = "Search Rust packages via lib.rs with curated rankings."
     tags = ["web", "code", "developer", "packages"]
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:

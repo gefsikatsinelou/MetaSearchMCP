@@ -12,6 +12,7 @@ class BaseProvider(ABC):
     """Abstract base for all search providers."""
 
     name: str = ""
+    description: str = ""
     # Tags help the aggregator filter by intent (e.g. "google", "academic")
     tags: list[str] = []
 

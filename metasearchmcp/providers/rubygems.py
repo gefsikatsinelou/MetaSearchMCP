@@ -10,6 +10,7 @@ class RubyGemsProvider(BaseProvider):
     """RubyGems package search via the public API."""
 
     name = "rubygems"
+    description = "Search Ruby gems on RubyGems.org."
     tags = ["web", "code", "developer", "packages"]
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:

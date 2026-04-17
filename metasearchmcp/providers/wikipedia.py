@@ -13,6 +13,7 @@ class WikipediaProvider(BaseProvider):
     """
 
     name = "wikipedia"
+    description = "Search Wikipedia articles across all languages."
     tags = ["web", "academic", "knowledge"]
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:

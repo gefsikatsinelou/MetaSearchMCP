@@ -15,6 +15,7 @@ class BraveProvider(BaseProvider):
     """
 
     name = "brave"
+    description = "Privacy-focused web search via Brave Search."
     tags = ["web", "privacy"]
 
     def __init__(self) -> None:

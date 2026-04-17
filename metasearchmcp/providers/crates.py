@@ -13,6 +13,7 @@ class CratesIoProvider(BaseProvider):
     """
 
     name = "crates"
+    description = "Search Rust packages published on crates.io."
     tags = ["web", "code", "developer", "packages"]
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:

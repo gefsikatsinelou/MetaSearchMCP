@@ -9,6 +9,7 @@ class GoogleSerperProvider(BaseProvider):
     """Google search via serper.dev API."""
 
     name = "google_serper"
+    description = "Google web search proxied through the Serper API."
     tags = ["google", "web"]
 
     _API_URL = "https://google.serper.dev/search"

@@ -14,6 +14,7 @@ class WikidataProvider(BaseProvider):
     """
 
     name = "wikidata"
+    description = "Search structured knowledge base entities on Wikidata."
     tags = ["web", "academic", "knowledge"]
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:

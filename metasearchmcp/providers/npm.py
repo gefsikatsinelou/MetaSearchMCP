@@ -13,6 +13,7 @@ class NpmProvider(BaseProvider):
     """
 
     name = "npm"
+    description = "Search JavaScript and TypeScript packages on the npm registry."
     tags = ["web", "code", "developer", "packages"]
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:

@@ -15,6 +15,7 @@ class CrossrefProvider(BaseProvider):
     """
 
     name = "crossref"
+    description = "Search scholarly metadata from Crossref covering journals, books, and conference papers."
     tags = ["academic", "web"]
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:

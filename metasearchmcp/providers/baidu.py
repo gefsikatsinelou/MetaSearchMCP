@@ -19,6 +19,7 @@ class BaiduProvider(BaseProvider):
     """
 
     name = "baidu"
+    description = "Web search via Baidu."
     tags = ["web"]
 
     def is_available(self) -> bool:

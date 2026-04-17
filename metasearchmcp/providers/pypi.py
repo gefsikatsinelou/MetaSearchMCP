@@ -23,6 +23,7 @@ class PyPIProvider(BaseProvider):
     """
 
     name = "pypi"
+    description = "Search Python packages published on PyPI."
     tags = ["web", "code", "developer", "packages"]
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:

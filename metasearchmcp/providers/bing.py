@@ -13,6 +13,7 @@ class BingProvider(BaseProvider):
     """Bing web search via the public RSS response format."""
 
     name = "bing"
+    description = "Web search via Microsoft Bing."
     tags = ["web"]
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:

@@ -14,6 +14,7 @@ class GitLabProvider(BaseProvider):
     """
 
     name = "gitlab"
+    description = "Search GitLab projects and repositories."
     tags = ["web", "code", "developer", "repos"]
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:

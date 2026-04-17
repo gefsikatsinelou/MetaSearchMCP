@@ -19,6 +19,7 @@ class EcosiaProvider(BaseProvider):
     """
 
     name = "ecosia"
+    description = "Eco-friendly web search via Ecosia, powered by Bing."
     tags = ["web", "privacy"]
 
     def is_available(self) -> bool:

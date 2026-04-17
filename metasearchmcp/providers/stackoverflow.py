@@ -16,6 +16,7 @@ class StackOverflowProvider(BaseProvider):
     """
 
     name = "stackoverflow"
+    description = "Search Stack Overflow questions and answers."
     tags = ["web", "code", "developer"]
 
     def __init__(self) -> None:

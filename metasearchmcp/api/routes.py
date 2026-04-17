@@ -94,8 +94,19 @@ async def providers(
     registry=Depends(_get_registry),
 ) -> dict:
     filtered = pick_providers_by_tags(registry, tag or [])
+
+    # Build a tag -> [provider names] grouping for convenience
+    tag_groups: dict[str, list[str]] = {}
+    for p in filtered.values():
+        for t in p.tags:
+            tag_groups.setdefault(t, []).append(p.name)
+
     return {
-        "available": [{"name": p.name, "tags": p.tags} for p in filtered.values()],
+        "available": [
+            {"name": p.name, "tags": p.tags, "description": p.description}
+            for p in filtered.values()
+        ],
         "count": len(filtered),
+        "tag_groups": tag_groups,
         "filters": {"tags": tag or []},
     }

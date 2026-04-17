@@ -17,6 +17,7 @@ class ArxivProvider(BaseProvider):
     """
 
     name = "arxiv"
+    description = "Search arXiv preprints across physics, mathematics, computer science, and more."
     tags = ["academic", "web"]
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:

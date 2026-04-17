@@ -20,6 +20,7 @@ class YandexProvider(BaseProvider):
     """
 
     name = "yandex"
+    description = "Web search via Yandex."
     tags = ["web"]
 
     def is_available(self) -> bool:

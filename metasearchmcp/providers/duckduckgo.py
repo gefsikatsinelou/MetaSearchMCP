@@ -15,6 +15,7 @@ class DuckDuckGoProvider(BaseProvider):
     """DuckDuckGo search via HTML scraping of the lite endpoint."""
 
     name = "duckduckgo"
+    description = "Privacy-focused web search via DuckDuckGo."
     tags = ["web", "privacy"]
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:

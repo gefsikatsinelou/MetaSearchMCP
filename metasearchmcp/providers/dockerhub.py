@@ -10,6 +10,7 @@ class DockerHubProvider(BaseProvider):
     """Docker Hub repository search via the public search API."""
 
     name = "dockerhub"
+    description = "Search public container images on Docker Hub."
     tags = ["web", "code", "developer", "containers"]
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:

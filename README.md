@@ -58,15 +58,16 @@ Both are low-cost options. For smaller or occasional workloads, `serpbase.dev` i
 | Provider | Name | Method |
 |---|---|---|
 | DuckDuckGo | `duckduckgo` | HTML scraping |
-| Bing | `bing` | HTML scraping |
-| Yahoo | `yahoo` | HTML scraping |
+| Bing | `bing` | RSS feed |
+| Yahoo | `yahoo` | HTML scraping, best effort |
 | Brave | `brave` | Official Search API |
+| Mwmbl | `mwmbl` | Public JSON API |
 | Ecosia | `ecosia` | HTML scraping |
 | Mojeek | `mojeek` | HTML scraping |
 | Startpage | `startpage` | HTML scraping, best effort |
 | Qwant | `qwant` | Internal JSON API, best effort |
 | Yandex | `yandex` | HTML scraping, best effort |
-| Baidu | `baidu` | HTML scraping, best effort |
+| Baidu | `baidu` | JSON endpoint, best effort |
 
 ### Knowledge And Reference
 
@@ -82,6 +83,7 @@ Both are low-cost options. For smaller or occasional workloads, `serpbase.dev` i
 | Provider | Name | Method |
 |---|---|---|
 | GitHub | `github` | GitHub REST API |
+| GitLab | `gitlab` | GitLab REST API |
 | Stack Overflow | `stackoverflow` | Stack Exchange API |
 | Hacker News | `hackernews` | Algolia HN API |
 | Reddit | `reddit` | Reddit API |
@@ -89,7 +91,10 @@ Both are low-cost options. For smaller or occasional workloads, `serpbase.dev` i
 | PyPI | `pypi` | HTML scraping |
 | RubyGems | `rubygems` | RubyGems search API |
 | crates.io | `crates` | crates.io API |
+| lib.rs | `lib_rs` | HTML scraping |
 | Docker Hub | `dockerhub` | Docker Hub search API |
+| pkg.go.dev | `pkg_go_dev` | HTML scraping |
+| MetaCPAN | `metacpan` | MetaCPAN REST API |
 
 ### Academic Sources
 
@@ -103,7 +108,7 @@ Both are low-cost options. For smaller or occasional workloads, `serpbase.dev` i
 ## Installation
 
 ```bash
-git clone https://github.com/your-org/MetaSearchMCP
+git clone https://github.com/gefsikatsinelou/MetaSearchMCP
 cd MetaSearchMCP
 pip install -e ".[dev]"
 ```

@@ -36,6 +36,10 @@ class Settings(BaseSettings):
     ncbi_api_key: str = ""  # PubMed / NCBI (optional)
     semantic_scholar_api_key: str = ""  # Semantic Scholar (optional)
 
+    # API keys — finance providers
+    alpha_vantage_api_key: str = ""  # Alpha Vantage (optional; 25 req/day free)
+    finnhub_api_key: str = ""  # Finnhub (optional; 60 req/min free)
+
     # Provider control
     enabled_providers: str = ""  # comma-separated; empty = auto
     allow_unstable_providers: bool = False

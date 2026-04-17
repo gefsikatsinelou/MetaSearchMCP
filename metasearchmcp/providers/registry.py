@@ -49,6 +49,11 @@ from .semanticscholar import SemanticScholarProvider
 from .crossref import CrossrefProvider
 from .openlibrary import OpenLibraryProvider
 
+# Finance
+from .yahoo_finance import YahooFinanceProvider
+from .alpha_vantage import AlphaVantageProvider
+from .finnhub import FinnhubProvider
+
 
 # Ordered list of all provider classes.
 # Order matters: within a tag group, earlier providers take priority in dedup.
@@ -92,6 +97,10 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     SemanticScholarProvider,
     CrossrefProvider,
     OpenLibraryProvider,
+    # Finance
+    YahooFinanceProvider,
+    AlphaVantageProvider,
+    FinnhubProvider,
 ]
 
 

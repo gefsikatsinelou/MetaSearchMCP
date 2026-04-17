@@ -105,6 +105,14 @@ Both are low-cost options. For smaller or occasional workloads, `serpbase.dev` i
 | Semantic Scholar | `semanticscholar` | Graph API |
 | CrossRef | `crossref` | REST API |
 
+### Finance Sources
+
+| Provider | Name | Key Required | Free Tier |
+|---|---|---|---|
+| Yahoo Finance | `yahoo_finance` | No | Unofficial endpoint, no key needed |
+| Alpha Vantage | `alpha_vantage` | `ALPHA_VANTAGE_API_KEY` | 25 req/day — [get key](https://www.alphavantage.co/support/#api-key) |
+| Finnhub | `finnhub` | `FINNHUB_API_KEY` | 60 req/min — [get key](https://finnhub.io/register) |
+
 ## Installation
 
 ```bash
@@ -144,6 +152,8 @@ REDDIT_CLIENT_ID=
 REDDIT_CLIENT_SECRET=
 NCBI_API_KEY=
 SEMANTIC_SCHOLAR_API_KEY=
+ALPHA_VANTAGE_API_KEY=
+FINNHUB_API_KEY=
 
 ENABLED_PROVIDERS=
 ALLOW_UNSTABLE_PROVIDERS=false

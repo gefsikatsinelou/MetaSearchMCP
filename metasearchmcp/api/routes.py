@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from fastapi import APIRouter, Depends, HTTPException, Query
+from metasearchmcp import __version__
 
 from metasearchmcp.catalog import (
     build_provider_catalog,
@@ -23,6 +24,15 @@ _catalog = build_provider_catalog()
 
 def _get_registry():
     return _catalog
+
+
+def _build_tag_groups(registry: dict) -> dict[str, list[str]]:
+    groups: dict[str, list[str]] = {}
+    for provider in registry.values():
+        for tag in provider.tags:
+            groups.setdefault(tag, []).append(provider.name)
+
+    return {tag: sorted(names) for tag, names in sorted(groups.items())}
 
 
 @router.post(
@@ -82,8 +92,12 @@ async def search_google(
 
 
 @router.get("/health", summary="Health check")
-async def health() -> dict:
-    return {"status": "ok"}
+async def health(registry=Depends(_get_registry)) -> dict:
+    return {
+        "status": "ok",
+        "version": __version__,
+        "provider_count": len(registry),
+    }
 
 
 @router.get(
@@ -95,18 +109,15 @@ async def providers(
 ) -> dict:
     filtered = pick_providers_by_tags(registry, tag or [])
 
-    # Build a tag -> [provider names] grouping for convenience
-    tag_groups: dict[str, list[str]] = {}
-    for p in filtered.values():
-        for t in p.tags:
-            tag_groups.setdefault(t, []).append(p.name)
-
     return {
-        "available": [
-            {"name": p.name, "tags": p.tags, "description": p.description}
-            for p in filtered.values()
-        ],
+        "available": sorted(
+            [
+                {"name": p.name, "tags": sorted(p.tags), "description": p.description}
+                for p in filtered.values()
+            ],
+            key=lambda provider: provider["name"],
+        ),
         "count": len(filtered),
-        "tag_groups": tag_groups,
+        "tag_groups": _build_tag_groups(filtered),
         "filters": {"tags": tag or []},
     }

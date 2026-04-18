@@ -239,6 +239,8 @@ curl -X POST http://localhost:8000/search/google \
 
 Return the currently available provider catalog.
 
+The response includes provider descriptions and a tag-to-provider index for quick discovery.
+
 You can filter the catalog by tag:
 
 ```bash
@@ -247,7 +249,7 @@ curl "http://localhost:8000/providers?tag=academic&tag=web"
 
 ### `GET /health`
 
-Simple health check endpoint.
+Simple health check endpoint. Returns service status, version, and provider count.
 
 ## Response Schema
 

@@ -93,10 +93,12 @@ async def search_google(
 
 @router.get("/health", summary="Health check")
 async def health(registry=Depends(_get_registry)) -> dict:
+    provider_names = sorted(registry.keys())
     return {
         "status": "ok",
         "version": __version__,
         "provider_count": len(registry),
+        "providers": provider_names,
     }
 
 

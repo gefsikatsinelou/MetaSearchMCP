@@ -249,7 +249,7 @@ curl "http://localhost:8000/providers?tag=academic&tag=web"
 
 ### `GET /health`
 
-Simple health check endpoint. Returns service status, version, and provider count.
+Simple health check endpoint. Returns service status, version, provider count, and the current provider name list.
 
 ## Response Schema
 

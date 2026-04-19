@@ -30,6 +30,7 @@ dev = [
 [project.scripts]
 metasearchmcp = "metasearchmcp.server:run"
 metasearchmcp-mcp = "metasearchmcp.broker:run"
+metasearchmcp-setup = "metasearchmcp.cli:setup"
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"

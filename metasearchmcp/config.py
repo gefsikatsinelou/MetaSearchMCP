@@ -1,11 +1,18 @@
 from __future__ import annotations
 
+from pathlib import Path
+
 from pydantic_settings import BaseSettings, SettingsConfigDict
+
+USER_CONFIG_DIR = Path.home() / ".metasearchmcp"
+USER_CONFIG_FILE = USER_CONFIG_DIR / "config.env"
 
 
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(
-        env_file=".env",
+        # User config (~/.metasearchmcp/config.env) is the base;
+        # a local .env in the working directory overrides it.
+        env_file=[str(USER_CONFIG_FILE), ".env"],
         env_file_encoding="utf-8",
         case_sensitive=False,
     )

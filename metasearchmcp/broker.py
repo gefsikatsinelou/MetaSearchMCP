@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import asyncio
 import json
+import sys
 from typing import Any
 
 import mcp.server.stdio
@@ -315,6 +316,17 @@ async def _main() -> None:
 
 
 def run() -> None:
+    from metasearchmcp.config import get_settings, USER_CONFIG_FILE
+
+    settings = get_settings()
+    if not settings.serpbase_api_key:
+        print(
+            "[MetaSearchMCP] SERPBASE_API_KEY not configured.\n"
+            f"  Run 'metasearchmcp-setup' to set up your API key.\n"
+            f"  Get your key at: https://serpbase.dev/dashboard/api-keys\n"
+            f"  Config file: {USER_CONFIG_FILE}",
+            file=sys.stderr,
+        )
     asyncio.run(_main())
 
 

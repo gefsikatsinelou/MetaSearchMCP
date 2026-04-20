@@ -1,11 +1,25 @@
 from __future__ import annotations
 
+import shutil
 from types import SimpleNamespace
+import uuid
 from pathlib import Path
 
 import pytest
 
 from metasearchmcp.config import Settings
+
+
+@pytest.fixture
+def config_sandbox(request):
+    sandbox = (
+        Path(__file__).resolve().parents[1]
+        / ".test-artifacts"
+        / f"{request.node.name}-{uuid.uuid4().hex}"
+    )
+    sandbox.mkdir(parents=True)
+    yield sandbox
+    shutil.rmtree(sandbox, ignore_errors=True)
 
 
 def test_enabled_provider_list_strips_whitespace_and_empty_values():
@@ -20,18 +34,18 @@ def test_enabled_provider_list_empty_string_means_auto():
     assert settings.enabled_provider_list() == []
 
 
-def test_load_config_returns_empty_when_file_missing(tmp_path, monkeypatch):
+def test_load_config_returns_empty_when_file_missing(config_sandbox, monkeypatch):
     from metasearchmcp import cli
 
-    monkeypatch.setattr(cli, "USER_CONFIG_FILE", tmp_path / "missing.env")
+    monkeypatch.setattr(cli, "USER_CONFIG_FILE", config_sandbox / "missing.env")
 
     assert cli.load_config() == {}
 
 
-def test_load_config_skips_comments_and_malformed_lines(tmp_path, monkeypatch):
+def test_load_config_skips_comments_and_malformed_lines(config_sandbox, monkeypatch):
     from metasearchmcp import cli
 
-    config_file = tmp_path / "config.env"
+    config_file = config_sandbox / "config.env"
     config_file.write_text(
         "# comment\nSERPBASE_API_KEY=test-key\nINVALID\nHOST=127.0.0.1\n",
         encoding="utf-8",
@@ -44,10 +58,10 @@ def test_load_config_skips_comments_and_malformed_lines(tmp_path, monkeypatch):
     }
 
 
-def test_save_config_writes_file_and_trailing_newline(tmp_path, monkeypatch):
+def test_save_config_writes_file_and_trailing_newline(config_sandbox, monkeypatch):
     from metasearchmcp import cli
 
-    config_dir = tmp_path / ".metasearchmcp"
+    config_dir = config_sandbox / ".metasearchmcp"
     config_file = config_dir / "config.env"
     monkeypatch.setattr(cli, "USER_CONFIG_DIR", config_dir)
     monkeypatch.setattr(cli, "USER_CONFIG_FILE", config_file)

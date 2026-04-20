@@ -1,4 +1,9 @@
 __pycache__/
 *.py[cod]
 .pytest_cache/
+.omx/
+.test-artifacts/
+.tmp/
+pytest-tmp/
+tmp*/
 .env

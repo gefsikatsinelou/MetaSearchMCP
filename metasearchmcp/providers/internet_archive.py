@@ -14,6 +14,7 @@ class InternetArchiveProvider(BaseProvider):
     """
 
     name = "internet_archive"
+    description = "Search Internet Archive collections, including texts, media, and software."
     tags = ["web", "academic", "knowledge"]
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:

@@ -92,6 +92,24 @@ async def test_aggregate_merges_suggestions():
 
 
 @pytest.mark.asyncio
+async def test_aggregate_cleans_related_searches_and_suggestions():
+    p = _make_provider("p1", [_result("https://a.com", "p1")])
+
+    async def p_search(query, params):
+        return ProviderPayload(
+            results=[_result("https://a.com", "p1")],
+            related_searches=[" python ", "python", "   "],
+            suggestions=[" asyncio ", "asyncio", ""],
+        )
+
+    p.search = p_search
+
+    resp = await run_search_plan("test", [p])
+    assert resp.related_searches == ["python"]
+    assert resp.suggestions == ["asyncio"]
+
+
+@pytest.mark.asyncio
 async def test_aggregate_all_fail_returns_empty():
     bad1 = _make_provider("b1", [], fail=True)
     bad2 = _make_provider("b2", [], fail=True)

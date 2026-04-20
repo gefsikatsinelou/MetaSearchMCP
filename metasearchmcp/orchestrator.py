@@ -40,9 +40,10 @@ def _unique_strings(values: list[str]) -> list[str]:
     seen: set[str] = set()
     unique: list[str] = []
     for value in values:
-        if value and value not in seen:
-            seen.add(value)
-            unique.append(value)
+        normalized = value.strip()
+        if normalized and normalized not in seen:
+            seen.add(normalized)
+            unique.append(normalized)
     return unique
 
 

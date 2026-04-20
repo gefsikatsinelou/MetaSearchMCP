@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
-from .base import BaseProvider
+from .base import API_USER_AGENT, BaseProvider
 
 _API_URL = "https://crates.io/api/v1/crates"
 
@@ -23,7 +23,7 @@ class CratesIoProvider(BaseProvider):
         }
         # crates.io requires a descriptive User-Agent
         headers = {
-            "User-Agent": "metasearchmcp/0.1 (metasearch; +https://github.com/your-org/metasearchmcp)",
+            "User-Agent": API_USER_AGENT,
         }
 
         async with self._client() as client:

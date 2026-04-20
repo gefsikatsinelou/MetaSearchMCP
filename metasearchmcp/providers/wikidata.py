@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
-from .base import BaseProvider
+from .base import BOT_USER_AGENT, BaseProvider
 
 _API_URL = "https://www.wikidata.org/w/api.php"
 
@@ -29,7 +29,7 @@ class WikidataProvider(BaseProvider):
 
         # Wikimedia requires a descriptive UA with contact info to avoid 403
         headers = {
-            "User-Agent": "metasearchmcp/0.1 (metasearch bot; https://github.com/your-org/metasearchmcp)"
+            "User-Agent": BOT_USER_AGENT
         }
         async with self._client() as client:
             resp = await client.get(_API_URL, params=qp, headers=headers)

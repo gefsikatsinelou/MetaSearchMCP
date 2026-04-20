@@ -7,6 +7,10 @@ import httpx
 from metasearchmcp.config import get_settings
 from metasearchmcp.contracts import ProviderResult, SearchParams
 
+PROJECT_URL = "https://github.com/gefsikatsinelou/MetaSearchMCP"
+API_USER_AGENT = f"metasearchmcp/0.1 (metasearch; +{PROJECT_URL})"
+BOT_USER_AGENT = f"metasearchmcp/0.1 (metasearch bot; +{PROJECT_URL})"
+
 
 class BaseProvider(ABC):
     """Abstract base for all search providers."""
@@ -23,7 +27,7 @@ class BaseProvider(ABC):
 
     # Bot-friendly UA for API calls
     _API_HEADERS = {
-        "User-Agent": "metasearchmcp/0.1 (metasearch; +https://github.com/your-org/metasearchmcp)",
+        "User-Agent": API_USER_AGENT,
     }
     # Browser-like UA for HTML scraping
     _SCRAPER_HEADERS = {

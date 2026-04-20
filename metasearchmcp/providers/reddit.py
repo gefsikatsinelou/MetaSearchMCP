@@ -4,7 +4,7 @@ import base64
 
 from metasearchmcp.config import get_settings
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
-from .base import BaseProvider
+from .base import BOT_USER_AGENT, BaseProvider
 
 _TOKEN_URL = "https://www.reddit.com/api/v1/access_token"
 _SEARCH_URL = "https://oauth.reddit.com/search.json"
@@ -43,7 +43,7 @@ class RedditProvider(BaseProvider):
             data={"grant_type": "client_credentials"},
             headers={
                 "Authorization": f"Basic {credentials}",
-                "User-Agent": "metasearchmcp/0.1 (metasearch bot; +https://github.com/your-org/metasearchmcp)",
+                "User-Agent": BOT_USER_AGENT,
             },
         )
         resp.raise_for_status()
@@ -66,7 +66,7 @@ class RedditProvider(BaseProvider):
                 params=qp,
                 headers={
                     "Authorization": f"Bearer {token}",
-                    "User-Agent": "metasearchmcp/0.1 (metasearch bot; +https://github.com/your-org/metasearchmcp)",
+                    "User-Agent": BOT_USER_AGENT,
                 },
             )
             resp.raise_for_status()

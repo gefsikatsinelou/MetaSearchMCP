@@ -348,3 +348,17 @@ def test_lib_rs_parse_empty():
     p = LibRsProvider()
     result = p._parse("<html><body><main><div><ol></ol></div></main></body></html>")
     assert result.results == []
+
+
+def test_provider_user_agents_include_project_contact_url():
+    from metasearchmcp.providers.base import (
+        API_USER_AGENT,
+        BOT_USER_AGENT,
+        PROJECT_URL,
+    )
+
+    assert PROJECT_URL == "https://github.com/gefsikatsinelou/MetaSearchMCP"
+    assert PROJECT_URL in API_USER_AGENT
+    assert PROJECT_URL in BOT_USER_AGENT
+    assert "your-org" not in API_USER_AGENT
+    assert "your-org" not in BOT_USER_AGENT

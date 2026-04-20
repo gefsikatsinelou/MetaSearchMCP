@@ -37,6 +37,21 @@ def test_normalize_preserves_query():
     assert a != b
 
 
+def test_normalize_drops_default_ports():
+    assert canonicalize_url("https://example.com:443/foo") == canonicalize_url(
+        "https://example.com/foo"
+    )
+    assert canonicalize_url("http://example.com:80/foo") == canonicalize_url(
+        "http://example.com/foo"
+    )
+
+
+def test_normalize_preserves_non_default_ports():
+    assert canonicalize_url("https://example.com:8443/foo") != canonicalize_url(
+        "https://example.com/foo"
+    )
+
+
 # --- Deduplication ---
 
 

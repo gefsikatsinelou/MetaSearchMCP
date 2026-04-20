@@ -115,6 +115,28 @@ Both are low-cost options. For smaller or occasional workloads, `serpbase.dev` i
 
 ## Installation
 
+One-command local install:
+
+```bash
+python scripts/install.py
+```
+
+Install, run tests, and start the HTTP API:
+
+```bash
+python scripts/install.py --dev --test --run
+```
+
+Deploy with Docker Compose:
+
+```bash
+python scripts/install.py --mode docker
+```
+
+The installer creates `.env` from `.env.example` when `.env` does not already exist. Existing `.env` files are kept unless `--force-env` is passed.
+
+Manual install:
+
 ```bash
 git clone https://github.com/gefsikatsinelou/MetaSearchMCP
 cd MetaSearchMCP

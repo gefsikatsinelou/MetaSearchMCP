@@ -56,7 +56,16 @@ class Settings(BaseSettings):
         """Return explicit list of enabled providers, or empty list meaning 'auto'."""
         if not self.enabled_providers.strip():
             return []
-        return [p.strip() for p in self.enabled_providers.split(",") if p.strip()]
+
+        enabled: list[str] = []
+        seen: set[str] = set()
+        for provider in self.enabled_providers.split(","):
+            normalized = provider.strip().lower()
+            if not normalized or normalized in seen:
+                continue
+            seen.add(normalized)
+            enabled.append(normalized)
+        return enabled
 
 
 _settings: Settings | None = None

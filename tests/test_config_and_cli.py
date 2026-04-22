@@ -22,8 +22,10 @@ def config_sandbox(request):
     shutil.rmtree(sandbox, ignore_errors=True)
 
 
-def test_enabled_provider_list_strips_whitespace_and_empty_values():
-    settings = Settings(enabled_providers=" github, ,arxiv , duckduckgo ,, ")
+def test_enabled_provider_list_normalizes_case_and_deduplicates():
+    settings = Settings(
+        enabled_providers=" GitHub, ,ARXIV , duckduckgo, github, DuckDuckGo ,, "
+    )
 
     assert settings.enabled_provider_list() == ["github", "arxiv", "duckduckgo"]
 

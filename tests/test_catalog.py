@@ -24,3 +24,15 @@ def test_pick_providers_by_tags_matches_any_requested_tag():
     filtered = pick_providers_by_tags(catalog, ["academic", "privacy"])
 
     assert list(filtered.keys()) == ["duckduckgo", "arxiv"]
+
+
+def test_pick_providers_by_tags_can_require_all_requested_tags():
+    catalog = {
+        "duckduckgo": SimpleNamespace(tags=["web", "privacy"]),
+        "github": SimpleNamespace(tags=["code", "web"]),
+        "npm": SimpleNamespace(tags=["code", "web", "packages"]),
+    }
+
+    filtered = pick_providers_by_tags(catalog, ["code", "packages"], match="all")
+
+    assert list(filtered.keys()) == ["npm"]

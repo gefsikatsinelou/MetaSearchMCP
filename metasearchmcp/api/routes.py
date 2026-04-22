@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import Literal
+
 from fastapi import APIRouter, Depends, HTTPException, Query
 from metasearchmcp import __version__
 
@@ -44,7 +46,7 @@ async def search(
     req: SearchEnvelope,
     registry=Depends(_get_registry),
 ) -> SearchReport:
-    providers_map = pick_providers_by_tags(registry, req.tags)
+    providers_map = pick_providers_by_tags(registry, req.tags, match=req.tag_match)
     providers_map = pick_named_providers(providers_map, req.providers)
     if not providers_map:
         raise HTTPException(
@@ -107,9 +109,10 @@ async def health(registry=Depends(_get_registry)) -> dict:
 )
 async def providers(
     tag: list[str] | None = Query(default=None),
+    tag_match: Literal["any", "all"] = Query(default="any"),
     registry=Depends(_get_registry),
 ) -> dict:
-    filtered = pick_providers_by_tags(registry, tag or [])
+    filtered = pick_providers_by_tags(registry, tag or [], match=tag_match)
 
     return {
         "available": sorted(
@@ -121,5 +124,5 @@ async def providers(
         ),
         "count": len(filtered),
         "tag_groups": _build_tag_groups(filtered),
-        "filters": {"tags": tag or []},
+        "filters": {"tags": tag or [], "tag_match": tag_match},
     }

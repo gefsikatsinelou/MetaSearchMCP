@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Any
+from typing import Any, Literal
 
 from pydantic import BaseModel, Field, model_validator
 
@@ -58,6 +58,10 @@ class SearchEnvelope(BaseModel):
     tags: list[str] = Field(
         default_factory=list,
         description="Optional provider tags used to narrow the provider set",
+    )
+    tag_match: Literal["any", "all"] = Field(
+        default="any",
+        description="How tag filters are applied: match any tag or require all tags",
     )
     params: SearchOptions = Field(default_factory=SearchOptions)
 

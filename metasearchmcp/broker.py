@@ -45,6 +45,12 @@ _TOOLS = [
                     "items": {"type": "string"},
                     "description": "Optional provider tags used to narrow the provider set.",
                 },
+                "tag_match": {
+                    "type": "string",
+                    "enum": ["any", "all"],
+                    "default": "any",
+                    "description": "Match providers with any requested tag or require all tags.",
+                },
                 "num_results": {
                     "type": "integer",
                     "default": 10,
@@ -205,7 +211,11 @@ async def dispatch_tool(name: str, arguments: dict[str, Any]) -> dict[str, Any]:
             language=arguments.get("language", "en"),
             country=arguments.get("country", "us"),
         )
-        selected = pick_providers_by_tags(_catalog, arguments.get("tags") or [])
+        selected = pick_providers_by_tags(
+            _catalog,
+            arguments.get("tags") or [],
+            match=arguments.get("tag_match", "any"),
+        )
         selected = pick_named_providers(selected, arguments.get("providers") or [])
         if not selected:
             return {"error": "No providers available for the requested filters."}

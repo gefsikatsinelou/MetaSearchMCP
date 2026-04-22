@@ -198,6 +198,35 @@ def test_providers_filter_by_code_tag(client):
     assert names == {"github", "npm"}
 
 
+def test_providers_filter_by_all_tags(client):
+    resp = client.get("/providers?tag=web&tag=finance&tag_match=all")
+    assert resp.status_code == 200
+    data = resp.json()
+    names = {p["name"] for p in data["available"]}
+    assert names == {"yahoo_finance", "alpha_vantage"}
+    assert data["filters"] == {"tags": ["web", "finance"], "tag_match": "all"}
+
+
+@pytest.mark.asyncio
+async def test_dispatch_search_web_supports_all_tag_matching():
+    from metasearchmcp import broker
+
+    catalog = _fake_catalog()
+    with patch.object(broker, "_catalog", catalog):
+        result = await broker.dispatch_tool(
+            "search_web",
+            {
+                "query": "npm package",
+                "tags": ["code", "packages"],
+                "tag_match": "all",
+            },
+        )
+
+    assert "results" in result
+    providers_hit = {r["provider"] for r in result["results"]}
+    assert providers_hit == {"npm"}
+
+
 # ---------------------------------------------------------------------------
 # provider description field tests
 # ---------------------------------------------------------------------------

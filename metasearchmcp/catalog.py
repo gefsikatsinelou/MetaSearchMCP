@@ -29,13 +29,19 @@ def pick_tagged_providers(
 def pick_providers_by_tags(
     catalog: dict[str, BaseProvider],
     tags: list[str],
+    match: str = "any",
 ) -> dict[str, BaseProvider]:
     if not tags:
         return catalog
 
     requested = set(tags)
+    require_all = match == "all"
     return {
         name: provider
         for name, provider in catalog.items()
-        if requested.intersection(provider.tags)
+        if (
+            requested.issubset(provider.tags)
+            if require_all
+            else bool(requested.intersection(provider.tags))
+        )
     }

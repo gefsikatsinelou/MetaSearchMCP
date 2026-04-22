@@ -245,6 +245,20 @@ curl -X POST http://localhost:8000/search \
   }'
 ```
 
+When multiple tags are provided, the default behavior is `tag_match="any"`.
+Set `tag_match` to `"all"` when you want providers that satisfy every requested tag:
+
+```bash
+curl -X POST http://localhost:8000/search \
+  -H "Content-Type: application/json" \
+  -d '{
+    "query": "npm cli argument parser",
+    "tags": ["code", "packages"],
+    "tag_match": "all",
+    "params": {"num_results": 5, "max_total_results": 6}
+  }'
+```
+
 `num_results` controls how many results each provider can contribute. `max_total_results` caps the final merged response after deduplication.
 
 ### `POST /search/google`
@@ -267,6 +281,12 @@ You can filter the catalog by tag:
 
 ```bash
 curl "http://localhost:8000/providers?tag=academic&tag=web"
+```
+
+Use `tag_match=all` to require every tag instead of the default any-match behavior:
+
+```bash
+curl "http://localhost:8000/providers?tag=code&tag=packages&tag_match=all"
 ```
 
 ### `GET /health`
@@ -343,7 +363,7 @@ MetaSearchMCP exposes these MCP tools:
 - `search_github`
 - `compare_engines`
 
-`search_web` also accepts optional `tags` so agents can limit search to categories such as `web`, `academic`, `code`, or `google`.
+`search_web` also accepts optional `tags` so agents can limit search to categories such as `web`, `academic`, `code`, or `google`. When multiple tags are present, `tag_match="all"` requires a provider to satisfy the full set.
 All search tools accept `max_total_results` to keep the final payload compact.
 
 Example Claude Desktop config:

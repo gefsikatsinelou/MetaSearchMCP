@@ -123,6 +123,63 @@ async def test_dispatch_unknown_tool():
     assert "error" in result
 
 
+@pytest.mark.asyncio
+async def test_dispatch_search_google_prefers_searxng_provider():
+    from metasearchmcp import broker
+
+    catalog = {
+        "google_searxng": _make_provider("google_searxng", ["google", "web"], "SearXNG Google"),
+        "google_serpbase": _make_provider("google_serpbase", ["google", "web"], "SerpBase"),
+    }
+    with patch.object(broker, "_catalog", catalog):
+        result = await broker.dispatch_tool("search_google", {"query": "fastapi"})
+
+    assert "results" in result
+    providers_hit = {r["provider"] for r in result["results"]}
+    assert providers_hit == {"google_searxng"}
+
+
+@pytest.mark.asyncio
+async def test_dispatch_search_google_can_select_searxng_explicitly():
+    from metasearchmcp import broker
+
+    catalog = {
+        "google_searxng": _make_provider("google_searxng", ["google", "web"], "SearXNG Google"),
+        "google_serper": _make_provider("google_serper", ["google", "web"], "Serper"),
+    }
+    with patch.object(broker, "_catalog", catalog):
+        result = await broker.dispatch_tool(
+            "search_google", {"query": "fastapi", "provider": "google_searxng"}
+        )
+
+    assert "results" in result
+    providers_hit = {r["provider"] for r in result["results"]}
+    assert providers_hit == {"google_searxng"}
+
+
+def test_search_google_route_prefers_first_available_provider(client):
+    from metasearchmcp.api import routes
+    from fastapi import FastAPI
+
+    catalog = {
+        "google_searxng": _make_provider("google_searxng", ["google", "web"], "SearXNG Google"),
+        "google_serpbase": _make_provider("google_serpbase", ["google", "web"], "SerpBase"),
+    }
+
+    app = FastAPI()
+    app.include_router(routes.router)
+
+    with patch.object(routes, "_catalog", catalog):
+        with TestClient(app) as test_client:
+            resp = test_client.post("/search/google", json={"query": "fastapi"})
+
+    assert resp.status_code == 200
+    data = resp.json()
+    providers_hit = {r["provider"] for r in data["results"]}
+    assert providers_hit == {"google_searxng"}
+
+
+
 # ---------------------------------------------------------------------------
 # /providers route tests
 # ---------------------------------------------------------------------------

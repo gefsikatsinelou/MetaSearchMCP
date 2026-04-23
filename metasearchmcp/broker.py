@@ -79,7 +79,7 @@ _TOOLS = [
                 "query": {"type": "string", "description": "Search query"},
                 "provider": {
                     "type": "string",
-                    "enum": ["google_serpbase", "google_serper", ""],
+                    "enum": ["google_searxng", "google_serpbase", "google_serper", ""],
                     "default": "",
                 },
                 "num_results": {"type": "integer", "default": 10},
@@ -232,9 +232,12 @@ async def dispatch_tool(name: str, arguments: dict[str, Any]) -> dict[str, Any]:
                 for name, provider in selected.items()
                 if name == provider_name
             }
+        else:
+            first_available = next(iter(selected.items()), None)
+            selected = {first_available[0]: first_available[1]} if first_available else {}
         if not selected:
             return {
-                "error": "No Google provider available. Set SERPBASE_API_KEY or SERPER_API_KEY."
+                "error": "No Google provider available. Set SEARXNG_BASE_URL, SERPBASE_API_KEY, or SERPER_API_KEY."
             }
         return (
             await run_search_plan(query, list(selected.values()), options)
@@ -329,11 +332,15 @@ def run() -> None:
     from metasearchmcp.config import get_settings, USER_CONFIG_FILE
 
     settings = get_settings()
-    if not settings.serpbase_api_key:
+    if not (
+        settings.searxng_base_url
+        or settings.serpbase_api_key
+        or settings.serper_api_key
+    ):
         print(
-            "[MetaSearchMCP] SERPBASE_API_KEY not configured.\n"
-            f"  Run 'metasearchmcp-setup' to set up your API key.\n"
-            f"  Get your key at: https://serpbase.dev/dashboard/api-keys\n"
+            "[MetaSearchMCP] No Google provider configured.\n"
+            f"  Set SEARXNG_BASE_URL or run 'metasearchmcp-setup' for SerpBase.\n"
+            f"  SerpBase key dashboard: https://serpbase.dev/dashboard/api-keys\n"
             f"  Config file: {USER_CONFIG_FILE}",
             file=sys.stderr,
         )

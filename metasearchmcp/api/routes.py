@@ -79,14 +79,15 @@ async def search_google(
             )
         selected = {req.provider: google_providers[req.provider]}
     else:
-        selected = google_providers
+        first_available = next(iter(google_providers.items()), None)
+        selected = {first_available[0]: first_available[1]} if first_available else {}
 
     if not selected:
         raise HTTPException(
             status_code=503,
             detail=(
                 "No Google provider available. "
-                "Set SERPBASE_API_KEY or SERPER_API_KEY in your environment."
+                "Set SEARXNG_BASE_URL, SERPBASE_API_KEY, or SERPER_API_KEY in your environment."
             ),
         )
 

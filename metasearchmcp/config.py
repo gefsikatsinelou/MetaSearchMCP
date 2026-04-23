@@ -27,6 +27,7 @@ class Settings(BaseSettings):
     aggregator_timeout: float = 15.0
 
     # API keys — Google providers
+    searxng_base_url: str = ""
     serpbase_api_key: str = ""
     serper_api_key: str = ""
 

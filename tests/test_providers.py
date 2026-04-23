@@ -129,6 +129,39 @@ def test_github_parse():
 
 
 # ---------------------------------------------------------------------------
+# Google SearXNG
+# ---------------------------------------------------------------------------
+
+def _searxng_google_response() -> dict:
+    return {
+        "results": [
+            {
+                "title": "FastAPI",
+                "url": "https://fastapi.tiangolo.com",
+                "content": "FastAPI framework, high performance",
+            }
+        ],
+        "suggestions": ["fastapi tutorial"],
+        "infoboxes": [{"infobox": "FastAPI is a web framework"}],
+    }
+
+
+def test_google_searxng_parse():
+    from metasearchmcp.providers.google_searxng import GoogleSearXNGProvider
+
+    provider = GoogleSearXNGProvider()
+    result = provider._parse(_searxng_google_response())
+
+    assert len(result.results) == 1
+    r = result.results[0]
+    assert r.title == "FastAPI"
+    assert r.url == "https://fastapi.tiangolo.com"
+    assert r.provider == "google_searxng"
+    assert result.related_searches == ["fastapi tutorial"]
+    assert result.answer_box == {"infobox": "FastAPI is a web framework"}
+
+
+# ---------------------------------------------------------------------------
 # Google Serper
 # ---------------------------------------------------------------------------
 
@@ -166,6 +199,17 @@ def test_serper_parse():
 # ---------------------------------------------------------------------------
 # Provider availability
 # ---------------------------------------------------------------------------
+
+def test_google_searxng_unavailable_without_base_url(monkeypatch):
+    monkeypatch.setenv("SEARXNG_BASE_URL", "")
+    import metasearchmcp.config as cfg
+
+    cfg._settings = None
+    from metasearchmcp.providers.google_searxng import GoogleSearXNGProvider
+
+    p = GoogleSearXNGProvider()
+    assert p.is_available() is False
+    cfg._settings = None
 
 def test_google_serpbase_unavailable_without_key(monkeypatch):
     monkeypatch.setenv("SERPBASE_API_KEY", "")

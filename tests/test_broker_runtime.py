@@ -52,7 +52,9 @@ def test_run_warns_when_serpbase_missing(monkeypatch, capsys):
     import metasearchmcp.config as config
 
     class FakeSettings:
+        searxng_base_url = ""
         serpbase_api_key = ""
+        serper_api_key = ""
 
     called = {"ran": False}
 
@@ -66,7 +68,7 @@ def test_run_warns_when_serpbase_missing(monkeypatch, capsys):
     broker.run()
 
     err = capsys.readouterr().err
-    assert "SERPBASE_API_KEY not configured" in err
+    assert "No Google provider configured" in err
     assert called["ran"] is True
 
 
@@ -75,7 +77,9 @@ def test_run_skips_warning_when_serpbase_present(monkeypatch, capsys):
     import metasearchmcp.config as config
 
     class FakeSettings:
+        searxng_base_url = ""
         serpbase_api_key = "configured"
+        serper_api_key = ""
 
     def fake_run(coro):
         coro.close()
@@ -86,4 +90,25 @@ def test_run_skips_warning_when_serpbase_present(monkeypatch, capsys):
     broker.run()
 
     err = capsys.readouterr().err
-    assert "SERPBASE_API_KEY not configured" not in err
+    assert "No Google provider configured" not in err
+
+
+def test_run_skips_warning_when_searxng_present(monkeypatch, capsys):
+    from metasearchmcp import broker
+    import metasearchmcp.config as config
+
+    class FakeSettings:
+        searxng_base_url = "https://searx.example.com"
+        serpbase_api_key = ""
+        serper_api_key = ""
+
+    def fake_run(coro):
+        coro.close()
+
+    monkeypatch.setattr(config, "get_settings", lambda: FakeSettings())
+    monkeypatch.setattr(broker.asyncio, "run", fake_run)
+
+    broker.run()
+
+    err = capsys.readouterr().err
+    assert "No Google provider configured" not in err

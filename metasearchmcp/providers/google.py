@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import re
 from urllib.parse import parse_qs, unquote, urlparse
 
 from bs4 import BeautifulSoup
@@ -15,7 +16,15 @@ _SNIPPET_SELECTORS = (
     "div.yXK7lf",
     "div.s3v9rd",
     "span.aCOpRe",
+    "div[data-sncf='1']",
 )
+_ANSWER_BOX_SELECTORS = (
+    "div.IZ6rdc",
+    "div.kno-rdesc",
+    "div.hgKElc",
+    "div[data-attrid='wa:/description']",
+)
+_WHITESPACE_RE = re.compile(r"\s+")
 
 
 class GoogleProvider(BaseProvider):
@@ -95,13 +104,14 @@ class GoogleProvider(BaseProvider):
             if len(results) >= self._max_results:
                 break
 
-        related_searches = []
-        for suggestion in soup.select('div.gGQDvd.iIWm4b a, a[href*="&q="]'):
-            text = suggestion.get_text(" ", strip=True)
-            if text and text not in related_searches:
-                related_searches.append(text)
+        related_searches = self._extract_related_searches(soup)
+        answer_box = self._extract_answer_box(soup)
 
-        return ProviderResult(results=results, related_searches=related_searches)
+        return ProviderResult(
+            results=results,
+            related_searches=related_searches,
+            answer_box=answer_box,
+        )
 
     @staticmethod
     def _extract_result_url(href: str) -> str:
@@ -110,9 +120,15 @@ class GoogleProvider(BaseProvider):
         if href.startswith("/url?"):
             query = parse_qs(urlparse(href).query)
             target = query.get("q", [""])[0]
-            return unquote(target)
+            target = unquote(target)
+            parsed = urlparse(target)
+            if parsed.scheme in {"http", "https"} and parsed.netloc:
+                return target
+            return ""
         if href.startswith("http"):
-            return href
+            parsed = urlparse(href)
+            if parsed.scheme in {"http", "https"} and parsed.netloc:
+                return href
         return ""
 
     @staticmethod
@@ -120,5 +136,37 @@ class GoogleProvider(BaseProvider):
         for selector in _SNIPPET_SELECTORS:
             snippet_node = block.select_one(selector)
             if snippet_node:
-                return snippet_node.get_text(" ", strip=True)
+                return GoogleProvider._normalize_text(snippet_node.get_text(" ", strip=True))
         return ""
+
+    @staticmethod
+    def _extract_related_searches(soup: BeautifulSoup) -> list[str]:
+        related_searches: list[str] = []
+        selectors = (
+            "div.gGQDvd a",
+            "div.s75CSd a",
+            "div.BNeawe.s3v9rd.AP7Wnd a",
+        )
+        for selector in selectors:
+            for suggestion in soup.select(selector):
+                href = suggestion.get("href", "")
+                if "q=" not in href:
+                    continue
+                text = GoogleProvider._normalize_text(suggestion.get_text(" ", strip=True))
+                if text and text not in related_searches:
+                    related_searches.append(text)
+        return related_searches
+
+    @staticmethod
+    def _extract_answer_box(soup: BeautifulSoup) -> dict | None:
+        for selector in _ANSWER_BOX_SELECTORS:
+            node = soup.select_one(selector)
+            if node:
+                text = GoogleProvider._normalize_text(node.get_text(" ", strip=True))
+                if text:
+                    return {"text": text}
+        return None
+
+    @staticmethod
+    def _normalize_text(text: str) -> str:
+        return _WHITESPACE_RE.sub(" ", text).strip()

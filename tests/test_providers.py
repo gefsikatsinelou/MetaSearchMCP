@@ -136,6 +136,7 @@ def _google_html() -> str:
     return """
     <html>
       <body>
+        <div class="kno-rdesc">FastAPI is a modern Python web framework.</div>
         <div class="g">
           <a href="/url?q=https%3A%2F%2Ffastapi.tiangolo.com&sa=U&ved=123">
             <h3>FastAPI</h3>
@@ -144,6 +145,7 @@ def _google_html() -> str:
         </div>
         <div class="gGQDvd iIWm4b">
           <a href="/search?q=fastapi+tutorial">fastapi tutorial</a>
+          <a href="/preferences?hl=en">Settings</a>
         </div>
       </body>
     </html>
@@ -162,6 +164,37 @@ def test_google_parse():
     assert r.url == "https://fastapi.tiangolo.com"
     assert r.provider == "google"
     assert result.related_searches == ["fastapi tutorial"]
+    assert result.answer_box == {"text": "FastAPI is a modern Python web framework."}
+
+
+def test_google_parse_filters_invalid_result_links_and_deduplicates():
+    from metasearchmcp.providers.google import GoogleProvider
+
+    provider = GoogleProvider()
+    result = provider._parse(
+        """
+        <html>
+          <body>
+            <div class="g">
+              <a href="/search?q=internal+nav"><h3>Internal Nav</h3></a>
+              <div class="VwiC3b">Ignore me</div>
+            </div>
+            <div class="g">
+              <a href="/url?q=https%3A%2F%2Fexample.com%2Fguide&sa=U"><h3>Guide</h3></a>
+              <div class="VwiC3b">Primary result</div>
+            </div>
+            <div class="g">
+              <a href="https://example.com/guide"><h3>Guide duplicate</h3></a>
+              <div class="VwiC3b">Duplicate result</div>
+            </div>
+          </body>
+        </html>
+        """
+    )
+
+    assert len(result.results) == 1
+    assert result.results[0].url == "https://example.com/guide"
+    assert result.results[0].snippet == "Primary result"
 
 
 def test_google_rejects_sorry_page():

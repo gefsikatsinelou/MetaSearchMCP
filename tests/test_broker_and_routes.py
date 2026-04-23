@@ -207,6 +207,14 @@ def test_providers_filter_by_all_tags(client):
     assert data["filters"] == {"tags": ["web", "finance"], "tag_match": "all"}
 
 
+def test_providers_filters_normalize_tag_input(client):
+    resp = client.get("/providers?tag=%20Code%20&tag=%20PACKAGES%20&tag=code&tag_match=all")
+    assert resp.status_code == 200
+    data = resp.json()
+    names = {p["name"] for p in data["available"]}
+    assert names == {"npm"}
+
+
 @pytest.mark.asyncio
 async def test_dispatch_search_web_supports_all_tag_matching():
     from metasearchmcp import broker
@@ -218,6 +226,27 @@ async def test_dispatch_search_web_supports_all_tag_matching():
             {
                 "query": "npm package",
                 "tags": ["code", "packages"],
+                "tag_match": "all",
+            },
+        )
+
+    assert "results" in result
+    providers_hit = {r["provider"] for r in result["results"]}
+    assert providers_hit == {"npm"}
+
+
+@pytest.mark.asyncio
+async def test_dispatch_search_web_normalizes_provider_and_tag_filters():
+    from metasearchmcp import broker
+
+    catalog = _fake_catalog()
+    with patch.object(broker, "_catalog", catalog):
+        result = await broker.dispatch_tool(
+            "search_web",
+            {
+                "query": "npm package",
+                "providers": [" NPM ", "npm"],
+                "tags": [" Code ", "PACKAGES"],
                 "tag_match": "all",
             },
         )

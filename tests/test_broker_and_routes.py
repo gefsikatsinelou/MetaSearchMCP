@@ -124,11 +124,11 @@ async def test_dispatch_unknown_tool():
 
 
 @pytest.mark.asyncio
-async def test_dispatch_search_google_prefers_searxng_provider():
+async def test_dispatch_search_google_prefers_direct_google_provider():
     from metasearchmcp import broker
 
     catalog = {
-        "google_searxng": _make_provider("google_searxng", ["google", "web"], "SearXNG Google"),
+        "google": _make_provider("google", ["google", "web"], "Google"),
         "google_serpbase": _make_provider("google_serpbase", ["google", "web"], "SerpBase"),
     }
     with patch.object(broker, "_catalog", catalog):
@@ -136,25 +136,25 @@ async def test_dispatch_search_google_prefers_searxng_provider():
 
     assert "results" in result
     providers_hit = {r["provider"] for r in result["results"]}
-    assert providers_hit == {"google_searxng"}
+    assert providers_hit == {"google"}
 
 
 @pytest.mark.asyncio
-async def test_dispatch_search_google_can_select_searxng_explicitly():
+async def test_dispatch_search_google_can_select_direct_google_explicitly():
     from metasearchmcp import broker
 
     catalog = {
-        "google_searxng": _make_provider("google_searxng", ["google", "web"], "SearXNG Google"),
+        "google": _make_provider("google", ["google", "web"], "Google"),
         "google_serper": _make_provider("google_serper", ["google", "web"], "Serper"),
     }
     with patch.object(broker, "_catalog", catalog):
         result = await broker.dispatch_tool(
-            "search_google", {"query": "fastapi", "provider": "google_searxng"}
+            "search_google", {"query": "fastapi", "provider": "google"}
         )
 
     assert "results" in result
     providers_hit = {r["provider"] for r in result["results"]}
-    assert providers_hit == {"google_searxng"}
+    assert providers_hit == {"google"}
 
 
 def test_search_google_route_prefers_first_available_provider(client):
@@ -162,7 +162,7 @@ def test_search_google_route_prefers_first_available_provider(client):
     from fastapi import FastAPI
 
     catalog = {
-        "google_searxng": _make_provider("google_searxng", ["google", "web"], "SearXNG Google"),
+        "google": _make_provider("google", ["google", "web"], "Google"),
         "google_serpbase": _make_provider("google_serpbase", ["google", "web"], "SerpBase"),
     }
 
@@ -176,7 +176,7 @@ def test_search_google_route_prefers_first_available_provider(client):
     assert resp.status_code == 200
     data = resp.json()
     providers_hit = {r["provider"] for r in data["results"]}
-    assert providers_hit == {"google_searxng"}
+    assert providers_hit == {"google"}
 
 
 

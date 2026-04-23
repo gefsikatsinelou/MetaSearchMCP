@@ -52,7 +52,7 @@ def test_run_warns_when_serpbase_missing(monkeypatch, capsys):
     import metasearchmcp.config as config
 
     class FakeSettings:
-        searxng_base_url = ""
+        allow_unstable_providers = False
         serpbase_api_key = ""
         serper_api_key = ""
 
@@ -77,7 +77,7 @@ def test_run_skips_warning_when_serpbase_present(monkeypatch, capsys):
     import metasearchmcp.config as config
 
     class FakeSettings:
-        searxng_base_url = ""
+        allow_unstable_providers = False
         serpbase_api_key = "configured"
         serper_api_key = ""
 
@@ -93,12 +93,12 @@ def test_run_skips_warning_when_serpbase_present(monkeypatch, capsys):
     assert "No Google provider configured" not in err
 
 
-def test_run_skips_warning_when_searxng_present(monkeypatch, capsys):
+def test_run_skips_warning_when_direct_google_enabled(monkeypatch, capsys):
     from metasearchmcp import broker
     import metasearchmcp.config as config
 
     class FakeSettings:
-        searxng_base_url = "https://searx.example.com"
+        allow_unstable_providers = True
         serpbase_api_key = ""
         serper_api_key = ""
 

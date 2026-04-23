@@ -129,36 +129,51 @@ def test_github_parse():
 
 
 # ---------------------------------------------------------------------------
-# Google SearXNG
+# Google
 # ---------------------------------------------------------------------------
 
-def _searxng_google_response() -> dict:
-    return {
-        "results": [
-            {
-                "title": "FastAPI",
-                "url": "https://fastapi.tiangolo.com",
-                "content": "FastAPI framework, high performance",
-            }
-        ],
-        "suggestions": ["fastapi tutorial"],
-        "infoboxes": [{"infobox": "FastAPI is a web framework"}],
-    }
+def _google_html() -> str:
+    return """
+    <html>
+      <body>
+        <div class="g">
+          <a href="/url?q=https%3A%2F%2Ffastapi.tiangolo.com&sa=U&ved=123">
+            <h3>FastAPI</h3>
+          </a>
+          <div class="VwiC3b">FastAPI framework, high performance</div>
+        </div>
+        <div class="gGQDvd iIWm4b">
+          <a href="/search?q=fastapi+tutorial">fastapi tutorial</a>
+        </div>
+      </body>
+    </html>
+    """
 
 
-def test_google_searxng_parse():
-    from metasearchmcp.providers.google_searxng import GoogleSearXNGProvider
+def test_google_parse():
+    from metasearchmcp.providers.google import GoogleProvider
 
-    provider = GoogleSearXNGProvider()
-    result = provider._parse(_searxng_google_response())
+    provider = GoogleProvider()
+    result = provider._parse(_google_html())
 
     assert len(result.results) == 1
     r = result.results[0]
     assert r.title == "FastAPI"
     assert r.url == "https://fastapi.tiangolo.com"
-    assert r.provider == "google_searxng"
+    assert r.provider == "google"
     assert result.related_searches == ["fastapi tutorial"]
-    assert result.answer_box == {"infobox": "FastAPI is a web framework"}
+
+
+def test_google_rejects_sorry_page():
+    from metasearchmcp.providers.google import GoogleProvider
+
+    provider = GoogleProvider()
+
+    with pytest.raises(RuntimeError, match="automated traffic"):
+        provider._raise_on_blocked_response(
+            "Our systems have detected unusual traffic from your computer network",
+            "https://www.google.com/sorry/index",
+        )
 
 
 # ---------------------------------------------------------------------------
@@ -200,14 +215,14 @@ def test_serper_parse():
 # Provider availability
 # ---------------------------------------------------------------------------
 
-def test_google_searxng_unavailable_without_base_url(monkeypatch):
-    monkeypatch.setenv("SEARXNG_BASE_URL", "")
+def test_google_unavailable_without_unstable_flag(monkeypatch):
+    monkeypatch.setenv("ALLOW_UNSTABLE_PROVIDERS", "false")
     import metasearchmcp.config as cfg
 
     cfg._settings = None
-    from metasearchmcp.providers.google_searxng import GoogleSearXNGProvider
+    from metasearchmcp.providers.google import GoogleProvider
 
-    p = GoogleSearXNGProvider()
+    p = GoogleProvider()
     assert p.is_available() is False
     cfg._settings = None
 

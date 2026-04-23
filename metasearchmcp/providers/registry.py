@@ -4,7 +4,7 @@ from metasearchmcp.config import get_settings
 from .base import BaseProvider
 
 # Google providers
-from .google_searxng import GoogleSearXNGProvider
+from .google import GoogleProvider
 from .google_serpbase import GoogleSerpbaseProvider
 from .google_serper import GoogleSerperProvider
 
@@ -60,7 +60,7 @@ from .finnhub import FinnhubProvider
 # Order matters: within a tag group, earlier providers take priority in dedup.
 _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     # Google
-    GoogleSearXNGProvider,
+    GoogleProvider,
     GoogleSerpbaseProvider,
     GoogleSerperProvider,
     # General web search

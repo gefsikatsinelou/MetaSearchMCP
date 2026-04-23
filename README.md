@@ -31,19 +31,19 @@ MetaSearchMCP is built for that machine-consumable workflow. It is not a SearXNG
 
 ## Google Support
 
-Google is intentionally not scraped directly in this project.
+Google support now includes a direct scraper provider implemented inside this project.
 
-In practice, Google's anti-bot and risk-control systems make direct self-hosted scraping brittle and expensive to maintain. This project now treats SearXNG as the primary Google integration path, because it already maintains a battle-tested Google engine and exposes a stable search API that MetaSearchMCP can consume.
+The implementation direction is based on the same broad strategy used by SearXNG's Google engine: browser-like requests, consent cookie handling, locale-aware query parameters, and HTML result parsing. It is implemented locally in this repository rather than proxying through a SearXNG instance.
 
 Currently supported Google providers:
 
 | Provider | Env var | Notes |
 |---|---|---|
-| [SearXNG](https://github.com/searxng/searxng) | `SEARXNG_BASE_URL` | Primary path; query a SearXNG instance with `engines=google&format=json` |
+| Direct Google | `ALLOW_UNSTABLE_PROVIDERS=true` | Primary path; HTML scraping, best effort, may be blocked from datacenter IPs |
 | [serpbase.dev](https://serpbase.dev) | `SERPBASE_API_KEY` | Pay-per-use; typically cheaper for low-volume usage |
 | [serper.dev](https://serper.dev) | `SERPER_API_KEY` | Includes a free tier, then pay-per-use |
 
-Provider priority for `/search/google` is now `google_searxng` first, then `google_serpbase`, then `google_serper`.
+Provider priority for `/search/google` is now `google` first, then `google_serpbase`, then `google_serper`.
 
 ## Supported Providers
 
@@ -51,7 +51,7 @@ Provider priority for `/search/google` is now `google_searxng` first, then `goog
 
 | Provider | Name | Method |
 |---|---|---|
-| SearXNG | `google_searxng` | SearXNG Search API with Google engine |
+| Direct Google | `google` | HTML scraping modeled after SearXNG's approach |
 | SerpBase | `google_serpbase` | Hosted Google SERP API |
 | Serper | `google_serper` | Hosted Google SERP API |
 
@@ -167,7 +167,6 @@ PORT=8000
 DEFAULT_TIMEOUT=10
 AGGREGATOR_TIMEOUT=15
 
-SEARXNG_BASE_URL=
 SERPBASE_API_KEY=
 SERPER_API_KEY=
 BRAVE_API_KEY=
@@ -266,7 +265,7 @@ curl -X POST http://localhost:8000/search \
 
 ### `POST /search/google`
 
-Search Google through the configured Google provider chain. If `SEARXNG_BASE_URL` is set, MetaSearchMCP will prefer `google_searxng` automatically.
+Search Google through the configured Google provider chain. If `ALLOW_UNSTABLE_PROVIDERS=true`, MetaSearchMCP will prefer the direct `google` provider automatically.
 
 ```bash
 curl -X POST http://localhost:8000/search/google \
@@ -274,12 +273,12 @@ curl -X POST http://localhost:8000/search/google \
   -d '{"query": "site:github.com rust tokio"}'
 ```
 
-To force the SearXNG-backed Google route explicitly:
+To force the direct Google route explicitly:
 
 ```bash
 curl -X POST http://localhost:8000/search/google \
   -H "Content-Type: application/json" \
-  -d '{"query": "site:github.com rust tokio", "provider": "google_searxng"}'
+  -d '{"query": "site:github.com rust tokio", "provider": "google"}'
 ```
 
 ### `GET /providers`
@@ -385,7 +384,7 @@ Example Claude Desktop config:
     "MetaSearchMCP": {
       "command": "metasearchmcp-mcp",
       "env": {
-        "SEARXNG_BASE_URL": "https://your-searxng-instance.example",
+        "ALLOW_UNSTABLE_PROVIDERS": "true",
         "SERPBASE_API_KEY": "your_key",
         "SERPER_API_KEY": "your_key"
       }

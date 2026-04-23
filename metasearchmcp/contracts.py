@@ -71,7 +71,7 @@ class GoogleSearchEnvelope(BaseModel):
     provider: str = Field(
         default="",
         description=(
-            "'google_searxng', 'google_serpbase', or 'google_serper'; "
+            "'google', 'google_serpbase', or 'google_serper'; "
             "empty = first available"
         ),
     )

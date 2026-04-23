@@ -87,7 +87,7 @@ async def search_google(
             status_code=503,
             detail=(
                 "No Google provider available. "
-                "Set SEARXNG_BASE_URL, SERPBASE_API_KEY, or SERPER_API_KEY in your environment."
+                "Enable ALLOW_UNSTABLE_PROVIDERS=true for direct Google, or set SERPBASE_API_KEY / SERPER_API_KEY."
             ),
         )
 

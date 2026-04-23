@@ -79,7 +79,7 @@ _TOOLS = [
                 "query": {"type": "string", "description": "Search query"},
                 "provider": {
                     "type": "string",
-                    "enum": ["google_searxng", "google_serpbase", "google_serper", ""],
+                    "enum": ["google", "google_serpbase", "google_serper", ""],
                     "default": "",
                 },
                 "num_results": {"type": "integer", "default": 10},
@@ -237,7 +237,7 @@ async def dispatch_tool(name: str, arguments: dict[str, Any]) -> dict[str, Any]:
             selected = {first_available[0]: first_available[1]} if first_available else {}
         if not selected:
             return {
-                "error": "No Google provider available. Set SEARXNG_BASE_URL, SERPBASE_API_KEY, or SERPER_API_KEY."
+                "error": "No Google provider available. Enable ALLOW_UNSTABLE_PROVIDERS=true for direct Google, or set SERPBASE_API_KEY / SERPER_API_KEY."
             }
         return (
             await run_search_plan(query, list(selected.values()), options)
@@ -333,13 +333,13 @@ def run() -> None:
 
     settings = get_settings()
     if not (
-        settings.searxng_base_url
+        settings.allow_unstable_providers
         or settings.serpbase_api_key
         or settings.serper_api_key
     ):
         print(
             "[MetaSearchMCP] No Google provider configured.\n"
-            f"  Set SEARXNG_BASE_URL or run 'metasearchmcp-setup' for SerpBase.\n"
+            f"  Set ALLOW_UNSTABLE_PROVIDERS=true for direct Google, or run 'metasearchmcp-setup' for SerpBase.\n"
             f"  SerpBase key dashboard: https://serpbase.dev/dashboard/api-keys\n"
             f"  Config file: {USER_CONFIG_FILE}",
             file=sys.stderr,

@@ -37,6 +37,18 @@ def test_normalize_preserves_query():
     assert a != b
 
 
+def test_normalize_drops_tracking_query_params():
+    assert canonicalize_url(
+        "https://example.com/foo?q=python&utm_source=newsletter&fbclid=abc123"
+    ) == canonicalize_url("https://example.com/foo?q=python")
+
+
+def test_normalize_sorts_query_params_for_stable_deduplication():
+    assert canonicalize_url("https://example.com/foo?b=2&a=1") == canonicalize_url(
+        "https://example.com/foo?a=1&b=2"
+    )
+
+
 def test_normalize_drops_default_ports():
     assert canonicalize_url("https://example.com:443/foo") == canonicalize_url(
         "https://example.com/foo"
@@ -73,6 +85,16 @@ def test_dedup_first_occurrence_wins():
 
 def test_dedup_trailing_slash_same():
     out = collapse_duplicate_hits([_r("https://a.com/foo/"), _r("https://a.com/foo")])
+    assert len(out) == 1
+
+
+def test_dedup_tracking_links_same():
+    out = collapse_duplicate_hits(
+        [
+            _r("https://a.com/foo?q=python&utm_medium=email"),
+            _r("https://a.com/foo?q=python"),
+        ]
+    )
     assert len(out) == 1
 
 

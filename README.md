@@ -15,7 +15,7 @@ MetaSearchMCP aggregates results from multiple search providers, normalizes them
 
 Most search aggregators are designed around browser UX: HTML pages, pagination, and interactive result cards. Agents and LLM workflows need a different contract: predictable JSON, stable field names, partial-failure tolerance, and provider-level execution metadata.
 
-MetaSearchMCP is built for that machine-consumable workflow. It is not a SearXNG clone. The design is centered on search orchestration, normalized contracts, and MCP integration.
+MetaSearchMCP is built for that machine-consumable workflow. The design is centered on search orchestration, normalized contracts, and MCP integration.
 
 ## Core Features
 
@@ -33,7 +33,7 @@ MetaSearchMCP is built for that machine-consumable workflow. It is not a SearXNG
 
 Google support now includes a direct scraper provider implemented inside this project.
 
-The implementation direction is based on the same broad strategy used by SearXNG's Google engine: browser-like requests, consent cookie handling, locale-aware query parameters, and HTML result parsing. It is implemented locally in this repository rather than proxying through a SearXNG instance.
+The direct Google implementation uses browser-like requests, consent cookie handling, locale-aware query parameters, and resilient HTML result parsing. It is implemented locally in this repository.
 
 Currently supported Google providers:
 
@@ -51,7 +51,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 
 | Provider | Name | Method |
 |---|---|---|
-| Direct Google | `google` | HTML scraping modeled after SearXNG's approach |
+| Direct Google | `google` | HTML scraping with browser-like request handling |
 | SerpBase | `google_serpbase` | Hosted Google SERP API |
 | Serper | `google_serper` | Hosted Google SERP API |
 

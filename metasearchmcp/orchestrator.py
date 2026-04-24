@@ -58,7 +58,7 @@ async def run_search_plan(
     settings = get_settings()
     started_at = time.monotonic()
     jobs = [
-        execute_provider_search(provider, query, options, settings.default_timeout)
+        execute_provider_search(provider, query, options, settings.aggregator_timeout)
         for provider in providers
     ]
     raw_results = await asyncio.gather(*jobs)

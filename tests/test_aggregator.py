@@ -144,6 +144,25 @@ async def test_aggregate_provider_status_includes_latency():
 
 
 @pytest.mark.asyncio
+async def test_aggregate_uses_aggregator_timeout(monkeypatch):
+    import metasearchmcp.orchestrator as orchestrator
+
+    p = _make_provider("slow", [_result("https://x.com", "slow")], delay=0.02)
+
+    class FakeSettings:
+        aggregator_timeout = 0.001
+
+    monkeypatch.setattr(orchestrator, "get_settings", lambda: FakeSettings())
+
+    resp = await run_search_plan("test", [p])
+
+    assert resp.results == []
+    assert resp.providers[0].name == "slow"
+    assert resp.providers[0].success is False
+    assert "timeout after 0.001s" == resp.providers[0].error
+
+
+@pytest.mark.asyncio
 async def test_aggregate_empty_providers():
     resp = await run_search_plan("test", [])
     assert resp.results == []

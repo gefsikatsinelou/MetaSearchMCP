@@ -53,7 +53,14 @@ class GoogleSerperProvider(BaseProvider):
                 published_date=item.get("date"),
             ))
 
-        related = [r.get("query", "") for r in data.get("relatedSearches", [])]
+        related: list[str] = []
+        seen_related: set[str] = set()
+        for item in data.get("relatedSearches", []):
+            query = item.get("query", "").strip()
+            if not query or query in seen_related:
+                continue
+            seen_related.add(query)
+            related.append(query)
 
         answer_box: dict | None = None
         if "answerBox" in data:
@@ -63,6 +70,6 @@ class GoogleSerperProvider(BaseProvider):
 
         return ProviderResult(
             results=results,
-            related_searches=[r for r in related if r],
+            related_searches=related,
             answer_box=answer_box,
         )

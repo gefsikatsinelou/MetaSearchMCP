@@ -225,6 +225,9 @@ def _serper_response() -> dict:
         ],
         "relatedSearches": [
             {"query": "fastapi tutorial"},
+            {"query": " fastapi tutorial "},
+            {"query": ""},
+            {},
         ],
         "answerBox": {"answer": "FastAPI is a web framework"},
     }

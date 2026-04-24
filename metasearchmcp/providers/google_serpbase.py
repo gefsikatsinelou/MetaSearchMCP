@@ -56,7 +56,16 @@ class GoogleSerpbaseProvider(BaseProvider):
                 )
             )
 
-        related = [r for r in data.get("related_searches", []) if r]
+        related: list[str] = []
+        seen_related: set[str] = set()
+        for item in data.get("related_searches", []):
+            if item is None:
+                continue
+            query_text = str(item).strip()
+            if not query_text or query_text in seen_related:
+                continue
+            seen_related.add(query_text)
+            related.append(query_text)
         answer_box = (
             data.get("ai_overview")
             or data.get("knowledge_graph")

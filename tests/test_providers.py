@@ -247,6 +247,32 @@ def test_serper_parse():
     assert result.answer_box == {"answer": "FastAPI is a web framework"}
 
 
+def test_serpbase_parse_cleans_related_searches():
+    from metasearchmcp.providers.google_serpbase import GoogleSerpbaseProvider
+
+    provider = GoogleSerpbaseProvider()
+    result = provider._parse(
+        {
+            "status": 0,
+            "organic": [
+                {
+                    "title": "FastAPI",
+                    "link": "https://fastapi.tiangolo.com",
+                    "snippet": "FastAPI framework, high performance",
+                    "date": "2024-01-01",
+                }
+            ],
+            "related_searches": ["fastapi tutorial", " fastapi tutorial ", "", None],
+            "knowledge_graph": {"title": "FastAPI"},
+        },
+        "fastapi",
+    )
+
+    assert len(result.results) == 1
+    assert result.related_searches == ["fastapi tutorial"]
+    assert result.answer_box == {"title": "FastAPI"}
+
+
 # ---------------------------------------------------------------------------
 # Provider availability
 # ---------------------------------------------------------------------------

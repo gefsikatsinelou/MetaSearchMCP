@@ -43,13 +43,20 @@ class GoogleProvider(BaseProvider):
         primary = normalized.split("-", 1)[0].lower()
         return primary or "en"
 
+    @staticmethod
+    def _country_code(country: str) -> str:
+        normalized = (country or "us").strip().replace("_", "-")
+        region = normalized.rsplit("-", 1)[-1].lower()
+        return region or "us"
+
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
         language_code = self._language_code(params.language)
+        country_code = self._country_code(params.country)
         request_params = {
             "q": query,
-            "hl": f"{language_code}-{params.country.upper()}",
+            "hl": f"{language_code}-{country_code.upper()}",
             "lr": f"lang_{language_code}",
-            "gl": params.country.lower(),
+            "gl": country_code,
             "ie": "utf8",
             "oe": "utf8",
             "filter": "0",

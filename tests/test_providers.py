@@ -251,6 +251,43 @@ async def test_google_search_normalizes_language_for_request(monkeypatch):
     assert captured["params"]["lr"] == "lang_pt"
 
 
+@pytest.mark.asyncio
+async def test_google_search_normalizes_country_for_request(monkeypatch):
+    from metasearchmcp.providers.google import GoogleProvider
+
+    captured: dict[str, object] = {}
+
+    class FakeResponse:
+        text = "<html></html>"
+        url = "https://www.google.com/search?q=fastapi"
+
+        def raise_for_status(self) -> None:
+            return None
+
+    class FakeClient:
+        async def __aenter__(self):
+            return self
+
+        async def __aexit__(self, exc_type, exc, tb):
+            return None
+
+        async def get(self, url, params=None, cookies=None, headers=None):
+            captured["params"] = params
+            return FakeResponse()
+
+    provider = GoogleProvider()
+    monkeypatch.setattr(provider, "_scraper_client", lambda: FakeClient())
+    monkeypatch.setattr(provider, "_parse", lambda html: SimpleNamespace(results=[]))
+
+    await provider.search(
+        "fastapi",
+        SearchParams(language="en", country=" pt-BR ", safe_search=True),
+    )
+
+    assert captured["params"]["hl"] == "en-BR"
+    assert captured["params"]["gl"] == "br"
+
+
 # ---------------------------------------------------------------------------
 # Google Serper
 # ---------------------------------------------------------------------------

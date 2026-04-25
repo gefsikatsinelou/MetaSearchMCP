@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import xml.etree.ElementTree as ET
+from types import SimpleNamespace
 
 import pytest
 
@@ -207,6 +208,47 @@ def test_google_rejects_sorry_page():
             "Our systems have detected unusual traffic from your computer network",
             "https://www.google.com/sorry/index",
         )
+
+
+@pytest.mark.asyncio
+async def test_google_search_normalizes_language_for_request(monkeypatch):
+    from metasearchmcp.providers.google import GoogleProvider
+
+    captured: dict[str, object] = {}
+
+    class FakeResponse:
+        text = "<html></html>"
+        url = "https://www.google.com/search?q=fastapi"
+
+        def raise_for_status(self) -> None:
+            return None
+
+    class FakeClient:
+        async def __aenter__(self):
+            return self
+
+        async def __aexit__(self, exc_type, exc, tb):
+            return None
+
+        async def get(self, url, params=None, cookies=None, headers=None):
+            captured["url"] = url
+            captured["params"] = params
+            captured["cookies"] = cookies
+            captured["headers"] = headers
+            return FakeResponse()
+
+    provider = GoogleProvider()
+    monkeypatch.setattr(provider, "_scraper_client", lambda: FakeClient())
+    monkeypatch.setattr(provider, "_parse", lambda html: SimpleNamespace(results=[]))
+
+    result = await provider.search(
+        "fastapi",
+        SearchParams(language="pt-BR", country="br", safe_search=True),
+    )
+
+    assert result.results == []
+    assert captured["params"]["hl"] == "pt-BR"
+    assert captured["params"]["lr"] == "lang_pt"
 
 
 # ---------------------------------------------------------------------------

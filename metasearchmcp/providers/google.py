@@ -37,11 +37,18 @@ class GoogleProvider(BaseProvider):
     def is_available(self) -> bool:
         return get_settings().allow_unstable_providers
 
+    @staticmethod
+    def _language_code(language: str) -> str:
+        normalized = (language or "en").strip().replace("_", "-")
+        primary = normalized.split("-", 1)[0].lower()
+        return primary or "en"
+
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
+        language_code = self._language_code(params.language)
         request_params = {
             "q": query,
-            "hl": f"{params.language}-{params.country.upper()}",
-            "lr": f"lang_{params.language}",
+            "hl": f"{language_code}-{params.country.upper()}",
+            "lr": f"lang_{language_code}",
             "gl": params.country.lower(),
             "ie": "utf8",
             "oe": "utf8",

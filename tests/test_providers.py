@@ -326,6 +326,46 @@ def test_serper_parse():
     assert result.answer_box == {"answer": "FastAPI is a web framework"}
 
 
+@pytest.mark.asyncio
+async def test_serper_search_normalizes_locale_for_request(monkeypatch):
+    from metasearchmcp.providers.google_serper import GoogleSerperProvider
+
+    captured: dict[str, object] = {}
+
+    class FakeResponse:
+        def raise_for_status(self) -> None:
+            return None
+
+        def json(self) -> dict:
+            return {"organic": []}
+
+    class FakeClient:
+        async def __aenter__(self):
+            return self
+
+        async def __aexit__(self, exc_type, exc, tb):
+            return None
+
+        async def post(self, url, json=None, headers=None):
+            captured["url"] = url
+            captured["json"] = json
+            captured["headers"] = headers
+            return FakeResponse()
+
+    provider = GoogleSerperProvider()
+    monkeypatch.setattr(provider, "_api_key", "test-key")
+    monkeypatch.setattr(provider, "_client", lambda: FakeClient())
+
+    result = await provider.search(
+        "fastapi",
+        SearchParams(language="pt-BR", country=" pt-BR ", safe_search=True),
+    )
+
+    assert result.results == []
+    assert captured["json"]["hl"] == "pt"
+    assert captured["json"]["gl"] == "br"
+
+
 def test_serpbase_parse_cleans_related_searches():
     from metasearchmcp.providers.google_serpbase import GoogleSerpbaseProvider
 
@@ -350,6 +390,46 @@ def test_serpbase_parse_cleans_related_searches():
     assert len(result.results) == 1
     assert result.related_searches == ["fastapi tutorial"]
     assert result.answer_box == {"title": "FastAPI"}
+
+
+@pytest.mark.asyncio
+async def test_serpbase_search_normalizes_locale_for_request(monkeypatch):
+    from metasearchmcp.providers.google_serpbase import GoogleSerpbaseProvider
+
+    captured: dict[str, object] = {}
+
+    class FakeResponse:
+        def raise_for_status(self) -> None:
+            return None
+
+        def json(self) -> dict:
+            return {"status": 0, "organic": []}
+
+    class FakeClient:
+        async def __aenter__(self):
+            return self
+
+        async def __aexit__(self, exc_type, exc, tb):
+            return None
+
+        async def post(self, url, json=None, headers=None):
+            captured["url"] = url
+            captured["json"] = json
+            captured["headers"] = headers
+            return FakeResponse()
+
+    provider = GoogleSerpbaseProvider()
+    monkeypatch.setattr(provider, "_api_key", "test-key")
+    monkeypatch.setattr(provider, "_client", lambda: FakeClient())
+
+    result = await provider.search(
+        "fastapi",
+        SearchParams(language="pt-BR", country=" pt-BR ", safe_search=True),
+    )
+
+    assert result.results == []
+    assert captured["json"]["hl"] == "pt"
+    assert captured["json"]["gl"] == "br"
 
 
 @pytest.mark.asyncio

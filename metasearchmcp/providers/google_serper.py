@@ -21,12 +21,26 @@ class GoogleSerperProvider(BaseProvider):
     def is_available(self) -> bool:
         return bool(self._api_key)
 
+    @staticmethod
+    def _language_code(language: str) -> str:
+        normalized = (language or "en").strip().replace("_", "-")
+        primary = normalized.split("-", 1)[0].lower()
+        return primary or "en"
+
+    @staticmethod
+    def _country_code(country: str) -> str:
+        normalized = (country or "us").strip().replace("_", "-")
+        region = normalized.rsplit("-", 1)[-1].lower()
+        return region or "us"
+
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
+        language_code = self._language_code(params.language)
+        country_code = self._country_code(params.country)
         payload = {
             "q": query,
             "num": min(params.num_results, self._max_results),
-            "hl": params.language,
-            "gl": params.country,
+            "hl": language_code,
+            "gl": country_code,
         }
         headers = {
             "X-API-KEY": self._api_key,

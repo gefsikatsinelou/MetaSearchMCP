@@ -352,6 +352,46 @@ def test_serpbase_parse_cleans_related_searches():
     assert result.answer_box == {"title": "FastAPI"}
 
 
+@pytest.mark.asyncio
+async def test_brave_search_normalizes_locale_for_request(monkeypatch):
+    from metasearchmcp.providers.brave import BraveProvider
+
+    captured: dict[str, object] = {}
+
+    class FakeResponse:
+        def raise_for_status(self) -> None:
+            return None
+
+        def json(self) -> dict:
+            return {"web": {"results": []}}
+
+    class FakeClient:
+        async def __aenter__(self):
+            return self
+
+        async def __aexit__(self, exc_type, exc, tb):
+            return None
+
+        async def get(self, url, params=None, headers=None):
+            captured["url"] = url
+            captured["params"] = params
+            captured["headers"] = headers
+            return FakeResponse()
+
+    provider = BraveProvider()
+    monkeypatch.setattr(provider, "_api_key", "test-key")
+    monkeypatch.setattr(provider, "_client", lambda: FakeClient())
+
+    result = await provider.search(
+        "fastapi",
+        SearchParams(language="pt-BR", country=" pt-BR ", safe_search=True),
+    )
+
+    assert result.results == []
+    assert captured["params"]["search_lang"] == "pt"
+    assert captured["params"]["country"] == "BR"
+
+
 # ---------------------------------------------------------------------------
 # Provider availability
 # ---------------------------------------------------------------------------

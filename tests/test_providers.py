@@ -472,6 +472,44 @@ async def test_brave_search_normalizes_locale_for_request(monkeypatch):
     assert captured["params"]["country"] == "BR"
 
 
+@pytest.mark.asyncio
+async def test_duckduckgo_search_normalizes_locale_for_request(monkeypatch):
+    from metasearchmcp.providers.duckduckgo import DuckDuckGoProvider
+
+    captured: dict[str, object] = {}
+
+    class FakeResponse:
+        text = "<html></html>"
+
+        def raise_for_status(self) -> None:
+            return None
+
+    class FakeClient:
+        async def __aenter__(self):
+            return self
+
+        async def __aexit__(self, exc_type, exc, tb):
+            return None
+
+        async def get(self, url, params=None):
+            captured["url"] = url
+            captured["params"] = params
+            return FakeResponse()
+
+    provider = DuckDuckGoProvider()
+    monkeypatch.setattr(provider, "_scraper_client", lambda: FakeClient())
+    monkeypatch.setattr(provider, "_parse", lambda html: SimpleNamespace(results=[]))
+
+    result = await provider.search(
+        "fastapi",
+        SearchParams(language="pt-BR", country=" pt-BR ", safe_search=True),
+    )
+
+    assert result.results == []
+    assert captured["params"]["kl"] == "pt-BR"
+    assert captured["params"]["kp"] == "1"
+
+
 # ---------------------------------------------------------------------------
 # Provider availability
 # ---------------------------------------------------------------------------

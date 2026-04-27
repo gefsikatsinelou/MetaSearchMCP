@@ -24,13 +24,30 @@ class StartpageProvider(BaseProvider):
     description = "Privacy-focused web search via Startpage without tracking."
     tags = ["web", "privacy", "google"]
 
+    @staticmethod
+    def _language_code(language: str) -> str:
+        normalized = (language or "en").strip().replace("_", "-")
+        primary = normalized.split("-", 1)[0].lower()
+        return primary or "en"
+
+    @staticmethod
+    def _country_code(country: str) -> str:
+        normalized = (country or "us").strip().replace("_", "-")
+        region = normalized.rsplit("-", 1)[-1].lower()
+        return region or "us"
+
+    @classmethod
+    def _build_locale_settings(cls, params: SearchParams) -> tuple[str, str]:
+        engine_language = cls._language_code(params.language)
+        engine_region = f"{cls._country_code(params.country)}-{engine_language}"
+        return engine_language, engine_region
+
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
         headers = {
             "Origin": _BASE_URL,
             "Referer": f"{_BASE_URL}/",
         }
-        engine_language = params.language.split("-")[0].lower()
-        engine_region = f"{params.country.lower()}-{engine_language}"
+        engine_language, engine_region = self._build_locale_settings(params)
 
         form_data = {
             "query": query,

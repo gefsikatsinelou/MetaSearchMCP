@@ -249,6 +249,9 @@ async def test_google_search_normalizes_language_for_request(monkeypatch):
     assert result.results == []
     assert captured["params"]["hl"] == "pt-BR"
     assert captured["params"]["lr"] == "lang_pt"
+    assert "SM-G900P Build/LRX21T" in captured["headers"]["User-Agent"]
+    assert "Mobile Safari/537.36 NSTNWV" in captured["headers"]["User-Agent"]
+    assert captured["headers"]["User-Agent"].endswith("pt-BR")
 
 
 @pytest.mark.asyncio
@@ -286,6 +289,16 @@ async def test_google_search_normalizes_country_for_request(monkeypatch):
 
     assert captured["params"]["hl"] == "en-BR"
     assert captured["params"]["gl"] == "br"
+
+
+def test_google_build_user_agent_applies_stable_variant_suffix():
+    from metasearchmcp.providers.google import GoogleProvider
+
+    ua = GoogleProvider._build_user_agent("en", "us")
+
+    assert ua.startswith("Mozilla/5.0 (Linux; Android 5.0; SM-G900P Build/LRX21T)")
+    assert "Chrome/39.0.2374." in ua
+    assert ua.endswith("NSTNWV en-US")
 
 
 # ---------------------------------------------------------------------------

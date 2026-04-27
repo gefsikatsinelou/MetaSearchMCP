@@ -25,6 +25,11 @@ _ANSWER_BOX_SELECTORS = (
     "div[data-attrid='wa:/description']",
 )
 _WHITESPACE_RE = re.compile(r"\s+")
+_GOOGLE_BASE_USER_AGENT = (
+    "Mozilla/5.0 (Linux; Android 5.0; SM-G900P Build/LRX21T) "
+    "AppleWebKit/537.36 (KHTML, like Gecko) "
+    "Chrome/39.0.2374.1981 Mobile Safari/537.36 NSTNWV"
+)
 
 
 class GoogleProvider(BaseProvider):
@@ -49,6 +54,17 @@ class GoogleProvider(BaseProvider):
         region = normalized.rsplit("-", 1)[-1].lower()
         return region or "us"
 
+    @staticmethod
+    def _build_user_agent(language_code: str, country_code: str) -> str:
+        locale_suffix = f"{language_code}-{country_code.upper()}"
+        chrome_patch = 1980 + ((sum(ord(char) for char in locale_suffix) % 17) + 1)
+        return (
+            "Mozilla/5.0 (Linux; Android 5.0; SM-G900P Build/LRX21T) "
+            "AppleWebKit/537.36 (KHTML, like Gecko) "
+            f"Chrome/39.0.2374.{chrome_patch} Mobile Safari/537.36 "
+            f"NSTNWV {locale_suffix}"
+        )
+
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
         language_code = self._language_code(params.language)
         country_code = self._country_code(params.country)
@@ -64,7 +80,10 @@ class GoogleProvider(BaseProvider):
             "safe": _SAFE_SEARCH[params.safe_search],
         }
         cookies = {"CONSENT": "YES+"}
-        headers = {"Accept": "*/*"}
+        headers = {
+            "Accept": "*/*",
+            "User-Agent": self._build_user_agent(language_code, country_code),
+        }
 
         async with self._scraper_client() as client:
             resp = await client.get(

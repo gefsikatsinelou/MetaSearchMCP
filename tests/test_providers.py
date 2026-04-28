@@ -562,6 +562,53 @@ async def test_bing_search_normalizes_locale_for_request(monkeypatch):
     assert captured["params"]["adlt"] == "strict"
 
 
+@pytest.mark.asyncio
+async def test_qwant_search_normalizes_locale_for_request(monkeypatch):
+    from metasearchmcp.providers.qwant import QwantProvider
+
+    calls: list[dict[str, object]] = []
+
+    class FakeResponse:
+        def __init__(self, *, status_code, text="", json_data=None):
+            self.status_code = status_code
+            self.text = text
+            self._json_data = json_data or {}
+
+        def raise_for_status(self) -> None:
+            return None
+
+        def json(self) -> dict:
+            return self._json_data
+
+    class FakeClient:
+        async def __aenter__(self):
+            return self
+
+        async def __aexit__(self, exc_type, exc, tb):
+            return None
+
+        async def get(self, url, params=None, headers=None):
+            calls.append({"url": url, "params": params, "headers": headers})
+            if "api.qwant.com" in url:
+                return FakeResponse(status_code=403)
+            return FakeResponse(status_code=200, text="<html></html>")
+
+    provider = QwantProvider()
+    monkeypatch.setattr(provider, "_scraper_client", lambda: FakeClient())
+    monkeypatch.setattr(provider, "_parse_lite", lambda html: SimpleNamespace(results=[]))
+
+    result = await provider.search(
+        "fastapi",
+        SearchParams(language="pt-BR", country=" pt-BR ", safe_search=True),
+    )
+
+    assert result.results == []
+    assert calls[0]["params"]["locale"] == "pt_BR"
+    assert calls[1]["params"]["locale"] == "pt_br"
+    assert calls[1]["params"]["l"] == "pt"
+    assert calls[1]["params"]["s"] == 1
+
+
 # ---------------------------------------------------------------------------
 # Provider availability
 # ---------------------------------------------------------------------------

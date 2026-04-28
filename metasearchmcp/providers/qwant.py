@@ -26,11 +26,26 @@ class QwantProvider(BaseProvider):
     def is_available(self) -> bool:
         return get_settings().allow_unstable_providers
 
+    @staticmethod
+    def _language_code(language: str) -> str:
+        normalized = (language or "en").strip().replace("_", "-")
+        primary = normalized.split("-", 1)[0].lower()
+        return primary or "en"
+
+    @staticmethod
+    def _country_code(country: str) -> str:
+        normalized = (country or "us").strip().replace("_", "-")
+        region = normalized.rsplit("-", 1)[-1].upper()
+        return region or "US"
+
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
+        language_code = self._language_code(params.language)
+        country_code = self._country_code(params.country)
+        locale = f"{language_code}_{country_code}"
         qp = {
             "q": query,
             "count": min(params.num_results, self._max_results, 10),
-            "locale": f"{params.language}_{params.country.upper()}",
+            "locale": locale,
             "offset": 0,
             "device": "desktop",
         }
@@ -52,8 +67,8 @@ class QwantProvider(BaseProvider):
                 _LITE_URL,
                 params={
                     "q": query,
-                    "locale": f"{params.language}_{params.country.upper()}".lower(),
-                    "l": params.language.split("-")[0].lower(),
+                    "locale": locale.lower(),
+                    "l": language_code,
                     "s": 1 if params.safe_search else 0,
                     "p": 1,
                 },

@@ -1,3 +1,5 @@
+[![MseeP.ai Security Assessment Badge](https://mseep.net/pr/gefsikatsinelou-metasearchmcp-badge.png)](https://mseep.ai/app/gefsikatsinelou-metasearchmcp)
+
 # MetaSearchMCP
 
 Open-source metasearch backend for MCP, AI agents, and LLM workflows.

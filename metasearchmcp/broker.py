@@ -66,6 +66,11 @@ _TOOLS = [
                 },
                 "language": {"type": "string", "default": "en"},
                 "country": {"type": "string", "default": "us"},
+                "safe_search": {
+                    "type": "boolean",
+                    "default": True,
+                    "description": "Enable safe search filtering.",
+                },
             },
             "required": ["query"],
         },
@@ -210,6 +215,7 @@ async def dispatch_tool(name: str, arguments: dict[str, Any]) -> dict[str, Any]:
             max_total_results=max_total_results,
             language=arguments.get("language", "en"),
             country=arguments.get("country", "us"),
+            safe_search=arguments.get("safe_search", True),
         )
         selected = pick_providers_by_tags(
             _catalog,

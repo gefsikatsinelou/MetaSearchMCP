@@ -340,6 +340,35 @@ async def test_dispatch_search_web_passes_safe_search():
     assert captured["options"].safe_search is False
 
 
+@pytest.mark.asyncio
+async def test_dispatch_search_google_passes_safe_search():
+    from metasearchmcp import broker
+    from metasearchmcp.orchestrator import run_search_plan
+
+    captured = {}
+    original_run_search_plan = run_search_plan
+
+    async def _capture_run_search_plan(query, providers, options):
+        captured["options"] = options
+        return await original_run_search_plan(query, providers, options)
+
+    catalog = {
+        "google_serpbase": _make_provider("google_serpbase", ["google", "web"], "SerpBase"),
+    }
+    with patch.object(broker, "_catalog", catalog):
+        with patch.object(broker, "run_search_plan", _capture_run_search_plan):
+            result = await broker.dispatch_tool(
+                "search_google",
+                {
+                    "query": "fastapi",
+                    "safe_search": False,
+                },
+            )
+
+    assert "results" in result
+    assert captured["options"].safe_search is False
+
+
 # ---------------------------------------------------------------------------
 # provider description field tests
 # ---------------------------------------------------------------------------

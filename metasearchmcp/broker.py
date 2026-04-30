@@ -89,6 +89,11 @@ _TOOLS = [
                 },
                 "num_results": {"type": "integer", "default": 10},
                 "max_total_results": {"type": "integer", "default": 20},
+                "safe_search": {
+                    "type": "boolean",
+                    "default": True,
+                    "description": "Enable safe search filtering.",
+                },
             },
             "required": ["query"],
         },
@@ -230,6 +235,11 @@ async def dispatch_tool(name: str, arguments: dict[str, Any]) -> dict[str, Any]:
         ).model_dump()
 
     if name == "search_google":
+        options = SearchOptions(
+            num_results=num_results,
+            max_total_results=max_total_results,
+            safe_search=arguments.get("safe_search", True),
+        )
         selected = pick_tagged_providers(_catalog, "google")
         provider_name = arguments.get("provider", "")
         if provider_name:

@@ -39,3 +39,14 @@ def test_yahoo_builds_cookie():
 
     assert "vm=i" in cookie
     assert "vl=lang_en" in cookie
+
+
+def test_yahoo_normalizes_locale_for_request():
+    from metasearchmcp.contracts import SearchParams
+    from metasearchmcp.providers.yahoo import YahooProvider
+
+    assert YahooProvider._language_code("pt-BR") == "pt"
+    assert YahooProvider._country_code(" pt-BR ") == "BR"
+
+    assert YahooProvider._language_code("zh-CN") == "zh"
+    assert YahooProvider._country_code("zh-CN") == "CN"

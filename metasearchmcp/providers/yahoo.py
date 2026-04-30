@@ -48,9 +48,23 @@ class YahooProvider(BaseProvider):
     def is_available(self) -> bool:
         return get_settings().allow_unstable_providers
 
+    @staticmethod
+    def _language_code(language: str) -> str:
+        normalized = (language or "en").strip().replace("_", "-")
+        primary = normalized.split("-", 1)[0].lower()
+        return primary or "en"
+
+    @staticmethod
+    def _country_code(country: str) -> str:
+        normalized = (country or "us").strip().replace("_", "-")
+        region = normalized.rsplit("-", 1)[-1].upper()
+        return region or "US"
+
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
-        domain = _REGION_TO_DOMAIN.get(params.country.upper(), "search.yahoo.com")
-        language = _LANGUAGE_MAP.get(params.language.lower(), "en")
+        domain = _REGION_TO_DOMAIN.get(
+            self._country_code(params.country), "search.yahoo.com"
+        )
+        language = _LANGUAGE_MAP.get(self._language_code(params.language), "en")
         qp = {
             "p": query,
             "iscqry": "",

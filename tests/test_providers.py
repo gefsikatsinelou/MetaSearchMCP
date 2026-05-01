@@ -613,6 +613,15 @@ async def test_qwant_search_normalizes_locale_for_request(monkeypatch):
 # Provider availability
 # ---------------------------------------------------------------------------
 
+def test_yandex_normalizes_language_code():
+    from metasearchmcp.providers.yandex import YandexProvider
+
+    assert YandexProvider._language_code("pt-BR") == "pt"
+    assert YandexProvider._language_code(" pt-BR ") == "pt"
+    assert YandexProvider._language_code("en") == "en"
+    assert YandexProvider._language_code("") == "en"
+
+
 def test_google_unavailable_without_unstable_flag(monkeypatch):
     monkeypatch.setenv("ALLOW_UNSTABLE_PROVIDERS", "false")
     import metasearchmcp.config as cfg

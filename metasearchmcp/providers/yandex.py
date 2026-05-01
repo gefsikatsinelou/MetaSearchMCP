@@ -26,6 +26,12 @@ class YandexProvider(BaseProvider):
     def is_available(self) -> bool:
         return get_settings().allow_unstable_providers
 
+    @staticmethod
+    def _language_code(language: str) -> str:
+        normalized = (language or "en").strip().replace("_", "-")
+        primary = normalized.split("-", 1)[0].lower()
+        return primary or "en"
+
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
         qp = {
             "tmpl_version": "releases",
@@ -34,7 +40,7 @@ class YandexProvider(BaseProvider):
             "frame": "1",
             "searchid": "3131712",
         }
-        lang = params.language.split("-")[0].lower()
+        lang = self._language_code(params.language)
         if lang in _SUPPORTED_LANGS:
             qp["lang"] = lang
         cookies = {

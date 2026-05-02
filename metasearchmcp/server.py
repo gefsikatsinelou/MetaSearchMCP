@@ -19,9 +19,18 @@ app = FastAPI(
     redoc_url="/redoc",
 )
 
+def _parse_cors_origins(origins: str) -> list[str]:
+    """Parse a comma-separated CORS origins string into a list."""
+    if origins.strip() == "*":
+        return ["*"]
+    return [o.strip() for o in origins.split(",") if o.strip()]
+
+
+_settings = get_settings()
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=_parse_cors_origins(_settings.cors_origins),
     allow_methods=["*"],
     allow_headers=["*"],
 )

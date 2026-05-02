@@ -22,6 +22,10 @@ class Settings(BaseSettings):
     port: int = 8000
     log_level: str = "info"
 
+    # CORS — comma-separated list of allowed origins. "*" allows all (dev default).
+    # Production example: CORS_ORIGINS=https://app.example.com,https://admin.example.com
+    cors_origins: str = "*"
+
     # Timeouts
     default_timeout: float = 10.0
     aggregator_timeout: float = 15.0

@@ -7,9 +7,9 @@ from pydantic import ValidationError
 
 from metasearchmcp.contracts import (
     ProviderReport,
+    SearchEnvelope,
     SearchHit,
     SearchOptions,
-    SearchEnvelope,
     SearchReport,
 )
 
@@ -21,7 +21,7 @@ def test_search_result_derives_source_from_url():
 
 def test_search_result_keeps_explicit_source():
     r = SearchHit(
-        title="Test", url="https://example.com/page", source="Custom", provider="test"
+        title="Test", url="https://example.com/page", source="Custom", provider="test",
     )
     assert r.source == "Custom"
 
@@ -71,7 +71,7 @@ def test_search_response_serializable():
         ],
         timing_ms=42.0,
         providers=[
-            ProviderReport(name="p1", success=True, result_count=1, latency_ms=42.0)
+            ProviderReport(name="p1", success=True, result_count=1, latency_ms=42.0),
         ],
     )
     data = resp.model_dump()

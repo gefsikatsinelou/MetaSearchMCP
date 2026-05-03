@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
+
 from .base import BaseProvider
 
 # Unofficial Yahoo Finance JSON endpoint — no API key required.
@@ -84,7 +85,7 @@ class YahooFinanceProvider(BaseProvider):
                         "quote_type": q_type,
                         "sector": sector,
                     },
-                )
+                ),
             )
 
         return ProviderResult(results=results)

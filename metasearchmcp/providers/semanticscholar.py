@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
+
 from .base import BaseProvider
 
 _API_URL = "https://api.semanticscholar.org/graph/v1/paper/search"
@@ -96,7 +97,7 @@ class SemanticScholarProvider(BaseProvider):
                         "authors": [a.get("name", "") for a in authors_raw],
                         "doi": doi,
                     },
-                )
+                ),
             )
 
         return ProviderResult(results=results)

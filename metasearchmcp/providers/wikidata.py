@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
+
 from .base import BOT_USER_AGENT, BaseProvider
 
 _API_URL = "https://www.wikidata.org/w/api.php"
@@ -64,7 +65,7 @@ class WikidataProvider(BaseProvider):
                         "entity_id": entity_id,
                         "aliases": aliases,
                     },
-                )
+                ),
             )
 
         return ProviderResult(results=results)

@@ -3,6 +3,7 @@ from __future__ import annotations
 from bs4 import BeautifulSoup
 
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
+
 from .base import BaseProvider
 
 _BASE_URL = "https://pkg.go.dev"
@@ -58,7 +59,7 @@ class PkgGoDevProvider(BaseProvider):
                     rank=i,
                     provider=self.name,
                     extra={"version": version},
-                )
+                ),
             )
 
         return ProviderResult(results=results)

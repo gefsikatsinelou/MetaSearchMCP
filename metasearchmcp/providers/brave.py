@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from metasearchmcp.config import get_settings
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
+
 from .base import BaseProvider
 
 _API_URL = "https://api.search.brave.com/res/v1/web/search"
@@ -75,7 +76,7 @@ class BraveProvider(BaseProvider):
                     rank=i,
                     provider=self.name,
                     published_date=item.get("age"),
-                )
+                ),
             )
 
         return ProviderResult(results=results)

@@ -76,7 +76,7 @@ class YandexProvider(BaseProvider):
                     snippet=snippet,
                     rank=i,
                     provider=self.name,
-                )
+                ),
             )
             if i >= self._max_results:
                 break

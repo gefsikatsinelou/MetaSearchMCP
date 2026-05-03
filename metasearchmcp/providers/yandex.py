@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup
 
 from metasearchmcp.config import get_settings
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
+
 from .base import BaseProvider
 
 _SEARCH_URL = "https://yandex.com/search/site/"
@@ -44,7 +45,7 @@ class YandexProvider(BaseProvider):
         if lang in _SUPPORTED_LANGS:
             qp["lang"] = lang
         cookies = {
-            "cookie": "yp=1716337604.sp.family%3A0#1685406411.szm.1:1920x1080:1920x999"
+            "cookie": "yp=1716337604.sp.family%3A0#1685406411.szm.1:1920x1080:1920x999",
         }
 
         async with self._scraper_client() as client:
@@ -95,7 +96,7 @@ class YandexProvider(BaseProvider):
                     snippet=snippet,
                     rank=i,
                     provider=self.name,
-                )
+                ),
             )
             if i >= self._max_results:
                 break

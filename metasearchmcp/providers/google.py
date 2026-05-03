@@ -7,6 +7,7 @@ from bs4 import BeautifulSoup
 
 from metasearchmcp.config import get_settings
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
+
 from .base import BaseProvider
 
 _SEARCH_URL = "https://www.google.com/search"
@@ -111,10 +112,10 @@ class GoogleProvider(BaseProvider):
         containers = soup.select("div.g, div.Gx5Zad, div.MjjYud")
         for block in containers:
             anchor = block.select_one('a[href^="/url?q="]') or block.select_one(
-                'a[href^="http"]'
+                'a[href^="http"]',
             )
             title_node = block.select_one("h3") or block.select_one(
-                'div[role="heading"]'
+                'div[role="heading"]',
             )
             if not anchor or not title_node:
                 continue
@@ -134,7 +135,7 @@ class GoogleProvider(BaseProvider):
                     snippet=snippet,
                     rank=len(results) + 1,
                     provider=self.name,
-                )
+                ),
             )
             if len(results) >= self._max_results:
                 break
@@ -172,7 +173,7 @@ class GoogleProvider(BaseProvider):
             snippet_node = block.select_one(selector)
             if snippet_node:
                 return GoogleProvider._normalize_text(
-                    snippet_node.get_text(" ", strip=True)
+                    snippet_node.get_text(" ", strip=True),
                 )
         return ""
 
@@ -190,7 +191,7 @@ class GoogleProvider(BaseProvider):
                 if "q=" not in href:
                     continue
                 text = GoogleProvider._normalize_text(
-                    suggestion.get_text(" ", strip=True)
+                    suggestion.get_text(" ", strip=True),
                 )
                 if text and text not in related_searches:
                     related_searches.append(text)

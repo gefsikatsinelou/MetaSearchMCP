@@ -1,9 +1,9 @@
 from __future__ import annotations
 
 import shutil
-from types import SimpleNamespace
 import uuid
 from pathlib import Path
+from types import SimpleNamespace
 
 import pytest
 
@@ -24,7 +24,7 @@ def config_sandbox(request):
 
 def test_enabled_provider_list_normalizes_case_and_deduplicates():
     settings = Settings(
-        enabled_providers=" GitHub, ,ARXIV , duckduckgo, github, DuckDuckGo ,, "
+        enabled_providers=" GitHub, ,ARXIV , duckduckgo, github, DuckDuckGo ,, ",
     )
 
     assert settings.enabled_provider_list() == ["github", "arxiv", "duckduckgo"]
@@ -134,7 +134,7 @@ def test_setup_reuses_existing_key_without_reconfigure(monkeypatch, capsys):
     from metasearchmcp import cli
 
     monkeypatch.setattr(
-        cli, "load_config", lambda: {"SERPBASE_API_KEY": "abcdefgh1234"}
+        cli, "load_config", lambda: {"SERPBASE_API_KEY": "abcdefgh1234"},
     )
     monkeypatch.setattr(
         cli,

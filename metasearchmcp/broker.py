@@ -8,7 +8,7 @@ import sys
 from typing import Any
 
 import mcp.server.stdio
-import mcp.types as types
+from mcp import types
 from mcp.server import Server
 from mcp.server.lowlevel.server import NotificationOptions
 from mcp.server.models import InitializationOptions
@@ -194,14 +194,14 @@ async def call_tool(name: str, arguments: dict[str, Any]) -> list[types.TextCont
             types.TextContent(
                 type="text",
                 text=json.dumps(result, indent=2, ensure_ascii=False),
-            )
+            ),
         ]
     except Exception as exc:
         return [
             types.TextContent(
                 type="text",
                 text=json.dumps({"error": str(exc), "tool": name}),
-            )
+            ),
         ]
 
 
@@ -255,7 +255,7 @@ async def dispatch_tool(name: str, arguments: dict[str, Any]) -> dict[str, Any]:
             )
         if not selected:
             return {
-                "error": "No Google provider available. Enable ALLOW_UNSTABLE_PROVIDERS=true for direct Google, or set SERPBASE_API_KEY / SERPER_API_KEY."
+                "error": "No Google provider available. Enable ALLOW_UNSTABLE_PROVIDERS=true for direct Google, or set SERPBASE_API_KEY / SERPER_API_KEY.",
             }
         return (
             await run_search_plan(query, list(selected.values()), options)
@@ -316,7 +316,7 @@ async def dispatch_tool(name: str, arguments: dict[str, Any]) -> dict[str, Any]:
                     "No finance providers available. "
                     "yahoo_finance is enabled by default; "
                     "set ALPHA_VANTAGE_API_KEY or FINNHUB_API_KEY for additional providers."
-                )
+                ),
             }
         return (
             await run_search_plan(query, list(selected.values()), options)
@@ -347,7 +347,7 @@ async def _main() -> None:
 
 
 def run() -> None:
-    from metasearchmcp.config import get_settings, USER_CONFIG_FILE
+    from metasearchmcp.config import USER_CONFIG_FILE, get_settings
 
     settings = get_settings()
     if not (

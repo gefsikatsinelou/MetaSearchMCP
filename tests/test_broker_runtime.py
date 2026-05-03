@@ -48,8 +48,7 @@ async def test_call_tool_serializes_success_payload():
 
 
 def test_run_warns_when_serpbase_missing(monkeypatch, capsys):
-    from metasearchmcp import broker
-    import metasearchmcp.config as config
+    from metasearchmcp import broker, config
 
     class FakeSettings:
         allow_unstable_providers = False
@@ -73,8 +72,7 @@ def test_run_warns_when_serpbase_missing(monkeypatch, capsys):
 
 
 def test_run_skips_warning_when_serpbase_present(monkeypatch, capsys):
-    from metasearchmcp import broker
-    import metasearchmcp.config as config
+    from metasearchmcp import broker, config
 
     class FakeSettings:
         allow_unstable_providers = False
@@ -94,8 +92,7 @@ def test_run_skips_warning_when_serpbase_present(monkeypatch, capsys):
 
 
 def test_run_skips_warning_when_direct_google_enabled(monkeypatch, capsys):
-    from metasearchmcp import broker
-    import metasearchmcp.config as config
+    from metasearchmcp import broker, config
 
     class FakeSettings:
         allow_unstable_providers = True

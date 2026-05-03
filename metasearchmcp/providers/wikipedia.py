@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
+
 from .base import BaseProvider
 
 _API_URL = "https://en.wikipedia.org/w/api.php"
@@ -55,7 +56,7 @@ class WikipediaProvider(BaseProvider):
                     rank=i,
                     provider=self.name,
                     published_date=item.get("timestamp", "")[:10] or None,
-                )
+                ),
             )
 
         return ProviderResult(results=results)

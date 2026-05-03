@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
+
 from .base import BaseProvider
 
 _API_URL = "https://openlibrary.org/search.json"
@@ -66,7 +67,7 @@ class OpenLibraryProvider(BaseProvider):
                         "edition_count": edition_count,
                         "languages": languages,
                     },
-                )
+                ),
             )
 
         return ProviderResult(results=results)

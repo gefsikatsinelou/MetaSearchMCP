@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from metasearchmcp.config import get_settings
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
+
 from .base import BaseProvider
 
 _BASE_URL = "https://finnhub.io/api/v1"
@@ -70,7 +71,7 @@ class FinnhubProvider(BaseProvider):
                         "display_symbol": display_symbol,
                         "total_count": count,
                     },
-                )
+                ),
             )
 
         return ProviderResult(results=results)

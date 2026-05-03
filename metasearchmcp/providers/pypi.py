@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
+
 from .base import BaseProvider
 
 _JSON_API = "https://pypi.org/pypi/{name}/json"
@@ -61,7 +62,7 @@ class PyPIProvider(BaseProvider):
                 summary = info.get("summary", "") or ""
                 home_page = info.get("home_page", "") or ""
                 project_url = info.get(
-                    "package_url", f"https://pypi.org/project/{pkg_name}/"
+                    "package_url", f"https://pypi.org/project/{pkg_name}/",
                 )
                 keywords = (info.get("keywords") or "").split(",")[:5]
 
@@ -70,7 +71,7 @@ class PyPIProvider(BaseProvider):
                     snippet_parts.append(f"v{version}")
                 if keywords and keywords != [""]:
                     snippet_parts.append(
-                        f"Keywords: {', '.join(k.strip() for k in keywords if k.strip())}"
+                        f"Keywords: {', '.join(k.strip() for k in keywords if k.strip())}",
                     )
 
                 results.append(
@@ -88,7 +89,7 @@ class PyPIProvider(BaseProvider):
                             "requires_python": info.get("requires_python", ""),
                             "home_page": home_page,
                         },
-                    )
+                    ),
                 )
 
         return ProviderResult(results=results)

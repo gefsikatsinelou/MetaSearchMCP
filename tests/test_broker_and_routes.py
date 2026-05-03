@@ -9,7 +9,6 @@ from fastapi.testclient import TestClient
 
 from metasearchmcp.contracts import ProviderPayload, SearchHit
 
-
 # ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
@@ -25,8 +24,8 @@ def _make_provider(name: str, tags: list[str], description: str = "") -> MagicMo
     async def _search(query, params):
         return ProviderPayload(
             results=[
-                SearchHit(title="T", url=f"https://{name}.example.com", provider=name)
-            ]
+                SearchHit(title="T", url=f"https://{name}.example.com", provider=name),
+            ],
         )
 
     provider.search = _search
@@ -36,10 +35,10 @@ def _make_provider(name: str, tags: list[str], description: str = "") -> MagicMo
 def _fake_catalog() -> dict:
     return {
         "yahoo_finance": _make_provider(
-            "yahoo_finance", ["web", "finance"], "Yahoo Finance"
+            "yahoo_finance", ["web", "finance"], "Yahoo Finance",
         ),
         "alpha_vantage": _make_provider(
-            "alpha_vantage", ["web", "finance"], "Alpha Vantage"
+            "alpha_vantage", ["web", "finance"], "Alpha Vantage",
         ),
         "github": _make_provider("github", ["web", "code", "developer"], "GitHub"),
         "npm": _make_provider("npm", ["web", "code", "developer", "packages"], "npm"),
@@ -108,7 +107,7 @@ async def test_dispatch_compare_engines_fallback_to_all():
     catalog = _fake_catalog()
     with patch.object(broker, "_catalog", catalog):
         result = await broker.dispatch_tool(
-            "compare_engines", {"query": "test", "providers": []}
+            "compare_engines", {"query": "test", "providers": []},
         )
 
     assert "engines" in result
@@ -130,7 +129,7 @@ async def test_dispatch_search_google_prefers_direct_google_provider():
     catalog = {
         "google": _make_provider("google", ["google", "web"], "Google"),
         "google_serpbase": _make_provider(
-            "google_serpbase", ["google", "web"], "SerpBase"
+            "google_serpbase", ["google", "web"], "SerpBase",
         ),
     }
     with patch.object(broker, "_catalog", catalog):
@@ -151,7 +150,7 @@ async def test_dispatch_search_google_can_select_direct_google_explicitly():
     }
     with patch.object(broker, "_catalog", catalog):
         result = await broker.dispatch_tool(
-            "search_google", {"query": "fastapi", "provider": "google"}
+            "search_google", {"query": "fastapi", "provider": "google"},
         )
 
     assert "results" in result
@@ -160,13 +159,14 @@ async def test_dispatch_search_google_can_select_direct_google_explicitly():
 
 
 def test_search_google_route_prefers_first_available_provider(client):
-    from metasearchmcp.api import routes
     from fastapi import FastAPI
+
+    from metasearchmcp.api import routes
 
     catalog = {
         "google": _make_provider("google", ["google", "web"], "Google"),
         "google_serpbase": _make_provider(
-            "google_serpbase", ["google", "web"], "SerpBase"
+            "google_serpbase", ["google", "web"], "SerpBase",
         ),
     }
 
@@ -190,8 +190,9 @@ def test_search_google_route_prefers_first_available_provider(client):
 
 def _make_app_with_catalog(catalog: dict):
     """Return a FastAPI TestClient with a patched provider catalog."""
-    from metasearchmcp.api import routes
     from fastapi import FastAPI
+
+    from metasearchmcp.api import routes
 
     app = FastAPI()
     app.include_router(routes.router)
@@ -203,8 +204,9 @@ def _make_app_with_catalog(catalog: dict):
 
 @pytest.fixture()
 def client():
-    from metasearchmcp.api import routes
     from fastapi import FastAPI
+
+    from metasearchmcp.api import routes
 
     app = FastAPI()
     app.include_router(routes.router)
@@ -269,7 +271,7 @@ def test_providers_filter_by_all_tags(client):
 
 def test_providers_filters_normalize_tag_input(client):
     resp = client.get(
-        "/providers?tag=%20Code%20&tag=%20PACKAGES%20&tag=code&tag_match=all"
+        "/providers?tag=%20Code%20&tag=%20PACKAGES%20&tag=code&tag_match=all",
     )
     assert resp.status_code == 200
     data = resp.json()
@@ -359,7 +361,7 @@ async def test_dispatch_search_google_passes_safe_search():
 
     catalog = {
         "google_serpbase": _make_provider(
-            "google_serpbase", ["google", "web"], "SerpBase"
+            "google_serpbase", ["google", "web"], "SerpBase",
         ),
     }
     with patch.object(broker, "_catalog", catalog):

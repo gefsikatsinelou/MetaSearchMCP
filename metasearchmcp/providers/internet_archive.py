@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
+
 from .base import BaseProvider
 
 _SEARCH_URL = "https://archive.org/advancedsearch.php"
@@ -85,7 +86,7 @@ class InternetArchiveProvider(BaseProvider):
                         "mediatype": mediatype,
                         "creator": creator,
                     },
-                )
+                ),
             )
 
         return ProviderResult(results=results)

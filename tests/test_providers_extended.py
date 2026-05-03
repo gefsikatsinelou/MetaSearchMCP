@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-
 # ---------------------------------------------------------------------------
 # HackerNews
 # ---------------------------------------------------------------------------
@@ -29,7 +28,7 @@ def _hn_response() -> dict:
                 "num_comments": 10,
                 "created_at": "2024-03-11T08:00:00.000Z",
             },
-        ]
+        ],
     }
 
 
@@ -76,8 +75,8 @@ def _npm_response() -> dict:
                     "links": {"npm": "https://www.npmjs.com/package/lodash"},
                 },
                 "score": {"final": 0.95},
-            }
-        ]
+            },
+        ],
     }
 
 
@@ -112,8 +111,8 @@ def _crates_response() -> dict:
                 "downloads": 500_000_000,
                 "recent_downloads": 20_000_000,
                 "updated_at": "2024-02-15T00:00:00.000000+00:00",
-            }
-        ]
+            },
+        ],
     }
 
 
@@ -152,10 +151,10 @@ def _reddit_response() -> dict:
                         "is_self": True,
                         "selftext": "I am looking for resources...",
                         "created_utc": 1709827200.0,
-                    }
-                }
-            ]
-        }
+                    },
+                },
+            ],
+        },
     }
 
 
@@ -188,8 +187,8 @@ def _so_response() -> dict:
                 "answer_count": 12,
                 "is_answered": True,
                 "tags": ["python", "async", "asyncio"],
-            }
-        ]
+            },
+        ],
     }
 
 
@@ -221,8 +220,8 @@ def _wikidata_response() -> dict:
                 "description": "high-level programming language",
                 "url": "//www.wikidata.org/wiki/Q9903",
                 "aliases": ["Python language"],
-            }
-        ]
+            },
+        ],
     }
 
 
@@ -256,9 +255,9 @@ def _ia_response() -> dict:
                     "mediatype": "texts",
                     "date": "2004-01-01",
                     "creator": "Lawrence Lessig",
-                }
-            ]
-        }
+                },
+            ],
+        },
     }
 
 
@@ -297,8 +296,8 @@ def _s2_response() -> dict:
                     {"name": "Kristina Toutanova"},
                 ],
                 "externalIds": {"DOI": "10.18653/v1/N19-1423"},
-            }
-        ]
+            },
+        ],
     }
 
 
@@ -339,9 +338,9 @@ def _crossref_response() -> dict:
                     "is-referenced-by-count": 300,
                     "type": "proceedings-article",
                     "published": {"date-parts": [[2019, 8, 4]]},
-                }
-            ]
-        }
+                },
+            ],
+        },
     }
 
 
@@ -377,8 +376,8 @@ def _pubmed_summary() -> dict:
                     {"name": "Zhang F"},
                     {"name": "Smith J"},
                 ],
-            }
-        }
+            },
+        },
     }
 
 
@@ -409,7 +408,7 @@ def _rubygems_response() -> list[dict]:
             "downloads": 987654321,
             "authors": "David Heinemeier Hansson",
             "info": "Full-stack web application framework.",
-        }
+        },
     ]
 
 
@@ -437,8 +436,8 @@ def _dockerhub_response() -> dict:
                 "star_count": 15000,
                 "pull_count": 1000000000,
                 "is_official": True,
-            }
-        ]
+            },
+        ],
     }
 
 
@@ -466,8 +465,8 @@ def _openlibrary_response() -> dict:
                 "first_publish_year": 1999,
                 "edition_count": 12,
                 "language": ["eng"],
-            }
-        ]
+            },
+        ],
     }
 
 

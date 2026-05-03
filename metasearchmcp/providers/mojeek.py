@@ -3,6 +3,7 @@ from __future__ import annotations
 from bs4 import BeautifulSoup
 
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
+
 from .base import BaseProvider
 
 _SEARCH_URL = "https://www.mojeek.com/search"
@@ -67,7 +68,7 @@ class MojeekProvider(BaseProvider):
                     snippet=snippet,
                     rank=i,
                     provider=self.name,
-                )
+                ),
             )
             if i >= self._max_results:
                 break

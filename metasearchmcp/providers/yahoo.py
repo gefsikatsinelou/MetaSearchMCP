@@ -6,6 +6,7 @@ from bs4 import BeautifulSoup
 
 from metasearchmcp.config import get_settings
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
+
 from .base import BaseProvider
 
 _REGION_TO_DOMAIN = {
@@ -62,7 +63,7 @@ class YahooProvider(BaseProvider):
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
         domain = _REGION_TO_DOMAIN.get(
-            self._country_code(params.country), "search.yahoo.com"
+            self._country_code(params.country), "search.yahoo.com",
         )
         language = _LANGUAGE_MAP.get(self._language_code(params.language), "en")
         qp = {
@@ -72,16 +73,16 @@ class YahooProvider(BaseProvider):
             "ei": "UTF-8",
         }
         cookie = self._build_sb_cookie(
-            language=language, safe_search=params.safe_search
+            language=language, safe_search=params.safe_search,
         )
 
         async with self._scraper_client() as client:
             resp = await client.get(
-                f"https://{domain}/search", params=qp, cookies={"sB": cookie}
+                f"https://{domain}/search", params=qp, cookies={"sB": cookie},
             )
             if resp.status_code >= 500:
                 raise RuntimeError(
-                    f"Yahoo returned HTTP {resp.status_code}; request likely blocked upstream"
+                    f"Yahoo returned HTTP {resp.status_code}; request likely blocked upstream",
                 )
             resp.raise_for_status()
 
@@ -99,7 +100,7 @@ class YahooProvider(BaseProvider):
                 "pn=10",
                 "rw=new",
                 "userset=1",
-            ]
+            ],
         )
 
     @staticmethod
@@ -140,11 +141,11 @@ class YahooProvider(BaseProvider):
             title_node = None
             if domain == "search.yahoo.com":
                 title_node = block.select_one(
-                    "div.compTitle a h3 span"
+                    "div.compTitle a h3 span",
                 ) or block.select_one("div.compTitle a")
             else:
                 title_node = block.select_one("div.compTitle h3 a") or block.select_one(
-                    "h3 a"
+                    "h3 a",
                 )
 
             title = (title_node or url_node).get_text(" ", strip=True)
@@ -173,7 +174,7 @@ class YahooProvider(BaseProvider):
                     snippet=snippet,
                     rank=i,
                     provider=self.name,
-                )
+                ),
             )
             if i >= self._max_results:
                 break

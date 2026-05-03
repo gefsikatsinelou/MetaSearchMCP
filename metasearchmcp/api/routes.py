@@ -3,8 +3,8 @@ from __future__ import annotations
 from typing import Literal
 
 from fastapi import APIRouter, Depends, HTTPException, Query
-from metasearchmcp import __version__
 
+from metasearchmcp import __version__
 from metasearchmcp.catalog import (
     build_provider_catalog,
     pick_named_providers,
@@ -106,7 +106,7 @@ async def health(registry=Depends(_get_registry)) -> dict:
 
 
 @router.get(
-    "/providers", summary="List all configured providers and their availability"
+    "/providers", summary="List all configured providers and their availability",
 )
 async def providers(
     tag: list[str] | None = Query(default=None),

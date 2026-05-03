@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from metasearchmcp.config import get_settings
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
+
 from .base import BaseProvider
 
 _API_URL = "https://api.stackexchange.com/2.3/search/advanced"
@@ -72,7 +73,7 @@ class StackOverflowProvider(BaseProvider):
                         "is_answered": answered,
                         "tags": tags,
                     },
-                )
+                ),
             )
 
         return ProviderResult(results=results)

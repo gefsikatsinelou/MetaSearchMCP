@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
+
 from .base import BaseProvider
 
 _API_URL = "https://api.mwmbl.org/api/v1/search/"
@@ -39,7 +40,7 @@ class MwmblProvider(BaseProvider):
                     source="mwmbl.org",
                     rank=i,
                     provider=self.name,
-                )
+                ),
             )
 
         return ProviderResult(results=results)

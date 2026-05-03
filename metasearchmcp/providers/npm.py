@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
+
 from .base import BaseProvider
 
 _API_URL = "https://registry.npmjs.org/-/v1/search"
@@ -63,7 +64,7 @@ class NpmProvider(BaseProvider):
                         "links": links,
                         "score": obj.get("score", {}),
                     },
-                )
+                ),
             )
 
         return ProviderResult(results=results)

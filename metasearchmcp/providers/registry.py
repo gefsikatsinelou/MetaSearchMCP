@@ -1,60 +1,60 @@
 from __future__ import annotations
 
 from metasearchmcp.config import get_settings
+
+from .alpha_vantage import AlphaVantageProvider
+
+# Academic
+from .arxiv import ArxivProvider
+from .baidu import BaiduProvider
 from .base import BaseProvider
+from .bing import BingProvider
+
+# Web search — API
+from .brave import BraveProvider
+from .crates import CratesIoProvider
+from .crossref import CrossrefProvider
+from .dockerhub import DockerHubProvider
+
+# Web search — HTML scraping
+from .duckduckgo import DuckDuckGoProvider
+from .ecosia import EcosiaProvider
+from .finnhub import FinnhubProvider
+
+# Developer
+from .github import GitHubProvider
+from .gitlab import GitLabProvider
 
 # Google providers
 from .google import GoogleProvider
 from .google_serpbase import GoogleSerpbaseProvider
 from .google_serper import GoogleSerperProvider
-
-# Web search — HTML scraping
-from .duckduckgo import DuckDuckGoProvider
-from .bing import BingProvider
-from .yahoo import YahooProvider
-from .ecosia import EcosiaProvider
+from .hackernews import HackerNewsProvider
+from .internet_archive import InternetArchiveProvider
+from .lib_rs import LibRsProvider
+from .metacpan import MetaCPANProvider
 from .mojeek import MojeekProvider
-from .startpage import StartpageProvider
-from .qwant import QwantProvider
-from .yandex import YandexProvider
-from .baidu import BaiduProvider
-
-# Web search — API
-from .brave import BraveProvider
 from .mwmbl import MwmblProvider
+from .npm import NpmProvider
+from .openlibrary import OpenLibraryProvider
+from .pkg_go_dev import PkgGoDevProvider
+from .pubmed import PubMedProvider
+from .pypi import PyPIProvider
+from .qwant import QwantProvider
+from .reddit import RedditProvider
+from .rubygems import RubyGemsProvider
+from .semanticscholar import SemanticScholarProvider
+from .stackoverflow import StackOverflowProvider
+from .startpage import StartpageProvider
+from .wikidata import WikidataProvider
 
 # Knowledge / reference
 from .wikipedia import WikipediaProvider
-from .wikidata import WikidataProvider
-from .internet_archive import InternetArchiveProvider
-
-# Developer
-from .github import GitHubProvider
-from .gitlab import GitLabProvider
-from .stackoverflow import StackOverflowProvider
-from .hackernews import HackerNewsProvider
-from .reddit import RedditProvider
-from .npm import NpmProvider
-from .pypi import PyPIProvider
-from .rubygems import RubyGemsProvider
-from .crates import CratesIoProvider
-from .lib_rs import LibRsProvider
-from .dockerhub import DockerHubProvider
-from .pkg_go_dev import PkgGoDevProvider
-from .metacpan import MetaCPANProvider
-
-# Academic
-from .arxiv import ArxivProvider
-from .pubmed import PubMedProvider
-from .semanticscholar import SemanticScholarProvider
-from .crossref import CrossrefProvider
-from .openlibrary import OpenLibraryProvider
+from .yahoo import YahooProvider
 
 # Finance
 from .yahoo_finance import YahooFinanceProvider
-from .alpha_vantage import AlphaVantageProvider
-from .finnhub import FinnhubProvider
-
+from .yandex import YandexProvider
 
 # Ordered list of all provider classes.
 # Order matters: within a tag group, earlier providers take priority in dedup.

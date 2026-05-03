@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
+
 from .base import API_USER_AGENT, BaseProvider
 
 _API_URL = "https://crates.io/api/v1/crates"
@@ -62,7 +63,7 @@ class CratesIoProvider(BaseProvider):
                         "downloads": downloads,
                         "recent_downloads": crate.get("recent_downloads", 0),
                     },
-                )
+                ),
             )
 
         return ProviderResult(results=results)

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
+
 from .base import BaseProvider
 
 _API_URL = "https://rubygems.org/api/v1/search.json"
@@ -55,7 +56,7 @@ class RubyGemsProvider(BaseProvider):
                         "authors": authors,
                         "downloads": downloads,
                     },
-                )
+                ),
             )
 
         return ProviderResult(results=results)

@@ -5,6 +5,7 @@ from collections import OrderedDict
 from bs4 import BeautifulSoup
 
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
+
 from .base import BaseProvider
 
 _BASE_URL = "https://www.startpage.com"
@@ -75,12 +76,12 @@ class StartpageProvider(BaseProvider):
                 ("language", engine_language),
                 ("language_ui", engine_language),
                 ("search_results_region", engine_region),
-            ]
+            ],
         )
         cookies = {
             "preferences": "N1N".join(
                 f"{key}EEE{value}" for key, value in preferences.items()
-            )
+            ),
         }
 
         async with self._scraper_client() as client:
@@ -90,7 +91,7 @@ class StartpageProvider(BaseProvider):
             form_data["sc"] = sc_code
 
             resp = await client.post(
-                _SEARCH_URL, data=form_data, cookies=cookies, headers=headers
+                _SEARCH_URL, data=form_data, cookies=cookies, headers=headers,
             )
             resp.raise_for_status()
 
@@ -99,7 +100,7 @@ class StartpageProvider(BaseProvider):
             or "ability to connect to Startpage has been suspended" in resp.text
         ):
             raise RuntimeError(
-                "Startpage temporarily suspended requests from this network (Error 883)"
+                "Startpage temporarily suspended requests from this network (Error 883)",
             )
 
         if (
@@ -114,7 +115,7 @@ class StartpageProvider(BaseProvider):
     def _extract_sc_code(html: str) -> str:
         soup = BeautifulSoup(html, "lxml")
         sc_input = soup.select_one('form#search input[name="sc"]') or soup.select_one(
-            'input[name="sc"]'
+            'input[name="sc"]',
         )
         if not sc_input or not sc_input.get("value"):
             raise RuntimeError("Startpage did not expose an sc token for this session")
@@ -161,7 +162,7 @@ class StartpageProvider(BaseProvider):
                     snippet=snippet,
                     rank=i,
                     provider=self.name,
-                )
+                ),
             )
             if i >= self._max_results:
                 break

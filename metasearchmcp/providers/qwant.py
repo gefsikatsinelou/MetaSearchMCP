@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup
 
 from metasearchmcp.config import get_settings
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
+
 from .base import BaseProvider
 
 # Qwant's internal search API (used by their web frontend)
@@ -101,7 +102,7 @@ class QwantProvider(BaseProvider):
                         snippet=item.get("desc", ""),
                         rank=rank,
                         provider=self.name,
-                    )
+                    ),
                 )
                 if rank >= self._max_results:
                     return ProviderResult(results=results)
@@ -135,7 +136,7 @@ class QwantProvider(BaseProvider):
                     else "",
                     rank=i,
                     provider=self.name,
-                )
+                ),
             )
             if i >= self._max_results:
                 break

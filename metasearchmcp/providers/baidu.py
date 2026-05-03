@@ -5,6 +5,7 @@ from html import unescape
 
 from metasearchmcp.config import get_settings
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
+
 from .base import BaseProvider
 
 _SEARCH_URL = "https://www.baidu.com/s"
@@ -40,7 +41,7 @@ class BaiduProvider(BaseProvider):
 
         if not payload.startswith("{"):
             raise RuntimeError(
-                "Baidu did not return JSON search results for this request"
+                "Baidu did not return JSON search results for this request",
             )
 
         data = json.loads(payload)
@@ -65,7 +66,7 @@ class BaiduProvider(BaseProvider):
                     snippet=snippet,
                     rank=i,
                     provider=self.name,
-                )
+                ),
             )
             if i >= self._max_results:
                 break

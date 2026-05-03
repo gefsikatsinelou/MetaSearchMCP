@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from metasearchmcp.config import get_settings
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
+
 from .base import BaseProvider
 
 _API_URL = "https://api.github.com/search/repositories"
@@ -67,7 +68,7 @@ class GitHubProvider(BaseProvider):
                         "forks": item.get("forks_count", 0),
                         "topics": item.get("topics", []),
                     },
-                )
+                ),
             )
 
         return ProviderResult(results=results)

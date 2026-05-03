@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from metasearchmcp.config import get_settings
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
+
 from .base import BaseProvider
 
 _BASE_URL = "https://www.alphavantage.co/query"
@@ -76,7 +77,7 @@ class AlphaVantageProvider(BaseProvider):
                         "currency": currency,
                         "match_score": match_score,
                     },
-                )
+                ),
             )
 
         return ProviderResult(results=results)

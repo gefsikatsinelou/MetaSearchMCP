@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
+
 from .base import BaseProvider
 
 _BASE_URL = "https://gitlab.com"
@@ -61,7 +62,7 @@ class GitLabProvider(BaseProvider):
                         "topics": item.get("topics", []),
                         "clone_url": item.get("http_url_to_repo"),
                     },
-                )
+                ),
             )
 
         return ProviderResult(results=results)

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
+
 from .base import BaseProvider
 
 _API_URL = "https://hn.algolia.com/api/v1/search"
@@ -50,7 +51,7 @@ class HackerNewsProvider(BaseProvider):
             if story_url and story_url != url:
                 snippet_parts.append(f"Discussion: {hn_url}")
             snippet_parts.append(
-                f"Points: {points} | Comments: {comments} | By: {author}"
+                f"Points: {points} | Comments: {comments} | By: {author}",
             )
 
             results.append(
@@ -68,7 +69,7 @@ class HackerNewsProvider(BaseProvider):
                         "author": author,
                         "hn_url": hn_url,
                     },
-                )
+                ),
             )
 
         return ProviderResult(results=results)

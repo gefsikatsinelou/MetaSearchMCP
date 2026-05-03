@@ -5,6 +5,7 @@ from urllib.parse import parse_qs, urlparse
 from bs4 import BeautifulSoup
 
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
+
 from .base import BaseProvider
 
 # DuckDuckGo's HTML endpoint still exposes server-rendered results.
@@ -61,7 +62,7 @@ class DuckDuckGoProvider(BaseProvider):
 
             parsed = urlparse(href)
             if parsed.netloc.endswith("duckduckgo.com") and parsed.path.startswith(
-                "/l/"
+                "/l/",
             ):
                 href = parse_qs(parsed.query).get("uddg", [href])[0]
 
@@ -75,7 +76,7 @@ class DuckDuckGoProvider(BaseProvider):
                     snippet=snippet,
                     rank=i,
                     provider=self.name,
-                )
+                ),
             )
 
             if i >= self._max_results:

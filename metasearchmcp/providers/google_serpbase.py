@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from metasearchmcp.config import get_settings
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
+
 from .base import BaseProvider
 
 
@@ -50,7 +51,7 @@ class GoogleSerpbaseProvider(BaseProvider):
             data = resp.json()
             if data.get("status") != 0:
                 raise RuntimeError(
-                    data.get("error") or f"serpbase error status={data.get('status')}"
+                    data.get("error") or f"serpbase error status={data.get('status')}",
                 )
 
         return self._parse(data, query)
@@ -67,7 +68,7 @@ class GoogleSerpbaseProvider(BaseProvider):
                     rank=i,
                     provider=self.name,
                     published_date=item.get("date"),
-                )
+                ),
             )
 
         related: list[str] = []

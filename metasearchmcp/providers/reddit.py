@@ -4,6 +4,7 @@ import base64
 
 from metasearchmcp.config import get_settings
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
+
 from .base import BOT_USER_AGENT, BaseProvider
 
 _TOKEN_URL = "https://www.reddit.com/api/v1/access_token"
@@ -36,7 +37,7 @@ class RedditProvider(BaseProvider):
 
     async def _get_token(self, client) -> str:
         credentials = base64.b64encode(
-            f"{self._client_id}:{self._client_secret}".encode()
+            f"{self._client_id}:{self._client_secret}".encode(),
         ).decode()
         resp = await client.post(
             _TOKEN_URL,
@@ -94,7 +95,7 @@ class RedditProvider(BaseProvider):
                 import datetime
 
                 published = datetime.datetime.fromtimestamp(
-                    created, tz=datetime.UTC
+                    created, tz=datetime.UTC,
                 ).strftime("%Y-%m-%d")
 
             is_self = post.get("is_self", False)
@@ -119,7 +120,7 @@ class RedditProvider(BaseProvider):
                         "num_comments": comments,
                         "permalink": permalink,
                     },
-                )
+                ),
             )
 
         return ProviderResult(results=results)

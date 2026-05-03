@@ -1,9 +1,9 @@
 from __future__ import annotations
 
-
 from bs4 import BeautifulSoup
 
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
+
 from .base import BaseProvider
 
 _BASE_URL = "https://lib.rs"
@@ -58,7 +58,7 @@ class LibRsProvider(BaseProvider):
                     rank=i,
                     provider=self.name,
                     extra={"version": version},
-                )
+                ),
             )
 
         return ProviderResult(results=results)

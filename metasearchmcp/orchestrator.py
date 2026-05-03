@@ -24,7 +24,7 @@ async def execute_provider_search(
     start = time.monotonic()
     try:
         payload = await asyncio.wait_for(
-            provider.search(query, options), timeout=timeout
+            provider.search(query, options), timeout=timeout,
         )
         latency_ms = (time.monotonic() - start) * 1000
         return provider.name, payload, latency_ms, None
@@ -80,7 +80,7 @@ async def run_search_plan(
                     success=False,
                     latency_ms=round(latency_ms, 1),
                     error=error,
-                )
+                ),
             )
             continue
 
@@ -95,7 +95,7 @@ async def run_search_plan(
                 success=True,
                 result_count=len(payload.results),
                 latency_ms=round(latency_ms, 1),
-            )
+            ),
         )
 
     deduplicated_hits = collapse_duplicate_hits(merged_hits)

@@ -4,6 +4,7 @@ import xml.etree.ElementTree as ET
 from email.utils import parsedate_to_datetime
 
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
+
 from .base import BaseProvider
 
 _SEARCH_URL = "https://www.bing.com/search"
@@ -74,7 +75,7 @@ class BingProvider(BaseProvider):
                     rank=i,
                     provider=self.name,
                     published_date=published_date,
-                )
+                ),
             )
             if i >= self._max_results:
                 break

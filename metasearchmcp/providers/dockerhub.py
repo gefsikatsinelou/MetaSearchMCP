@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
+
 from .base import BaseProvider
 
 _API_URL = "https://hub.docker.com/v2/search/repositories/"
@@ -56,7 +57,7 @@ class DockerHubProvider(BaseProvider):
                         "pull_count": pulls,
                         "is_official": item.get("is_official", False),
                     },
-                )
+                ),
             )
 
         return ProviderResult(results=results)

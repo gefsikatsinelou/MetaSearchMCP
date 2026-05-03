@@ -12,7 +12,7 @@ from metasearchmcp.orchestrator import run_search_plan
 
 
 def _make_provider(
-    name: str, results: list[SearchHit], fail: bool = False, delay: float = 0.0
+    name: str, results: list[SearchHit], fail: bool = False, delay: float = 0.0,
 ):
     """Create a minimal mock provider."""
     provider = MagicMock()
@@ -37,7 +37,7 @@ def _result(url: str, provider: str) -> SearchHit:
 @pytest.mark.asyncio
 async def test_aggregate_combines_results():
     p1 = _make_provider(
-        "p1", [_result("https://a.com", "p1"), _result("https://b.com", "p1")]
+        "p1", [_result("https://a.com", "p1"), _result("https://b.com", "p1")],
     )
     p2 = _make_provider("p2", [_result("https://c.com", "p2")])
 
@@ -123,7 +123,7 @@ async def test_aggregate_all_fail_returns_empty():
 async def test_aggregate_deduplicates_across_providers():
     p1 = _make_provider("p1", [_result("https://a.com", "p1")])
     p2 = _make_provider(
-        "p2", [_result("https://a.com", "p2"), _result("https://b.com", "p2")]
+        "p2", [_result("https://a.com", "p2"), _result("https://b.com", "p2")],
     )
 
     resp = await run_search_plan("test", [p1, p2])
@@ -145,7 +145,7 @@ async def test_aggregate_provider_status_includes_latency():
 
 @pytest.mark.asyncio
 async def test_aggregate_uses_aggregator_timeout(monkeypatch):
-    import metasearchmcp.orchestrator as orchestrator
+    from metasearchmcp import orchestrator
 
     p = _make_provider("slow", [_result("https://x.com", "slow")], delay=0.02)
 

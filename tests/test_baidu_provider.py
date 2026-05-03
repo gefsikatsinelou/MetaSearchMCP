@@ -9,9 +9,9 @@ def _baidu_payload() -> dict:
                     "title": "Python asyncio official docs",
                     "url": "https://docs.python.org/3/library/asyncio.html",
                     "abs": "Asynchronous I/O support for Python.",
-                }
-            ]
-        }
+                },
+            ],
+        },
     }
 
 

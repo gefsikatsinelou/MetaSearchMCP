@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
+
 from .base import BaseProvider
 
 _API_URL = "https://api.crossref.org/works"
@@ -95,7 +96,7 @@ class CrossrefProvider(BaseProvider):
                         ],
                         "container_title": container,
                     },
-                )
+                ),
             )
 
         return ProviderResult(results=results)

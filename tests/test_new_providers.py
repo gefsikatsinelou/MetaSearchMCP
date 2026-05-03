@@ -3,7 +3,6 @@ pkg_go_dev, lib_rs."""
 
 from __future__ import annotations
 
-
 # ---------------------------------------------------------------------------
 # Mwmbl
 # ---------------------------------------------------------------------------
@@ -56,7 +55,7 @@ def test_mwmbl_parse_title_concatenation():
             "url": "https://x.com",
             "title": [{"value": "Hello"}, {"value": " World"}],
             "extract": [],
-        }
+        },
     ]
     result = p._parse(data)
     assert result.results[0].title == "Hello World"
@@ -164,22 +163,22 @@ def _metacpan_response() -> dict:
                     "_source": {
                         "documentation": "Moose",
                         "abstract": "A postmodern object system for Perl 5",
-                    }
+                    },
                 },
                 {
                     "_source": {
                         "documentation": "LWP::UserAgent",
                         "abstract": "Web user agent class",
-                    }
+                    },
                 },
                 {
                     "_source": {
                         "documentation": "DBI",
                         # abstract missing
-                    }
+                    },
                 },
-            ]
-        }
+            ],
+        },
     }
 
 

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
+
 from .base import BaseProvider
 
 _ESEARCH_URL = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi"
@@ -104,7 +105,7 @@ class PubMedProvider(BaseProvider):
                         "authors": [a.get("name", "") for a in authors_raw],
                         "article_ids": item.get("articleids", []),
                     },
-                )
+                ),
             )
 
         return ProviderResult(results=results)

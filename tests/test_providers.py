@@ -8,7 +8,6 @@ import pytest
 
 from metasearchmcp.contracts import SearchParams
 
-
 # ---------------------------------------------------------------------------
 # Wikipedia
 # ---------------------------------------------------------------------------
@@ -28,8 +27,8 @@ def _wikipedia_response() -> dict:
                     "snippet": "British <span>comedy</span> group.",
                     "timestamp": "2023-06-01T00:00:00Z",
                 },
-            ]
-        }
+            ],
+        },
     }
 
 
@@ -115,7 +114,7 @@ def _github_response() -> dict:
                 "forks_count": 9000,
                 "topics": ["http", "python"],
                 "pushed_at": "2024-03-01T00:00:00Z",
-            }
+            },
         ],
     }
 
@@ -198,7 +197,7 @@ def test_google_parse_filters_invalid_result_links_and_deduplicates():
             </div>
           </body>
         </html>
-        """
+        """,
     )
 
     assert len(result.results) == 1
@@ -322,7 +321,7 @@ def _serper_response() -> dict:
                 "link": "https://fastapi.tiangolo.com",
                 "snippet": "FastAPI framework, high performance",
                 "date": "2024-01-01",
-            }
+            },
         ],
         "relatedSearches": [
             {"query": "fastapi tutorial"},
@@ -402,7 +401,7 @@ def test_serpbase_parse_cleans_related_searches():
                     "link": "https://fastapi.tiangolo.com",
                     "snippet": "FastAPI framework, high performance",
                     "date": "2024-01-01",
-                }
+                },
             ],
             "related_searches": ["fastapi tutorial", " fastapi tutorial ", "", None],
             "knowledge_graph": {"title": "FastAPI"},
@@ -560,7 +559,7 @@ async def test_bing_search_normalizes_locale_for_request(monkeypatch):
     provider = BingProvider()
     monkeypatch.setattr(provider, "_client", lambda: FakeClient())
     monkeypatch.setattr(
-        provider, "_parse", lambda xml_text: SimpleNamespace(results=[])
+        provider, "_parse", lambda xml_text: SimpleNamespace(results=[]),
     )
 
     result = await provider.search(
@@ -608,7 +607,7 @@ async def test_qwant_search_normalizes_locale_for_request(monkeypatch):
     provider = QwantProvider()
     monkeypatch.setattr(provider, "_scraper_client", lambda: FakeClient())
     monkeypatch.setattr(
-        provider, "_parse_lite", lambda html: SimpleNamespace(results=[])
+        provider, "_parse_lite", lambda html: SimpleNamespace(results=[]),
     )
 
     result = await provider.search(

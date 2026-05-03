@@ -3,6 +3,7 @@ from __future__ import annotations
 import copy
 
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
+
 from .base import BaseProvider
 
 _SEARCH_URL = "https://fastapi.metacpan.org/v1/file/_search"
@@ -13,7 +14,7 @@ _QUERY_TEMPLATE = {
             "type": "most_fields",
             "fields": ["documentation", "documentation.*"],
             "analyzer": "camelcase",
-        }
+        },
     },
     "filter": {
         "bool": {
@@ -22,8 +23,8 @@ _QUERY_TEMPLATE = {
                 {"term": {"status": "latest"}},
                 {"term": {"indexed": 1}},
                 {"term": {"authorized": 1}},
-            ]
-        }
+            ],
+        },
     },
     "sort": [
         {"_score": {"order": "desc"}},
@@ -73,7 +74,7 @@ class MetaCPANProvider(BaseProvider):
                     source="metacpan.org",
                     rank=i,
                     provider=self.name,
-                )
+                ),
             )
 
         return ProviderResult(results=results)

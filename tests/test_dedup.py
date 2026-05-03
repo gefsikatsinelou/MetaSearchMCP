@@ -15,19 +15,19 @@ def _r(url: str, provider: str = "p") -> SearchHit:
 
 def test_normalize_strips_trailing_slash():
     assert canonicalize_url("https://example.com/foo/") == canonicalize_url(
-        "https://example.com/foo"
+        "https://example.com/foo",
     )
 
 
 def test_normalize_case_insensitive():
     assert canonicalize_url("https://Example.COM/Foo") == canonicalize_url(
-        "https://example.com/foo"
+        "https://example.com/foo",
     )
 
 
 def test_normalize_drops_fragment():
     assert canonicalize_url("https://example.com/foo#bar") == canonicalize_url(
-        "https://example.com/foo"
+        "https://example.com/foo",
     )
 
 
@@ -39,28 +39,28 @@ def test_normalize_preserves_query():
 
 def test_normalize_drops_tracking_query_params():
     assert canonicalize_url(
-        "https://example.com/foo?q=python&utm_source=newsletter&fbclid=abc123"
+        "https://example.com/foo?q=python&utm_source=newsletter&fbclid=abc123",
     ) == canonicalize_url("https://example.com/foo?q=python")
 
 
 def test_normalize_sorts_query_params_for_stable_deduplication():
     assert canonicalize_url("https://example.com/foo?b=2&a=1") == canonicalize_url(
-        "https://example.com/foo?a=1&b=2"
+        "https://example.com/foo?a=1&b=2",
     )
 
 
 def test_normalize_drops_default_ports():
     assert canonicalize_url("https://example.com:443/foo") == canonicalize_url(
-        "https://example.com/foo"
+        "https://example.com/foo",
     )
     assert canonicalize_url("http://example.com:80/foo") == canonicalize_url(
-        "http://example.com/foo"
+        "http://example.com/foo",
     )
 
 
 def test_normalize_preserves_non_default_ports():
     assert canonicalize_url("https://example.com:8443/foo") != canonicalize_url(
-        "https://example.com/foo"
+        "https://example.com/foo",
     )
 
 
@@ -93,7 +93,7 @@ def test_dedup_tracking_links_same():
         [
             _r("https://a.com/foo?q=python&utm_medium=email"),
             _r("https://a.com/foo?q=python"),
-        ]
+        ],
     )
     assert len(out) == 1
 

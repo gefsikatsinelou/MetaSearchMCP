@@ -3,6 +3,7 @@ from __future__ import annotations
 import xml.etree.ElementTree as ET
 
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
+
 from .base import BaseProvider
 
 _API_URL = "https://export.arxiv.org/api/query"
@@ -69,7 +70,7 @@ class ArxivProvider(BaseProvider):
                     provider=self.name,
                     published_date=published,
                     extra={"authors": authors},
-                )
+                ),
             )
 
         return ProviderResult(results=results)

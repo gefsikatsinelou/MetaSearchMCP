@@ -14,13 +14,22 @@ class InternetArchiveProvider(BaseProvider):
     """
 
     name = "internet_archive"
-    description = "Search Internet Archive collections, including texts, media, and software."
+    description = (
+        "Search Internet Archive collections, including texts, media, and software."
+    )
     tags = ["web", "academic", "knowledge"]
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
         qp = {
             "q": query,
-            "fl[]": ["identifier", "title", "description", "mediatype", "date", "creator"],
+            "fl[]": [
+                "identifier",
+                "title",
+                "description",
+                "mediatype",
+                "date",
+                "creator",
+            ],
             "rows": min(params.num_results, self._max_results, 20),
             "page": 1,
             "output": "json",
@@ -62,19 +71,21 @@ class InternetArchiveProvider(BaseProvider):
             if creator:
                 snippet_parts.append(creator)
 
-            results.append(SearchResult(
-                title=title,
-                url=url,
-                snippet=" | ".join(p for p in snippet_parts if p),
-                source="archive.org",
-                rank=i,
-                provider=self.name,
-                published_date=date or None,
-                extra={
-                    "identifier": identifier,
-                    "mediatype": mediatype,
-                    "creator": creator,
-                },
-            ))
+            results.append(
+                SearchResult(
+                    title=title,
+                    url=url,
+                    snippet=" | ".join(p for p in snippet_parts if p),
+                    source="archive.org",
+                    rank=i,
+                    provider=self.name,
+                    published_date=date or None,
+                    extra={
+                        "identifier": identifier,
+                        "mediatype": mediatype,
+                        "creator": creator,
+                    },
+                )
+            )
 
         return ProviderResult(results=results)

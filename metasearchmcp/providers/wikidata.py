@@ -28,9 +28,7 @@ class WikidataProvider(BaseProvider):
         }
 
         # Wikimedia requires a descriptive UA with contact info to avoid 403
-        headers = {
-            "User-Agent": BOT_USER_AGENT
-        }
+        headers = {"User-Agent": BOT_USER_AGENT}
         async with self._client() as client:
             resp = await client.get(_API_URL, params=qp, headers=headers)
             resp.raise_for_status()

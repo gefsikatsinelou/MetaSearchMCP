@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import xml.etree.ElementTree as ET
-from urllib.parse import quote_plus
 
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
 from .base import BaseProvider
@@ -60,15 +59,17 @@ class ArxivProvider(BaseProvider):
                 for a in entry.findall("atom:author", _NS)
             ]
 
-            results.append(SearchResult(
-                title=title,
-                url=arxiv_url,
-                snippet=snippet[:400],
-                source="arxiv.org",
-                rank=i,
-                provider=self.name,
-                published_date=published,
-                extra={"authors": authors},
-            ))
+            results.append(
+                SearchResult(
+                    title=title,
+                    url=arxiv_url,
+                    snippet=snippet[:400],
+                    source="arxiv.org",
+                    rank=i,
+                    provider=self.name,
+                    published_date=published,
+                    extra={"authors": authors},
+                )
+            )
 
         return ProviderResult(results=results)

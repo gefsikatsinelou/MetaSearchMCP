@@ -23,6 +23,7 @@ class PubMedProvider(BaseProvider):
     def __init__(self) -> None:
         super().__init__()
         from metasearchmcp.config import get_settings
+
         settings = get_settings()
         self._api_key: str = getattr(settings, "ncbi_api_key", "")
 
@@ -88,20 +89,22 @@ class PubMedProvider(BaseProvider):
             if authors:
                 snippet_parts.append(", ".join(authors))
 
-            results.append(SearchResult(
-                title=title,
-                url=url,
-                snippet=" | ".join(snippet_parts),
-                source="pubmed.ncbi.nlm.nih.gov",
-                rank=i,
-                provider=self.name,
-                published_date=pub_date or None,
-                extra={
-                    "pmid": pmid,
-                    "journal": journal,
-                    "authors": [a.get("name", "") for a in authors_raw],
-                    "article_ids": item.get("articleids", []),
-                },
-            ))
+            results.append(
+                SearchResult(
+                    title=title,
+                    url=url,
+                    snippet=" | ".join(snippet_parts),
+                    source="pubmed.ncbi.nlm.nih.gov",
+                    rank=i,
+                    provider=self.name,
+                    published_date=pub_date or None,
+                    extra={
+                        "pmid": pmid,
+                        "journal": journal,
+                        "authors": [a.get("name", "") for a in authors_raw],
+                        "article_ids": item.get("articleids", []),
+                    },
+                )
+            )
 
         return ProviderResult(results=results)

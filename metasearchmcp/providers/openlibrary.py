@@ -10,7 +10,9 @@ class OpenLibraryProvider(BaseProvider):
     """Open Library search via the public search API."""
 
     name = "openlibrary"
-    description = "Search books and authors via Open Library, part of the Internet Archive."
+    description = (
+        "Search books and authors via Open Library, part of the Internet Archive."
+    )
     tags = ["web", "academic", "knowledge", "books"]
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:

@@ -2,12 +2,12 @@
 
 from __future__ import annotations
 
-from unittest.mock import AsyncMock, MagicMock, patch
+from unittest.mock import MagicMock, patch
 
 import pytest
 from fastapi.testclient import TestClient
 
-from metasearchmcp.contracts import ProviderPayload, SearchHit, SearchOptions
+from metasearchmcp.contracts import ProviderPayload, SearchHit
 
 
 # ---------------------------------------------------------------------------
@@ -129,7 +129,9 @@ async def test_dispatch_search_google_prefers_direct_google_provider():
 
     catalog = {
         "google": _make_provider("google", ["google", "web"], "Google"),
-        "google_serpbase": _make_provider("google_serpbase", ["google", "web"], "SerpBase"),
+        "google_serpbase": _make_provider(
+            "google_serpbase", ["google", "web"], "SerpBase"
+        ),
     }
     with patch.object(broker, "_catalog", catalog):
         result = await broker.dispatch_tool("search_google", {"query": "fastapi"})
@@ -163,7 +165,9 @@ def test_search_google_route_prefers_first_available_provider(client):
 
     catalog = {
         "google": _make_provider("google", ["google", "web"], "Google"),
-        "google_serpbase": _make_provider("google_serpbase", ["google", "web"], "SerpBase"),
+        "google_serpbase": _make_provider(
+            "google_serpbase", ["google", "web"], "SerpBase"
+        ),
     }
 
     app = FastAPI()
@@ -177,7 +181,6 @@ def test_search_google_route_prefers_first_available_provider(client):
     data = resp.json()
     providers_hit = {r["provider"] for r in data["results"]}
     assert providers_hit == {"google"}
-
 
 
 # ---------------------------------------------------------------------------
@@ -265,7 +268,9 @@ def test_providers_filter_by_all_tags(client):
 
 
 def test_providers_filters_normalize_tag_input(client):
-    resp = client.get("/providers?tag=%20Code%20&tag=%20PACKAGES%20&tag=code&tag_match=all")
+    resp = client.get(
+        "/providers?tag=%20Code%20&tag=%20PACKAGES%20&tag=code&tag_match=all"
+    )
     assert resp.status_code == 200
     data = resp.json()
     names = {p["name"] for p in data["available"]}
@@ -353,7 +358,9 @@ async def test_dispatch_search_google_passes_safe_search():
         return await original_run_search_plan(query, providers, options)
 
     catalog = {
-        "google_serpbase": _make_provider("google_serpbase", ["google", "web"], "SerpBase"),
+        "google_serpbase": _make_provider(
+            "google_serpbase", ["google", "web"], "SerpBase"
+        ),
     }
     with patch.object(broker, "_catalog", catalog):
         with patch.object(broker, "run_search_plan", _capture_run_search_plan):

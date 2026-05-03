@@ -47,9 +47,7 @@ def canonicalize_url(url: str) -> str:
         netloc = _drop_default_port(parsed.scheme, parsed.netloc)
         path = parsed.path.rstrip("/") or "/"
         query = _normalize_query(parsed.query)
-        normalized = urlunparse(
-            ("", netloc, path, parsed.params, query, "")
-        )
+        normalized = urlunparse(("", netloc, path, parsed.params, query, ""))
         return normalized.lstrip("/")
     except Exception:
         return url.strip().lower()

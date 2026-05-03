@@ -49,22 +49,26 @@ class HackerNewsProvider(BaseProvider):
             snippet_parts = []
             if story_url and story_url != url:
                 snippet_parts.append(f"Discussion: {hn_url}")
-            snippet_parts.append(f"Points: {points} | Comments: {comments} | By: {author}")
+            snippet_parts.append(
+                f"Points: {points} | Comments: {comments} | By: {author}"
+            )
 
-            results.append(SearchResult(
-                title=title,
-                url=url,
-                snippet=" | ".join(snippet_parts),
-                source="news.ycombinator.com",
-                rank=i,
-                provider=self.name,
-                published_date=created or None,
-                extra={
-                    "points": points,
-                    "num_comments": comments,
-                    "author": author,
-                    "hn_url": hn_url,
-                },
-            ))
+            results.append(
+                SearchResult(
+                    title=title,
+                    url=url,
+                    snippet=" | ".join(snippet_parts),
+                    source="news.ycombinator.com",
+                    rank=i,
+                    provider=self.name,
+                    published_date=created or None,
+                    extra={
+                        "points": points,
+                        "num_comments": comments,
+                        "author": author,
+                        "hn_url": hn_url,
+                    },
+                )
+            )
 
         return ProviderResult(results=results)

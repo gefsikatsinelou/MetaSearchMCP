@@ -250,7 +250,9 @@ async def dispatch_tool(name: str, arguments: dict[str, Any]) -> dict[str, Any]:
             }
         else:
             first_available = next(iter(selected.items()), None)
-            selected = {first_available[0]: first_available[1]} if first_available else {}
+            selected = (
+                {first_available[0]: first_available[1]} if first_available else {}
+            )
         if not selected:
             return {
                 "error": "No Google provider available. Enable ALLOW_UNSTABLE_PROVIDERS=true for direct Google, or set SERPBASE_API_KEY / SERPER_API_KEY."

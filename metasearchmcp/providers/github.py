@@ -52,20 +52,22 @@ class GitHubProvider(BaseProvider):
                 snippet_parts.append(f"Language: {language}")
             snippet_parts.append(f"Stars: {stars}")
 
-            results.append(SearchResult(
-                title=item.get("full_name", ""),
-                url=item.get("html_url", ""),
-                snippet=" | ".join(p for p in snippet_parts if p),
-                source="github.com",
-                rank=i,
-                provider=self.name,
-                published_date=item.get("pushed_at", "")[:10] or None,
-                extra={
-                    "stars": stars,
-                    "language": language,
-                    "forks": item.get("forks_count", 0),
-                    "topics": item.get("topics", []),
-                },
-            ))
+            results.append(
+                SearchResult(
+                    title=item.get("full_name", ""),
+                    url=item.get("html_url", ""),
+                    snippet=" | ".join(p for p in snippet_parts if p),
+                    source="github.com",
+                    rank=i,
+                    provider=self.name,
+                    published_date=item.get("pushed_at", "")[:10] or None,
+                    extra={
+                        "stars": stars,
+                        "language": language,
+                        "forks": item.get("forks_count", 0),
+                        "topics": item.get("topics", []),
+                    },
+                )
+            )
 
         return ProviderResult(results=results)

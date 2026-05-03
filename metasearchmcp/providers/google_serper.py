@@ -58,14 +58,16 @@ class GoogleSerperProvider(BaseProvider):
         results: list[SearchResult] = []
 
         for i, item in enumerate(data.get("organic", []), start=1):
-            results.append(SearchResult(
-                title=item.get("title", ""),
-                url=item.get("link", ""),
-                snippet=item.get("snippet", ""),
-                rank=i,
-                provider=self.name,
-                published_date=item.get("date"),
-            ))
+            results.append(
+                SearchResult(
+                    title=item.get("title", ""),
+                    url=item.get("link", ""),
+                    snippet=item.get("snippet", ""),
+                    rank=i,
+                    provider=self.name,
+                    published_date=item.get("date"),
+                )
+            )
 
         related: list[str] = []
         seen_related: set[str] = set()

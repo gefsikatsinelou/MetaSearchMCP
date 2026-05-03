@@ -113,7 +113,9 @@ class GoogleProvider(BaseProvider):
             anchor = block.select_one('a[href^="/url?q="]') or block.select_one(
                 'a[href^="http"]'
             )
-            title_node = block.select_one("h3") or block.select_one('div[role="heading"]')
+            title_node = block.select_one("h3") or block.select_one(
+                'div[role="heading"]'
+            )
             if not anchor or not title_node:
                 continue
 
@@ -169,7 +171,9 @@ class GoogleProvider(BaseProvider):
         for selector in _SNIPPET_SELECTORS:
             snippet_node = block.select_one(selector)
             if snippet_node:
-                return GoogleProvider._normalize_text(snippet_node.get_text(" ", strip=True))
+                return GoogleProvider._normalize_text(
+                    snippet_node.get_text(" ", strip=True)
+                )
         return ""
 
     @staticmethod
@@ -185,7 +189,9 @@ class GoogleProvider(BaseProvider):
                 href = suggestion.get("href", "")
                 if "q=" not in href:
                     continue
-                text = GoogleProvider._normalize_text(suggestion.get_text(" ", strip=True))
+                text = GoogleProvider._normalize_text(
+                    suggestion.get_text(" ", strip=True)
+                )
                 if text and text not in related_searches:
                     related_searches.append(text)
         return related_searches

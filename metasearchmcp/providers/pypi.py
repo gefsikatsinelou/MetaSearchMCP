@@ -60,29 +60,35 @@ class PyPIProvider(BaseProvider):
                 version = info.get("version", "")
                 summary = info.get("summary", "") or ""
                 home_page = info.get("home_page", "") or ""
-                project_url = info.get("package_url", f"https://pypi.org/project/{pkg_name}/")
+                project_url = info.get(
+                    "package_url", f"https://pypi.org/project/{pkg_name}/"
+                )
                 keywords = (info.get("keywords") or "").split(",")[:5]
 
                 snippet_parts = [summary]
                 if version:
                     snippet_parts.append(f"v{version}")
                 if keywords and keywords != [""]:
-                    snippet_parts.append(f"Keywords: {', '.join(k.strip() for k in keywords if k.strip())}")
+                    snippet_parts.append(
+                        f"Keywords: {', '.join(k.strip() for k in keywords if k.strip())}"
+                    )
 
-                results.append(SearchResult(
-                    title=pkg_name,
-                    url=project_url,
-                    snippet=" | ".join(p for p in snippet_parts if p),
-                    source="pypi.org",
-                    rank=len(results) + 1,
-                    provider=self.name,
-                    extra={
-                        "version": version,
-                        "author": info.get("author", ""),
-                        "license": info.get("license", ""),
-                        "requires_python": info.get("requires_python", ""),
-                        "home_page": home_page,
-                    },
-                ))
+                results.append(
+                    SearchResult(
+                        title=pkg_name,
+                        url=project_url,
+                        snippet=" | ".join(p for p in snippet_parts if p),
+                        source="pypi.org",
+                        rank=len(results) + 1,
+                        provider=self.name,
+                        extra={
+                            "version": version,
+                            "author": info.get("author", ""),
+                            "license": info.get("license", ""),
+                            "requires_python": info.get("requires_python", ""),
+                            "home_page": home_page,
+                        },
+                    )
+                )
 
         return ProviderResult(results=results)

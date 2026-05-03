@@ -42,7 +42,6 @@ def test_yahoo_builds_cookie():
 
 
 def test_yahoo_normalizes_locale_for_request():
-    from metasearchmcp.contracts import SearchParams
     from metasearchmcp.providers.yahoo import YahooProvider
 
     assert YahooProvider._language_code("pt-BR") == "pt"

@@ -133,13 +133,15 @@ def test_print_tool_configs_includes_common_integrations(capsys):
 def test_setup_reuses_existing_key_without_reconfigure(monkeypatch, capsys):
     from metasearchmcp import cli
 
-    monkeypatch.setattr(cli, "load_config", lambda: {"SERPBASE_API_KEY": "abcdefgh1234"})
+    monkeypatch.setattr(
+        cli, "load_config", lambda: {"SERPBASE_API_KEY": "abcdefgh1234"}
+    )
     monkeypatch.setattr(
         cli,
         "USER_CONFIG_FILE",
         SimpleNamespace(exists=lambda: True, __str__=lambda self: "config.env"),
     )
-    monkeypatch.setattr("builtins.input", lambda prompt='': "n")
+    monkeypatch.setattr("builtins.input", lambda prompt="": "n")
 
     called = {"printed": False}
 
@@ -167,7 +169,7 @@ def test_setup_saves_validated_key(monkeypatch):
         SimpleNamespace(exists=lambda: False, __str__=lambda self: "config.env"),
     )
     monkeypatch.setattr(cli, "load_config", lambda: {})
-    monkeypatch.setattr("builtins.input", lambda prompt='': next(answers))
+    monkeypatch.setattr("builtins.input", lambda prompt="": next(answers))
     monkeypatch.setattr(cli, "validate_serpbase_key", lambda key: True)
     monkeypatch.setattr(cli, "save_config", lambda env: saved.update(env))
     monkeypatch.setattr(cli, "print_tool_configs", lambda: None)
@@ -186,7 +188,7 @@ def test_setup_aborts_when_key_empty(monkeypatch):
         SimpleNamespace(exists=lambda: False, __str__=lambda self: "config.env"),
     )
     monkeypatch.setattr(cli, "load_config", lambda: {})
-    monkeypatch.setattr("builtins.input", lambda prompt='': "")
+    monkeypatch.setattr("builtins.input", lambda prompt="": "")
 
     with pytest.raises(SystemExit) as exc_info:
         cli.setup()
@@ -205,7 +207,7 @@ def test_setup_aborts_when_validation_fails_and_user_declines(monkeypatch):
         SimpleNamespace(exists=lambda: False, __str__=lambda self: "config.env"),
     )
     monkeypatch.setattr(cli, "load_config", lambda: {})
-    monkeypatch.setattr("builtins.input", lambda prompt='': next(answers))
+    monkeypatch.setattr("builtins.input", lambda prompt="": next(answers))
     monkeypatch.setattr(cli, "validate_serpbase_key", lambda key: False)
 
     with pytest.raises(SystemExit) as exc_info:

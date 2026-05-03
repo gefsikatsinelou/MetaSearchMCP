@@ -67,13 +67,15 @@ class BraveProvider(BaseProvider):
         web = data.get("web", {})
 
         for i, item in enumerate(web.get("results", []), start=1):
-            results.append(SearchResult(
-                title=item.get("title", ""),
-                url=item.get("url", ""),
-                snippet=item.get("description", ""),
-                rank=i,
-                provider=self.name,
-                published_date=item.get("age"),
-            ))
+            results.append(
+                SearchResult(
+                    title=item.get("title", ""),
+                    url=item.get("url", ""),
+                    snippet=item.get("description", ""),
+                    rank=i,
+                    provider=self.name,
+                    published_date=item.get("age"),
+                )
+            )
 
         return ProviderResult(results=results)

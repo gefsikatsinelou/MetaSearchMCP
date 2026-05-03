@@ -17,7 +17,9 @@ class FinnhubProvider(BaseProvider):
     """
 
     name = "finnhub"
-    description = "Real-time stock quotes, earnings, and company profiles via Finnhub API."
+    description = (
+        "Real-time stock quotes, earnings, and company profiles via Finnhub API."
+    )
     tags = ["finance", "stocks"]
 
     def __init__(self) -> None:

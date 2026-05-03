@@ -46,15 +46,17 @@ class WikipediaProvider(BaseProvider):
             raw_snippet = item.get("snippet", "")
             snippet = BeautifulSoupStrip.strip(raw_snippet)
 
-            results.append(SearchResult(
-                title=title,
-                url=url,
-                snippet=snippet,
-                source="en.wikipedia.org",
-                rank=i,
-                provider=self.name,
-                published_date=item.get("timestamp", "")[:10] or None,
-            ))
+            results.append(
+                SearchResult(
+                    title=title,
+                    url=url,
+                    snippet=snippet,
+                    source="en.wikipedia.org",
+                    rank=i,
+                    provider=self.name,
+                    published_date=item.get("timestamp", "")[:10] or None,
+                )
+            )
 
         return ProviderResult(results=results)
 
@@ -65,4 +67,5 @@ class BeautifulSoupStrip:
     @staticmethod
     def strip(html: str) -> str:
         import re
+
         return re.sub(r"<[^>]+>", "", html).strip()

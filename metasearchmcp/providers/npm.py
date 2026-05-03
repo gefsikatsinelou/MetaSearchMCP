@@ -48,20 +48,22 @@ class NpmProvider(BaseProvider):
             if version:
                 snippet_parts.append(f"v{version}")
 
-            results.append(SearchResult(
-                title=name,
-                url=url,
-                snippet=" | ".join(p for p in snippet_parts if p),
-                source="npmjs.com",
-                rank=i,
-                provider=self.name,
-                published_date=date or None,
-                extra={
-                    "version": version,
-                    "keywords": keywords,
-                    "links": links,
-                    "score": obj.get("score", {}),
-                },
-            ))
+            results.append(
+                SearchResult(
+                    title=name,
+                    url=url,
+                    snippet=" | ".join(p for p in snippet_parts if p),
+                    source="npmjs.com",
+                    rank=i,
+                    provider=self.name,
+                    published_date=date or None,
+                    extra={
+                        "version": version,
+                        "keywords": keywords,
+                        "links": links,
+                        "score": obj.get("score", {}),
+                    },
+                )
+            )
 
         return ProviderResult(results=results)

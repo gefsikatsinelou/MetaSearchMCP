@@ -57,20 +57,22 @@ class StackOverflowProvider(BaseProvider):
             if answered:
                 snippet_parts.append("(answered)")
 
-            results.append(SearchResult(
-                title=item.get("title", ""),
-                url=item.get("link", ""),
-                snippet=" | ".join(snippet_parts),
-                source="stackoverflow.com",
-                rank=i,
-                provider=self.name,
-                published_date=None,
-                extra={
-                    "score": score,
-                    "answer_count": answer_count,
-                    "is_answered": answered,
-                    "tags": tags,
-                },
-            ))
+            results.append(
+                SearchResult(
+                    title=item.get("title", ""),
+                    url=item.get("link", ""),
+                    snippet=" | ".join(snippet_parts),
+                    source="stackoverflow.com",
+                    rank=i,
+                    provider=self.name,
+                    published_date=None,
+                    extra={
+                        "score": score,
+                        "answer_count": answer_count,
+                        "is_answered": answered,
+                        "tags": tags,
+                    },
+                )
+            )
 
         return ProviderResult(results=results)

@@ -39,3 +39,8 @@ testpaths = ["tests"]
 
 [tool.hatch.build.targets.wheel]
 packages = ["metasearchmcp"]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.15.12",
+]

@@ -1,4 +1,4 @@
-from metasearchmcp.server import app, run
+from metasearchmcp.server import run
 
 
 if __name__ == "__main__":

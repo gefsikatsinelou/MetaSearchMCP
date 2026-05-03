@@ -1,7 +1,7 @@
 """Provider parse/adapter unit tests using mocked HTTP responses."""
+
 from __future__ import annotations
 
-import xml.etree.ElementTree as ET
 from types import SimpleNamespace
 
 import pytest
@@ -12,6 +12,7 @@ from metasearchmcp.contracts import SearchParams
 # ---------------------------------------------------------------------------
 # Wikipedia
 # ---------------------------------------------------------------------------
+
 
 def _wikipedia_response() -> dict:
     return {
@@ -34,6 +35,7 @@ def _wikipedia_response() -> dict:
 
 def test_wikipedia_parse():
     from metasearchmcp.providers.wikipedia import WikipediaProvider
+
     provider = WikipediaProvider()
     result = provider._parse(_wikipedia_response())
 
@@ -50,6 +52,7 @@ def test_wikipedia_parse():
 # ---------------------------------------------------------------------------
 # arXiv
 # ---------------------------------------------------------------------------
+
 
 def _arxiv_xml() -> str:
     return """<?xml version="1.0" encoding="UTF-8"?>
@@ -73,6 +76,7 @@ def _arxiv_xml() -> str:
 
 def test_arxiv_parse():
     from metasearchmcp.providers.arxiv import ArxivProvider
+
     provider = ArxivProvider()
     result = provider._parse(_arxiv_xml())
 
@@ -87,6 +91,7 @@ def test_arxiv_parse():
 
 def test_arxiv_parse_malformed_xml():
     from metasearchmcp.providers.arxiv import ArxivProvider
+
     provider = ArxivProvider()
     result = provider._parse("this is not xml")
     assert result.results == []
@@ -95,6 +100,7 @@ def test_arxiv_parse_malformed_xml():
 # ---------------------------------------------------------------------------
 # GitHub
 # ---------------------------------------------------------------------------
+
 
 def _github_response() -> dict:
     return {
@@ -116,6 +122,7 @@ def _github_response() -> dict:
 
 def test_github_parse():
     from metasearchmcp.providers.github import GitHubProvider
+
     provider = GitHubProvider()
     result = provider._parse(_github_response())
 
@@ -132,6 +139,7 @@ def test_github_parse():
 # ---------------------------------------------------------------------------
 # Google
 # ---------------------------------------------------------------------------
+
 
 def _google_html() -> str:
     return """
@@ -305,6 +313,7 @@ def test_google_build_user_agent_applies_stable_variant_suffix():
 # Google Serper
 # ---------------------------------------------------------------------------
 
+
 def _serper_response() -> dict:
     return {
         "organic": [
@@ -327,6 +336,7 @@ def _serper_response() -> dict:
 
 def test_serper_parse():
     from metasearchmcp.providers.google_serper import GoogleSerperProvider
+
     provider = GoogleSerperProvider()
     result = provider._parse(_serper_response())
 
@@ -549,7 +559,9 @@ async def test_bing_search_normalizes_locale_for_request(monkeypatch):
 
     provider = BingProvider()
     monkeypatch.setattr(provider, "_client", lambda: FakeClient())
-    monkeypatch.setattr(provider, "_parse", lambda xml_text: SimpleNamespace(results=[]))
+    monkeypatch.setattr(
+        provider, "_parse", lambda xml_text: SimpleNamespace(results=[])
+    )
 
     result = await provider.search(
         "fastapi",
@@ -595,7 +607,9 @@ async def test_qwant_search_normalizes_locale_for_request(monkeypatch):
 
     provider = QwantProvider()
     monkeypatch.setattr(provider, "_scraper_client", lambda: FakeClient())
-    monkeypatch.setattr(provider, "_parse_lite", lambda html: SimpleNamespace(results=[]))
+    monkeypatch.setattr(
+        provider, "_parse_lite", lambda html: SimpleNamespace(results=[])
+    )
 
     result = await provider.search(
         "fastapi",
@@ -612,6 +626,7 @@ async def test_qwant_search_normalizes_locale_for_request(monkeypatch):
 # ---------------------------------------------------------------------------
 # Provider availability
 # ---------------------------------------------------------------------------
+
 
 def test_yandex_normalizes_language_code():
     from metasearchmcp.providers.yandex import YandexProvider
@@ -633,12 +648,15 @@ def test_google_unavailable_without_unstable_flag(monkeypatch):
     assert p.is_available() is False
     cfg._settings = None
 
+
 def test_google_serpbase_unavailable_without_key(monkeypatch):
     monkeypatch.setenv("SERPBASE_API_KEY", "")
     # Reset settings singleton
     import metasearchmcp.config as cfg
+
     cfg._settings = None
     from metasearchmcp.providers.google_serpbase import GoogleSerpbaseProvider
+
     p = GoogleSerpbaseProvider()
     assert p.is_available() is False
     cfg._settings = None  # clean up
@@ -647,8 +665,10 @@ def test_google_serpbase_unavailable_without_key(monkeypatch):
 def test_brave_unavailable_without_key(monkeypatch):
     monkeypatch.setenv("BRAVE_API_KEY", "")
     import metasearchmcp.config as cfg
+
     cfg._settings = None
     from metasearchmcp.providers.brave import BraveProvider
+
     p = BraveProvider()
     assert p.is_available() is False
     cfg._settings = None
@@ -656,5 +676,6 @@ def test_brave_unavailable_without_key(monkeypatch):
 
 def test_duckduckgo_always_available():
     from metasearchmcp.providers.duckduckgo import DuckDuckGoProvider
+
     p = DuckDuckGoProvider()
     assert p.is_available() is True

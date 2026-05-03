@@ -41,7 +41,11 @@ class MojeekProvider(BaseProvider):
         items = soup.select("ul.results-standard li") or soup.select("ul.results li")
 
         for i, li in enumerate(items, start=1):
-            a = li.select_one("a.title") or li.select_one("h2 a") or li.select_one("a[href]")
+            a = (
+                li.select_one("a.title")
+                or li.select_one("h2 a")
+                or li.select_one("a[href]")
+            )
             if not a:
                 continue
             title = a.get_text(strip=True)
@@ -56,13 +60,15 @@ class MojeekProvider(BaseProvider):
                     snippet = el.get_text(strip=True)
                     break
 
-            results.append(SearchResult(
-                title=title,
-                url=url,
-                snippet=snippet,
-                rank=i,
-                provider=self.name,
-            ))
+            results.append(
+                SearchResult(
+                    title=title,
+                    url=url,
+                    snippet=snippet,
+                    rank=i,
+                    provider=self.name,
+                )
+            )
             if i >= self._max_results:
                 break
 

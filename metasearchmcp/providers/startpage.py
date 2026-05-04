@@ -91,7 +91,10 @@ class StartpageProvider(BaseProvider):
             form_data["sc"] = sc_code
 
             resp = await client.post(
-                _SEARCH_URL, data=form_data, cookies=cookies, headers=headers,
+                _SEARCH_URL,
+                data=form_data,
+                cookies=cookies,
+                headers=headers,
             )
             resp.raise_for_status()
 

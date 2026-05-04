@@ -58,7 +58,9 @@ def test_pick_providers_by_tags_normalizes_case_and_deduplicates():
     }
 
     filtered = pick_providers_by_tags(
-        catalog, [" Code ", "PACKAGES", "code"], match="all",
+        catalog,
+        [" Code ", "PACKAGES", "code"],
+        match="all",
     )
 
     assert list(filtered.keys()) == ["npm"]

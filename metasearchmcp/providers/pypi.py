@@ -62,7 +62,8 @@ class PyPIProvider(BaseProvider):
                 summary = info.get("summary", "") or ""
                 home_page = info.get("home_page", "") or ""
                 project_url = info.get(
-                    "package_url", f"https://pypi.org/project/{pkg_name}/",
+                    "package_url",
+                    f"https://pypi.org/project/{pkg_name}/",
                 )
                 keywords = (info.get("keywords") or "").split(",")[:5]
 

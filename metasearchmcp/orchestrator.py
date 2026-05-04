@@ -24,7 +24,8 @@ async def execute_provider_search(
     start = time.monotonic()
     try:
         payload = await asyncio.wait_for(
-            provider.search(query, options), timeout=timeout,
+            provider.search(query, options),
+            timeout=timeout,
         )
         latency_ms = (time.monotonic() - start) * 1000
         return provider.name, payload, latency_ms, None

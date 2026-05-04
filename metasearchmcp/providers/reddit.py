@@ -95,7 +95,8 @@ class RedditProvider(BaseProvider):
                 import datetime
 
                 published = datetime.datetime.fromtimestamp(
-                    created, tz=datetime.UTC,
+                    created,
+                    tz=datetime.UTC,
                 ).strftime("%Y-%m-%d")
 
             is_self = post.get("is_self", False)

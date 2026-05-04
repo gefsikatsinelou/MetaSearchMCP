@@ -63,7 +63,8 @@ class YahooProvider(BaseProvider):
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
         domain = _REGION_TO_DOMAIN.get(
-            self._country_code(params.country), "search.yahoo.com",
+            self._country_code(params.country),
+            "search.yahoo.com",
         )
         language = _LANGUAGE_MAP.get(self._language_code(params.language), "en")
         qp = {
@@ -73,12 +74,15 @@ class YahooProvider(BaseProvider):
             "ei": "UTF-8",
         }
         cookie = self._build_sb_cookie(
-            language=language, safe_search=params.safe_search,
+            language=language,
+            safe_search=params.safe_search,
         )
 
         async with self._scraper_client() as client:
             resp = await client.get(
-                f"https://{domain}/search", params=qp, cookies={"sB": cookie},
+                f"https://{domain}/search",
+                params=qp,
+                cookies={"sB": cookie},
             )
             if resp.status_code >= 500:
                 raise RuntimeError(

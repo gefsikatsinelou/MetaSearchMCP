@@ -35,10 +35,14 @@ def _make_provider(name: str, tags: list[str], description: str = "") -> MagicMo
 def _fake_catalog() -> dict:
     return {
         "yahoo_finance": _make_provider(
-            "yahoo_finance", ["web", "finance"], "Yahoo Finance",
+            "yahoo_finance",
+            ["web", "finance"],
+            "Yahoo Finance",
         ),
         "alpha_vantage": _make_provider(
-            "alpha_vantage", ["web", "finance"], "Alpha Vantage",
+            "alpha_vantage",
+            ["web", "finance"],
+            "Alpha Vantage",
         ),
         "github": _make_provider("github", ["web", "code", "developer"], "GitHub"),
         "npm": _make_provider("npm", ["web", "code", "developer", "packages"], "npm"),
@@ -107,7 +111,8 @@ async def test_dispatch_compare_engines_fallback_to_all():
     catalog = _fake_catalog()
     with patch.object(broker, "_catalog", catalog):
         result = await broker.dispatch_tool(
-            "compare_engines", {"query": "test", "providers": []},
+            "compare_engines",
+            {"query": "test", "providers": []},
         )
 
     assert "engines" in result
@@ -129,7 +134,9 @@ async def test_dispatch_search_google_prefers_direct_google_provider():
     catalog = {
         "google": _make_provider("google", ["google", "web"], "Google"),
         "google_serpbase": _make_provider(
-            "google_serpbase", ["google", "web"], "SerpBase",
+            "google_serpbase",
+            ["google", "web"],
+            "SerpBase",
         ),
     }
     with patch.object(broker, "_catalog", catalog):
@@ -150,7 +157,8 @@ async def test_dispatch_search_google_can_select_direct_google_explicitly():
     }
     with patch.object(broker, "_catalog", catalog):
         result = await broker.dispatch_tool(
-            "search_google", {"query": "fastapi", "provider": "google"},
+            "search_google",
+            {"query": "fastapi", "provider": "google"},
         )
 
     assert "results" in result
@@ -166,7 +174,9 @@ def test_search_google_route_prefers_first_available_provider(client):
     catalog = {
         "google": _make_provider("google", ["google", "web"], "Google"),
         "google_serpbase": _make_provider(
-            "google_serpbase", ["google", "web"], "SerpBase",
+            "google_serpbase",
+            ["google", "web"],
+            "SerpBase",
         ),
     }
 
@@ -361,7 +371,9 @@ async def test_dispatch_search_google_passes_safe_search():
 
     catalog = {
         "google_serpbase": _make_provider(
-            "google_serpbase", ["google", "web"], "SerpBase",
+            "google_serpbase",
+            ["google", "web"],
+            "SerpBase",
         ),
     }
     with patch.object(broker, "_catalog", catalog):

@@ -134,7 +134,9 @@ def test_setup_reuses_existing_key_without_reconfigure(monkeypatch, capsys):
     from metasearchmcp import cli
 
     monkeypatch.setattr(
-        cli, "load_config", lambda: {"SERPBASE_API_KEY": "abcdefgh1234"},
+        cli,
+        "load_config",
+        lambda: {"SERPBASE_API_KEY": "abcdefgh1234"},
     )
     monkeypatch.setattr(
         cli,

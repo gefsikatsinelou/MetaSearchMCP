@@ -559,7 +559,9 @@ async def test_bing_search_normalizes_locale_for_request(monkeypatch):
     provider = BingProvider()
     monkeypatch.setattr(provider, "_client", lambda: FakeClient())
     monkeypatch.setattr(
-        provider, "_parse", lambda xml_text: SimpleNamespace(results=[]),
+        provider,
+        "_parse",
+        lambda xml_text: SimpleNamespace(results=[]),
     )
 
     result = await provider.search(
@@ -607,7 +609,9 @@ async def test_qwant_search_normalizes_locale_for_request(monkeypatch):
     provider = QwantProvider()
     monkeypatch.setattr(provider, "_scraper_client", lambda: FakeClient())
     monkeypatch.setattr(
-        provider, "_parse_lite", lambda html: SimpleNamespace(results=[]),
+        provider,
+        "_parse_lite",
+        lambda html: SimpleNamespace(results=[]),
     )
 
     result = await provider.search(

@@ -106,7 +106,8 @@ async def health(registry=Depends(_get_registry)) -> dict:
 
 
 @router.get(
-    "/providers", summary="List all configured providers and their availability",
+    "/providers",
+    summary="List all configured providers and their availability",
 )
 async def providers(
     tag: list[str] | None = Query(default=None),

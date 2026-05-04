@@ -143,4 +143,5 @@ def filter_by_tag(
     registry: dict[str, BaseProvider],
     tag: str,
 ) -> dict[str, BaseProvider]:
+    """Return providers in *registry* that have *tag* in their tags."""
     return {n: p for n, p in registry.items() if tag in p.tags}

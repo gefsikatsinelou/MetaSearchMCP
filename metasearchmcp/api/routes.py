@@ -24,7 +24,7 @@ router = APIRouter()
 _catalog = build_provider_catalog()
 
 
-def _get_registry():
+def _get_registry() -> dict[str, BaseProvider]:
     return _catalog
 
 

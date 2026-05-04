@@ -21,6 +21,7 @@ async def execute_provider_search(
     options: SearchOptions,
     timeout: float,
 ) -> tuple[str, ProviderPayload | None, float, str | None]:
+    """Run a single provider search with a timeout and return normalized results."""
     start = time.monotonic()
     try:
         payload = await asyncio.wait_for(
@@ -53,6 +54,11 @@ async def run_search_plan(
     providers: Sequence[BaseProvider],
     options: SearchOptions | None = None,
 ) -> SearchReport:
+    """Execute *query* across all *providers* and merge the results.
+
+    Results are deduplicated, capped to ``options.max_total_results``,
+    and enriched with per-provider timing and error metadata.
+    """
     if options is None:
         options = SearchOptions()
 

@@ -17,6 +17,7 @@ from metasearchmcp.contracts import (
     SearchReport,
 )
 from metasearchmcp.orchestrator import run_search_plan
+from metasearchmcp.providers.base import BaseProvider
 
 router = APIRouter()
 

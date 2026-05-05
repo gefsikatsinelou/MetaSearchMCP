@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import base64
 
+import httpx
+
 from metasearchmcp.config import get_settings
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
 
@@ -35,7 +37,7 @@ class RedditProvider(BaseProvider):
     def is_available(self) -> bool:
         return bool(self._client_id and self._client_secret)
 
-    async def _get_token(self, client) -> str:
+    async def _get_token(self, client: httpx.AsyncClient) -> str:
         credentials = base64.b64encode(
             f"{self._client_id}:{self._client_secret}".encode(),
         ).decode()

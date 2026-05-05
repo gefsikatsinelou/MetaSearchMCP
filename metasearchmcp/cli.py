@@ -23,6 +23,7 @@ _VALID_STATUSES = {0, 2, 3}  # ok, insufficient_credits, rate_limited
 
 
 def load_config() -> dict[str, str]:
+    """Load key=value pairs from the user config file."""
     env: dict[str, str] = {}
     if not USER_CONFIG_FILE.exists():
         return env
@@ -35,6 +36,7 @@ def load_config() -> dict[str, str]:
 
 
 def save_config(env: dict[str, str]) -> None:
+    """Persist key=value pairs to the user config file with restricted permissions."""
     USER_CONFIG_DIR.mkdir(parents=True, exist_ok=True)
     lines = [f"{k}={v}" for k, v in env.items()]
     USER_CONFIG_FILE.write_text("\n".join(lines) + "\n", encoding="utf-8")
@@ -45,6 +47,7 @@ def save_config(env: dict[str, str]) -> None:
 
 
 def validate_serpbase_key(api_key: str) -> bool:
+    """Check whether a SerpBase API key is valid by calling the validation endpoint."""
     try:
         resp = httpx.post(
             _SERPBASE_VALIDATE_URL,
@@ -69,6 +72,7 @@ def _mcp_server_block() -> dict:
 
 
 def print_tool_configs() -> None:
+    """Print MCP configuration snippets for popular AI tools."""
     block = json.dumps({"MetaSearchMCP": _mcp_server_block()}, indent=2)
 
     print()
@@ -115,6 +119,7 @@ def print_tool_configs() -> None:
 
 
 def setup() -> None:
+    """Run the interactive setup wizard to configure MetaSearchMCP."""
     print("MetaSearchMCP Setup Wizard")
     print("=" * 60)
 

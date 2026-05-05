@@ -1,3 +1,5 @@
+"""FastAPI application entry-point for MetaSearchMCP."""
+
 from __future__ import annotations
 
 import uvicorn
@@ -40,6 +42,7 @@ app.include_router(router)
 
 
 def run() -> None:
+    """Start the Uvicorn HTTP server."""
     settings = get_settings()
     uvicorn.run(
         "metasearchmcp.server:app",

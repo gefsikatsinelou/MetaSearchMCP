@@ -1,3 +1,5 @@
+"""FastAPI router exposing MetaSearchMCP HTTP endpoints."""
+
 from __future__ import annotations
 
 from typing import Literal
@@ -47,6 +49,7 @@ async def search(
     req: SearchEnvelope,
     registry: dict[str, BaseProvider] = Depends(_get_registry),
 ) -> SearchReport:
+    """Run an aggregate search across enabled providers."""
     providers_map = pick_providers_by_tags(registry, req.tags, match=req.tag_match)
     providers_map = pick_named_providers(providers_map, req.providers)
     if not providers_map:
@@ -69,6 +72,7 @@ async def search_google(
     req: GoogleSearchEnvelope,
     registry: dict[str, BaseProvider] = Depends(_get_registry),
 ) -> SearchReport:
+    """Run a Google search via configured hosted providers."""
     google_providers = pick_tagged_providers(registry, "google")
 
     if req.provider:
@@ -88,7 +92,8 @@ async def search_google(
             status_code=503,
             detail=(
                 "No Google provider available. "
-                "Enable ALLOW_UNSTABLE_PROVIDERS=true for direct Google, or set SERPBASE_API_KEY / SERPER_API_KEY."
+                "Enable ALLOW_UNSTABLE_PROVIDERS=true for direct Google, "
+                "or set SERPBASE_API_KEY / SERPER_API_KEY."
             ),
         )
 
@@ -97,6 +102,7 @@ async def search_google(
 
 @router.get("/health", summary="Health check")
 async def health(registry: dict[str, BaseProvider] = Depends(_get_registry)) -> dict:
+    """Return service health status and loaded providers."""
     provider_names = sorted(registry.keys())
     return {
         "status": "ok",
@@ -115,6 +121,7 @@ async def providers(
     tag_match: Literal["any", "all"] = Query(default="any"),
     registry: dict[str, BaseProvider] = Depends(_get_registry),
 ) -> dict:
+    """List configured providers, optionally filtered by tags."""
     filtered = pick_providers_by_tags(registry, tag or [], match=tag_match)
 
     return {

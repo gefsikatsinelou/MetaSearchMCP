@@ -183,11 +183,13 @@ _TOOLS = [
 
 @server.list_tools()
 async def list_tools() -> list[types.Tool]:
+    """Return the list of available MCP tools."""
     return _TOOLS
 
 
 @server.call_tool()
 async def call_tool(name: str, arguments: dict[str, Any]) -> list[types.TextContent]:
+    """Execute an MCP tool by name with the given arguments."""
     try:
         result = await dispatch_tool(name, arguments)
         return [
@@ -206,6 +208,7 @@ async def call_tool(name: str, arguments: dict[str, Any]) -> list[types.TextCont
 
 
 async def dispatch_tool(name: str, arguments: dict[str, Any]) -> dict[str, Any]:
+    """Route a tool call to the appropriate search handler."""
     query = arguments["query"]
     num_results = int(arguments.get("num_results", 10))
     max_total_results = int(arguments.get("max_total_results", 20))
@@ -347,6 +350,7 @@ async def _main() -> None:
 
 
 def run() -> None:
+    """Start the MCP server over stdio."""
     from metasearchmcp.config import USER_CONFIG_FILE, get_settings
 
     settings = get_settings()

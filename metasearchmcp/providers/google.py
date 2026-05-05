@@ -3,7 +3,7 @@ from __future__ import annotations
 import re
 from urllib.parse import parse_qs, unquote, urlparse
 
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, Tag
 
 from metasearchmcp.config import get_settings
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
@@ -168,7 +168,7 @@ class GoogleProvider(BaseProvider):
         return ""
 
     @staticmethod
-    def _extract_snippet(block) -> str:
+    def _extract_snippet(block: Tag) -> str:
         for selector in _SNIPPET_SELECTORS:
             snippet_node = block.select_one(selector)
             if snippet_node:

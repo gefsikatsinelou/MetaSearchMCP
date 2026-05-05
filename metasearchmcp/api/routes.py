@@ -29,7 +29,7 @@ def _get_registry() -> dict[str, BaseProvider]:
     return _catalog
 
 
-def _build_tag_groups(registry: dict) -> dict[str, list[str]]:
+def _build_tag_groups(registry: dict[str, BaseProvider]) -> dict[str, list[str]]:
     groups: dict[str, list[str]] = {}
     for provider in registry.values():
         for tag in provider.tags:
@@ -45,7 +45,7 @@ def _build_tag_groups(registry: dict) -> dict[str, list[str]]:
 )
 async def search(
     req: SearchEnvelope,
-    registry=Depends(_get_registry),
+    registry: dict[str, BaseProvider] = Depends(_get_registry),
 ) -> SearchReport:
     providers_map = pick_providers_by_tags(registry, req.tags, match=req.tag_match)
     providers_map = pick_named_providers(providers_map, req.providers)
@@ -67,7 +67,7 @@ async def search(
 )
 async def search_google(
     req: GoogleSearchEnvelope,
-    registry=Depends(_get_registry),
+    registry: dict[str, BaseProvider] = Depends(_get_registry),
 ) -> SearchReport:
     google_providers = pick_tagged_providers(registry, "google")
 
@@ -96,7 +96,7 @@ async def search_google(
 
 
 @router.get("/health", summary="Health check")
-async def health(registry=Depends(_get_registry)) -> dict:
+async def health(registry: dict[str, BaseProvider] = Depends(_get_registry)) -> dict:
     provider_names = sorted(registry.keys())
     return {
         "status": "ok",
@@ -113,7 +113,7 @@ async def health(registry=Depends(_get_registry)) -> dict:
 async def providers(
     tag: list[str] | None = Query(default=None),
     tag_match: Literal["any", "all"] = Query(default="any"),
-    registry=Depends(_get_registry),
+    registry: dict[str, BaseProvider] = Depends(_get_registry),
 ) -> dict:
     filtered = pick_providers_by_tags(registry, tag or [], match=tag_match)
 

@@ -18,7 +18,7 @@ class SearchHit(BaseModel):
     extra: dict[str, Any] = Field(default_factory=dict)
 
     @model_validator(mode="after")
-    def derive_source(self) -> "SearchHit":
+    def derive_source(self) -> SearchHit:
         if not self.source and self.url:
             from urllib.parse import urlparse
 

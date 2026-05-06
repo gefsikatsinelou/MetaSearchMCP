@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import asyncio
 import time
-from typing import Sequence
+from collections.abc import Sequence
 
 from metasearchmcp.config import get_settings
 from metasearchmcp.contracts import (
@@ -30,7 +30,7 @@ async def execute_provider_search(
         )
         latency_ms = (time.monotonic() - start) * 1000
         return provider.name, payload, latency_ms, None
-    except asyncio.TimeoutError:
+    except TimeoutError:
         latency_ms = (time.monotonic() - start) * 1000
         return provider.name, None, latency_ms, f"timeout after {timeout}s"
     except Exception as exc:

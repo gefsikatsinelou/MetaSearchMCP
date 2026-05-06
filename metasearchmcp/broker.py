@@ -43,13 +43,17 @@ _TOOLS = [
                 "tags": {
                     "type": "array",
                     "items": {"type": "string"},
-                    "description": "Optional provider tags used to narrow the provider set.",
+                    "description": (
+                        "Optional provider tags used to narrow the provider set."
+                    ),
                 },
                 "tag_match": {
                     "type": "string",
                     "enum": ["any", "all"],
                     "default": "any",
-                    "description": "Match providers with any requested tag or require all tags.",
+                    "description": (
+                        "Match providers with any requested tag or require all tags."
+                    ),
                 },
                 "num_results": {
                     "type": "integer",
@@ -62,7 +66,9 @@ _TOOLS = [
                     "default": 20,
                     "minimum": 1,
                     "maximum": 100,
-                    "description": "Cap the final merged result set returned to the agent.",
+                    "description": (
+                        "Cap the final merged result set returned to the agent."
+                    ),
                 },
                 "language": {"type": "string", "default": "en"},
                 "country": {"type": "string", "default": "us"},
@@ -153,7 +159,9 @@ _TOOLS = [
             "properties": {
                 "query": {
                     "type": "string",
-                    "description": "Ticker symbol or company name, e.g. 'AAPL' or 'Tesla'",
+                    "description": (
+                        "Ticker symbol or company name, e.g. 'AAPL' or 'Tesla'"
+                    ),
                 },
                 "num_results": {"type": "integer", "default": 10},
                 "max_total_results": {"type": "integer", "default": 20},
@@ -258,7 +266,11 @@ async def dispatch_tool(name: str, arguments: dict[str, Any]) -> dict[str, Any]:
             )
         if not selected:
             return {
-                "error": "No Google provider available. Enable ALLOW_UNSTABLE_PROVIDERS=true for direct Google, or set SERPBASE_API_KEY / SERPER_API_KEY.",
+                "error": (
+                    "No Google provider available. "
+                    "Enable ALLOW_UNSTABLE_PROVIDERS=true for direct Google, "
+                    "or set SERPBASE_API_KEY / SERPER_API_KEY."
+                ),
             }
         return (
             await run_search_plan(query, list(selected.values()), options)
@@ -318,7 +330,8 @@ async def dispatch_tool(name: str, arguments: dict[str, Any]) -> dict[str, Any]:
                 "error": (
                     "No finance providers available. "
                     "yahoo_finance is enabled by default; "
-                    "set ALPHA_VANTAGE_API_KEY or FINNHUB_API_KEY for additional providers."
+                    "set ALPHA_VANTAGE_API_KEY or FINNHUB_API_KEY "
+                    "for additional providers."
                 ),
             }
         return (
@@ -361,7 +374,8 @@ def run() -> None:
     ):
         print(
             "[MetaSearchMCP] No Google provider configured.\n"
-            f"  Set ALLOW_UNSTABLE_PROVIDERS=true for direct Google, or run 'metasearchmcp-setup' for SerpBase.\n"
+            "  Set ALLOW_UNSTABLE_PROVIDERS=true for direct Google, "
+            "or run 'metasearchmcp-setup' for SerpBase.\n"
             f"  SerpBase key dashboard: https://serpbase.dev/dashboard/api-keys\n"
             f"  Config file: {USER_CONFIG_FILE}",
             file=sys.stderr,

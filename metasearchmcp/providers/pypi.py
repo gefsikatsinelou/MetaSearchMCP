@@ -71,9 +71,10 @@ class PyPIProvider(BaseProvider):
                 if version:
                     snippet_parts.append(f"v{version}")
                 if keywords and keywords != [""]:
-                    snippet_parts.append(
-                        f"Keywords: {', '.join(k.strip() for k in keywords if k.strip())}",
+                    joined = ", ".join(
+                        k.strip() for k in keywords if k.strip()
                     )
+                    snippet_parts.append(f"Keywords: {joined}")
 
                 results.append(
                     SearchResult(

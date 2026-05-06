@@ -16,14 +16,20 @@ class CrossrefProvider(BaseProvider):
     """
 
     name = "crossref"
-    description = "Search scholarly metadata from Crossref covering journals, books, and conference papers."
+    description = (
+        "Search scholarly metadata from Crossref covering "
+        "journals, books, and conference papers."
+    )
     tags = ["academic", "web"]
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
         qp = {
             "query": query,
             "rows": min(params.num_results, self._max_results, 20),
-            "select": "DOI,title,abstract,author,container-title,published,URL,is-referenced-by-count,type",
+            "select": (
+                "DOI,title,abstract,author,container-title,"
+                "published,URL,is-referenced-by-count,type"
+            ),
             "mailto": "metasearchmcp@example.com",  # polite pool
         }
 

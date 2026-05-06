@@ -18,7 +18,10 @@ class SemanticScholarProvider(BaseProvider):
     """
 
     name = "semanticscholar"
-    description = "Search academic papers with AI-powered semantic understanding via Semantic Scholar."
+    description = (
+        "Search academic papers with AI-powered semantic "
+        "understanding via Semantic Scholar."
+    )
     tags = ["academic", "web"]
 
     def __init__(self) -> None:

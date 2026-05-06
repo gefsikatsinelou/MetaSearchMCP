@@ -103,7 +103,8 @@ class StartpageProvider(BaseProvider):
             or "ability to connect to Startpage has been suspended" in resp.text
         ):
             raise RuntimeError(
-                "Startpage temporarily suspended requests from this network (Error 883)",
+                "Startpage temporarily suspended requests "
+                "from this network (Error 883)",
             )
 
         if (

@@ -18,7 +18,10 @@ class AlphaVantageProvider(BaseProvider):
     """
 
     name = "alpha_vantage"
-    description = "Real-time and historical stock quotes, forex, and crypto data via Alpha Vantage API."
+    description = (
+        "Real-time and historical stock quotes, forex, "
+        "and crypto data via Alpha Vantage API."
+    )
     tags = ["finance", "stocks"]
 
     def __init__(self) -> None:

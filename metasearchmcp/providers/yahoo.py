@@ -86,7 +86,8 @@ class YahooProvider(BaseProvider):
             )
             if resp.status_code >= 500:
                 raise RuntimeError(
-                    f"Yahoo returned HTTP {resp.status_code}; request likely blocked upstream",
+                    f"Yahoo returned HTTP {resp.status_code}; "
+                    "request likely blocked upstream",
                 )
             resp.raise_for_status()
 

@@ -183,9 +183,8 @@ def test_search_google_route_prefers_first_available_provider(client):
     app = FastAPI()
     app.include_router(routes.router)
 
-    with patch.object(routes, "_catalog", catalog):
-        with TestClient(app) as test_client:
-            resp = test_client.post("/search/google", json={"query": "fastapi"})
+    with patch.object(routes, "_catalog", catalog), TestClient(app) as test_client:
+        resp = test_client.post("/search/google", json={"query": "fastapi"})
 
     assert resp.status_code == 200
     data = resp.json()
@@ -222,9 +221,8 @@ def client():
     app.include_router(routes.router)
 
     catalog = _fake_catalog()
-    with patch.object(routes, "_catalog", catalog):
-        with TestClient(app) as c:
-            yield c
+    with patch.object(routes, "_catalog", catalog), TestClient(app) as c:
+        yield c
 
 
 def test_providers_list_all(client):

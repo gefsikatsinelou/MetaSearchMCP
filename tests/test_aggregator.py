@@ -164,7 +164,7 @@ async def test_aggregate_uses_aggregator_timeout(monkeypatch):
     assert resp.results == []
     assert resp.providers[0].name == "slow"
     assert resp.providers[0].success is False
-    assert "timeout after 0.001s" == resp.providers[0].error
+    assert resp.providers[0].error == "timeout after 0.001s"
 
 
 @pytest.mark.asyncio

@@ -313,7 +313,7 @@ async def dispatch_tool(name: str, arguments: dict[str, Any]) -> dict[str, Any]:
         ]
         responses = await asyncio.gather(*jobs, return_exceptions=True)
         comparison: dict[str, Any] = {"query": query, "engines": {}}
-        for provider_name, response in zip(selected.keys(), responses):
+        for provider_name, response in zip(selected.keys(), responses, strict=True):
             if isinstance(response, Exception):
                 comparison["engines"][provider_name] = {"error": str(response)}
             else:

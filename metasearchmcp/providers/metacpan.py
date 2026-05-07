@@ -1,3 +1,5 @@
+"""MetaCPAN — CPAN Perl module search via the MetaCPAN API."""
+
 from __future__ import annotations
 
 import copy

@@ -1,3 +1,5 @@
+"""Baidu web search via the JSON result endpoint."""
+
 from __future__ import annotations
 
 import json

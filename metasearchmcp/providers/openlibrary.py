@@ -1,3 +1,5 @@
+"""Open Library search via the public search API."""
+
 from __future__ import annotations
 
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult

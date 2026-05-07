@@ -1,3 +1,5 @@
+"""Direct Google web search via HTML scraping."""
+
 from __future__ import annotations
 
 import re

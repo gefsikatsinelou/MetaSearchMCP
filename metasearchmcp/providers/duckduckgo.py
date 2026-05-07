@@ -1,3 +1,5 @@
+"""DuckDuckGo search via HTML scraping of the lite endpoint."""
+
 from __future__ import annotations
 
 from urllib.parse import parse_qs, urlparse

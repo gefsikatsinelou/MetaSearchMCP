@@ -1,3 +1,5 @@
+"""Brave Search via the official Web Search API."""
+
 from __future__ import annotations
 
 from metasearchmcp.config import get_settings

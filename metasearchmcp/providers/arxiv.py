@@ -1,3 +1,5 @@
+"""arXiv academic paper search via the public Atom API."""
+
 from __future__ import annotations
 
 import xml.etree.ElementTree as ET

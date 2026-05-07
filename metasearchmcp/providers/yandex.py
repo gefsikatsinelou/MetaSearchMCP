@@ -1,3 +1,5 @@
+"""Yandex web search via HTML scraping."""
+
 from __future__ import annotations
 
 from bs4 import BeautifulSoup

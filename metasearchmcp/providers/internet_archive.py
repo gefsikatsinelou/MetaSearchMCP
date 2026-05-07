@@ -1,3 +1,5 @@
+"""Internet Archive full-text search via the Advanced Search API."""
+
 from __future__ import annotations
 
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult

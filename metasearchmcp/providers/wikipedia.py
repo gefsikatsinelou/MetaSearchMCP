@@ -1,3 +1,5 @@
+"""Wikipedia full-text search via the MediaWiki Action API."""
+
 from __future__ import annotations
 
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult

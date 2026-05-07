@@ -1,3 +1,5 @@
+"""Google search via serper.dev API."""
+
 from __future__ import annotations
 
 from metasearchmcp.config import get_settings

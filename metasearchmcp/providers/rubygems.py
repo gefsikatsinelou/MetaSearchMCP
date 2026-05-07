@@ -1,3 +1,5 @@
+"""RubyGems package search via the public API."""
+
 from __future__ import annotations
 
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult

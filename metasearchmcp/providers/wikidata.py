@@ -1,3 +1,5 @@
+"""Wikidata entity search via the MediaWiki API."""
+
 from __future__ import annotations
 
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult

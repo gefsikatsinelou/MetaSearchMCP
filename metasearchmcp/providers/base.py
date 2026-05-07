@@ -1,3 +1,5 @@
+"""Abstract base for all search providers."""
+
 from __future__ import annotations
 
 from abc import ABC, abstractmethod

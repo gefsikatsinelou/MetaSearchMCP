@@ -1,3 +1,5 @@
+"""Startpage search via HTML scraping."""
+
 from __future__ import annotations
 
 from collections import OrderedDict

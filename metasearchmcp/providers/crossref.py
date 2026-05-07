@@ -1,3 +1,5 @@
+"""CrossRef scholarly metadata search via the public REST API."""
+
 from __future__ import annotations
 
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult

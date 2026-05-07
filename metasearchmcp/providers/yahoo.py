@@ -1,3 +1,5 @@
+"""Yahoo web search via HTML scraping with Yahoo's expected cookie flow."""
+
 from __future__ import annotations
 
 from urllib.parse import unquote

@@ -1,3 +1,5 @@
+"""Alpha Vantage stock search via the official SYMBOL_SEARCH endpoint."""
+
 from __future__ import annotations
 
 from metasearchmcp.config import get_settings

@@ -1,3 +1,5 @@
+"""PyPI package lookup via the JSON API."""
+
 from __future__ import annotations
 
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult

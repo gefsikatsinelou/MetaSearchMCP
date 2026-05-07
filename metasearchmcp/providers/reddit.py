@@ -1,3 +1,5 @@
+"""Reddit search via the official OAuth2 API."""
+
 from __future__ import annotations
 
 import base64

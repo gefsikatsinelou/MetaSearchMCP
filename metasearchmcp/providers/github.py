@@ -1,3 +1,5 @@
+"""GitHub repository search via the public REST API."""
+
 from __future__ import annotations
 
 from metasearchmcp.config import get_settings

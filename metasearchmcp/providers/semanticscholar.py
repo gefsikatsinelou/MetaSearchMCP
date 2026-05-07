@@ -1,3 +1,5 @@
+"""Semantic Scholar academic paper search via the public Graph API."""
+
 from __future__ import annotations
 
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult

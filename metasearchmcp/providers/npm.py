@@ -1,3 +1,5 @@
+"""npm package search via the npm registry API."""
+
 from __future__ import annotations
 
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult

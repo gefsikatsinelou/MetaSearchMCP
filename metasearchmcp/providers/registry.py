@@ -1,3 +1,5 @@
+"""Registry search provider."""
+
 from __future__ import annotations
 
 from metasearchmcp.config import get_settings

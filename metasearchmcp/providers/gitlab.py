@@ -1,3 +1,5 @@
+"""GitLab project search via the public GitLab REST API."""
+
 from __future__ import annotations
 
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult

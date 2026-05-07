@@ -1,3 +1,5 @@
+"""Yahoo Finance stock & ETF search via the unofficial JSON endpoint."""
+
 from __future__ import annotations
 
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult

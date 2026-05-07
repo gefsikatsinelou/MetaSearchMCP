@@ -1,3 +1,5 @@
+"""PubMed biomedical literature search via NCBI E-utilities."""
+
 from __future__ import annotations
 
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult

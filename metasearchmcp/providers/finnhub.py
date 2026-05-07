@@ -1,3 +1,5 @@
+"""Finnhub stock search via the official API."""
+
 from __future__ import annotations
 
 from metasearchmcp.config import get_settings

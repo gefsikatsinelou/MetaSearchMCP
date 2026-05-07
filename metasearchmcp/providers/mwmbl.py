@@ -1,3 +1,5 @@
+"""Mwmbl — non-profit, open-source web search engine."""
+
 from __future__ import annotations
 
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult

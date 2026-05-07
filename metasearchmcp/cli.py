@@ -27,8 +27,8 @@ def load_config() -> dict[str, str]:
     env: dict[str, str] = {}
     if not USER_CONFIG_FILE.exists():
         return env
-    for line in USER_CONFIG_FILE.read_text(encoding="utf-8").splitlines():
-        line = line.strip()
+    for raw_line in USER_CONFIG_FILE.read_text(encoding="utf-8").splitlines():
+        line = raw_line.strip()
         if line and not line.startswith("#") and "=" in line:
             k, _, v = line.partition("=")
             env[k.strip()] = v.strip()

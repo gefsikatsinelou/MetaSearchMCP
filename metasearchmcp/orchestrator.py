@@ -1,3 +1,5 @@
+"""Search orchestrator: execute queries across providers and merge results."""
+
 from __future__ import annotations
 
 import asyncio

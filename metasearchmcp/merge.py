@@ -1,8 +1,13 @@
+"""URL canonicalization and result deduplication utilities."""
+
 from __future__ import annotations
+
+from typing import TYPE_CHECKING
 
 from urllib.parse import parse_qsl, urlencode, urlparse, urlunparse
 
-from metasearchmcp.contracts import SearchHit
+if TYPE_CHECKING:
+    from metasearchmcp.contracts import SearchHit
 
 _DEFAULT_PORTS = {"http": "80", "https": "443"}
 _TRACKING_QUERY_KEYS = {

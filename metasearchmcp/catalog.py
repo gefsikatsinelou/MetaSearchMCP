@@ -1,6 +1,12 @@
+"""Provider catalog: build and filter the registry of search providers."""
+
 from __future__ import annotations
 
-from metasearchmcp.providers.base import BaseProvider
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from metasearchmcp.providers.base import BaseProvider
+
 from metasearchmcp.providers.registry import build_registry
 
 
@@ -64,6 +70,7 @@ def pick_providers_by_tags(
 
     Returns:
         A sub-catalog containing only the matching providers.
+
     """
     requested_tags = _normalize_requested_values(tags)
     if not requested_tags:

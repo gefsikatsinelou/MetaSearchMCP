@@ -1,5 +1,6 @@
 """Parse/unit tests for the five new providers: mwmbl, gitlab, metacpan,
-pkg_go_dev, lib_rs."""
+pkg_go_dev, lib_rs.
+"""
 
 from __future__ import annotations
 

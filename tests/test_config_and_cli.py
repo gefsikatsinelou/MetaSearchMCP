@@ -170,7 +170,7 @@ def test_setup_saves_validated_key(monkeypatch):
         "USER_CONFIG_FILE",
         SimpleNamespace(exists=lambda: False, __str__=lambda self: "config.env"),
     )
-    monkeypatch.setattr(cli, "load_config", lambda: {})
+    monkeypatch.setattr(cli, "load_config", dict)
     monkeypatch.setattr("builtins.input", lambda prompt="": next(answers))
     monkeypatch.setattr(cli, "validate_serpbase_key", lambda key: True)
     monkeypatch.setattr(cli, "save_config", lambda env: saved.update(env))
@@ -189,7 +189,7 @@ def test_setup_aborts_when_key_empty(monkeypatch):
         "USER_CONFIG_FILE",
         SimpleNamespace(exists=lambda: False, __str__=lambda self: "config.env"),
     )
-    monkeypatch.setattr(cli, "load_config", lambda: {})
+    monkeypatch.setattr(cli, "load_config", dict)
     monkeypatch.setattr("builtins.input", lambda prompt="": "")
 
     with pytest.raises(SystemExit) as exc_info:
@@ -208,7 +208,7 @@ def test_setup_aborts_when_validation_fails_and_user_declines(monkeypatch):
         "USER_CONFIG_FILE",
         SimpleNamespace(exists=lambda: False, __str__=lambda self: "config.env"),
     )
-    monkeypatch.setattr(cli, "load_config", lambda: {})
+    monkeypatch.setattr(cli, "load_config", dict)
     monkeypatch.setattr("builtins.input", lambda prompt="": next(answers))
     monkeypatch.setattr(cli, "validate_serpbase_key", lambda key: False)
 

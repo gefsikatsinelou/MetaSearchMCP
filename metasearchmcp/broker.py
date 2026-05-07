@@ -13,6 +13,7 @@ from mcp.server import Server
 from mcp.server.lowlevel.server import NotificationOptions
 from mcp.server.models import InitializationOptions
 
+from metasearchmcp import __version__
 from metasearchmcp.catalog import (
     build_provider_catalog,
     pick_named_providers,
@@ -352,7 +353,7 @@ async def dispatch_tool(name: str, arguments: dict[str, Any]) -> dict[str, Any]:
 async def _main() -> None:
     options = InitializationOptions(
         server_name="MetaSearchMCP",
-        server_version="0.1.0",
+        server_version=__version__,
         capabilities=server.get_capabilities(
             notification_options=NotificationOptions(),
             experimental_capabilities={},

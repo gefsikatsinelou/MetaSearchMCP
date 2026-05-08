@@ -11,6 +11,8 @@ USER_CONFIG_FILE = USER_CONFIG_DIR / "config.env"
 
 
 class Settings(BaseSettings):
+    """Application settings loaded from environment variables and .env files."""
+
     model_config = SettingsConfigDict(
         # User config (~/.metasearchmcp/config.env) is the base;
         # a local .env in the working directory overrides it.

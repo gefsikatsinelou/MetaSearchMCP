@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import TYPE_CHECKING
+
 from metasearchmcp.config import get_settings
 
 from .alpha_vantage import AlphaVantageProvider
@@ -9,7 +11,6 @@ from .alpha_vantage import AlphaVantageProvider
 # Academic
 from .arxiv import ArxivProvider
 from .baidu import BaiduProvider
-from .base import BaseProvider
 from .bing import BingProvider
 
 # Web search — API
@@ -57,6 +58,9 @@ from .yahoo import YahooProvider
 # Finance
 from .yahoo_finance import YahooFinanceProvider
 from .yandex import YandexProvider
+
+if TYPE_CHECKING:
+    from .base import BaseProvider
 
 # Ordered list of all provider classes.
 # Order matters: within a tag group, earlier providers take priority in dedup.

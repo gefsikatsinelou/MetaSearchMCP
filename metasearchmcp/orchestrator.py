@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import asyncio
 import time
-from collections.abc import Sequence
+from typing import TYPE_CHECKING
 
 from metasearchmcp.config import get_settings
 from metasearchmcp.contracts import (
@@ -14,7 +14,11 @@ from metasearchmcp.contracts import (
     SearchReport,
 )
 from metasearchmcp.merge import collapse_duplicate_hits
-from metasearchmcp.providers.base import BaseProvider
+
+if TYPE_CHECKING:
+    from collections.abc import Sequence
+
+    from metasearchmcp.providers.base import BaseProvider
 
 
 async def execute_provider_search(

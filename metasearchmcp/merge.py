@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 from typing import TYPE_CHECKING
-
 from urllib.parse import parse_qsl, urlencode, urlparse, urlunparse
 
 if TYPE_CHECKING:

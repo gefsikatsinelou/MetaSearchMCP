@@ -3,15 +3,19 @@
 from __future__ import annotations
 
 from abc import ABC, abstractmethod
+from typing import TYPE_CHECKING
 
 import httpx
 
+from metasearchmcp import __version__
 from metasearchmcp.config import get_settings
-from metasearchmcp.contracts import ProviderResult, SearchParams
+
+if TYPE_CHECKING:
+    from metasearchmcp.contracts import ProviderResult, SearchParams
 
 PROJECT_URL = "https://github.com/gefsikatsinelou/MetaSearchMCP"
-API_USER_AGENT = f"metasearchmcp/0.1 (metasearch; +{PROJECT_URL})"
-BOT_USER_AGENT = f"metasearchmcp/0.1 (metasearch bot; +{PROJECT_URL})"
+API_USER_AGENT = f"metasearchmcp/{__version__} (metasearch; +{PROJECT_URL})"
+BOT_USER_AGENT = f"metasearchmcp/{__version__} (metasearch bot; +{PROJECT_URL})"
 
 
 class BaseProvider(ABC):

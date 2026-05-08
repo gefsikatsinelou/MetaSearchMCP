@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Literal
+from typing import Literal, TYPE_CHECKING
 
 from fastapi import APIRouter, Depends, HTTPException, Query
 
@@ -19,7 +19,9 @@ from metasearchmcp.contracts import (
     SearchReport,
 )
 from metasearchmcp.orchestrator import run_search_plan
-from metasearchmcp.providers.base import BaseProvider
+
+if TYPE_CHECKING:
+    from metasearchmcp.providers.base import BaseProvider
 
 router = APIRouter()
 

@@ -1,3 +1,5 @@
+"""Tests for configuration model and CLI helpers."""
+
 from __future__ import annotations
 
 import shutil

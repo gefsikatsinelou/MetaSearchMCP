@@ -1,3 +1,5 @@
+"""Tests for broker tool runtime behaviour."""
+
 from __future__ import annotations
 
 import json

@@ -1,3 +1,5 @@
+"""Tests for the Qwant provider HTML parser."""
+
 from __future__ import annotations
 
 

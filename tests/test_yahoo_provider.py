@@ -1,3 +1,5 @@
+"""Tests for the Yahoo provider HTML parser."""
+
 from __future__ import annotations
 
 

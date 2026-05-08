@@ -1,3 +1,5 @@
+"""Tests for the Startpage provider utilities."""
+
 from __future__ import annotations
 
 

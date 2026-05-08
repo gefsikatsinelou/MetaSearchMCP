@@ -1,3 +1,5 @@
+"""Tests for provider catalog filtering utilities."""
+
 from __future__ import annotations
 
 from types import SimpleNamespace

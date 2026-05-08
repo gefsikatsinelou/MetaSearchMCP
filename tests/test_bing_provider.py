@@ -1,3 +1,5 @@
+"""Tests for the Bing provider RSS parser."""
+
 from __future__ import annotations
 
 

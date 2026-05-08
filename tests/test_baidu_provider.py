@@ -1,3 +1,5 @@
+"""Tests for the Baidu provider parser."""
+
 from __future__ import annotations
 
 
@@ -26,3 +28,4 @@ def test_baidu_parse_json():
     assert item.title == "Python asyncio official docs"
     assert item.url == "https://docs.python.org/3/library/asyncio.html"
     assert item.provider == "baidu"
+

@@ -1,3 +1,5 @@
+"""Tests for API route helpers and health endpoint."""
+
 from __future__ import annotations
 
 from types import SimpleNamespace

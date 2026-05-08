@@ -27,6 +27,7 @@ class BaseProvider(ABC):
     tags: list[str] = []
 
     def __init__(self) -> None:
+        """Initialize provider with settings-derived timeout and max results."""
         settings = get_settings()
         self._timeout = settings.default_timeout
         self._max_results = settings.max_results_per_provider
@@ -72,4 +73,5 @@ class BaseProvider(ABC):
         return True
 
     def __repr__(self) -> str:
+        """Return a developer-friendly representation of the provider."""
         return f"<Provider name={self.name!r}>"

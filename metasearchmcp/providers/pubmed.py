@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from metasearchmcp.config import get_settings
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
 
 from .base import BaseProvider
@@ -25,8 +26,6 @@ class PubMedProvider(BaseProvider):
 
     def __init__(self) -> None:
         super().__init__()
-        from metasearchmcp.config import get_settings
-
         settings = get_settings()
         self._api_key: str = getattr(settings, "ncbi_api_key", "")
 

@@ -20,6 +20,7 @@ from metasearchmcp.catalog import (
     pick_providers_by_tags,
     pick_tagged_providers,
 )
+from metasearchmcp.config import USER_CONFIG_FILE, get_settings
 from metasearchmcp.contracts import SearchOptions
 from metasearchmcp.orchestrator import run_search_plan
 
@@ -365,8 +366,6 @@ async def _main() -> None:
 
 def run() -> None:
     """Start the MCP server over stdio."""
-    from metasearchmcp.config import USER_CONFIG_FILE, get_settings
-
     settings = get_settings()
     if not (
         settings.allow_unstable_providers

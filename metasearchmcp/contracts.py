@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from typing import Any, Literal
+from urllib.parse import urlparse
 
 from pydantic import BaseModel, Field, model_validator
 
@@ -23,8 +24,6 @@ class SearchHit(BaseModel):
     def derive_source(self) -> SearchHit:
         """Derive the source domain from the URL when not explicitly set."""
         if not self.source and self.url:
-            from urllib.parse import urlparse
-
             self.source = urlparse(self.url).netloc or ""
         return self
 

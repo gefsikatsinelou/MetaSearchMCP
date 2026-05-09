@@ -2,11 +2,14 @@
 
 from __future__ import annotations
 
+import re
+
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
 
 from .base import BaseProvider
 
 _API_URL = "https://api.crossref.org/works"
+_MAX_DISPLAY_AUTHORS = 3
 
 
 class CrossrefProvider(BaseProvider):
@@ -55,16 +58,14 @@ class CrossrefProvider(BaseProvider):
 
             abstract = (item.get("abstract") or "")[:400]
             # CrossRef abstracts sometimes include JATS XML tags
-            import re
-
             abstract = re.sub(r"<[^>]+>", "", abstract).strip()
 
             authors_raw = item.get("author", [])
             authors = [
                 f"{a.get('given', '')} {a.get('family', '')}".strip()
-                for a in authors_raw[:3]
+                for a in authors_raw[:_MAX_DISPLAY_AUTHORS]
             ]
-            if len(authors_raw) > 3:
+            if len(authors_raw) > _MAX_DISPLAY_AUTHORS:
                 authors.append("et al.")
 
             container = (item.get("container-title") or [""])[0]

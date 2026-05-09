@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import base64
+import datetime
 
 import httpx
 
@@ -96,8 +97,6 @@ class RedditProvider(BaseProvider):
 
             published = None
             if created:
-                import datetime
-
                 published = datetime.datetime.fromtimestamp(
                     created,
                     tz=datetime.UTC,

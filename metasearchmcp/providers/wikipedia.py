@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import re
+
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
 
 from .base import BaseProvider
@@ -69,6 +71,4 @@ class BeautifulSoupStrip:
 
     @staticmethod
     def strip(html: str) -> str:
-        import re
-
         return re.sub(r"<[^>]+>", "", html).strip()

@@ -341,8 +341,9 @@ async def test_dispatch_search_web_passes_safe_search():
         return await original_run_search_plan(query, providers, options)
 
     catalog = _fake_catalog()
-    with patch.object(broker, "_catalog", catalog), patch.object(
-        broker, "run_search_plan", _capture_run_search_plan
+    with (
+        patch.object(broker, "_catalog", catalog),
+        patch.object(broker, "run_search_plan", _capture_run_search_plan),
     ):
         result = await broker.dispatch_tool(
             "search_web",
@@ -375,8 +376,9 @@ async def test_dispatch_search_google_passes_safe_search():
             "SerpBase",
         ),
     }
-    with patch.object(broker, "_catalog", catalog), patch.object(
-        broker, "run_search_plan", _capture_run_search_plan
+    with (
+        patch.object(broker, "_catalog", catalog),
+        patch.object(broker, "run_search_plan", _capture_run_search_plan),
     ):
         result = await broker.dispatch_tool(
             "search_google",

@@ -50,7 +50,7 @@ async def test_call_tool_serializes_success_payload():
 
 
 def test_run_warns_when_serpbase_missing(monkeypatch, capsys):
-    from metasearchmcp import broker, config
+    from metasearchmcp import broker
 
     class FakeSettings:
         allow_unstable_providers = False

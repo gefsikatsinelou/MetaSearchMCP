@@ -2,12 +2,17 @@
 
 from __future__ import annotations
 
+import logging
+
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
 
 from .base import BaseProvider
 
+logger = logging.getLogger(__name__)
+
 _JSON_API = "https://pypi.org/pypi/{name}/json"
 _SEARCH_URL = "https://pypi.org/search/"
+_HTTP_OK = 200
 
 
 class PyPIProvider(BaseProvider):
@@ -52,10 +57,11 @@ class PyPIProvider(BaseProvider):
                 seen.add(name)
                 try:
                     resp = await client.get(_JSON_API.format(name=name))
-                    if resp.status_code != 200:
+                    if resp.status_code != _HTTP_OK:
                         continue
                     data = resp.json()
                 except Exception:
+                    logger.exception("PyPI lookup failed for %s", name)
                     continue
 
                 info = data.get("info", {})

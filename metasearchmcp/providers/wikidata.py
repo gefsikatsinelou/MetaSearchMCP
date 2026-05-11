@@ -54,7 +54,9 @@ class WikidataProvider(BaseProvider):
 
             snippet_parts = [description]
             if aliases:
-                snippet_parts.append(f"Also known as: {', '.join(aliases[:_MAX_ALIASES_SHOWN])}")
+                snippet_parts.append(
+                    f"Also known as: {', '.join(aliases[:_MAX_ALIASES_SHOWN])}"
+                )
 
             results.append(
                 SearchResult(

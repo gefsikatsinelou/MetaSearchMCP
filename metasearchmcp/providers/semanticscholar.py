@@ -9,6 +9,7 @@ from .base import BaseProvider
 
 _API_URL = "https://api.semanticscholar.org/graph/v1/paper/search"
 _FIELDS = "paperId,title,abstract,year,authors,url,externalIds,venue,citationCount"
+_MAX_AUTHORS_SHOWN = 3
 
 
 class SemanticScholarProvider(BaseProvider):
@@ -63,8 +64,8 @@ class SemanticScholarProvider(BaseProvider):
             citations = paper.get("citationCount", 0)
 
             authors_raw = paper.get("authors", [])
-            authors = [a.get("name", "") for a in authors_raw[:3]]
-            if len(authors_raw) > 3:
+            authors = [a.get("name", "") for a in authors_raw[:_MAX_AUTHORS_SHOWN]]
+            if len(authors_raw) > _MAX_AUTHORS_SHOWN:
                 authors.append("et al.")
 
             # Prefer DOI URL, fall back to S2 URL

@@ -9,6 +9,7 @@ from .base import BaseProvider
 
 _ESEARCH_URL = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi"
 _ESUMMARY_URL = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi"
+_MAX_AUTHORS_SHOWN = 3
 
 
 class PubMedProvider(BaseProvider):
@@ -79,8 +80,8 @@ class PubMedProvider(BaseProvider):
             pub_date = item.get("pubdate", "")[:10]
             journal = item.get("source", "")
             authors_raw = item.get("authors", [])
-            authors = [a.get("name", "") for a in authors_raw[:3]]
-            if len(authors_raw) > 3:
+            authors = [a.get("name", "") for a in authors_raw[:_MAX_AUTHORS_SHOWN]]
+            if len(authors_raw) > _MAX_AUTHORS_SHOWN:
                 authors.append("et al.")
 
             url = f"https://pubmed.ncbi.nlm.nih.gov/{pmid}/"

@@ -7,6 +7,7 @@ from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
 from .base import BaseProvider
 
 _API_URL = "https://openlibrary.org/search.json"
+_MAX_DISPLAY_ITEMS = 3
 
 
 class OpenLibraryProvider(BaseProvider):
@@ -47,13 +48,13 @@ class OpenLibraryProvider(BaseProvider):
 
             snippet_parts = []
             if authors:
-                snippet_parts.append(", ".join(authors[:3]))
+                snippet_parts.append(", ".join(authors[:_MAX_DISPLAY_ITEMS]))
             if year:
                 snippet_parts.append(f"First published: {year}")
             if edition_count:
                 snippet_parts.append(f"Editions: {edition_count}")
             if languages:
-                snippet_parts.append(f"Languages: {', '.join(languages[:3])}")
+                snippet_parts.append(f"Languages: {', '.join(languages[:_MAX_DISPLAY_ITEMS])}")
 
             results.append(
                 SearchResult(

@@ -14,6 +14,7 @@ from .base import BOT_USER_AGENT, BaseProvider
 
 _TOKEN_URL = "https://www.reddit.com/api/v1/access_token"
 _SEARCH_URL = "https://oauth.reddit.com/search.json"
+_MAX_SELFTEXT_LENGTH = 200
 
 
 class RedditProvider(BaseProvider):
@@ -92,7 +93,7 @@ class RedditProvider(BaseProvider):
             subreddit = post.get("subreddit_name_prefixed", "")
             score = post.get("score", 0)
             comments = post.get("num_comments", 0)
-            selftext = (post.get("selftext") or "")[:200]
+            selftext = (post.get("selftext") or "")[:_MAX_SELFTEXT_LENGTH]
             created = post.get("created_utc")
 
             published = None

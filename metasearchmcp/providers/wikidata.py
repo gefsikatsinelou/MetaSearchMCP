@@ -7,6 +7,7 @@ from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
 from .base import BOT_USER_AGENT, BaseProvider
 
 _API_URL = "https://www.wikidata.org/w/api.php"
+_MAX_ALIASES_SHOWN = 3
 
 
 class WikidataProvider(BaseProvider):
@@ -53,7 +54,7 @@ class WikidataProvider(BaseProvider):
 
             snippet_parts = [description]
             if aliases:
-                snippet_parts.append(f"Also known as: {', '.join(aliases[:3])}")
+                snippet_parts.append(f"Also known as: {', '.join(aliases[:_MAX_ALIASES_SHOWN])}")
 
             results.append(
                 SearchResult(

@@ -29,7 +29,9 @@ class GitHubProvider(BaseProvider):
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
         qp = {
             "q": query,
-            "per_page": str(min(params.num_results, self._max_results, _MAX_API_RESULTS)),
+            "per_page": str(
+                min(params.num_results, self._max_results, _MAX_API_RESULTS)
+            ),
             "sort": "best-match",
         }
         headers: dict[str, str] = {"Accept": "application/vnd.github+json"}

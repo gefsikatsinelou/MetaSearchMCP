@@ -8,6 +8,7 @@ from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
 from .base import BaseProvider
 
 _API_URL = "https://api.github.com/search/repositories"
+_MAX_API_RESULTS = 30
 
 
 class GitHubProvider(BaseProvider):
@@ -28,7 +29,7 @@ class GitHubProvider(BaseProvider):
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
         qp = {
             "q": query,
-            "per_page": str(min(params.num_results, self._max_results, 30)),
+            "per_page": str(min(params.num_results, self._max_results, _MAX_API_RESULTS)),
             "sort": "best-match",
         }
         headers: dict[str, str] = {"Accept": "application/vnd.github+json"}

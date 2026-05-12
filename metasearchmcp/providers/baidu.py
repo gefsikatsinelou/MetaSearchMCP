@@ -11,6 +11,7 @@ from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
 from .base import BaseProvider
 
 _SEARCH_URL = "https://www.baidu.com/s"
+_MAX_API_RESULTS = 10
 
 
 class BaiduProvider(BaseProvider):
@@ -31,7 +32,7 @@ class BaiduProvider(BaseProvider):
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
         qp = {
             "wd": query,
-            "rn": min(params.num_results, self._max_results, 10),
+            "rn": min(params.num_results, self._max_results, _MAX_API_RESULTS),
             "pn": 0,
             "tn": "json",
         }

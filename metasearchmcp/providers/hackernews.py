@@ -7,6 +7,7 @@ from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
 from .base import BaseProvider
 
 _API_URL = "https://hn.algolia.com/api/v1/search"
+_MAX_API_RESULTS = 30
 
 
 class HackerNewsProvider(BaseProvider):
@@ -22,7 +23,7 @@ class HackerNewsProvider(BaseProvider):
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
         qp = {
             "query": query,
-            "hitsPerPage": min(params.num_results, self._max_results, 30),
+            "hitsPerPage": min(params.num_results, self._max_results, _MAX_API_RESULTS),
             "tags": "story",
         }
 

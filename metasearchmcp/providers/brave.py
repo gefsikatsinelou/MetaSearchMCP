@@ -8,6 +8,7 @@ from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
 from .base import BaseProvider
 
 _API_URL = "https://api.search.brave.com/res/v1/web/search"
+_MAX_API_RESULTS = 20
 
 
 class BraveProvider(BaseProvider):
@@ -45,7 +46,7 @@ class BraveProvider(BaseProvider):
         country_code = self._country_code(params.country)
         qp = {
             "q": query,
-            "count": str(min(params.num_results, self._max_results, 20)),
+            "count": str(min(params.num_results, self._max_results, _MAX_API_RESULTS)),
             "search_lang": language_code,
             "country": country_code,
         }

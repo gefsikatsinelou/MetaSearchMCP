@@ -8,6 +8,7 @@ from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
 from .base import BaseProvider
 
 _API_URL = "https://api.stackexchange.com/2.3/search/advanced"
+_MAX_API_RESULTS = 30
 
 
 class StackOverflowProvider(BaseProvider):
@@ -31,7 +32,7 @@ class StackOverflowProvider(BaseProvider):
         qp: dict = {
             "q": query,
             "site": "stackoverflow",
-            "pagesize": min(params.num_results, self._max_results, 30),
+            "pagesize": min(params.num_results, self._max_results, _MAX_API_RESULTS),
             "order": "desc",
             "sort": "relevance",
             "filter": "default",

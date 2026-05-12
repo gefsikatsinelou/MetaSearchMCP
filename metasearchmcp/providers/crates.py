@@ -7,6 +7,7 @@ from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
 from .base import API_USER_AGENT, BaseProvider
 
 _API_URL = "https://crates.io/api/v1/crates"
+_MAX_API_RESULTS = 10
 
 
 class CratesIoProvider(BaseProvider):
@@ -22,7 +23,7 @@ class CratesIoProvider(BaseProvider):
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
         qp = {
             "q": query,
-            "per_page": min(params.num_results, self._max_results, 10),
+            "per_page": min(params.num_results, self._max_results, _MAX_API_RESULTS),
         }
         # crates.io requires a descriptive User-Agent
         headers = {

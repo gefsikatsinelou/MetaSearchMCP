@@ -27,13 +27,16 @@ class AlphaVantageProvider(BaseProvider):
     tags = ["finance", "stocks"]
 
     def __init__(self) -> None:
+        """Initialize provider and load the Alpha Vantage API key."""
         super().__init__()
         self._api_key = get_settings().alpha_vantage_api_key
 
     def is_available(self) -> bool:
+        """Return True when an Alpha Vantage API key is configured."""
         return bool(self._api_key)
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
+        """Search for stock symbols matching *query* via Alpha Vantage."""
         async with self._client() as client:
             resp = await client.get(
                 _BASE_URL,

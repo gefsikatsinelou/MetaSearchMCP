@@ -26,13 +26,16 @@ class FinnhubProvider(BaseProvider):
     tags = ["finance", "stocks"]
 
     def __init__(self) -> None:
+        """Initialize provider and load the Finnhub API key."""
         super().__init__()
         self._api_key = get_settings().finnhub_api_key
 
     def is_available(self) -> bool:
+        """Return True when a Finnhub API key is configured."""
         return bool(self._api_key)
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
+        """Search for stock symbols matching *query* via Finnhub."""
         async with self._client() as client:
             resp = await client.get(
                 f"{_BASE_URL}/search",

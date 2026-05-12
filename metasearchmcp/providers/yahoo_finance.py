@@ -35,6 +35,7 @@ class YahooFinanceProvider(BaseProvider):
     tags = ["finance", "stocks"]
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
+        """Search for stock tickers and company names via Yahoo Finance."""
         num = min(params.num_results, self._max_results, 20)
 
         async with self._client() as client:

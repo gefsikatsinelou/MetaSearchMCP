@@ -26,6 +26,7 @@ class ArxivProvider(BaseProvider):
     tags = ["academic", "web"]
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
+        """Search arXiv for papers matching *query*."""
         qp = {
             "search_query": f"all:{query}",
             "max_results": str(min(params.num_results, self._max_results)),

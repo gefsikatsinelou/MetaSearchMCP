@@ -27,9 +27,11 @@ class BaiduProvider(BaseProvider):
     tags = ["web"]
 
     def is_available(self) -> bool:
+        """Return whether Baidu is enabled via unstable-provider flag."""
         return get_settings().allow_unstable_providers
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
+        """Search Baidu for *query* via the JSON endpoint."""
         qp = {
             "wd": query,
             "rn": min(params.num_results, self._max_results, _MAX_API_RESULTS),

@@ -31,6 +31,7 @@ class PubMedProvider(BaseProvider):
         self._api_key: str = getattr(settings, "ncbi_api_key", "")
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
+        """Search PubMed biomedical literature for *query*."""
         limit = min(params.num_results, self._max_results, 10)
 
         # Step 1: ESearch — get PMIDs

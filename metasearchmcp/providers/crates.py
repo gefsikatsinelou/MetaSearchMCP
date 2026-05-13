@@ -21,6 +21,7 @@ class CratesIoProvider(BaseProvider):
     tags = ["web", "code", "developer", "packages"]
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
+        """Search crates.io for Rust packages matching *query*."""
         qp = {
             "q": query,
             "per_page": min(params.num_results, self._max_results, _MAX_API_RESULTS),

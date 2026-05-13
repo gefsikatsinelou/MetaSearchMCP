@@ -22,6 +22,7 @@ class WikipediaProvider(BaseProvider):
     tags = ["web", "academic", "knowledge"]
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
+        """Search Wikipedia articles for *query*."""
         qp = {
             "action": "query",
             "list": "search",
@@ -71,4 +72,5 @@ class BeautifulSoupStrip:
 
     @staticmethod
     def strip(html: str) -> str:
+        """Remove HTML tags from *html* and return plain text."""
         return re.sub(r"<[^>]+>", "", html).strip()

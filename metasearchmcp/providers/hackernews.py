@@ -21,6 +21,7 @@ class HackerNewsProvider(BaseProvider):
     tags = ["web", "developer", "news"]
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
+        """Search Hacker News stories for *query* via Algolia."""
         qp = {
             "query": query,
             "hitsPerPage": min(params.num_results, self._max_results, _MAX_API_RESULTS),

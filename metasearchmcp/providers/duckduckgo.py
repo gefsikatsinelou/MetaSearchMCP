@@ -34,6 +34,7 @@ class DuckDuckGoProvider(BaseProvider):
         return region or "US"
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
+        """Search DuckDuckGo for *query* via the HTML endpoint."""
         language_code = self._language_code(params.language)
         country_code = self._country_code(params.country)
         qp = {

@@ -35,6 +35,7 @@ class PyPIProvider(BaseProvider):
     tags = ["web", "code", "developer", "packages"]
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
+        """Search PyPI for Python packages matching *query*."""
         # Candidate names to probe: whole query + individual tokens
         candidates: list[str] = []
         slug = query.strip().lower().replace(" ", "-")

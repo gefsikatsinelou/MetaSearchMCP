@@ -27,6 +27,7 @@ class GitHubProvider(BaseProvider):
         self._token = get_settings().github_token
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
+        """Search GitHub repositories for *query*."""
         qp = {
             "q": query,
             "per_page": str(

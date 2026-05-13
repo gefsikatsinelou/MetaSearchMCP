@@ -29,6 +29,7 @@ class StackOverflowProvider(BaseProvider):
         self._api_key: str = getattr(settings, "stackexchange_api_key", "")
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
+        """Search Stack Overflow questions for *query*."""
         qp: dict = {
             "q": query,
             "site": "stackoverflow",

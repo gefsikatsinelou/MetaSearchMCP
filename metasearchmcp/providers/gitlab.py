@@ -21,6 +21,7 @@ class GitLabProvider(BaseProvider):
     tags = ["web", "code", "developer", "repos"]
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
+        """Search GitLab projects for *query*."""
         async with self._client() as client:
             resp = await client.get(
                 f"{_BASE_URL}/{_API_PATH}",

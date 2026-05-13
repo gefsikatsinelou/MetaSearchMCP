@@ -22,6 +22,7 @@ class WikidataProvider(BaseProvider):
     tags = ["web", "academic", "knowledge"]
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
+        """Search Wikidata entities for *query*."""
         qp = {
             "action": "wbsearchentities",
             "search": query,

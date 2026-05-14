@@ -37,6 +37,7 @@ class GoogleSerpbaseProvider(BaseProvider):
         normalized = (country or "us").strip().replace("_", "-")
         region = normalized.rsplit("-", 1)[-1].lower()
         return region or "us"
+
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
         """Search Google for *query* via the Serpbase API."""
         language_code = self._language_code(params.language)

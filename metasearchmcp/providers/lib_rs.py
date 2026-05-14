@@ -23,6 +23,7 @@ class LibRsProvider(BaseProvider):
     tags = ["web", "code", "developer", "packages"]
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
+        """Search lib.rs for *query* and return Rust crate results."""
         async with self._scraper_client() as client:
             resp = await client.get(
                 f"{_BASE_URL}/search",

@@ -23,6 +23,7 @@ class InternetArchiveProvider(BaseProvider):
     tags = ["web", "academic", "knowledge"]
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
+        """Search Internet Archive for *query* and return archived items."""
         qp = {
             "q": query,
             "fl[]": [

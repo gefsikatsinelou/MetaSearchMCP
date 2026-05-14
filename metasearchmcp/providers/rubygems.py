@@ -17,6 +17,7 @@ class RubyGemsProvider(BaseProvider):
     tags = ["web", "code", "developer", "packages"]
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
+        """Search RubyGems for *query* and return gem results."""
         qp = {
             "query": query,
         }

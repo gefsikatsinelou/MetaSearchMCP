@@ -20,6 +20,7 @@ class NpmProvider(BaseProvider):
     tags = ["web", "code", "developer", "packages"]
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
+        """Search npm for *query* and return package results."""
         qp = {
             "text": query,
             "size": min(params.num_results, self._max_results, 20),

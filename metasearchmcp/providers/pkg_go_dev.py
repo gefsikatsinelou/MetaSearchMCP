@@ -22,6 +22,7 @@ class PkgGoDevProvider(BaseProvider):
     tags = ["web", "code", "developer", "packages"]
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
+        """Search pkg.go.dev for *query* and return Go package results."""
         async with self._scraper_client() as client:
             resp = await client.get(
                 f"{_BASE_URL}/search",

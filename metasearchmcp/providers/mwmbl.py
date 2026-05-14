@@ -20,6 +20,7 @@ class MwmblProvider(BaseProvider):
     tags = ["web", "general"]
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
+        """Search Mwmbl for *query* and return web results."""
         async with self._client() as client:
             resp = await client.get(_API_URL, params={"s": query})
             resp.raise_for_status()

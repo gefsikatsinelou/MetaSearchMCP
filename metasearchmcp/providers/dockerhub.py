@@ -17,6 +17,7 @@ class DockerHubProvider(BaseProvider):
     tags = ["web", "code", "developer", "containers"]
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
+        """Search Docker Hub for *query* and return image results."""
         qp = {
             "query": query,
             "page_size": min(params.num_results, self._max_results, 25),

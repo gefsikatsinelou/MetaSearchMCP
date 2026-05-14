@@ -20,6 +20,7 @@ class OpenLibraryProvider(BaseProvider):
     tags = ["web", "academic", "knowledge", "books"]
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
+        """Search Open Library for *query* and return book results."""
         qp = {
             "q": query,
             "limit": min(params.num_results, self._max_results, 20),

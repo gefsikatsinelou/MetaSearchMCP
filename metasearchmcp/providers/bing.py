@@ -32,6 +32,7 @@ class BingProvider(BaseProvider):
         return region or "US"
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
+        """Search Bing for *query* via the public RSS endpoint."""
         language_code = self._language_code(params.language)
         country_code = self._country_code(params.country)
         qp = {

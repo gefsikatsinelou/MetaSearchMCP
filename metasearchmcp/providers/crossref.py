@@ -28,6 +28,7 @@ class CrossrefProvider(BaseProvider):
     tags = ["academic", "web"]
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
+        """Search Crossref for *query* and return academic results."""
         qp = {
             "query": query,
             "rows": min(params.num_results, self._max_results, 20),

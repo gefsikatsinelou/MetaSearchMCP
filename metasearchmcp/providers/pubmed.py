@@ -26,6 +26,7 @@ class PubMedProvider(BaseProvider):
     tags = ["academic", "web", "medical"]
 
     def __init__(self) -> None:
+        """Initialize PubMed provider with API key from settings."""
         super().__init__()
         settings = get_settings()
         self._api_key: str = getattr(settings, "ncbi_api_key", "")

@@ -24,6 +24,7 @@ class StackOverflowProvider(BaseProvider):
     tags = ["web", "code", "developer"]
 
     def __init__(self) -> None:
+        """Initialize StackOverflow provider with API key from settings."""
         super().__init__()
         settings = get_settings()
         self._api_key: str = getattr(settings, "stackexchange_api_key", "")

@@ -18,10 +18,12 @@ class GoogleSerpbaseProvider(BaseProvider):
     _API_URL = "https://api.serpbase.dev/google/search"
 
     def __init__(self) -> None:
+        """Initialize Serpbase provider with API key from settings."""
         super().__init__()
         self._api_key = get_settings().serpbase_api_key
 
     def is_available(self) -> bool:
+        """Return True when a Serpbase API key is configured."""
         return bool(self._api_key)
 
     @staticmethod
@@ -35,8 +37,8 @@ class GoogleSerpbaseProvider(BaseProvider):
         normalized = (country or "us").strip().replace("_", "-")
         region = normalized.rsplit("-", 1)[-1].lower()
         return region or "us"
-
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
+        """Search Google for *query* via the Serpbase API."""
         language_code = self._language_code(params.language)
         country_code = self._country_code(params.country)
         payload = {

@@ -43,6 +43,7 @@ class GoogleProvider(BaseProvider):
     tags = ["google", "web"]
 
     def is_available(self) -> bool:
+        """Return True when unstable providers are allowed."""
         return get_settings().allow_unstable_providers
 
     @staticmethod
@@ -69,6 +70,7 @@ class GoogleProvider(BaseProvider):
         )
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
+        """Search Google for *query* via the unofficial API endpoint."""
         language_code = self._language_code(params.language)
         country_code = self._country_code(params.country)
         request_params = {

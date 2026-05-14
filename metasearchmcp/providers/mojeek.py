@@ -24,6 +24,7 @@ class MojeekProvider(BaseProvider):
     tags = ["web", "privacy"]
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
+        """Search Mojeek for *query* and return web results."""
         qp = {
             "q": query,
             "s": min(params.num_results, self._max_results, 30),

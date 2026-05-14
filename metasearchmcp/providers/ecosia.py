@@ -26,9 +26,11 @@ class EcosiaProvider(BaseProvider):
     tags = ["web", "privacy"]
 
     def is_available(self) -> bool:
+        """Return True when unstable providers are allowed."""
         return get_settings().allow_unstable_providers
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
+        """Search Ecosia for *query* and return web results."""
         qp = {
             "q": query,
             "p": 0,

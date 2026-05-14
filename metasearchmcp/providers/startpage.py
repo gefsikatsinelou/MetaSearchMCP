@@ -46,6 +46,7 @@ class StartpageProvider(BaseProvider):
         return engine_language, engine_region
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
+        """Search Startpage for *query* and return web results."""
         headers = {
             "Origin": _BASE_URL,
             "Referer": f"{_BASE_URL}/",

@@ -23,10 +23,12 @@ class BraveProvider(BaseProvider):
     tags = ["web", "privacy"]
 
     def __init__(self) -> None:
+        """Initialize Brave provider with API key from settings."""
         super().__init__()
         self._api_key = get_settings().brave_api_key
 
     def is_available(self) -> bool:
+        """Return True when a Brave API key is configured."""
         return bool(self._api_key)
 
     @staticmethod
@@ -42,6 +44,7 @@ class BraveProvider(BaseProvider):
         return region or "US"
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
+        """Search Brave for *query* via the official Web Search API."""
         language_code = self._language_code(params.language)
         country_code = self._country_code(params.country)
         qp = {

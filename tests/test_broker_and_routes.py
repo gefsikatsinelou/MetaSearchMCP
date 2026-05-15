@@ -211,7 +211,7 @@ def _make_app_with_catalog(catalog: dict):
         yield client
 
 
-@pytest.fixture()
+@pytest.fixture
 def client():
     from fastapi import FastAPI
 

@@ -23,6 +23,7 @@ class GitHubProvider(BaseProvider):
     tags = ["code", "web"]
 
     def __init__(self) -> None:
+        """Initialize the GitHub provider with an optional API token."""
         super().__init__()
         self._token = get_settings().github_token
 

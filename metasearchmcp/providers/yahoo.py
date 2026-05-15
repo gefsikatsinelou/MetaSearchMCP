@@ -49,6 +49,7 @@ class YahooProvider(BaseProvider):
     tags = ["web"]
 
     def is_available(self) -> bool:
+        """Return whether Yahoo is enabled via ``allow_unstable_providers``."""
         return get_settings().allow_unstable_providers
 
     @staticmethod
@@ -64,6 +65,7 @@ class YahooProvider(BaseProvider):
         return region or "US"
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
+        """Search Yahoo for *query* via HTML scraping and return web results."""
         domain = _REGION_TO_DOMAIN.get(
             self._country_code(params.country),
             "search.yahoo.com",

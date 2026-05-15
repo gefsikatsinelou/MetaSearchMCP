@@ -27,6 +27,7 @@ class QwantProvider(BaseProvider):
     tags = ["web", "privacy"]
 
     def is_available(self) -> bool:
+        """Return whether Qwant is enabled via ``allow_unstable_providers``."""
         return get_settings().allow_unstable_providers
 
     @staticmethod
@@ -42,6 +43,7 @@ class QwantProvider(BaseProvider):
         return region or "US"
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
+        """Search Qwant for *query* and return web results."""
         language_code = self._language_code(params.language)
         country_code = self._country_code(params.country)
         locale = f"{language_code}_{country_code}"

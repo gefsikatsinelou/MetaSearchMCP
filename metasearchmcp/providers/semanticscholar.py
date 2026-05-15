@@ -29,14 +29,17 @@ class SemanticScholarProvider(BaseProvider):
     tags = ["academic", "web"]
 
     def __init__(self) -> None:
+        """Initialize the Semantic Scholar provider with an optional API key."""
         super().__init__()
         settings = get_settings()
         self._api_key: str = getattr(settings, "semantic_scholar_api_key", "")
 
     def is_available(self) -> bool:
+        """Return whether a Semantic Scholar API key is configured."""
         return bool(self._api_key)
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
+        """Search Semantic Scholar for *query* and return academic paper results."""
         qp = {
             "query": query,
             "limit": min(params.num_results, self._max_results, 10),

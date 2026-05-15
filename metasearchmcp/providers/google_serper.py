@@ -18,10 +18,12 @@ class GoogleSerperProvider(BaseProvider):
     _API_URL = "https://google.serper.dev/search"
 
     def __init__(self) -> None:
+        """Initialize the Google Serper provider with an API key."""
         super().__init__()
         self._api_key = get_settings().serper_api_key
 
     def is_available(self) -> bool:
+        """Return whether the provider has a configured API key."""
         return bool(self._api_key)
 
     @staticmethod
@@ -37,6 +39,7 @@ class GoogleSerperProvider(BaseProvider):
         return region or "us"
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
+        """Search Google via Serper for *query* and return web results."""
         language_code = self._language_code(params.language)
         country_code = self._country_code(params.country)
         payload = {

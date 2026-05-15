@@ -33,12 +33,14 @@ class RedditProvider(BaseProvider):
     tags = ["web", "news", "developer"]
 
     def __init__(self) -> None:
+        """Initialize the Reddit provider with OAuth2 credentials."""
         super().__init__()
         settings = get_settings()
         self._client_id = settings.reddit_client_id
         self._client_secret = settings.reddit_client_secret
 
     def is_available(self) -> bool:
+        """Return whether both client ID and client secret are configured."""
         return bool(self._client_id and self._client_secret)
 
     async def _get_token(self, client: httpx.AsyncClient) -> str:
@@ -57,6 +59,7 @@ class RedditProvider(BaseProvider):
         return resp.json()["access_token"]
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
+        """Search Reddit posts for *query* and return matching results."""
         async with self._client() as client:
             token = await self._get_token(client)
             qp = {

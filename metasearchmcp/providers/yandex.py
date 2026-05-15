@@ -27,6 +27,7 @@ class YandexProvider(BaseProvider):
     tags = ["web"]
 
     def is_available(self) -> bool:
+        """Return whether Yandex is enabled via ``allow_unstable_providers``."""
         return get_settings().allow_unstable_providers
 
     @staticmethod
@@ -36,6 +37,7 @@ class YandexProvider(BaseProvider):
         return primary or "en"
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
+        """Search Yandex for *query* via HTML scraping and return web results."""
         qp = {
             "tmpl_version": "releases",
             "text": query,

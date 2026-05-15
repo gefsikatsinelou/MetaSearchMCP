@@ -32,7 +32,7 @@ class GitHubProvider(BaseProvider):
         qp = {
             "q": query,
             "per_page": str(
-                min(params.num_results, self._max_results, _MAX_API_RESULTS)
+                min(params.num_results, self._max_results, _MAX_API_RESULTS),
             ),
             "sort": "best-match",
         }

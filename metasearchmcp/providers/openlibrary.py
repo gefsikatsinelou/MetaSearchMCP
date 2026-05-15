@@ -56,7 +56,7 @@ class OpenLibraryProvider(BaseProvider):
                 snippet_parts.append(f"Editions: {edition_count}")
             if languages:
                 snippet_parts.append(
-                    f"Languages: {', '.join(languages[:_MAX_DISPLAY_ITEMS])}"
+                    f"Languages: {', '.join(languages[:_MAX_DISPLAY_ITEMS])}",
                 )
 
             results.append(

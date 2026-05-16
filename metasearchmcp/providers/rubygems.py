@@ -29,7 +29,7 @@ class RubyGemsProvider(BaseProvider):
             data = resp.json()
 
         return self._parse(
-            data[: min(params.num_results, self._max_results, _MAX_API_RESULTS)]
+            data[: min(params.num_results, self._max_results, _MAX_API_RESULTS)],
         )
 
     def _parse(self, data: list[dict]) -> ProviderResult:

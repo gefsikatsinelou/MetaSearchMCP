@@ -29,7 +29,7 @@ class GitLabProvider(BaseProvider):
                 params={
                     "search": query,
                     "per_page": min(
-                        params.num_results, self._max_results, _MAX_API_RESULTS
+                        params.num_results, self._max_results, _MAX_API_RESULTS,
                     ),
                 },
             )

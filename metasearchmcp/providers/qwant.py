@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from http import HTTPStatus
+
 from bs4 import BeautifulSoup
 
 from metasearchmcp.config import get_settings
@@ -63,7 +65,7 @@ class QwantProvider(BaseProvider):
 
         async with self._scraper_client() as client:
             resp = await client.get(_API_URL, params=qp, headers=extra_headers)
-            if resp.status_code != 403:
+            if resp.status_code != HTTPStatus.FORBIDDEN:
                 resp.raise_for_status()
                 data = resp.json()
                 if data.get("status") == "success":

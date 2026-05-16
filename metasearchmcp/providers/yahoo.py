@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from http import HTTPStatus
 from urllib.parse import unquote
 
 from bs4 import BeautifulSoup
@@ -90,7 +91,7 @@ class YahooProvider(BaseProvider):
                 params=qp,
                 cookies={"sB": cookie},
             )
-            if resp.status_code >= 500:
+            if resp.status_code >= HTTPStatus.INTERNAL_SERVER_ERROR:
                 raise RuntimeError(
                     f"Yahoo returned HTTP {resp.status_code}; "
                     "request likely blocked upstream",

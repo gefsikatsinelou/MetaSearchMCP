@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from http import HTTPStatus
 import logging
 
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
@@ -12,7 +13,6 @@ logger = logging.getLogger(__name__)
 
 _JSON_API = "https://pypi.org/pypi/{name}/json"
 _SEARCH_URL = "https://pypi.org/search/"
-_HTTP_OK = 200
 
 
 class PyPIProvider(BaseProvider):
@@ -58,7 +58,7 @@ class PyPIProvider(BaseProvider):
                 seen.add(name)
                 try:
                     resp = await client.get(_JSON_API.format(name=name))
-                    if resp.status_code != _HTTP_OK:
+                    if resp.status_code != HTTPStatus.OK:
                         continue
                     data = resp.json()
                 except Exception:

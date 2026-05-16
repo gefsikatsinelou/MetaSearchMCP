@@ -12,6 +12,7 @@ from .base import BaseProvider
 
 _BASE_URL = "https://www.startpage.com"
 _SEARCH_URL = "https://www.startpage.com/sp/search"
+_MAX_API_RESULTS = 10
 
 
 class StartpageProvider(BaseProvider):
@@ -73,7 +74,10 @@ class StartpageProvider(BaseProvider):
                 ("enable_stay_control", "1"),
                 ("instant_answers", "1"),
                 ("lang_homepage", f"s/device/{engine_language}/"),
-                ("num_of_results", str(min(params.num_results, self._max_results, 10))),
+                (
+                    "num_of_results",
+                    str(min(params.num_results, self._max_results, _MAX_API_RESULTS)),
+                ),
                 ("suggestions", "1"),
                 ("wt_unit", "celsius"),
                 ("language", engine_language),

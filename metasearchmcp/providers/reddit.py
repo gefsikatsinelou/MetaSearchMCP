@@ -14,6 +14,7 @@ from .base import BOT_USER_AGENT, BaseProvider
 
 _TOKEN_URL = "https://www.reddit.com/api/v1/access_token"
 _SEARCH_URL = "https://oauth.reddit.com/search.json"
+_MAX_API_RESULTS = 25
 _MAX_SELFTEXT_LENGTH = 200
 
 
@@ -65,7 +66,7 @@ class RedditProvider(BaseProvider):
             qp = {
                 "q": query,
                 "sort": "relevance",
-                "limit": min(params.num_results, self._max_results, 25),
+                "limit": min(params.num_results, self._max_results, _MAX_API_RESULTS),
                 "type": "link",
             }
             if not params.safe_search:

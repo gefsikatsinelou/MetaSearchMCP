@@ -11,6 +11,8 @@ from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
 
 from .base import BaseProvider
 
+_MAX_API_RESULTS = 10
+
 _REGION_TO_DOMAIN = {
     "CA": "ca.search.yahoo.com",
     "DE": "de.search.yahoo.com",
@@ -74,7 +76,7 @@ class YahooProvider(BaseProvider):
         qp = {
             "p": query,
             "iscqry": "",
-            "n": min(params.num_results, self._max_results, 10),
+            "n": min(params.num_results, self._max_results, _MAX_API_RESULTS),
             "ei": "UTF-8",
         }
         cookie = self._build_sb_cookie(

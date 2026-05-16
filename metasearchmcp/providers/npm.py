@@ -7,6 +7,7 @@ from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
 from .base import BaseProvider
 
 _API_URL = "https://registry.npmjs.org/-/v1/search"
+_MAX_API_RESULTS = 20
 
 
 class NpmProvider(BaseProvider):
@@ -23,7 +24,7 @@ class NpmProvider(BaseProvider):
         """Search npm for *query* and return package results."""
         qp = {
             "text": query,
-            "size": min(params.num_results, self._max_results, 20),
+            "size": min(params.num_results, self._max_results, _MAX_API_RESULTS),
         }
 
         async with self._client() as client:

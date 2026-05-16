@@ -9,6 +9,7 @@ from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
 from .base import BaseProvider
 
 _API_URL = "https://api.crossref.org/works"
+_MAX_API_RESULTS = 20
 _MAX_DISPLAY_AUTHORS = 3
 
 
@@ -31,7 +32,7 @@ class CrossrefProvider(BaseProvider):
         """Search Crossref for *query* and return academic results."""
         qp = {
             "query": query,
-            "rows": min(params.num_results, self._max_results, 20),
+            "rows": min(params.num_results, self._max_results, _MAX_API_RESULTS),
             "select": (
                 "DOI,title,abstract,author,container-title,"
                 "published,URL,is-referenced-by-count,type"

@@ -12,6 +12,7 @@ from .base import BaseProvider
 # Qwant's internal search API (used by their web frontend)
 _API_URL = "https://api.qwant.com/v3/search/web"
 _LITE_URL = "https://lite.qwant.com/"
+_MAX_API_RESULTS = 10
 
 
 class QwantProvider(BaseProvider):
@@ -49,7 +50,7 @@ class QwantProvider(BaseProvider):
         locale = f"{language_code}_{country_code}"
         qp = {
             "q": query,
-            "count": min(params.num_results, self._max_results, 10),
+            "count": min(params.num_results, self._max_results, _MAX_API_RESULTS),
             "locale": locale,
             "offset": 0,
             "device": "desktop",

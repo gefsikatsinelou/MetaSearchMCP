@@ -9,6 +9,7 @@ from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
 from .base import BaseProvider
 
 _SEARCH_URL = "https://www.mojeek.com/search"
+_MAX_API_RESULTS = 30
 
 
 class MojeekProvider(BaseProvider):
@@ -27,7 +28,7 @@ class MojeekProvider(BaseProvider):
         """Search Mojeek for *query* and return web results."""
         qp = {
             "q": query,
-            "s": min(params.num_results, self._max_results, 30),
+            "s": min(params.num_results, self._max_results, _MAX_API_RESULTS),
             "lb": params.language,
         }
 

@@ -9,6 +9,7 @@ from .base import BaseProvider
 
 _ESEARCH_URL = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi"
 _ESUMMARY_URL = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi"
+_MAX_API_RESULTS = 10
 _MAX_AUTHORS_SHOWN = 3
 
 
@@ -33,7 +34,7 @@ class PubMedProvider(BaseProvider):
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
         """Search PubMed biomedical literature for *query*."""
-        limit = min(params.num_results, self._max_results, 10)
+        limit = min(params.num_results, self._max_results, _MAX_API_RESULTS)
 
         # Step 1: ESearch — get PMIDs
         esearch_params: dict = {

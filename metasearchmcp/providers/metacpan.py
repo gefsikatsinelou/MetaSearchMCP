@@ -9,6 +9,7 @@ from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
 from .base import BaseProvider
 
 _SEARCH_URL = "https://fastapi.metacpan.org/v1/file/_search"
+_MAX_API_RESULTS = 20
 
 _QUERY_TEMPLATE = {
     "query": {
@@ -48,7 +49,7 @@ class MetaCPANProvider(BaseProvider):
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
         """Search MetaCPAN for *query* and return Perl module results."""
-        num = min(params.num_results, self._max_results, 20)
+        num = min(params.num_results, self._max_results, _MAX_API_RESULTS)
         payload = copy.deepcopy(_QUERY_TEMPLATE)
         payload["query"]["multi_match"]["query"] = query  # type: ignore[index]
         payload["size"] = num

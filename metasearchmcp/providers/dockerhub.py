@@ -7,6 +7,7 @@ from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
 from .base import BaseProvider
 
 _API_URL = "https://hub.docker.com/v2/search/repositories/"
+_MAX_API_RESULTS = 25
 
 
 class DockerHubProvider(BaseProvider):
@@ -20,7 +21,7 @@ class DockerHubProvider(BaseProvider):
         """Search Docker Hub for *query* and return image results."""
         qp = {
             "query": query,
-            "page_size": min(params.num_results, self._max_results, 25),
+            "page_size": min(params.num_results, self._max_results, _MAX_API_RESULTS),
             "page": 1,
         }
 

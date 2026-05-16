@@ -7,6 +7,7 @@ from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
 from .base import BaseProvider
 
 _API_URL = "https://rubygems.org/api/v1/search.json"
+_MAX_API_RESULTS = 20
 
 
 class RubyGemsProvider(BaseProvider):
@@ -27,7 +28,9 @@ class RubyGemsProvider(BaseProvider):
             resp.raise_for_status()
             data = resp.json()
 
-        return self._parse(data[: min(params.num_results, self._max_results, 20)])
+        return self._parse(
+            data[: min(params.num_results, self._max_results, _MAX_API_RESULTS)]
+        )
 
     def _parse(self, data: list[dict]) -> ProviderResult:
         results: list[SearchResult] = []

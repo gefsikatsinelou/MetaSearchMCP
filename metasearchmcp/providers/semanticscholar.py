@@ -9,6 +9,7 @@ from .base import BaseProvider
 
 _API_URL = "https://api.semanticscholar.org/graph/v1/paper/search"
 _FIELDS = "paperId,title,abstract,year,authors,url,externalIds,venue,citationCount"
+_MAX_API_RESULTS = 10
 _MAX_AUTHORS_SHOWN = 3
 
 
@@ -42,7 +43,7 @@ class SemanticScholarProvider(BaseProvider):
         """Search Semantic Scholar for *query* and return academic paper results."""
         qp = {
             "query": query,
-            "limit": min(params.num_results, self._max_results, 10),
+            "limit": min(params.num_results, self._max_results, _MAX_API_RESULTS),
             "fields": _FIELDS,
         }
         headers: dict[str, str] = {}

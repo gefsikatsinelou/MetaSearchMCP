@@ -7,6 +7,7 @@ from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
 from .base import BaseProvider
 
 _SEARCH_URL = "https://archive.org/advancedsearch.php"
+_MAX_API_RESULTS = 20
 
 
 class InternetArchiveProvider(BaseProvider):
@@ -34,7 +35,7 @@ class InternetArchiveProvider(BaseProvider):
                 "date",
                 "creator",
             ],
-            "rows": min(params.num_results, self._max_results, 20),
+            "rows": min(params.num_results, self._max_results, _MAX_API_RESULTS),
             "page": 1,
             "output": "json",
         }

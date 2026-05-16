@@ -7,6 +7,7 @@ from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
 from .base import BaseProvider
 
 _API_URL = "https://openlibrary.org/search.json"
+_MAX_API_RESULTS = 20
 _MAX_DISPLAY_ITEMS = 3
 
 
@@ -23,7 +24,7 @@ class OpenLibraryProvider(BaseProvider):
         """Search Open Library for *query* and return book results."""
         qp = {
             "q": query,
-            "limit": min(params.num_results, self._max_results, 20),
+            "limit": min(params.num_results, self._max_results, _MAX_API_RESULTS),
             "fields": "key,title,author_name,first_publish_year,edition_count,language",
         }
 

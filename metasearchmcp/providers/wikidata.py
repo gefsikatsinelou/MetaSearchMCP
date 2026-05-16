@@ -7,6 +7,7 @@ from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
 from .base import BOT_USER_AGENT, BaseProvider
 
 _API_URL = "https://www.wikidata.org/w/api.php"
+_MAX_API_RESULTS = 20
 _MAX_ALIASES_SHOWN = 3
 
 
@@ -27,7 +28,7 @@ class WikidataProvider(BaseProvider):
             "action": "wbsearchentities",
             "search": query,
             "language": params.language,
-            "limit": min(params.num_results, self._max_results, 20),
+            "limit": min(params.num_results, self._max_results, _MAX_API_RESULTS),
             "format": "json",
             "type": "item",
         }

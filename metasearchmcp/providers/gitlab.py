@@ -8,6 +8,7 @@ from .base import BaseProvider
 
 _BASE_URL = "https://gitlab.com"
 _API_PATH = "api/v4/projects"
+_MAX_API_RESULTS = 20
 
 
 class GitLabProvider(BaseProvider):
@@ -25,7 +26,12 @@ class GitLabProvider(BaseProvider):
         async with self._client() as client:
             resp = await client.get(
                 f"{_BASE_URL}/{_API_PATH}",
-                params={"search": query, "per_page": min(params.num_results, 20)},
+                params={
+                    "search": query,
+                    "per_page": min(
+                        params.num_results, self._max_results, _MAX_API_RESULTS
+                    ),
+                },
             )
             resp.raise_for_status()
             data = resp.json()

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from http import HTTPStatus
 from typing import TYPE_CHECKING, Literal
 
 from fastapi import APIRouter, Depends, HTTPException, Query
@@ -56,7 +57,7 @@ async def search(
     providers_map = pick_named_providers(providers_map, req.providers)
     if not providers_map:
         raise HTTPException(
-            status_code=503,
+            status_code=HTTPStatus.SERVICE_UNAVAILABLE,
             detail=(
                 "No providers available for the requested filters. "
                 "Check provider names, tags, configuration, and API keys."
@@ -80,7 +81,7 @@ async def search_google(
     if req.provider:
         if req.provider not in google_providers:
             raise HTTPException(
-                status_code=400,
+                status_code=HTTPStatus.BAD_REQUEST,
                 detail=f"Google provider '{req.provider}' is not available. "
                 f"Available: {list(google_providers.keys())}",
             )
@@ -91,7 +92,7 @@ async def search_google(
 
     if not selected:
         raise HTTPException(
-            status_code=503,
+            status_code=HTTPStatus.SERVICE_UNAVAILABLE,
             detail=(
                 "No Google provider available. "
                 "Enable ALLOW_UNSTABLE_PROVIDERS=true for direct Google, "

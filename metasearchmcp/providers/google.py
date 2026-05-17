@@ -28,6 +28,7 @@ _ANSWER_BOX_SELECTORS = (
     "div[data-attrid='wa:/description']",
 )
 _WHITESPACE_RE = re.compile(r"\s+")
+_ERR_GOOGLE_BLOCKED = "Google rejected the request as automated traffic"
 _GOOGLE_BASE_USER_AGENT = (
     "Mozilla/5.0 (Linux; Android 5.0; SM-G900P Build/LRX21T) "
     "AppleWebKit/537.36 (KHTML, like Gecko) "
@@ -106,7 +107,7 @@ class GoogleProvider(BaseProvider):
     def _raise_on_blocked_response(html: str, url: str) -> None:
         lowered = html.lower()
         if "/sorry/" in url or "unusual traffic from your computer network" in lowered:
-            raise RuntimeError("Google rejected the request as automated traffic")
+            raise RuntimeError(_ERR_GOOGLE_BLOCKED)
 
     def _parse(self, html: str) -> ProviderResult:
         soup = BeautifulSoup(html, "lxml")

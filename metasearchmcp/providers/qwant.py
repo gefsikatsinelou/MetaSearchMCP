@@ -15,6 +15,7 @@ from .base import BaseProvider
 _API_URL = "https://api.qwant.com/v3/search/web"
 _LITE_URL = "https://lite.qwant.com/"
 _MAX_API_RESULTS = 10
+_ERR_QWANT_UNAVAILABLE = "Qwant Lite is currently unavailable from this network"
 
 
 class QwantProvider(BaseProvider):
@@ -85,7 +86,7 @@ class QwantProvider(BaseProvider):
             lite.raise_for_status()
 
         if "Service unavailable" in lite.text or "Unavailable" in lite.text[:500]:
-            raise RuntimeError("Qwant Lite is currently unavailable from this network")
+            raise RuntimeError(_ERR_QWANT_UNAVAILABLE)
 
         return self._parse_lite(lite.text)
 

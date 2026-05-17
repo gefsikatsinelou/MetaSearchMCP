@@ -12,6 +12,7 @@ from .base import BaseProvider
 
 _SEARCH_URL = "https://www.baidu.com/s"
 _MAX_API_RESULTS = 10
+_ERR_BAIDU_NOT_JSON = "Baidu did not return JSON search results for this request"
 
 
 class BaiduProvider(BaseProvider):
@@ -45,9 +46,7 @@ class BaiduProvider(BaseProvider):
             payload = resp.text.lstrip("\ufeff\r\n\t ")
 
         if not payload.startswith("{"):
-            raise RuntimeError(
-                "Baidu did not return JSON search results for this request",
-            )
+            raise RuntimeError(_ERR_BAIDU_NOT_JSON)
 
         data = json.loads(payload)
 

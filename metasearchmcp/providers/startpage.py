@@ -13,6 +13,12 @@ from .base import BaseProvider
 _BASE_URL = "https://www.startpage.com"
 _SEARCH_URL = "https://www.startpage.com/sp/search"
 _MAX_API_RESULTS = 10
+_ERR_STARTPAGE_SUSPENDED = (
+    "Startpage temporarily suspended requests "
+    "from this network (Error 883)"
+)
+_ERR_STARTPAGE_BLOCKED = "Startpage rejected the request as automated traffic"
+_ERR_STARTPAGE_NO_SC = "Startpage did not expose an sc token for this session"
 
 
 class StartpageProvider(BaseProvider):
@@ -109,16 +115,13 @@ class StartpageProvider(BaseProvider):
             "Error 883" in resp.text
             or "ability to connect to Startpage has been suspended" in resp.text
         ):
-            raise RuntimeError(
-                "Startpage temporarily suspended requests "
-                "from this network (Error 883)",
-            )
+            raise RuntimeError(_ERR_STARTPAGE_SUSPENDED)
 
         if (
             "/sp/feedback2" in str(resp.url)
             or "prevent possible abuse of our service" in resp.text
         ):
-            raise RuntimeError("Startpage rejected the request as automated traffic")
+            raise RuntimeError(_ERR_STARTPAGE_BLOCKED)
 
         return self._parse(resp.text)
 
@@ -129,7 +132,7 @@ class StartpageProvider(BaseProvider):
             'input[name="sc"]',
         )
         if not sc_input or not sc_input.get("value"):
-            raise RuntimeError("Startpage did not expose an sc token for this session")
+            raise RuntimeError(_ERR_STARTPAGE_NO_SC)
         return sc_input["value"]
 
     def _parse(self, html: str) -> ProviderResult:

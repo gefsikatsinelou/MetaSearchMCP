@@ -14,6 +14,10 @@ from .base import BaseProvider
 
 _MAX_API_RESULTS = 10
 
+
+def _err_yahoo_blocked(status_code: int) -> str:
+    return f"Yahoo returned HTTP {status_code}; request likely blocked upstream"
+
 _REGION_TO_DOMAIN = {
     "CA": "ca.search.yahoo.com",
     "DE": "de.search.yahoo.com",
@@ -92,10 +96,7 @@ class YahooProvider(BaseProvider):
                 cookies={"sB": cookie},
             )
             if resp.status_code >= HTTPStatus.INTERNAL_SERVER_ERROR:
-                raise RuntimeError(
-                    f"Yahoo returned HTTP {resp.status_code}; "
-                    "request likely blocked upstream",
-                )
+                raise RuntimeError(_err_yahoo_blocked(resp.status_code))
             resp.raise_for_status()
 
         return self._parse(resp.text, domain=domain)

@@ -11,6 +11,7 @@ from .base import BaseProvider
 
 _SEARCH_URL = "https://yandex.com/search/site/"
 _SUPPORTED_LANGS = {"ru", "en", "be", "fr", "de", "id", "kk", "tt", "tr", "uk"}
+_ERR_YANDEX_CAPTCHA = "Yandex requested a captcha challenge for this network"
 
 
 class YandexProvider(BaseProvider):
@@ -57,7 +58,7 @@ class YandexProvider(BaseProvider):
             resp.raise_for_status()
 
         if resp.headers.get("x-yandex-captcha") == "captcha":
-            raise RuntimeError("Yandex requested a captcha challenge for this network")
+            raise RuntimeError(_ERR_YANDEX_CAPTCHA)
 
         return self._parse(resp.text)
 

@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from http import HTTPStatus
-from typing import TYPE_CHECKING, Literal
+from typing import TYPE_CHECKING, Annotated, Literal
 
 from fastapi import APIRouter, Depends, HTTPException, Query
 
@@ -20,9 +20,7 @@ from metasearchmcp.contracts import (
     SearchReport,
 )
 from metasearchmcp.orchestrator import run_search_plan
-
-if TYPE_CHECKING:
-    from metasearchmcp.providers.base import BaseProvider
+from metasearchmcp.providers.base import BaseProvider
 
 router = APIRouter()
 
@@ -50,7 +48,7 @@ def _build_tag_groups(registry: dict[str, BaseProvider]) -> dict[str, list[str]]
 )
 async def search(
     req: SearchEnvelope,
-    registry: dict[str, BaseProvider] = Depends(_get_registry),
+    registry: Annotated[dict[str, BaseProvider], Depends(_get_registry)],
 ) -> SearchReport:
     """Run an aggregate search across enabled providers."""
     providers_map = pick_providers_by_tags(registry, req.tags, match=req.tag_match)
@@ -73,7 +71,7 @@ async def search(
 )
 async def search_google(
     req: GoogleSearchEnvelope,
-    registry: dict[str, BaseProvider] = Depends(_get_registry),
+    registry: Annotated[dict[str, BaseProvider], Depends(_get_registry)],
 ) -> SearchReport:
     """Run a Google search via configured hosted providers."""
     google_providers = pick_tagged_providers(registry, "google")
@@ -104,7 +102,7 @@ async def search_google(
 
 
 @router.get("/health", summary="Health check")
-async def health(registry: dict[str, BaseProvider] = Depends(_get_registry)) -> dict:
+async def health(registry: Annotated[dict[str, BaseProvider], Depends(_get_registry)]) -> dict:
     """Return service health status and loaded providers."""
     provider_names = sorted(registry.keys())
     return {
@@ -120,9 +118,9 @@ async def health(registry: dict[str, BaseProvider] = Depends(_get_registry)) -> 
     summary="List all configured providers and their availability",
 )
 async def providers(
-    tag: list[str] | None = Query(default=None),
-    tag_match: Literal["any", "all"] = Query(default="any"),
-    registry: dict[str, BaseProvider] = Depends(_get_registry),
+    registry: Annotated[dict[str, BaseProvider], Depends(_get_registry)],
+    tag: Annotated[list[str] | None, Query()] = None,
+    tag_match: Annotated[Literal["any", "all"], Query()] = "any",
 ) -> dict:
     """List configured providers, optionally filtered by tags."""
     filtered = pick_providers_by_tags(registry, tag or [], match=tag_match)

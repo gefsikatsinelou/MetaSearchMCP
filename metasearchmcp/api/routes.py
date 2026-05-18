@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from http import HTTPStatus
-from typing import TYPE_CHECKING, Annotated, Literal
+from typing import Annotated, Literal
 
 from fastapi import APIRouter, Depends, HTTPException, Query
 
@@ -102,7 +102,9 @@ async def search_google(
 
 
 @router.get("/health", summary="Health check")
-async def health(registry: Annotated[dict[str, BaseProvider], Depends(_get_registry)]) -> dict:
+async def health(
+    registry: Annotated[dict[str, BaseProvider], Depends(_get_registry)],
+) -> dict:
     """Return service health status and loaded providers."""
     provider_names = sorted(registry.keys())
     return {

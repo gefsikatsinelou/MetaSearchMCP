@@ -14,8 +14,7 @@ _BASE_URL = "https://www.startpage.com"
 _SEARCH_URL = "https://www.startpage.com/sp/search"
 _MAX_API_RESULTS = 10
 _ERR_STARTPAGE_SUSPENDED = (
-    "Startpage temporarily suspended requests "
-    "from this network (Error 883)"
+    "Startpage temporarily suspended requests from this network (Error 883)"
 )
 _ERR_STARTPAGE_BLOCKED = "Startpage rejected the request as automated traffic"
 _ERR_STARTPAGE_NO_SC = "Startpage did not expose an sc token for this session"

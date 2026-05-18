@@ -18,6 +18,7 @@ _MAX_API_RESULTS = 10
 def _err_yahoo_blocked(status_code: int) -> str:
     return f"Yahoo returned HTTP {status_code}; request likely blocked upstream"
 
+
 _REGION_TO_DOMAIN = {
     "CA": "ca.search.yahoo.com",
     "DE": "de.search.yahoo.com",

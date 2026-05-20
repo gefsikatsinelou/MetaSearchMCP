@@ -64,7 +64,7 @@ def validate_serpbase_key(api_key: str) -> bool:
 # ─── Config snippet output ────────────────────────────────────────────────────
 
 
-def _mcp_server_block() -> dict:
+def _mcp_server_block() -> dict[str, str | list[str]]:
     return {
         "command": "uvx",
         "args": ["MetaSearchMCP"],

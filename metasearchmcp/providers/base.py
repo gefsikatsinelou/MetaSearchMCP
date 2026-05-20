@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from abc import ABC, abstractmethod
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, ClassVar
 
 import httpx
 
@@ -24,7 +24,7 @@ class BaseProvider(ABC):
     name: str = ""
     description: str = ""
     # Tags help the aggregator filter by intent (e.g. "google", "academic")
-    tags: list[str] = []
+    tags: ClassVar[list[str]] = []
 
     def __init__(self) -> None:
         """Initialize provider with settings-derived timeout and max results."""
@@ -33,11 +33,11 @@ class BaseProvider(ABC):
         self._max_results = settings.max_results_per_provider
 
     # Bot-friendly UA for API calls
-    _API_HEADERS = {
+    _API_HEADERS: ClassVar[dict[str, str]] = {
         "User-Agent": API_USER_AGENT,
     }
     # Browser-like UA for HTML scraping
-    _SCRAPER_HEADERS = {
+    _SCRAPER_HEADERS: ClassVar[dict[str, str]] = {
         "User-Agent": (
             "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
             "AppleWebKit/537.36 (KHTML, like Gecko) "

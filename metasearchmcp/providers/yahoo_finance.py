@@ -11,7 +11,6 @@ from .base import BaseProvider
 # Unofficial Yahoo Finance JSON endpoint — no API key required.
 # Uses the same endpoint as yfinance and many other open-source tools.
 _SEARCH_URL = "https://query1.finance.yahoo.com/v1/finance/search"
-_QUOTE_URL = "https://query1.finance.yahoo.com/v8/finance/chart/{symbol}"
 _MAX_API_RESULTS = 20
 
 _HEADERS = {

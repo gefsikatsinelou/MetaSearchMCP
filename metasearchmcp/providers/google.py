@@ -30,11 +30,6 @@ _ANSWER_BOX_SELECTORS = (
 )
 _WHITESPACE_RE = re.compile(r"\s+")
 _ERR_GOOGLE_BLOCKED = "Google rejected the request as automated traffic"
-_GOOGLE_BASE_USER_AGENT = (
-    "Mozilla/5.0 (Linux; Android 5.0; SM-G900P Build/LRX21T) "
-    "AppleWebKit/537.36 (KHTML, like Gecko) "
-    "Chrome/39.0.2374.1981 Mobile Safari/537.36 NSTNWV"
-)
 
 
 class GoogleProvider(BaseProvider):

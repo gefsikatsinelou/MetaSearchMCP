@@ -2,10 +2,9 @@
 
 from __future__ import annotations
 
-from typing import ClassVar
-
 import json
 from html import unescape
+from typing import ClassVar
 
 from metasearchmcp.config import get_settings
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult

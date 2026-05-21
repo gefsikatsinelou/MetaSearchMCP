@@ -2,9 +2,8 @@
 
 from __future__ import annotations
 
-from typing import ClassVar
-
 import re
+from typing import ClassVar
 
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
 

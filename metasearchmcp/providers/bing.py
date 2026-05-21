@@ -2,10 +2,9 @@
 
 from __future__ import annotations
 
-from typing import ClassVar
-
 import xml.etree.ElementTree as ET
 from email.utils import parsedate_to_datetime
+from typing import ClassVar
 
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
 

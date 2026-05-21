@@ -2,10 +2,9 @@
 
 from __future__ import annotations
 
-from typing import ClassVar
-
 import logging
 from http import HTTPStatus
+from typing import ClassVar
 
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
 

@@ -2,9 +2,8 @@
 
 from __future__ import annotations
 
-from typing import ClassVar
-
 from http import HTTPStatus
+from typing import ClassVar
 from urllib.parse import unquote
 
 from bs4 import BeautifulSoup

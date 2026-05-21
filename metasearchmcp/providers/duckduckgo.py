@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 from typing import ClassVar
-
 from urllib.parse import parse_qs, urlparse
 
 from bs4 import BeautifulSoup

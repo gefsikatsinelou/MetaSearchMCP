@@ -2,10 +2,9 @@
 
 from __future__ import annotations
 
-from typing import ClassVar
-
 import base64
 import datetime
+from typing import ClassVar
 
 import httpx
 

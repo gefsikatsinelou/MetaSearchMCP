@@ -4,11 +4,12 @@ from __future__ import annotations
 
 import base64
 import datetime
-from typing import ClassVar
-
-import httpx
+from typing import TYPE_CHECKING, ClassVar
 
 from metasearchmcp.config import get_settings
+
+if TYPE_CHECKING:
+    import httpx
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
 
 from .base import BOT_USER_AGENT, BaseProvider

@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import ClassVar
+
 from metasearchmcp.config import get_settings
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
 
@@ -23,7 +25,7 @@ class FinnhubProvider(BaseProvider):
     description = (
         "Real-time stock quotes, earnings, and company profiles via Finnhub API."
     )
-    tags = ["finance", "stocks"]
+    tags: ClassVar[list[str]] = ["finance", "stocks"]
 
     def __init__(self) -> None:
         """Initialize provider and load the Finnhub API key."""

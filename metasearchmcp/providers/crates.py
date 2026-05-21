@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import ClassVar
+
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
 
 from .base import API_USER_AGENT, BaseProvider
@@ -18,7 +20,7 @@ class CratesIoProvider(BaseProvider):
 
     name = "crates"
     description = "Search Rust packages published on crates.io."
-    tags = ["web", "code", "developer", "packages"]
+    tags: ClassVar[list[str]] = ["web", "code", "developer", "packages"]
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
         """Search crates.io for Rust packages matching *query*."""

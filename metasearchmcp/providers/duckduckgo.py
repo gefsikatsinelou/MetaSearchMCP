@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import ClassVar
+
 from urllib.parse import parse_qs, urlparse
 
 from bs4 import BeautifulSoup
@@ -19,7 +21,7 @@ class DuckDuckGoProvider(BaseProvider):
 
     name = "duckduckgo"
     description = "Privacy-focused web search via DuckDuckGo."
-    tags = ["web", "privacy"]
+    tags: ClassVar[list[str]] = ["web", "privacy"]
 
     @staticmethod
     def _language_code(language: str) -> str:

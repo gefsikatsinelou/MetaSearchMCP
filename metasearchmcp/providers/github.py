@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import ClassVar
+
 from metasearchmcp.config import get_settings
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
 
@@ -20,7 +22,7 @@ class GitHubProvider(BaseProvider):
 
     name = "github"
     description = "Search GitHub repositories, code, issues, and pull requests."
-    tags = ["code", "web"]
+    tags: ClassVar[list[str]] = ["code", "web"]
 
     def __init__(self) -> None:
         """Initialize the GitHub provider with an optional API token."""

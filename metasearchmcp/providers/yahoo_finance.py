@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import ClassVar
+
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
 
 from .base import BaseProvider
@@ -33,7 +35,7 @@ class YahooFinanceProvider(BaseProvider):
 
     name = "yahoo_finance"
     description = "Stock quotes, summaries, and market data via Yahoo Finance."
-    tags = ["finance", "stocks"]
+    tags: ClassVar[list[str]] = ["finance", "stocks"]
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
         """Search for stock tickers and company names via Yahoo Finance."""

@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import ClassVar
+
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
 
 from .base import BaseProvider
@@ -18,7 +20,7 @@ class HackerNewsProvider(BaseProvider):
 
     name = "hackernews"
     description = "Search Hacker News stories, comments, and discussions via Algolia."
-    tags = ["web", "developer", "news"]
+    tags: ClassVar[list[str]] = ["web", "developer", "news"]
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
         """Search Hacker News stories for *query* via Algolia."""

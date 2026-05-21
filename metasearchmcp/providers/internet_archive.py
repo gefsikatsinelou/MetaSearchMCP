@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import ClassVar
+
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
 
 from .base import BaseProvider
@@ -21,7 +23,7 @@ class InternetArchiveProvider(BaseProvider):
     description = (
         "Search Internet Archive collections, including texts, media, and software."
     )
-    tags = ["web", "academic", "knowledge"]
+    tags: ClassVar[list[str]] = ["web", "academic", "knowledge"]
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
         """Search Internet Archive for *query* and return archived items."""

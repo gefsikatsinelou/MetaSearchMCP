@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import ClassVar
+
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
 
 from .base import BaseProvider
@@ -15,7 +17,7 @@ class RubyGemsProvider(BaseProvider):
 
     name = "rubygems"
     description = "Search Ruby gems on RubyGems.org."
-    tags = ["web", "code", "developer", "packages"]
+    tags: ClassVar[list[str]] = ["web", "code", "developer", "packages"]
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
         """Search RubyGems for *query* and return gem results."""

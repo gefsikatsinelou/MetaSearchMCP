@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import ClassVar
+
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
 
 from .base import BaseProvider
@@ -18,7 +20,7 @@ class NpmProvider(BaseProvider):
 
     name = "npm"
     description = "Search JavaScript and TypeScript packages on the npm registry."
-    tags = ["web", "code", "developer", "packages"]
+    tags: ClassVar[list[str]] = ["web", "code", "developer", "packages"]
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
         """Search npm for *query* and return package results."""

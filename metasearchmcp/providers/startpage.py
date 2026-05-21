@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import ClassVar
+
 from collections import OrderedDict
 
 from bs4 import BeautifulSoup
@@ -31,7 +33,7 @@ class StartpageProvider(BaseProvider):
 
     name = "startpage"
     description = "Privacy-focused web search via Startpage without tracking."
-    tags = ["web", "privacy", "google"]
+    tags: ClassVar[list[str]] = ["web", "privacy", "google"]
 
     @staticmethod
     def _language_code(language: str) -> str:

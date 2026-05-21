@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import ClassVar
+
 import json
 from html import unescape
 
@@ -25,7 +27,7 @@ class BaiduProvider(BaseProvider):
 
     name = "baidu"
     description = "Web search via Baidu."
-    tags = ["web"]
+    tags: ClassVar[list[str]] = ["web"]
 
     def is_available(self) -> bool:
         """Return whether Baidu is enabled via unstable-provider flag."""

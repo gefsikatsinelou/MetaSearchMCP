@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import ClassVar
+
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
 
 from .base import BaseProvider
@@ -17,7 +19,7 @@ class MwmblProvider(BaseProvider):
 
     name = "mwmbl"
     description = "Non-commercial open-source web search via the Mwmbl community index."
-    tags = ["web", "general"]
+    tags: ClassVar[list[str]] = ["web", "general"]
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
         """Search Mwmbl for *query* and return web results."""

@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import ClassVar
+
 import logging
 from http import HTTPStatus
 
@@ -32,7 +34,7 @@ class PyPIProvider(BaseProvider):
 
     name = "pypi"
     description = "Search Python packages published on PyPI."
-    tags = ["web", "code", "developer", "packages"]
+    tags: ClassVar[list[str]] = ["web", "code", "developer", "packages"]
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
         """Search PyPI for Python packages matching *query*."""

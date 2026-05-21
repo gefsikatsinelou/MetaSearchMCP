@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import ClassVar
+
 import xml.etree.ElementTree as ET
 from email.utils import parsedate_to_datetime
 
@@ -17,7 +19,7 @@ class BingProvider(BaseProvider):
 
     name = "bing"
     description = "Web search via Microsoft Bing."
-    tags = ["web"]
+    tags: ClassVar[list[str]] = ["web"]
 
     @staticmethod
     def _language_code(language: str) -> str:

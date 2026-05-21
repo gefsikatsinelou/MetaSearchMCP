@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import ClassVar
+
 import base64
 import datetime
 
@@ -31,7 +33,7 @@ class RedditProvider(BaseProvider):
 
     name = "reddit"
     description = "Search Reddit posts, comments, and communities."
-    tags = ["web", "news", "developer"]
+    tags: ClassVar[list[str]] = ["web", "news", "developer"]
 
     def __init__(self) -> None:
         """Initialize the Reddit provider with OAuth2 credentials."""

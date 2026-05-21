@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import ClassVar
+
 from http import HTTPStatus
 
 from bs4 import BeautifulSoup
@@ -28,7 +30,7 @@ class QwantProvider(BaseProvider):
 
     name = "qwant"
     description = "Privacy-focused European web search via Qwant."
-    tags = ["web", "privacy"]
+    tags: ClassVar[list[str]] = ["web", "privacy"]
 
     def is_available(self) -> bool:
         """Return whether Qwant is enabled via ``allow_unstable_providers``."""

@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import ClassVar
+
 import copy
 
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
@@ -45,7 +47,7 @@ class MetaCPANProvider(BaseProvider):
 
     name = "metacpan"
     description = "Search Perl modules and distributions on MetaCPAN."
-    tags = ["web", "code", "developer", "packages"]
+    tags: ClassVar[list[str]] = ["web", "code", "developer", "packages"]
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
         """Search MetaCPAN for *query* and return Perl module results."""

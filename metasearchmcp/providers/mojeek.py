@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import ClassVar
+
 from bs4 import BeautifulSoup
 
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
@@ -22,7 +24,7 @@ class MojeekProvider(BaseProvider):
 
     name = "mojeek"
     description = "Independent web search via Mojeek own crawler index."
-    tags = ["web", "privacy"]
+    tags: ClassVar[list[str]] = ["web", "privacy"]
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
         """Search Mojeek for *query* and return web results."""

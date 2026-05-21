@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import ClassVar
+
 import re
 
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
@@ -19,7 +21,7 @@ class WikipediaProvider(BaseProvider):
 
     name = "wikipedia"
     description = "Search Wikipedia articles across all languages."
-    tags = ["web", "academic", "knowledge"]
+    tags: ClassVar[list[str]] = ["web", "academic", "knowledge"]
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
         """Search Wikipedia articles for *query*."""

@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import ClassVar
+
 from metasearchmcp.config import get_settings
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
 
@@ -24,7 +26,7 @@ class AlphaVantageProvider(BaseProvider):
         "Real-time and historical stock quotes, forex, "
         "and crypto data via Alpha Vantage API."
     )
-    tags = ["finance", "stocks"]
+    tags: ClassVar[list[str]] = ["finance", "stocks"]
 
     def __init__(self) -> None:
         """Initialize provider and load the Alpha Vantage API key."""

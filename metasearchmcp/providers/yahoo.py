@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import ClassVar
+
 from http import HTTPStatus
 from urllib.parse import unquote
 
@@ -54,7 +56,7 @@ class YahooProvider(BaseProvider):
 
     name = "yahoo"
     description = "Web search via Yahoo Search."
-    tags = ["web"]
+    tags: ClassVar[list[str]] = ["web"]
 
     def is_available(self) -> bool:
         """Return whether Yahoo is enabled via ``allow_unstable_providers``."""

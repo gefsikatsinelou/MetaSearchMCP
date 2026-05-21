@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import ClassVar
+
 from bs4 import BeautifulSoup
 
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
@@ -19,7 +21,7 @@ class PkgGoDevProvider(BaseProvider):
 
     name = "pkg_go_dev"
     description = "Search Go modules and packages on pkg.go.dev."
-    tags = ["web", "code", "developer", "packages"]
+    tags: ClassVar[list[str]] = ["web", "code", "developer", "packages"]
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
         """Search pkg.go.dev for *query* and return Go package results."""

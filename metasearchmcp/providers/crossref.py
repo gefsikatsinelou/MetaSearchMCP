@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import ClassVar
+
 import re
 
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
@@ -26,7 +28,7 @@ class CrossrefProvider(BaseProvider):
         "Search scholarly metadata from Crossref covering "
         "journals, books, and conference papers."
     )
-    tags = ["academic", "web"]
+    tags: ClassVar[list[str]] = ["academic", "web"]
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
         """Search Crossref for *query* and return academic results."""

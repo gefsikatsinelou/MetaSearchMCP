@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import ClassVar
+
 from metasearchmcp.config import get_settings
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
 
@@ -24,7 +26,7 @@ class PubMedProvider(BaseProvider):
 
     name = "pubmed"
     description = "Search biomedical and life-science literature via PubMed / NCBI."
-    tags = ["academic", "web", "medical"]
+    tags: ClassVar[list[str]] = ["academic", "web", "medical"]
 
     def __init__(self) -> None:
         """Initialize PubMed provider with API key from settings."""

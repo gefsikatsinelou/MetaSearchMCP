@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import ClassVar
+
 from bs4 import BeautifulSoup
 
 from metasearchmcp.config import get_settings
@@ -23,7 +25,7 @@ class EcosiaProvider(BaseProvider):
 
     name = "ecosia"
     description = "Eco-friendly web search via Ecosia, powered by Bing."
-    tags = ["web", "privacy"]
+    tags: ClassVar[list[str]] = ["web", "privacy"]
 
     def is_available(self) -> bool:
         """Return True when unstable providers are allowed."""

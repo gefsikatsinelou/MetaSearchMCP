@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import ClassVar
+
 import xml.etree.ElementTree as ET
 
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
@@ -23,7 +25,7 @@ class ArxivProvider(BaseProvider):
         "Search arXiv preprints across physics, mathematics, "
         "computer science, and more."
     )
-    tags = ["academic", "web"]
+    tags: ClassVar[list[str]] = ["academic", "web"]
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
         """Search arXiv for papers matching *query*."""

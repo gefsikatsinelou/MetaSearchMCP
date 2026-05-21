@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import ClassVar
+
 from metasearchmcp.config import get_settings
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
 
@@ -21,7 +23,7 @@ class StackOverflowProvider(BaseProvider):
 
     name = "stackoverflow"
     description = "Search Stack Overflow questions and answers."
-    tags = ["web", "code", "developer"]
+    tags: ClassVar[list[str]] = ["web", "code", "developer"]
 
     def __init__(self) -> None:
         """Initialize StackOverflow provider with API key from settings."""

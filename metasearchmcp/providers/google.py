@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import ClassVar
+
 import re
 from urllib.parse import parse_qs, unquote, urlparse
 
@@ -41,7 +43,7 @@ class GoogleProvider(BaseProvider):
 
     name = "google"
     description = "Direct Google web search via HTML scraping."
-    tags = ["google", "web"]
+    tags: ClassVar[list[str]] = ["google", "web"]
 
     def is_available(self) -> bool:
         """Return True when unstable providers are allowed."""

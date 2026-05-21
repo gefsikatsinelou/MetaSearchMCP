@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import ClassVar
+
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
 
 from .base import BaseProvider
@@ -18,7 +20,7 @@ class OpenLibraryProvider(BaseProvider):
     description = (
         "Search books and authors via Open Library, part of the Internet Archive."
     )
-    tags = ["web", "academic", "knowledge", "books"]
+    tags: ClassVar[list[str]] = ["web", "academic", "knowledge", "books"]
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
         """Search Open Library for *query* and return book results."""

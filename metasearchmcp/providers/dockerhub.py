@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import ClassVar
+
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
 
 from .base import BaseProvider
@@ -15,7 +17,7 @@ class DockerHubProvider(BaseProvider):
 
     name = "dockerhub"
     description = "Search public container images on Docker Hub."
-    tags = ["web", "code", "developer", "containers"]
+    tags: ClassVar[list[str]] = ["web", "code", "developer", "containers"]
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
         """Search Docker Hub for *query* and return image results."""

@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import ClassVar
+
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
 
 from .base import BOT_USER_AGENT, BaseProvider
@@ -20,7 +22,7 @@ class WikidataProvider(BaseProvider):
 
     name = "wikidata"
     description = "Search structured knowledge base entities on Wikidata."
-    tags = ["web", "academic", "knowledge"]
+    tags: ClassVar[list[str]] = ["web", "academic", "knowledge"]
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
         """Search Wikidata entities for *query*."""

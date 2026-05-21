@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import ClassVar
+
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
 
 from .base import BaseProvider
@@ -19,7 +21,7 @@ class GitLabProvider(BaseProvider):
 
     name = "gitlab"
     description = "Search GitLab projects and repositories."
-    tags = ["web", "code", "developer", "repos"]
+    tags: ClassVar[list[str]] = ["web", "code", "developer", "repos"]
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
         """Search GitLab projects for *query*."""

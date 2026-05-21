@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import ClassVar
+
 from bs4 import BeautifulSoup
 
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
@@ -20,7 +22,7 @@ class LibRsProvider(BaseProvider):
 
     name = "lib_rs"
     description = "Search Rust packages via lib.rs with curated rankings."
-    tags = ["web", "code", "developer", "packages"]
+    tags: ClassVar[list[str]] = ["web", "code", "developer", "packages"]
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
         """Search lib.rs for *query* and return Rust crate results."""

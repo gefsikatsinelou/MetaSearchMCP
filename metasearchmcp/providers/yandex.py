@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import ClassVar
+
 from bs4 import BeautifulSoup
 
 from metasearchmcp.config import get_settings
@@ -25,7 +27,7 @@ class YandexProvider(BaseProvider):
 
     name = "yandex"
     description = "Web search via Yandex."
-    tags = ["web"]
+    tags: ClassVar[list[str]] = ["web"]
 
     def is_available(self) -> bool:
         """Return whether Yandex is enabled via ``allow_unstable_providers``."""

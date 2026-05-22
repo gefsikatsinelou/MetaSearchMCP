@@ -34,14 +34,15 @@ async def execute_provider_search(
             provider.search(query, options),
             timeout=timeout,
         )
-        latency_ms = (time.monotonic() - start) * 1000
-        return provider.name, payload, latency_ms, None
     except TimeoutError:
         latency_ms = (time.monotonic() - start) * 1000
         return provider.name, None, latency_ms, f"timeout after {timeout}s"
     except Exception as exc:
         latency_ms = (time.monotonic() - start) * 1000
         return provider.name, None, latency_ms, str(exc)
+    else:
+        latency_ms = (time.monotonic() - start) * 1000
+        return provider.name, payload, latency_ms, None
 
 
 def _unique_strings(values: list[str]) -> list[str]:

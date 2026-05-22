@@ -61,18 +61,6 @@ class YahooProvider(BaseProvider):
         """Return whether Yahoo is enabled via ``allow_unstable_providers``."""
         return get_settings().allow_unstable_providers
 
-    @staticmethod
-    def _language_code(language: str) -> str:
-        normalized = (language or "en").strip().replace("_", "-")
-        primary = normalized.split("-", 1)[0].lower()
-        return primary or "en"
-
-    @staticmethod
-    def _country_code(country: str) -> str:
-        normalized = (country or "us").strip().replace("_", "-")
-        region = normalized.rsplit("-", 1)[-1].upper()
-        return region or "US"
-
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
         """Search Yahoo for *query* via HTML scraping and return web results."""
         domain = _REGION_TO_DOMAIN.get(

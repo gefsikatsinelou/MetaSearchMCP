@@ -33,18 +33,6 @@ class BraveProvider(BaseProvider):
         """Return True when a Brave API key is configured."""
         return bool(self._api_key)
 
-    @staticmethod
-    def _language_code(language: str) -> str:
-        normalized = (language or "en").strip().replace("_", "-")
-        primary = normalized.split("-", 1)[0].lower()
-        return primary or "en"
-
-    @staticmethod
-    def _country_code(country: str) -> str:
-        normalized = (country or "us").strip().replace("_", "-")
-        region = normalized.rsplit("-", 1)[-1].upper()
-        return region or "US"
-
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
         """Search Brave for *query* via the official Web Search API."""
         language_code = self._language_code(params.language)

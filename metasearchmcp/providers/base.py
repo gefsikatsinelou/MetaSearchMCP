@@ -63,6 +63,20 @@ class BaseProvider(ABC):
             headers=self._SCRAPER_HEADERS,
         )
 
+    @staticmethod
+    def _language_code(language: str) -> str:
+        """Normalize a language string to a two-letter primary code."""
+        normalized = (language or "en").strip().replace("_", "-")
+        primary = normalized.split("-", 1)[0].lower()
+        return primary or "en"
+
+    @staticmethod
+    def _country_code(country: str) -> str:
+        """Normalize a country/region string to a two-letter uppercase code."""
+        normalized = (country or "us").strip().replace("_", "-")
+        region = normalized.rsplit("-", 1)[-1].upper()
+        return region or "US"
+
     @abstractmethod
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
         """Execute a search and return structured results."""

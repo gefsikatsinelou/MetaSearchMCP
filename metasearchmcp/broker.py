@@ -214,6 +214,7 @@ async def call_tool(name: str, arguments: dict[str, Any]) -> list[types.TextCont
                 type="text",
                 text=json.dumps(
                     {"error": str(exc), "tool": name},
+                    indent=2,
                     ensure_ascii=False,
                 ),
             ),

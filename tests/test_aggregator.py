@@ -39,6 +39,7 @@ def _result(url: str, provider: str) -> SearchHit:
 
 @pytest.mark.asyncio
 async def test_aggregate_combines_results():
+    """Results from multiple providers should be merged into one response."""
     p1 = _make_provider(
         "p1",
         [_result("https://a.com", "p1"), _result("https://b.com", "p1")],
@@ -53,6 +54,7 @@ async def test_aggregate_combines_results():
 
 @pytest.mark.asyncio
 async def test_aggregate_partial_failure_does_not_abort():
+    """A failing provider should not prevent other providers from returning results."""
     good = _make_provider("good", [_result("https://ok.com", "good")])
     bad = _make_provider("bad", [], fail=True)
 
@@ -69,6 +71,7 @@ async def test_aggregate_partial_failure_does_not_abort():
 
 @pytest.mark.asyncio
 async def test_aggregate_merges_suggestions():
+    """Suggestions from multiple providers should be deduplicated and merged."""
     p1 = _make_provider("p1", [_result("https://a.com", "p1")])
     p2 = _make_provider("p2", [_result("https://b.com", "p2")])
 
@@ -97,6 +100,7 @@ async def test_aggregate_merges_suggestions():
 
 @pytest.mark.asyncio
 async def test_aggregate_cleans_related_searches_and_suggestions():
+    """Empty and duplicate suggestions/related_searches should be stripped."""
     p = _make_provider("p1", [_result("https://a.com", "p1")])
 
     async def p_search(query, params):
@@ -115,6 +119,7 @@ async def test_aggregate_cleans_related_searches_and_suggestions():
 
 @pytest.mark.asyncio
 async def test_aggregate_all_fail_returns_empty():
+    """When every provider fails the response should contain no results."""
     bad1 = _make_provider("b1", [], fail=True)
     bad2 = _make_provider("b2", [], fail=True)
 
@@ -125,6 +130,7 @@ async def test_aggregate_all_fail_returns_empty():
 
 @pytest.mark.asyncio
 async def test_aggregate_deduplicates_across_providers():
+    """Duplicate URLs across providers should be collapsed, keeping the first hit."""
     p1 = _make_provider("p1", [_result("https://a.com", "p1")])
     p2 = _make_provider(
         "p2",
@@ -140,6 +146,7 @@ async def test_aggregate_deduplicates_across_providers():
 
 @pytest.mark.asyncio
 async def test_aggregate_provider_status_includes_latency():
+    """Each provider report should include a realistic latency value."""
     p = _make_provider("p1", [_result("https://x.com", "p1")], delay=0.01)
     resp = await run_search_plan("test", [p])
 
@@ -150,6 +157,7 @@ async def test_aggregate_provider_status_includes_latency():
 
 @pytest.mark.asyncio
 async def test_aggregate_uses_aggregator_timeout(monkeypatch):
+    """Providers exceeding the aggregator timeout should be marked as failed."""
     from metasearchmcp import orchestrator
 
     p = _make_provider("slow", [_result("https://x.com", "slow")], delay=0.02)
@@ -169,6 +177,7 @@ async def test_aggregate_uses_aggregator_timeout(monkeypatch):
 
 @pytest.mark.asyncio
 async def test_aggregate_empty_providers():
+    """Passing an empty provider list should yield an empty but valid response."""
     resp = await run_search_plan("test", [])
     assert resp.results == []
     assert resp.providers == []
@@ -176,6 +185,7 @@ async def test_aggregate_empty_providers():
 
 @pytest.mark.asyncio
 async def test_aggregate_respects_max_total_results():
+    """The final result list should be capped to max_total_results."""
     p1 = _make_provider(
         "p1",
         [

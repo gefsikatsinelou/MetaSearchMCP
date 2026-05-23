@@ -3,11 +3,13 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "MetaSearchMCP"
+name = "metasearchmcp"
 version = "0.1.0"
 description = "MCP-first metasearch backend for AI agents and structured search workflows"
 readme = "README.md"
+license = "MIT"
 requires-python = ">=3.11"
+
 dependencies = [
     "fastapi>=0.111.0",
     "uvicorn[standard]>=0.29.0",
@@ -31,6 +33,13 @@ dev = [
 metasearchmcp = "metasearchmcp.server:run"
 metasearchmcp-mcp = "metasearchmcp.broker:run"
 metasearchmcp-setup = "metasearchmcp.cli:setup"
+msm = "metasearchmcp.server:run"
+msm-mcp = "metasearchmcp.broker:run"
+
+[project.urls]
+Homepage = "https://github.com/gefsikatsinelou/MetaSearchMCP"
+Repository = "https://github.com/gefsikatsinelou/MetaSearchMCP.git"
+Issues = "https://github.com/gefsikatsinelou/MetaSearchMCP/issues"
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"

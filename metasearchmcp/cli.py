@@ -10,7 +10,7 @@ import sys
 
 import httpx
 
-from metasearchmcp.config import USER_CONFIG_DIR, USER_CONFIG_FILE
+from metasearchmcp.config import USER_CONFIG_DIR, USER_CONFIG_FILE, get_settings
 
 _SERPBASE_VALIDATE_URL = "https://api.serpbase.dev/google/search"
 _DASHBOARD_URL = "https://serpbase.dev/dashboard/api-keys"
@@ -53,7 +53,7 @@ def validate_serpbase_key(api_key: str) -> bool:
             _SERPBASE_VALIDATE_URL,
             json={"q": "test"},
             headers={"X-API-Key": api_key},
-            timeout=10.0,
+            timeout=get_settings().default_timeout,
         )
         data = resp.json()
         return data.get("status") in _VALID_STATUSES

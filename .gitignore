@@ -7,3 +7,8 @@ __pycache__/
 pytest-tmp/
 tmp*/
 .env
+
+# Build artifacts
+dist/
+build/
+*.egg-info/

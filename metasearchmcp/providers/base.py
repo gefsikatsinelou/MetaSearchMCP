@@ -17,6 +17,9 @@ PROJECT_URL = "https://github.com/gefsikatsinelou/MetaSearchMCP"
 API_USER_AGENT = f"metasearchmcp/{__version__} (metasearch; +{PROJECT_URL})"
 BOT_USER_AGENT = f"metasearchmcp/{__version__} (metasearch bot; +{PROJECT_URL})"
 
+# Shared truncation limit to keep snippet lengths consistent across providers.
+MAX_SNIPPET_LENGTH = 400
+
 
 class BaseProvider(ABC):
     """Abstract base for all search providers."""

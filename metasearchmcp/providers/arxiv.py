@@ -7,7 +7,7 @@ from typing import ClassVar
 
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
 
-from .base import BaseProvider
+from .base import MAX_SNIPPET_LENGTH, BaseProvider
 
 _API_URL = "https://export.arxiv.org/api/query"
 _NS = {"atom": "http://www.w3.org/2005/Atom"}
@@ -71,7 +71,7 @@ class ArxivProvider(BaseProvider):
                 SearchResult(
                     title=title,
                     url=arxiv_url,
-                    snippet=snippet[:400],
+                    snippet=snippet[:MAX_SNIPPET_LENGTH],
                     source="arxiv.org",
                     rank=i,
                     provider=self.name,

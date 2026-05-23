@@ -7,7 +7,7 @@ from typing import ClassVar
 
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
 
-from .base import BaseProvider
+from .base import MAX_SNIPPET_LENGTH, BaseProvider
 
 _API_URL = "https://api.crossref.org/works"
 _MAX_API_RESULTS = 20
@@ -59,7 +59,7 @@ class CrossrefProvider(BaseProvider):
             doi = item.get("DOI", "")
             url = item.get("URL", "") or (f"https://doi.org/{doi}" if doi else "")
 
-            abstract = (item.get("abstract") or "")[:400]
+            abstract = (item.get("abstract") or "")[:MAX_SNIPPET_LENGTH]
             # CrossRef abstracts sometimes include JATS XML tags
             abstract = re.sub(r"<[^>]+>", "", abstract).strip()
 

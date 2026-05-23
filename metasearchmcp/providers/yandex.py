@@ -9,7 +9,7 @@ from bs4 import BeautifulSoup
 from metasearchmcp.config import get_settings
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
 
-from .base import BaseProvider
+from .base import MAX_SNIPPET_LENGTH, BaseProvider
 
 _SEARCH_URL = "https://yandex.com/search/site/"
 _SUPPORTED_LANGS = {"ru", "en", "be", "fr", "de", "id", "kk", "tt", "tr", "uk"}
@@ -93,7 +93,7 @@ class YandexProvider(BaseProvider):
             ):
                 el = block.select_one(sel)
                 if el:
-                    snippet = el.get_text(strip=True)[:400]
+                    snippet = el.get_text(strip=True)[:MAX_SNIPPET_LENGTH]
                     break
 
             results.append(

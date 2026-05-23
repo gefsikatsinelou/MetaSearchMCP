@@ -7,7 +7,7 @@ from typing import ClassVar
 from metasearchmcp.config import get_settings
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
 
-from .base import BaseProvider
+from .base import MAX_SNIPPET_LENGTH, BaseProvider
 
 _API_URL = "https://api.semanticscholar.org/graph/v1/paper/search"
 _FIELDS = "paperId,title,abstract,year,authors,url,externalIds,venue,citationCount"
@@ -64,7 +64,7 @@ class SemanticScholarProvider(BaseProvider):
 
         for i, paper in enumerate(data.get("data", []), start=1):
             title = paper.get("title", "")
-            abstract = (paper.get("abstract") or "")[:400]
+            abstract = (paper.get("abstract") or "")[:MAX_SNIPPET_LENGTH]
             year = str(paper.get("year") or "")
             venue = paper.get("venue", "") or ""
             citations = paper.get("citationCount", 0)

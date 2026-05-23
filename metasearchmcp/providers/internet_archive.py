@@ -6,7 +6,7 @@ from typing import ClassVar
 
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
 
-from .base import BaseProvider
+from .base import MAX_SNIPPET_LENGTH, BaseProvider
 
 _SEARCH_URL = "https://archive.org/advancedsearch.php"
 _MAX_API_RESULTS = 20
@@ -62,7 +62,7 @@ class InternetArchiveProvider(BaseProvider):
             description = doc.get("description", "")
             if isinstance(description, list):
                 description = " ".join(description)
-            description = (description or "")[:400]
+            description = (description or "")[:MAX_SNIPPET_LENGTH]
 
             mediatype = doc.get("mediatype", "")
             creator = doc.get("creator", "")

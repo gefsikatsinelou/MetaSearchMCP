@@ -51,7 +51,7 @@ class HackerNewsProvider(BaseProvider):
             created = (hit.get("created_at") or "")[:10]
 
             # Prefer the story URL; fall back to HN thread
-            url = story_url if story_url else hn_url
+            url = story_url or hn_url
 
             snippet_parts = []
             if story_url and story_url != url:

@@ -221,6 +221,32 @@ async def call_tool(name: str, arguments: dict[str, Any]) -> list[types.TextCont
         ]
 
 
+async def _run_tagged_search(
+    query: str,
+    options: SearchOptions,
+    tag: str,
+    error_message: str,
+) -> dict[str, Any]:
+    """Execute a search against providers that carry *tag* and return the report."""
+    selected = pick_tagged_providers(_catalog, tag)
+    if not selected:
+        return {"error": error_message}
+    return (await run_search_plan(query, list(selected.values()), options)).model_dump()
+
+
+async def _run_named_search(
+    query: str,
+    options: SearchOptions,
+    names: list[str],
+    error_message: str,
+) -> dict[str, Any]:
+    """Execute a search against explicitly named providers and return the report."""
+    selected = pick_named_providers(_catalog, names)
+    if not selected:
+        return {"error": error_message}
+    return (await run_search_plan(query, list(selected.values()), options)).model_dump()
+
+
 async def dispatch_tool(name: str, arguments: dict[str, Any]) -> dict[str, Any]:
     """Route a tool call to the appropriate search handler."""
     query = arguments["query"]
@@ -283,20 +309,14 @@ async def dispatch_tool(name: str, arguments: dict[str, Any]) -> dict[str, Any]:
         ).model_dump()
 
     if name == "search_academic":
-        selected = pick_tagged_providers(_catalog, "academic")
-        if not selected:
-            return {"error": "No academic providers available."}
-        return (
-            await run_search_plan(query, list(selected.values()), options)
-        ).model_dump()
+        return await _run_tagged_search(
+            query, options, "academic", "No academic providers available.",
+        )
 
     if name == "search_github":
-        selected = pick_named_providers(_catalog, ["github"])
-        if not selected:
-            return {"error": "GitHub provider not available."}
-        return (
-            await run_search_plan(query, list(selected.values()), options)
-        ).model_dump()
+        return await _run_named_search(
+            query, options, ["github"], "GitHub provider not available.",
+        )
 
     if name == "compare_engines":
         selected = pick_named_providers(_catalog, arguments.get("providers") or [])
@@ -330,27 +350,22 @@ async def dispatch_tool(name: str, arguments: dict[str, Any]) -> dict[str, Any]:
         return comparison
 
     if name == "search_finance":
-        selected = pick_tagged_providers(_catalog, "finance")
-        if not selected:
-            return {
-                "error": (
-                    "No finance providers available. "
-                    "yahoo_finance is enabled by default; "
-                    "set ALPHA_VANTAGE_API_KEY or FINNHUB_API_KEY "
-                    "for additional providers."
-                ),
-            }
-        return (
-            await run_search_plan(query, list(selected.values()), options)
-        ).model_dump()
+        return await _run_tagged_search(
+            query,
+            options,
+            "finance",
+            (
+                "No finance providers available. "
+                "yahoo_finance is enabled by default; "
+                "set ALPHA_VANTAGE_API_KEY or FINNHUB_API_KEY "
+                "for additional providers."
+            ),
+        )
 
     if name == "search_code":
-        selected = pick_tagged_providers(_catalog, "code")
-        if not selected:
-            return {"error": "No code/developer providers available."}
-        return (
-            await run_search_plan(query, list(selected.values()), options)
-        ).model_dump()
+        return await _run_tagged_search(
+            query, options, "code", "No code/developer providers available.",
+        )
 
     return {"error": f"Unknown tool: {name}"}
 

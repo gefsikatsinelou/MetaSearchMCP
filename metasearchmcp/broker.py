@@ -310,12 +310,18 @@ async def dispatch_tool(name: str, arguments: dict[str, Any]) -> dict[str, Any]:
 
     if name == "search_academic":
         return await _run_tagged_search(
-            query, options, "academic", "No academic providers available.",
+            query,
+            options,
+            "academic",
+            "No academic providers available.",
         )
 
     if name == "search_github":
         return await _run_named_search(
-            query, options, ["github"], "GitHub provider not available.",
+            query,
+            options,
+            ["github"],
+            "GitHub provider not available.",
         )
 
     if name == "compare_engines":
@@ -364,7 +370,10 @@ async def dispatch_tool(name: str, arguments: dict[str, Any]) -> dict[str, Any]:
 
     if name == "search_code":
         return await _run_tagged_search(
-            query, options, "code", "No code/developer providers available.",
+            query,
+            options,
+            "code",
+            "No code/developer providers available.",
         )
 
     return {"error": f"Unknown tool: {name}"}

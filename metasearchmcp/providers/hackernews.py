@@ -54,7 +54,7 @@ class HackerNewsProvider(BaseProvider):
             url = story_url or hn_url
 
             snippet_parts = []
-            if story_url and story_url != url:
+            if story_url:
                 snippet_parts.append(f"Discussion: {hn_url}")
             snippet_parts.append(
                 f"Points: {points} | Comments: {comments} | By: {author}",

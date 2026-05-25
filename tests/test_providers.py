@@ -245,7 +245,7 @@ async def test_google_search_normalizes_language_for_request(monkeypatch):
             return FakeResponse()
 
     provider = GoogleProvider()
-    monkeypatch.setattr(provider, "_scraper_client", lambda: FakeClient())
+    monkeypatch.setattr(provider, "_scraper_client", FakeClient)
     monkeypatch.setattr(provider, "_parse", lambda html: SimpleNamespace(results=[]))
 
     result = await provider.search(
@@ -286,7 +286,7 @@ async def test_google_search_normalizes_country_for_request(monkeypatch):
             return FakeResponse()
 
     provider = GoogleProvider()
-    monkeypatch.setattr(provider, "_scraper_client", lambda: FakeClient())
+    monkeypatch.setattr(provider, "_scraper_client", FakeClient)
     monkeypatch.setattr(provider, "_parse", lambda html: SimpleNamespace(results=[]))
 
     await provider.search(
@@ -376,7 +376,7 @@ async def test_serper_search_normalizes_locale_for_request(monkeypatch):
 
     provider = GoogleSerperProvider()
     monkeypatch.setattr(provider, "_api_key", "test-key")
-    monkeypatch.setattr(provider, "_client", lambda: FakeClient())
+    monkeypatch.setattr(provider, "_client", FakeClient)
 
     result = await provider.search(
         "fastapi",
@@ -442,7 +442,7 @@ async def test_serpbase_search_normalizes_locale_for_request(monkeypatch):
 
     provider = GoogleSerpbaseProvider()
     monkeypatch.setattr(provider, "_api_key", "test-key")
-    monkeypatch.setattr(provider, "_client", lambda: FakeClient())
+    monkeypatch.setattr(provider, "_client", FakeClient)
 
     result = await provider.search(
         "fastapi",
@@ -482,7 +482,7 @@ async def test_brave_search_normalizes_locale_for_request(monkeypatch):
 
     provider = BraveProvider()
     monkeypatch.setattr(provider, "_api_key", "test-key")
-    monkeypatch.setattr(provider, "_client", lambda: FakeClient())
+    monkeypatch.setattr(provider, "_client", FakeClient)
 
     result = await provider.search(
         "fastapi",
@@ -519,7 +519,7 @@ async def test_duckduckgo_search_normalizes_locale_for_request(monkeypatch):
             return FakeResponse()
 
     provider = DuckDuckGoProvider()
-    monkeypatch.setattr(provider, "_scraper_client", lambda: FakeClient())
+    monkeypatch.setattr(provider, "_scraper_client", FakeClient)
     monkeypatch.setattr(provider, "_parse", lambda html: SimpleNamespace(results=[]))
 
     result = await provider.search(
@@ -557,7 +557,7 @@ async def test_bing_search_normalizes_locale_for_request(monkeypatch):
             return FakeResponse()
 
     provider = BingProvider()
-    monkeypatch.setattr(provider, "_client", lambda: FakeClient())
+    monkeypatch.setattr(provider, "_client", FakeClient)
     monkeypatch.setattr(
         provider,
         "_parse",
@@ -607,7 +607,7 @@ async def test_qwant_search_normalizes_locale_for_request(monkeypatch):
             return FakeResponse(status_code=200, text="<html></html>")
 
     provider = QwantProvider()
-    monkeypatch.setattr(provider, "_scraper_client", lambda: FakeClient())
+    monkeypatch.setattr(provider, "_scraper_client", FakeClient)
     monkeypatch.setattr(
         provider,
         "_parse_lite",

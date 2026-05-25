@@ -63,7 +63,7 @@ def test_run_warns_when_serpbase_missing(monkeypatch, capsys):
         called["ran"] = True
         coro.close()
 
-    monkeypatch.setattr(broker, "get_settings", lambda: FakeSettings())
+    monkeypatch.setattr(broker, "get_settings", FakeSettings)
     monkeypatch.setattr(broker.asyncio, "run", fake_run)
 
     broker.run()
@@ -84,7 +84,7 @@ def test_run_skips_warning_when_serpbase_present(monkeypatch, capsys):
     def fake_run(coro):
         coro.close()
 
-    monkeypatch.setattr(broker, "get_settings", lambda: FakeSettings())
+    monkeypatch.setattr(broker, "get_settings", FakeSettings)
     monkeypatch.setattr(broker.asyncio, "run", fake_run)
 
     broker.run()
@@ -104,7 +104,7 @@ def test_run_skips_warning_when_direct_google_enabled(monkeypatch, capsys):
     def fake_run(coro):
         coro.close()
 
-    monkeypatch.setattr(broker, "get_settings", lambda: FakeSettings())
+    monkeypatch.setattr(broker, "get_settings", FakeSettings)
     monkeypatch.setattr(broker.asyncio, "run", fake_run)
 
     broker.run()

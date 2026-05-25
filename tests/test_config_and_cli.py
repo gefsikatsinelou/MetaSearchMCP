@@ -175,7 +175,7 @@ def test_setup_saves_validated_key(monkeypatch):
     monkeypatch.setattr(cli, "load_config", dict)
     monkeypatch.setattr("builtins.input", lambda prompt="": next(answers))
     monkeypatch.setattr(cli, "validate_serpbase_key", lambda key: True)
-    monkeypatch.setattr(cli, "save_config", lambda env: saved.update(env))
+    monkeypatch.setattr(cli, "save_config", saved.update)
     monkeypatch.setattr(cli, "print_tool_configs", lambda: None)
 
     cli.setup()

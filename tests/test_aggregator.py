@@ -165,7 +165,7 @@ async def test_aggregate_uses_aggregator_timeout(monkeypatch):
     class FakeSettings:
         aggregator_timeout = 0.001
 
-    monkeypatch.setattr(orchestrator, "get_settings", lambda: FakeSettings())
+    monkeypatch.setattr(orchestrator, "get_settings", FakeSettings)
 
     resp = await run_search_plan("test", [p])
 

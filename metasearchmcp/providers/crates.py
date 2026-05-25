@@ -13,7 +13,8 @@ _MAX_API_RESULTS = 10
 
 
 class CratesIoProvider(BaseProvider):
-    """crates.io Rust package search via the public REST API.
+    """
+    crates.io Rust package search via the public REST API.
 
     No authentication required.
     """

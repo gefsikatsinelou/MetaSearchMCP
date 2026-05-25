@@ -14,7 +14,8 @@ _MAX_API_RESULTS = 20
 
 
 class GitLabProvider(BaseProvider):
-    """GitLab project search via the public GitLab REST API.
+    """
+    GitLab project search via the public GitLab REST API.
 
     No authentication required for public project search.
     """

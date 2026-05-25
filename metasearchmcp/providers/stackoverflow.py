@@ -14,7 +14,8 @@ _MAX_API_RESULTS = 30
 
 
 class StackOverflowProvider(BaseProvider):
-    """Stack Overflow / Stack Exchange search via the official API.
+    """
+    Stack Overflow / Stack Exchange search via the official API.
 
     Public access: 300 req/day (IP-based).
     With a Stack Apps API key: 10,000 req/day.

@@ -20,7 +20,8 @@ _ERR_QWANT_UNAVAILABLE = "Qwant Lite is currently unavailable from this network"
 
 
 class QwantProvider(BaseProvider):
-    """Qwant search via their internal JSON API.
+    """
+    Qwant search via their internal JSON API.
 
     The internal API endpoint (v3) currently returns 403 for non-browser
     requests. This provider is best-effort and may not work without a valid

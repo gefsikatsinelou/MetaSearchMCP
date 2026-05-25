@@ -13,7 +13,8 @@ _BASE_URL = "https://finnhub.io/api/v1"
 
 
 class FinnhubProvider(BaseProvider):
-    """Finnhub stock search via the official API.
+    """
+    Finnhub stock search via the official API.
 
     Free tier: 60 API calls/minute.
     Get a free key at https://finnhub.io/register

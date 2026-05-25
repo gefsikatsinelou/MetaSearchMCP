@@ -113,7 +113,8 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
 
 
 def build_registry() -> dict[str, BaseProvider]:
-    """Instantiate all providers and return a name -> instance mapping.
+    """
+    Instantiate all providers and return a name -> instance mapping.
 
     Providers whose is_available() returns False are excluded unless they
     appear in the explicit ENABLED_PROVIDERS list (in which case they are

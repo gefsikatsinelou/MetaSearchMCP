@@ -22,7 +22,8 @@ _ERR_STARTPAGE_NO_SC = "Startpage did not expose an sc token for this session"
 
 
 class StartpageProvider(BaseProvider):
-    """Startpage search via HTML scraping.
+    """
+    Startpage search via HTML scraping.
 
     Startpage proxies Google results with privacy preservation.
     Heavy anti-bot measures; this provider may be unreliable in automated

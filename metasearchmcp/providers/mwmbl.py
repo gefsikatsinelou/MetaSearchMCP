@@ -12,7 +12,8 @@ _API_URL = "https://api.mwmbl.org/api/v1/search/"
 
 
 class MwmblProvider(BaseProvider):
-    """Mwmbl — non-profit, open-source web search engine.
+    """
+    Mwmbl — non-profit, open-source web search engine.
 
     Public JSON API, no authentication required.
     """

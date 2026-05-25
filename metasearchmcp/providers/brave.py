@@ -14,7 +14,8 @@ _MAX_API_RESULTS = 20
 
 
 class BraveProvider(BaseProvider):
-    """Brave Search via the official Web Search API.
+    """
+    Brave Search via the official Web Search API.
 
     Free tier: 2000 req/month. API key required.
     Sign up at https://brave.com/search/api/

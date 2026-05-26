@@ -8,6 +8,10 @@ pytest-tmp/
 tmp*/
 .env
 
+# Tool caches
+.ruff_cache/
+.mypy_cache/
+
 # Build artifacts
 dist/
 build/

@@ -16,8 +16,7 @@ _MAX_AUTHORS_SHOWN = 3
 
 
 class SemanticScholarProvider(BaseProvider):
-    """
-    Semantic Scholar academic paper search via the public Graph API.
+    """Semantic Scholar academic paper search via the public Graph API.
 
     Unauthenticated: 1 req/sec, 5,000 req/day.
     With a free API key: 10 req/sec, 100M+ papers indexed.

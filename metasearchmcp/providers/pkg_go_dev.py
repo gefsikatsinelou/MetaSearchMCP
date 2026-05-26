@@ -14,8 +14,7 @@ _BASE_URL = "https://pkg.go.dev"
 
 
 class PkgGoDevProvider(BaseProvider):
-    """
-    pkg.go.dev — Go package/module search via HTML scraping.
+    """pkg.go.dev — Go package/module search via HTML scraping.
 
     No authentication required.
     """

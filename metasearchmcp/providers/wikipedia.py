@@ -13,8 +13,7 @@ _API_URL = "https://en.wikipedia.org/w/api.php"
 
 
 class WikipediaProvider(BaseProvider):
-    """
-    Wikipedia full-text search via the MediaWiki Action API.
+    """Wikipedia full-text search via the MediaWiki Action API.
 
     No authentication required. Returns article summaries.
     """

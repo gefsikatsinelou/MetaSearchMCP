@@ -17,8 +17,7 @@ _ERR_YANDEX_CAPTCHA = "Yandex requested a captcha challenge for this network"
 
 
 class YandexProvider(BaseProvider):
-    """
-    Yandex web search via HTML scraping.
+    """Yandex web search via HTML scraping.
 
     Yandex returns a mostly client-side-rendered response to non-browser
     requests; results are typically empty from datacenter IPs. May work on

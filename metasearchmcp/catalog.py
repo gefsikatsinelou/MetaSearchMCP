@@ -31,8 +31,7 @@ def pick_named_providers(
     catalog: dict[str, BaseProvider],
     names: list[str],
 ) -> dict[str, BaseProvider]:
-    """
-    Filter *catalog* to providers whose names match *names* (case-insensitive).
+    """Filter *catalog* to providers whose names match *names* (case-insensitive).
 
     If *names* is empty the original *catalog* is returned unchanged.
     """
@@ -61,8 +60,7 @@ def pick_providers_by_tags(
     tags: list[str],
     match: str = "any",
 ) -> dict[str, BaseProvider]:
-    """
-    Filter *catalog* by one or more tags.
+    """Filter *catalog* by one or more tags.
 
     Args:
         catalog: Mapping of provider name to provider instance.

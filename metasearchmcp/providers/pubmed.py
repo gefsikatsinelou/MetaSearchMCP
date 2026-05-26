@@ -16,8 +16,7 @@ _MAX_AUTHORS_SHOWN = 3
 
 
 class PubMedProvider(BaseProvider):
-    """
-    PubMed biomedical literature search via NCBI E-utilities.
+    """PubMed biomedical literature search via NCBI E-utilities.
 
     Fully public, no API key required for low-volume use.
     Recommended rate: <= 3 req/sec without key. For higher volume,

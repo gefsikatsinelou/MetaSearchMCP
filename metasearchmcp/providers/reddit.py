@@ -21,8 +21,7 @@ _MAX_SELFTEXT_LENGTH = 200
 
 
 class RedditProvider(BaseProvider):
-    """
-    Reddit search via the official OAuth2 API.
+    """Reddit search via the official OAuth2 API.
 
     Requires a Reddit application (free, no review needed for script apps):
       1. Go to https://www.reddit.com/prefs/apps

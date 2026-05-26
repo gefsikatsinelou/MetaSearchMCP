@@ -17,8 +17,7 @@ _ERR_BAIDU_NOT_JSON = "Baidu did not return JSON search results for this request
 
 
 class BaiduProvider(BaseProvider):
-    """
-    Baidu web search via the JSON result endpoint.
+    """Baidu web search via the JSON result endpoint.
 
     Suitable for Chinese-language and China-region queries.
     Baidu has aggressive anti-bot detection; results in automated contexts

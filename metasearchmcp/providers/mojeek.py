@@ -15,8 +15,7 @@ _MAX_API_RESULTS = 30
 
 
 class MojeekProvider(BaseProvider):
-    """
-    Mojeek independent web search via HTML scraping.
+    """Mojeek independent web search via HTML scraping.
 
     Mojeek crawls the web independently (not a meta-search of Google/Bing).
     No authentication required.

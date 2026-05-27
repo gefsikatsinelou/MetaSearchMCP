@@ -17,7 +17,8 @@ _SEARCH_URL = "https://pypi.org/search/"
 
 
 class PyPIProvider(BaseProvider):
-    """PyPI package lookup via the JSON API.
+    """
+    PyPI package lookup via the JSON API.
 
     PyPI's HTML search page is protected by Cloudflare bot detection and
     cannot be scraped reliably. The XML-RPC search method was removed.

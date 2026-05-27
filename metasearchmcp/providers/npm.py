@@ -13,7 +13,8 @@ _MAX_API_RESULTS = 20
 
 
 class NpmProvider(BaseProvider):
-    """npm package search via the npm registry API.
+    """
+    npm package search via the npm registry API.
 
     Fully public, no authentication required.
     """

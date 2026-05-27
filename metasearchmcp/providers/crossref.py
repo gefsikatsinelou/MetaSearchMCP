@@ -15,7 +15,8 @@ _MAX_DISPLAY_AUTHORS = 3
 
 
 class CrossrefProvider(BaseProvider):
-    """CrossRef scholarly metadata search via the public REST API.
+    """
+    CrossRef scholarly metadata search via the public REST API.
 
     Covers 145M+ DOI-registered scholarly works (papers, books, datasets).
     No authentication required.

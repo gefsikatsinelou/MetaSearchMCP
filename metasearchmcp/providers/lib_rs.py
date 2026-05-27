@@ -14,7 +14,8 @@ _BASE_URL = "https://lib.rs"
 
 
 class LibRsProvider(BaseProvider):
-    """lib.rs — alternative Rust crate search via HTML scraping.
+    """
+    lib.rs — alternative Rust crate search via HTML scraping.
 
     Complements crates.io with different ranking and discoverability.
     No authentication required.

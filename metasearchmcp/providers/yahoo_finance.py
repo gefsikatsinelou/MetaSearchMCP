@@ -22,7 +22,8 @@ _HEADERS = {
 
 
 class YahooFinanceProvider(BaseProvider):
-    """Yahoo Finance stock & ETF search via the unofficial JSON endpoint.
+    """
+    Yahoo Finance stock & ETF search via the unofficial JSON endpoint.
 
     No API key required. Returns ticker symbols, company names, and basic
     quote data. Note: unofficial endpoint, may occasionally be unreliable.

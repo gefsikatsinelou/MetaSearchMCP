@@ -13,7 +13,8 @@ _BASE_URL = "https://www.alphavantage.co/query"
 
 
 class AlphaVantageProvider(BaseProvider):
-    """Alpha Vantage stock search via the official SYMBOL_SEARCH endpoint.
+    """
+    Alpha Vantage stock search via the official SYMBOL_SEARCH endpoint.
 
     Free tier: 25 requests/day, 5 requests/minute.
     Get a free key at https://www.alphavantage.co/support/#api-key

@@ -39,7 +39,8 @@ _QUERY_TEMPLATE = {
 
 
 class MetaCPANProvider(BaseProvider):
-    """MetaCPAN — CPAN Perl module search via the MetaCPAN API.
+    """
+    MetaCPAN — CPAN Perl module search via the MetaCPAN API.
 
     Public API, no authentication required.
     """

@@ -14,7 +14,8 @@ _MAX_ALIASES_SHOWN = 3
 
 
 class WikidataProvider(BaseProvider):
-    """Wikidata entity search via the MediaWiki API.
+    """
+    Wikidata entity search via the MediaWiki API.
 
     Returns structured knowledge entities (people, places, concepts, etc.)
     with their descriptions. No authentication required.

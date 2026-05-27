@@ -14,7 +14,8 @@ _NS = {"atom": "http://www.w3.org/2005/Atom"}
 
 
 class ArxivProvider(BaseProvider):
-    """arXiv academic paper search via the public Atom API.
+    """
+    arXiv academic paper search via the public Atom API.
 
     No authentication required. Rate limit: ~3 req/sec, 1 req/3s recommended.
     """

@@ -52,6 +52,7 @@ class BaseProvider(ABC):
     }
 
     def _client(self) -> httpx.AsyncClient:
+        """Return an HTTP client configured for API requests."""
         return httpx.AsyncClient(
             timeout=self._timeout,
             follow_redirects=True,
@@ -59,7 +60,7 @@ class BaseProvider(ABC):
         )
 
     def _scraper_client(self) -> httpx.AsyncClient:
-        """HTTP client with browser-like headers for HTML scraping."""
+        """Return an HTTP client with browser-like headers for HTML scraping."""
         return httpx.AsyncClient(
             timeout=self._timeout,
             follow_redirects=True,

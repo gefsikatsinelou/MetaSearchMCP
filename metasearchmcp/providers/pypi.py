@@ -6,6 +6,8 @@ import logging
 from http import HTTPStatus
 from typing import Any, ClassVar
 
+import httpx
+
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
 
 from .base import BaseProvider
@@ -68,7 +70,7 @@ class PyPIProvider(BaseProvider):
 
     async def _fetch_package_info(
         self,
-        client: Any,
+        client: httpx.AsyncClient,
         name: str,
     ) -> dict[str, Any] | None:
         """Fetch package metadata from the PyPI JSON API."""

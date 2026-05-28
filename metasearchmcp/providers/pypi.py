@@ -36,9 +36,9 @@ class PyPIProvider(BaseProvider):
     description = "Search Python packages published on PyPI."
     tags: ClassVar[list[str]] = ["web", "code", "developer", "packages"]
 
-    async def search(self, query: str, params: SearchParams) -> ProviderResult:
-        """Search PyPI for Python packages matching *query*."""
-        # Candidate names to probe: whole query + individual tokens
+    @staticmethod
+    def _build_candidates(query: str) -> list[str]:
+        """Build a list of candidate package names from the query."""
         candidates: list[str] = []
         slug = query.strip().lower().replace(" ", "-")
         if slug:
@@ -47,58 +47,81 @@ class PyPIProvider(BaseProvider):
             t = token.strip(".,;:()[]")
             if t and t not in candidates:
                 candidates.append(t)
+        return candidates
+
+    @staticmethod
+    def _build_snippet(info: dict[str, Any]) -> str:
+        """Build a human-readable snippet from package metadata."""
+        summary = info.get("summary", "") or ""
+        version = info.get("version", "")
+        keywords_raw = info.get("keywords") or ""
+        keywords = keywords_raw.split(",")[:5]
+
+        parts: list[str] = [summary]
+        if version:
+            parts.append(f"v{version}")
+        if keywords and keywords != [""]:
+            joined = ", ".join(k.strip() for k in keywords if k.strip())
+            parts.append(f"Keywords: {joined}")
+
+        return " | ".join(p for p in parts if p)
+
+    async def _fetch_package_info(
+        self,
+        client: Any,
+        name: str,
+    ) -> dict[str, Any] | None:
+        """Fetch package metadata from the PyPI JSON API."""
+        try:
+            resp = await client.get(_JSON_API.format(name=name))
+            if resp.status_code != HTTPStatus.OK:
+                return None
+            return resp.json()
+        except Exception:
+            logger.exception("PyPI lookup failed for %s", name)
+            return None
+
+    async def search(self, query: str, params: SearchParams) -> ProviderResult:
+        """Search PyPI for Python packages matching *query*."""
+        candidates = self._build_candidates(query)
+        max_results = min(params.num_results, self._max_results)
 
         results: list[SearchResult] = []
         seen: set[str] = set()
 
         async with self._client() as client:
             for name in candidates:
-                if len(results) >= min(params.num_results, self._max_results):
+                if len(results) >= max_results:
                     break
                 if name in seen:
                     continue
                 seen.add(name)
-                try:
-                    resp = await client.get(_JSON_API.format(name=name))
-                    if resp.status_code != HTTPStatus.OK:
-                        continue
-                    data = resp.json()
-                except Exception:
-                    logger.exception("PyPI lookup failed for %s", name)
+
+                data = await self._fetch_package_info(client, name)
+                if data is None:
                     continue
 
                 info = data.get("info", {})
                 pkg_name = info.get("name", name)
-                version = info.get("version", "")
-                summary = info.get("summary", "") or ""
-                home_page = info.get("home_page", "") or ""
                 project_url = info.get(
                     "package_url",
                     f"https://pypi.org/project/{pkg_name}/",
                 )
-                keywords = (info.get("keywords") or "").split(",")[:5]
-
-                snippet_parts = [summary]
-                if version:
-                    snippet_parts.append(f"v{version}")
-                if keywords and keywords != [""]:
-                    joined = ", ".join(k.strip() for k in keywords if k.strip())
-                    snippet_parts.append(f"Keywords: {joined}")
 
                 results.append(
                     SearchResult(
                         title=pkg_name,
                         url=project_url,
-                        snippet=" | ".join(p for p in snippet_parts if p),
+                        snippet=self._build_snippet(info),
                         source="pypi.org",
                         rank=len(results) + 1,
                         provider=self.name,
                         extra={
-                            "version": version,
+                            "version": info.get("version", ""),
                             "author": info.get("author", ""),
                             "license": info.get("license", ""),
                             "requires_python": info.get("requires_python", ""),
-                            "home_page": home_page,
+                            "home_page": info.get("home_page", "") or "",
                         },
                     ),
                 )

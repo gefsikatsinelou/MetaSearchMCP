@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import logging
 from http import HTTPStatus
-from typing import ClassVar
+from typing import Any, ClassVar
 
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
 

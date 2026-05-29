@@ -13,8 +13,7 @@ _MAX_API_RESULTS = 30
 
 
 class HackerNewsProvider(BaseProvider):
-    """
-    Hacker News search via the Algolia HN API.
+    """Hacker News search via the Algolia HN API.
 
     Fully public, no authentication required. Returns stories and Ask HNs.
     """

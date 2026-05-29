@@ -15,8 +15,7 @@ _SEARCH_URL = "https://www.ecosia.org/search"
 
 
 class EcosiaProvider(BaseProvider):
-    """
-    Ecosia search via HTML scraping.
+    """Ecosia search via HTML scraping.
 
     Ecosia uses Bing results under the hood. Since it routes through Bing,
     it inherits Bing's CAPTCHA behaviour on datacenter IPs and is likely to

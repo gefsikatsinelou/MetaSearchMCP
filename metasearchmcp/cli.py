@@ -1,5 +1,4 @@
-"""
-First-run setup wizard for MetaSearchMCP.
+"""First-run setup wizard for MetaSearchMCP.
 
 Run with: metasearchmcp-setup
 """

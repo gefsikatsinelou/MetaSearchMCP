@@ -61,8 +61,7 @@ async def run_search_plan(
     providers: Sequence[BaseProvider],
     options: SearchOptions | None = None,
 ) -> SearchReport:
-    """
-    Execute *query* across all *providers* and merge the results.
+    """Execute *query* across all *providers* and merge the results.
 
     Results are deduplicated, capped to ``options.max_total_results``,
     and enriched with per-provider timing and error metadata.

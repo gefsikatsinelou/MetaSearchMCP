@@ -13,8 +13,7 @@ _MAX_API_RESULTS = 20
 
 
 class InternetArchiveProvider(BaseProvider):
-    """
-    Internet Archive full-text search via the Advanced Search API.
+    """Internet Archive full-text search via the Advanced Search API.
 
     Covers books, texts, audio, video, software, and web archives.
     No authentication required.

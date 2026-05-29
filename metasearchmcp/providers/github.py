@@ -14,8 +14,7 @@ _MAX_API_RESULTS = 30
 
 
 class GitHubProvider(BaseProvider):
-    """
-    GitHub repository search via the public REST API.
+    """GitHub repository search via the public REST API.
 
     No token: 10 req/min (unauthenticated).
     With GITHUB_TOKEN: 30 req/min, higher rate limits.

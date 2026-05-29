@@ -61,9 +61,9 @@ class GoogleSerpbaseProvider(BaseProvider):
                     data.get("error") or f"serpbase error status={data.get('status')}",
                 )
 
-        return self._parse(data, query)
+        return self._parse(data)
 
-    def _parse(self, data: dict, query: str) -> ProviderResult:
+    def _parse(self, data: dict) -> ProviderResult:
         results: list[SearchResult] = []
 
         for i, item in enumerate(data.get("organic", []), start=1):

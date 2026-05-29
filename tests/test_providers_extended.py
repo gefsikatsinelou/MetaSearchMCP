@@ -229,7 +229,7 @@ def test_wikidata_parse():
     from metasearchmcp.providers.wikidata import WikidataProvider
 
     p = WikidataProvider()
-    result = p._parse(_wikidata_response(), "en")
+    result = p._parse(_wikidata_response())
 
     assert len(result.results) == 1
     r = result.results[0]

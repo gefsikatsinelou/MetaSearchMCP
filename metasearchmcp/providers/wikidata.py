@@ -42,9 +42,9 @@ class WikidataProvider(BaseProvider):
             resp.raise_for_status()
             data = resp.json()
 
-        return self._parse(data, params.language)
+        return self._parse(data)
 
-    def _parse(self, data: dict, language: str) -> ProviderResult:
+    def _parse(self, data: dict) -> ProviderResult:
         results: list[SearchResult] = []
 
         for i, item in enumerate(data.get("search", []), start=1):

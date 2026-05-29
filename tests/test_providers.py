@@ -406,7 +406,6 @@ def test_serpbase_parse_cleans_related_searches():
             "related_searches": ["fastapi tutorial", " fastapi tutorial ", "", None],
             "knowledge_graph": {"title": "FastAPI"},
         },
-        "fastapi",
     )
 
     assert len(result.results) == 1

@@ -46,9 +46,9 @@ class FinnhubProvider(BaseProvider):
             resp.raise_for_status()
             data = resp.json()
 
-        return self._parse(data, query)
+        return self._parse(data)
 
-    def _parse(self, data: dict, query: str = "") -> ProviderResult:
+    def _parse(self, data: dict) -> ProviderResult:
         results: list[SearchResult] = []
 
         count = data.get("count", 0)

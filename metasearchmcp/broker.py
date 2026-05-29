@@ -247,6 +247,98 @@ async def _run_named_search(
     return (await run_search_plan(query, list(selected.values()), options)).model_dump()
 
 
+async def _dispatch_search_web(
+    query: str,
+    arguments: dict[str, Any],
+    options: SearchOptions,
+) -> dict[str, Any]:
+    """Handle the search_web tool dispatch."""
+    options = SearchOptions(
+        num_results=options.num_results,
+        max_total_results=options.max_total_results,
+        language=arguments.get("language", "en"),
+        country=arguments.get("country", "us"),
+        safe_search=arguments.get("safe_search", True),
+    )
+    selected = pick_providers_by_tags(
+        _catalog,
+        arguments.get("tags") or [],
+        match=arguments.get("tag_match", "any"),
+    )
+    selected = pick_named_providers(selected, arguments.get("providers") or [])
+    if not selected:
+        return {"error": "No providers available for the requested filters."}
+    return (await run_search_plan(query, list(selected.values()), options)).model_dump()
+
+
+async def _dispatch_search_google(
+    query: str,
+    arguments: dict[str, Any],
+    options: SearchOptions,
+) -> dict[str, Any]:
+    """Handle the search_google tool dispatch."""
+    options = SearchOptions(
+        num_results=options.num_results,
+        max_total_results=options.max_total_results,
+        safe_search=arguments.get("safe_search", True),
+    )
+    selected = pick_tagged_providers(_catalog, "google")
+    provider_name = arguments.get("provider", "")
+    if provider_name:
+        selected = {
+            name: provider
+            for name, provider in selected.items()
+            if name == provider_name
+        }
+    else:
+        first_available = next(iter(selected.items()), None)
+        selected = {first_available[0]: first_available[1]} if first_available else {}
+    if not selected:
+        return {
+            "error": (
+                "No Google provider available. "
+                "Enable ALLOW_UNSTABLE_PROVIDERS=true for direct Google, "
+                "or set SERPBASE_API_KEY / SERPER_API_KEY."
+            ),
+        }
+    return (await run_search_plan(query, list(selected.values()), options)).model_dump()
+
+
+async def _dispatch_compare_engines(
+    query: str,
+    arguments: dict[str, Any],
+    options: SearchOptions,
+) -> dict[str, Any]:
+    """Handle the compare_engines tool dispatch."""
+    selected = pick_named_providers(_catalog, arguments.get("providers") or [])
+    if not selected:
+        selected = _catalog
+    if not selected:
+        return {"error": "No providers available for comparison."}
+    jobs = [
+        run_search_plan(
+            query,
+            [provider],
+            SearchOptions(
+                num_results=options.num_results,
+                max_total_results=options.max_total_results,
+            ),
+        )
+        for provider in selected.values()
+    ]
+    responses = await asyncio.gather(*jobs, return_exceptions=True)
+    comparison: dict[str, Any] = {"query": query, "engines": {}}
+    for provider_name, response in zip(selected.keys(), responses, strict=True):
+        if isinstance(response, Exception):
+            comparison["engines"][provider_name] = {"error": str(response)}
+        else:
+            comparison["engines"][provider_name] = {
+                "results": [result.model_dump() for result in response.results],
+                "timing_ms": response.timing_ms,
+            }
+    return comparison
+
+
 async def dispatch_tool(name: str, arguments: dict[str, Any]) -> dict[str, Any]:
     """Route a tool call to the appropriate search handler."""
     query = arguments["query"]
@@ -257,106 +349,17 @@ async def dispatch_tool(name: str, arguments: dict[str, Any]) -> dict[str, Any]:
         max_total_results=max_total_results,
     )
 
-    if name == "search_web":
-        options = SearchOptions(
-            num_results=num_results,
-            max_total_results=max_total_results,
-            language=arguments.get("language", "en"),
-            country=arguments.get("country", "us"),
-            safe_search=arguments.get("safe_search", True),
-        )
-        selected = pick_providers_by_tags(
-            _catalog,
-            arguments.get("tags") or [],
-            match=arguments.get("tag_match", "any"),
-        )
-        selected = pick_named_providers(selected, arguments.get("providers") or [])
-        if not selected:
-            return {"error": "No providers available for the requested filters."}
-        return (
-            await run_search_plan(query, list(selected.values()), options)
-        ).model_dump()
-
-    if name == "search_google":
-        options = SearchOptions(
-            num_results=num_results,
-            max_total_results=max_total_results,
-            safe_search=arguments.get("safe_search", True),
-        )
-        selected = pick_tagged_providers(_catalog, "google")
-        provider_name = arguments.get("provider", "")
-        if provider_name:
-            selected = {
-                name: provider
-                for name, provider in selected.items()
-                if name == provider_name
-            }
-        else:
-            first_available = next(iter(selected.items()), None)
-            selected = (
-                {first_available[0]: first_available[1]} if first_available else {}
-            )
-        if not selected:
-            return {
-                "error": (
-                    "No Google provider available. "
-                    "Enable ALLOW_UNSTABLE_PROVIDERS=true for direct Google, "
-                    "or set SERPBASE_API_KEY / SERPER_API_KEY."
-                ),
-            }
-        return (
-            await run_search_plan(query, list(selected.values()), options)
-        ).model_dump()
-
-    if name == "search_academic":
-        return await _run_tagged_search(
-            query,
-            options,
-            "academic",
-            "No academic providers available.",
-        )
-
-    if name == "search_github":
-        return await _run_named_search(
-            query,
-            options,
-            ["github"],
-            "GitHub provider not available.",
-        )
-
-    if name == "compare_engines":
-        selected = pick_named_providers(_catalog, arguments.get("providers") or [])
-        if not selected:
-            # Fall back to all enabled providers instead of erroring silently
-            selected = _catalog
-        if not selected:
-            return {"error": "No providers available for comparison."}
-
-        jobs = [
-            run_search_plan(
-                query,
-                [provider],
-                SearchOptions(
-                    num_results=num_results,
-                    max_total_results=max_total_results,
-                ),
-            )
-            for provider in selected.values()
-        ]
-        responses = await asyncio.gather(*jobs, return_exceptions=True)
-        comparison: dict[str, Any] = {"query": query, "engines": {}}
-        for provider_name, response in zip(selected.keys(), responses, strict=True):
-            if isinstance(response, Exception):
-                comparison["engines"][provider_name] = {"error": str(response)}
-            else:
-                comparison["engines"][provider_name] = {
-                    "results": [result.model_dump() for result in response.results],
-                    "timing_ms": response.timing_ms,
-                }
-        return comparison
-
-    if name == "search_finance":
-        return await _run_tagged_search(
+    handlers: dict[str, Any] = {
+        "search_web": lambda: _dispatch_search_web(query, arguments, options),
+        "search_google": lambda: _dispatch_search_google(query, arguments, options),
+        "search_academic": lambda: _run_tagged_search(
+            query, options, "academic", "No academic providers available."
+        ),
+        "search_github": lambda: _run_named_search(
+            query, options, ["github"], "GitHub provider not available."
+        ),
+        "compare_engines": lambda: _dispatch_compare_engines(query, arguments, options),
+        "search_finance": lambda: _run_tagged_search(
             query,
             options,
             "finance",
@@ -366,17 +369,16 @@ async def dispatch_tool(name: str, arguments: dict[str, Any]) -> dict[str, Any]:
                 "set ALPHA_VANTAGE_API_KEY or FINNHUB_API_KEY "
                 "for additional providers."
             ),
-        )
+        ),
+        "search_code": lambda: _run_tagged_search(
+            query, options, "code", "No code/developer providers available."
+        ),
+    }
 
-    if name == "search_code":
-        return await _run_tagged_search(
-            query,
-            options,
-            "code",
-            "No code/developer providers available.",
-        )
-
-    return {"error": f"Unknown tool: {name}"}
+    handler = handlers.get(name)
+    if handler is None:
+        return {"error": f"Unknown tool: {name}"}
+    return await handler()
 
 
 async def _main() -> None:

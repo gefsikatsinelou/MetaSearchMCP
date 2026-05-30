@@ -353,10 +353,16 @@ async def dispatch_tool(name: str, arguments: dict[str, Any]) -> dict[str, Any]:
         "search_web": lambda: _dispatch_search_web(query, arguments, options),
         "search_google": lambda: _dispatch_search_google(query, arguments, options),
         "search_academic": lambda: _run_tagged_search(
-            query, options, "academic", "No academic providers available.",
+            query,
+            options,
+            "academic",
+            "No academic providers available.",
         ),
         "search_github": lambda: _run_named_search(
-            query, options, ["github"], "GitHub provider not available.",
+            query,
+            options,
+            ["github"],
+            "GitHub provider not available.",
         ),
         "compare_engines": lambda: _dispatch_compare_engines(query, arguments, options),
         "search_finance": lambda: _run_tagged_search(
@@ -371,7 +377,10 @@ async def dispatch_tool(name: str, arguments: dict[str, Any]) -> dict[str, Any]:
             ),
         ),
         "search_code": lambda: _run_tagged_search(
-            query, options, "code", "No code/developer providers available.",
+            query,
+            options,
+            "code",
+            "No code/developer providers available.",
         ),
     }
 

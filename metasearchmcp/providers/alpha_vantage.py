@@ -39,6 +39,7 @@ class AlphaVantageProvider(BaseProvider):
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
         """Search for stock symbols matching *query* via Alpha Vantage."""
+        max_results = min(params.num_results, self._max_results)
         async with self._client() as client:
             resp = await client.get(
                 _BASE_URL,
@@ -51,12 +52,15 @@ class AlphaVantageProvider(BaseProvider):
             resp.raise_for_status()
             data = resp.json()
 
-        return self._parse(data)
+        return self._parse(data, max_results)
 
-    def _parse(self, data: dict) -> ProviderResult:
+    def _parse(self, data: dict, max_results: int | None = None) -> ProviderResult:
         results: list[SearchResult] = []
+        limit = max_results or self._max_results
 
         for i, match in enumerate(data.get("bestMatches", []), start=1):
+            if i > limit:
+                break
             symbol = match.get("1. symbol", "")
             name = match.get("2. name", "")
             q_type = match.get("3. type", "")

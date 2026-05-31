@@ -53,7 +53,7 @@ def canonicalize_url(url: str) -> str:
         query = _normalize_query(parsed.query)
         normalized = urlunparse(("", netloc, path, parsed.params, query, ""))
         return normalized.lstrip("/")
-    except Exception:
+    except ValueError:
         return url.strip().lower()
 
 

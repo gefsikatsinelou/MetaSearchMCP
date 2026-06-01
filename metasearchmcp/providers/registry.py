@@ -1,4 +1,4 @@
-"""Registry search provider."""
+"""Registry of search providers."""
 
 from __future__ import annotations
 

@@ -29,12 +29,6 @@ class GoogleSerpbaseProvider(BaseProvider):
         return bool(self._api_key)
 
     @staticmethod
-    def _language_code(language: str) -> str:
-        normalized = (language or "en").strip().replace("_", "-")
-        primary = normalized.split("-", 1)[0].lower()
-        return primary or "en"
-
-    @staticmethod
     def _country_code(country: str) -> str:
         normalized = (country or "us").strip().replace("_", "-")
         region = normalized.rsplit("-", 1)[-1].lower()

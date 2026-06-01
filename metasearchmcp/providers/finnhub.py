@@ -38,6 +38,7 @@ class FinnhubProvider(BaseProvider):
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
         """Search for stock symbols matching *query* via Finnhub."""
+        max_results = min(params.num_results, self._max_results)
         async with self._client() as client:
             resp = await client.get(
                 f"{_BASE_URL}/search",
@@ -46,13 +47,16 @@ class FinnhubProvider(BaseProvider):
             resp.raise_for_status()
             data = resp.json()
 
-        return self._parse(data)
+        return self._parse(data, max_results)
 
-    def _parse(self, data: dict) -> ProviderResult:
+    def _parse(self, data: dict, max_results: int | None = None) -> ProviderResult:
         results: list[SearchResult] = []
+        limit = max_results or self._max_results
 
         count = data.get("count", 0)
         for i, item in enumerate(data.get("result", []), start=1):
+            if i > limit:
+                break
             symbol = item.get("symbol", "")
             description = item.get("description", "")
             q_type = item.get("type", "")

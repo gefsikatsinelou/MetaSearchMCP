@@ -33,6 +33,7 @@ class EcosiaProvider(BaseProvider):
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
         """Search Ecosia for *query* and return web results."""
+        max_results = min(params.num_results, self._max_results)
         qp = {
             "q": query,
             "p": 0,
@@ -42,9 +43,9 @@ class EcosiaProvider(BaseProvider):
             resp = await client.get(_SEARCH_URL, params=qp)
             resp.raise_for_status()
 
-        return self._parse(resp.text)
+        return self._parse(resp.text, max_results)
 
-    def _parse(self, html: str) -> ProviderResult:
+    def _parse(self, html: str, max_results: int | None = None) -> ProviderResult:
         soup = BeautifulSoup(html, "lxml")
         results: list[SearchResult] = []
 
@@ -91,7 +92,7 @@ class EcosiaProvider(BaseProvider):
                     provider=self.name,
                 ),
             )
-            if i >= self._max_results:
+            if i >= (max_results or self._max_results):
                 break
 
         return ProviderResult(results=results)

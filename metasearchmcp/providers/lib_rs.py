@@ -26,6 +26,7 @@ class LibRsProvider(BaseProvider):
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
         """Search lib.rs for *query* and return Rust crate results."""
+        max_results = min(params.num_results, self._max_results)
         async with self._scraper_client() as client:
             resp = await client.get(
                 f"{_BASE_URL}/search",
@@ -34,9 +35,9 @@ class LibRsProvider(BaseProvider):
             resp.raise_for_status()
             html = resp.text
 
-        return self._parse(html)
+        return self._parse(html, max_results)
 
-    def _parse(self, html: str) -> ProviderResult:
+    def _parse(self, html: str, max_results: int | None = None) -> ProviderResult:
         soup = BeautifulSoup(html, "lxml")
         results: list[SearchResult] = []
 
@@ -65,5 +66,7 @@ class LibRsProvider(BaseProvider):
                     extra={"version": version},
                 ),
             )
+            if i >= (max_results or self._max_results):
+                break
 
         return ProviderResult(results=results)

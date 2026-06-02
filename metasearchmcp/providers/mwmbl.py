@@ -23,14 +23,15 @@ class MwmblProvider(BaseProvider):
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
         """Search Mwmbl for *query* and return web results."""
+        max_results = min(params.num_results, self._max_results)
         async with self._client() as client:
             resp = await client.get(_API_URL, params={"s": query})
             resp.raise_for_status()
             data = resp.json()
 
-        return self._parse(data)
+        return self._parse(data, max_results)
 
-    def _parse(self, data: list) -> ProviderResult:
+    def _parse(self, data: list, max_results: int | None = None) -> ProviderResult:
         results: list[SearchResult] = []
 
         for i, item in enumerate(data, start=1):
@@ -47,5 +48,7 @@ class MwmblProvider(BaseProvider):
                     provider=self.name,
                 ),
             )
+            if i >= (max_results or self._max_results):
+                break
 
         return ProviderResult(results=results)

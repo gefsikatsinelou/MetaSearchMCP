@@ -25,6 +25,7 @@ class PkgGoDevProvider(BaseProvider):
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
         """Search pkg.go.dev for *query* and return Go package results."""
+        max_results = min(params.num_results, self._max_results)
         async with self._scraper_client() as client:
             resp = await client.get(
                 f"{_BASE_URL}/search",
@@ -33,9 +34,9 @@ class PkgGoDevProvider(BaseProvider):
             resp.raise_for_status()
             html = resp.text
 
-        return self._parse(html)
+        return self._parse(html, max_results)
 
-    def _parse(self, html: str) -> ProviderResult:
+    def _parse(self, html: str, max_results: int | None = None) -> ProviderResult:
         soup = BeautifulSoup(html, "lxml")
         results: list[SearchResult] = []
 
@@ -66,5 +67,7 @@ class PkgGoDevProvider(BaseProvider):
                     extra={"version": version},
                 ),
             )
+            if i >= (max_results or self._max_results):
+                break
 
         return ProviderResult(results=results)

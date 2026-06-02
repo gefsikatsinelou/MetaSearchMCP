@@ -36,6 +36,7 @@ class GoogleSerpbaseProvider(BaseProvider):
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
         """Search Google for *query* via the Serpbase API."""
+        max_results = min(params.num_results, self._max_results)
         language_code = self._language_code(params.language)
         country_code = self._country_code(params.country)
         payload = {
@@ -55,9 +56,9 @@ class GoogleSerpbaseProvider(BaseProvider):
                     data.get("error") or f"serpbase error status={data.get('status')}",
                 )
 
-        return self._parse(data)
+        return self._parse(data, max_results)
 
-    def _parse(self, data: dict) -> ProviderResult:
+    def _parse(self, data: dict, max_results: int | None = None) -> ProviderResult:
         results: list[SearchResult] = []
 
         for i, item in enumerate(data.get("organic", []), start=1):
@@ -71,6 +72,8 @@ class GoogleSerpbaseProvider(BaseProvider):
                     published_date=item.get("date"),
                 ),
             )
+            if i >= (max_results or self._max_results):
+                break
 
         related: list[str] = []
         seen_related: set[str] = set()

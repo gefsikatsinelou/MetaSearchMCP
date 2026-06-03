@@ -89,7 +89,8 @@ class YahooProvider(BaseProvider):
                 raise RuntimeError(_err_yahoo_blocked(resp.status_code))
             resp.raise_for_status()
 
-        return self._parse(resp.text, domain=domain)
+        max_results = min(params.num_results, self._max_results, _MAX_API_RESULTS)
+        return self._parse(resp.text, max_results=max_results, domain=domain)
 
     @staticmethod
     def _build_sb_cookie(*, language: str, safe_search: bool) -> str:
@@ -122,10 +123,17 @@ class YahooProvider(BaseProvider):
                 end = min(end, idx)
         return unquote(url[start:end])
 
-    def _parse(self, html: str, *, domain: str = "search.yahoo.com") -> ProviderResult:
+    def _parse(
+        self,
+        html: str,
+        *,
+        max_results: int | None = None,
+        domain: str = "search.yahoo.com",
+    ) -> ProviderResult:
         soup = BeautifulSoup(html, "lxml")
         results: list[SearchResult] = []
         suggestions: list[str] = []
+        limit = max_results or self._max_results
 
         containers = (
             soup.select("div.algo-sr")
@@ -179,7 +187,7 @@ class YahooProvider(BaseProvider):
                     provider=self.name,
                 ),
             )
-            if i >= self._max_results:
+            if i >= limit:
                 break
 
         for node in soup.select("div.AlsoTry a, div.AlsoTry table a"):

@@ -51,11 +51,15 @@ class BaiduProvider(BaseProvider):
 
         data = json.loads(payload)
 
-        return self._parse(data)
+        return self._parse(
+            data,
+            max_results=min(params.num_results, self._max_results, _MAX_API_RESULTS),
+        )
 
-    def _parse(self, data: dict) -> ProviderResult:
+    def _parse(self, data: dict, max_results: int | None = None) -> ProviderResult:
         results: list[SearchResult] = []
         entries = data.get("feed", {}).get("entry", [])
+        limit = max_results or self._max_results
 
         for i, entry in enumerate(entries, start=1):
             title = unescape(entry.get("title", "") or "")
@@ -73,7 +77,7 @@ class BaiduProvider(BaseProvider):
                     provider=self.name,
                 ),
             )
-            if i >= self._max_results:
+            if i >= limit:
                 break
 
         return ProviderResult(results=results)

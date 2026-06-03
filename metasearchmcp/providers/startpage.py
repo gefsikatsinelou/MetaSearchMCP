@@ -117,7 +117,8 @@ class StartpageProvider(BaseProvider):
         ):
             raise RuntimeError(_ERR_STARTPAGE_BLOCKED)
 
-        return self._parse(resp.text)
+        max_results = min(params.num_results, self._max_results, _MAX_API_RESULTS)
+        return self._parse(resp.text, max_results=max_results)
 
     @staticmethod
     def _extract_sc_code(html: str) -> str:
@@ -129,9 +130,10 @@ class StartpageProvider(BaseProvider):
             raise RuntimeError(_ERR_STARTPAGE_NO_SC)
         return sc_input["value"]
 
-    def _parse(self, html: str) -> ProviderResult:
+    def _parse(self, html: str, max_results: int | None = None) -> ProviderResult:
         soup = BeautifulSoup(html, "lxml")
         results: list[SearchResult] = []
+        limit = max_results or self._max_results
 
         # Startpage uses CSS-in-JS class names that change; rely on stable
         # semantic classes: div.result, a.result-title / a.result-link, p.description
@@ -172,7 +174,7 @@ class StartpageProvider(BaseProvider):
                     provider=self.name,
                 ),
             )
-            if i >= self._max_results:
+            if i >= limit:
                 break
 
         return ProviderResult(results=results)

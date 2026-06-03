@@ -38,11 +38,13 @@ class MojeekProvider(BaseProvider):
             resp = await client.get(_SEARCH_URL, params=qp)
             resp.raise_for_status()
 
-        return self._parse(resp.text)
+        max_results = min(params.num_results, self._max_results, _MAX_API_RESULTS)
+        return self._parse(resp.text, max_results=max_results)
 
-    def _parse(self, html: str) -> ProviderResult:
+    def _parse(self, html: str, max_results: int | None = None) -> ProviderResult:
         soup = BeautifulSoup(html, "lxml")
         results: list[SearchResult] = []
+        limit = max_results or self._max_results
 
         # Mojeek: ul.results-standard > li, or ul.results > li
         items = soup.select("ul.results-standard li") or soup.select("ul.results li")
@@ -76,7 +78,7 @@ class MojeekProvider(BaseProvider):
                     provider=self.name,
                 ),
             )
-            if i >= self._max_results:
+            if i >= limit:
                 break
 
         return ProviderResult(results=results)

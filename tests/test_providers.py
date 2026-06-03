@@ -246,7 +246,7 @@ async def test_google_search_normalizes_language_for_request(monkeypatch):
 
     provider = GoogleProvider()
     monkeypatch.setattr(provider, "_scraper_client", FakeClient)
-    monkeypatch.setattr(provider, "_parse", lambda html: SimpleNamespace(results=[]))
+    monkeypatch.setattr(provider, "_parse", lambda html, max_results=None: SimpleNamespace(results=[]))
 
     result = await provider.search(
         "fastapi",
@@ -287,7 +287,7 @@ async def test_google_search_normalizes_country_for_request(monkeypatch):
 
     provider = GoogleProvider()
     monkeypatch.setattr(provider, "_scraper_client", FakeClient)
-    monkeypatch.setattr(provider, "_parse", lambda html: SimpleNamespace(results=[]))
+    monkeypatch.setattr(provider, "_parse", lambda html, max_results=None: SimpleNamespace(results=[]))
 
     await provider.search(
         "fastapi",
@@ -519,7 +519,7 @@ async def test_duckduckgo_search_normalizes_locale_for_request(monkeypatch):
 
     provider = DuckDuckGoProvider()
     monkeypatch.setattr(provider, "_scraper_client", FakeClient)
-    monkeypatch.setattr(provider, "_parse", lambda html: SimpleNamespace(results=[]))
+    monkeypatch.setattr(provider, "_parse", lambda html, max_results=None: SimpleNamespace(results=[]))
 
     result = await provider.search(
         "fastapi",
@@ -560,7 +560,7 @@ async def test_bing_search_normalizes_locale_for_request(monkeypatch):
     monkeypatch.setattr(
         provider,
         "_parse",
-        lambda xml_text: SimpleNamespace(results=[]),
+        lambda xml_text, max_results=None: SimpleNamespace(results=[]),
     )
 
     result = await provider.search(

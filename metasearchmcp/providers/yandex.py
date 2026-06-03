@@ -56,11 +56,13 @@ class YandexProvider(BaseProvider):
         if resp.headers.get("x-yandex-captcha") == "captcha":
             raise RuntimeError(_ERR_YANDEX_CAPTCHA)
 
-        return self._parse(resp.text)
+        max_results = min(params.num_results, self._max_results)
+        return self._parse(resp.text, max_results)
 
-    def _parse(self, html: str) -> ProviderResult:
+    def _parse(self, html: str, max_results: int | None = None) -> ProviderResult:
         soup = BeautifulSoup(html, "lxml")
         results: list[SearchResult] = []
+        limit = max_results or self._max_results
 
         # Yandex results: li.serp-item containing div.organic
         containers = soup.select("li.serp-item") or soup.select("div.Organic")
@@ -99,7 +101,7 @@ class YandexProvider(BaseProvider):
                     provider=self.name,
                 ),
             )
-            if i >= self._max_results:
+            if i >= limit:
                 break
 
         return ProviderResult(results=results)

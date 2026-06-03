@@ -36,11 +36,13 @@ class DuckDuckGoProvider(BaseProvider):
             resp = await client.get(_HTML_URL, params=qp)
             resp.raise_for_status()
 
-        return self._parse(resp.text)
+        max_results = min(params.num_results, self._max_results)
+        return self._parse(resp.text, max_results)
 
-    def _parse(self, html: str) -> ProviderResult:
+    def _parse(self, html: str, max_results: int | None = None) -> ProviderResult:
         soup = BeautifulSoup(html, "lxml")
         results: list[SearchResult] = []
+        limit = max_results or self._max_results
 
         for i, block in enumerate(soup.select("div.result"), start=1):
             a = block.select_one(".result__title a") or block.select_one("a.result__a")
@@ -71,7 +73,7 @@ class DuckDuckGoProvider(BaseProvider):
                 ),
             )
 
-            if i >= self._max_results:
+            if i >= limit:
                 break
 
         return ProviderResult(results=results)

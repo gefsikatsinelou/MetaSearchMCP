@@ -91,7 +91,8 @@ class GoogleProvider(BaseProvider):
             resp.raise_for_status()
 
         self._raise_on_blocked_response(resp.text, str(resp.url))
-        return self._parse(resp.text)
+        max_results = min(params.num_results, self._max_results)
+        return self._parse(resp.text, max_results)
 
     @staticmethod
     def _raise_on_blocked_response(html: str, url: str) -> None:
@@ -99,10 +100,11 @@ class GoogleProvider(BaseProvider):
         if "/sorry/" in url or "unusual traffic from your computer network" in lowered:
             raise RuntimeError(_ERR_GOOGLE_BLOCKED)
 
-    def _parse(self, html: str) -> ProviderResult:
+    def _parse(self, html: str, max_results: int | None = None) -> ProviderResult:
         soup = BeautifulSoup(html, "lxml")
         results: list[SearchResult] = []
         seen_urls: set[str] = set()
+        limit = max_results or self._max_results
 
         containers = soup.select("div.g, div.Gx5Zad, div.MjjYud")
         for block in containers:
@@ -132,7 +134,7 @@ class GoogleProvider(BaseProvider):
                     provider=self.name,
                 ),
             )
-            if len(results) >= self._max_results:
+            if len(results) >= limit:
                 break
 
         related_searches = self._extract_related_searches(soup)

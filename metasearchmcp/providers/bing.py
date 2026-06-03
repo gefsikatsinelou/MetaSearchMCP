@@ -36,11 +36,13 @@ class BingProvider(BaseProvider):
             resp = await client.get(_SEARCH_URL, params=qp)
             resp.raise_for_status()
 
-        return self._parse(resp.text)
+        max_results = min(params.num_results, self._max_results)
+        return self._parse(resp.text, max_results)
 
-    def _parse(self, xml_text: str) -> ProviderResult:
+    def _parse(self, xml_text: str, max_results: int | None = None) -> ProviderResult:
         results: list[SearchResult] = []
         root = ET.fromstring(xml_text)
+        limit = max_results or self._max_results
 
         for i, item in enumerate(root.findall(".//item"), start=1):
             title = (item.findtext("title") or "").strip()
@@ -69,7 +71,7 @@ class BingProvider(BaseProvider):
                     published_date=published_date,
                 ),
             )
-            if i >= self._max_results:
+            if i >= limit:
                 break
 
         return ProviderResult(results=results)

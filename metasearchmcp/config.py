@@ -76,12 +76,8 @@ class Settings(BaseSettings):
         return enabled
 
 
-_settings: Settings | None = None
-
-
 def get_settings() -> Settings:
     """Return the global Settings singleton, creating it on first call."""
-    global _settings
-    if _settings is None:
-        _settings = Settings()
-    return _settings
+    if getattr(get_settings, "_instance", None) is None:
+        get_settings._instance = Settings()
+    return get_settings._instance

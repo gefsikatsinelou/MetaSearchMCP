@@ -36,11 +36,12 @@ class GoogleSerperProvider(BaseProvider):
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
         """Search Google via Serper for *query* and return web results."""
+        max_results = min(params.num_results, self._max_results)
         language_code = self._language_code(params.language)
         country_code = self._country_code(params.country)
         payload = {
             "q": query,
-            "num": min(params.num_results, self._max_results),
+            "num": max_results,
             "hl": language_code,
             "gl": country_code,
         }
@@ -54,9 +55,9 @@ class GoogleSerperProvider(BaseProvider):
             resp.raise_for_status()
             data = resp.json()
 
-        return self._parse(data)
+        return self._parse(data, max_results)
 
-    def _parse(self, data: dict) -> ProviderResult:
+    def _parse(self, data: dict, max_results: int | None = None) -> ProviderResult:
         results: list[SearchResult] = []
 
         for i, item in enumerate(data.get("organic", []), start=1):
@@ -70,6 +71,8 @@ class GoogleSerperProvider(BaseProvider):
                     published_date=item.get("date"),
                 ),
             )
+            if i >= (max_results or self._max_results):
+                break
 
         related: list[str] = []
         seen_related: set[str] = set()

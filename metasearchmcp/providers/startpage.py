@@ -41,7 +41,9 @@ class StartpageProvider(BaseProvider):
         return region or "us"
 
     @classmethod
-    def _build_locale_settings(cls: type[Self], params: SearchParams) -> tuple[str, str]:
+    def _build_locale_settings(
+        cls: type[Self], params: SearchParams
+    ) -> tuple[str, str]:
         engine_language = cls._language_code(params.language)
         engine_region = f"{cls._country_code(params.country)}-{engine_language}"
         return engine_language, engine_region

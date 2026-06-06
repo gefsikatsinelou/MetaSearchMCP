@@ -40,7 +40,7 @@ class BaseProvider(ABC):
         "User-Agent": API_USER_AGENT,
     }
     # Browser-like UA for HTML scraping
-    _SCRAPER_HEADERS: ClassVar[dict[str, str]] = {
+    SCRAPER_HEADERS: ClassVar[dict[str, str]] = {
         "User-Agent": (
             "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
             "AppleWebKit/537.36 (KHTML, like Gecko) "
@@ -64,7 +64,7 @@ class BaseProvider(ABC):
         return httpx.AsyncClient(
             timeout=self._timeout,
             follow_redirects=True,
-            headers=self._SCRAPER_HEADERS,
+            headers=self.SCRAPER_HEADERS,
         )
 
     @staticmethod

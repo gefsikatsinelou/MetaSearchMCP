@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-from collections import OrderedDict
 from typing import ClassVar, Self
 
 from bs4 import BeautifulSoup
@@ -66,27 +65,24 @@ class StartpageProvider(BaseProvider):
             "abd": "1",
             "abe": "1",
         }
-        preferences = OrderedDict(
-            [
-                ("date_time", "world"),
-                ("disable_family_filter", "1" if params.safe_search else "0"),
-                ("disable_open_in_new_window", "0"),
-                ("enable_post_method", "1"),
-                ("enable_proxy_safety_suggest", "1"),
-                ("enable_stay_control", "1"),
-                ("instant_answers", "1"),
-                ("lang_homepage", f"s/device/{engine_language}/"),
-                (
-                    "num_of_results",
-                    str(min(params.num_results, self._max_results, _MAX_API_RESULTS)),
-                ),
-                ("suggestions", "1"),
-                ("wt_unit", "celsius"),
-                ("language", engine_language),
-                ("language_ui", engine_language),
-                ("search_results_region", engine_region),
-            ],
-        )
+        preferences = {
+            "date_time": "world",
+            "disable_family_filter": "1" if params.safe_search else "0",
+            "disable_open_in_new_window": "0",
+            "enable_post_method": "1",
+            "enable_proxy_safety_suggest": "1",
+            "enable_stay_control": "1",
+            "instant_answers": "1",
+            "lang_homepage": f"s/device/{engine_language}/",
+            "num_of_results": str(
+                min(params.num_results, self._max_results, _MAX_API_RESULTS)
+            ),
+            "suggestions": "1",
+            "wt_unit": "celsius",
+            "language": engine_language,
+            "language_ui": engine_language,
+            "search_results_region": engine_region,
+        }
         cookies = {
             "preferences": "N1N".join(
                 f"{key}EEE{value}" for key, value in preferences.items()

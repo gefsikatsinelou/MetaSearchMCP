@@ -79,7 +79,7 @@ class PyPIProvider(BaseProvider):
             if resp.status_code != HTTPStatus.OK:
                 return None
             return resp.json()
-        except Exception:
+        except (httpx.HTTPError, ValueError):
             logger.exception("PyPI lookup failed for %s", name)
             return None
 

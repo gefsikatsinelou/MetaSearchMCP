@@ -57,7 +57,7 @@ def validate_serpbase_key(api_key: str) -> bool:
         )
         data = resp.json()
         return data.get("status") in _VALID_STATUSES
-    except Exception:
+    except (httpx.HTTPError, json.JSONDecodeError):
         return False
 
 

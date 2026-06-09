@@ -41,7 +41,7 @@ class StartpageProvider(BaseProvider):
 
     @classmethod
     def _build_locale_settings(
-        cls: type[Self], params: SearchParams
+        cls: type[Self], params: SearchParams,
     ) -> tuple[str, str]:
         engine_language = cls._language_code(params.language)
         engine_region = f"{cls._country_code(params.country)}-{engine_language}"
@@ -75,7 +75,7 @@ class StartpageProvider(BaseProvider):
             "instant_answers": "1",
             "lang_homepage": f"s/device/{engine_language}/",
             "num_of_results": str(
-                min(params.num_results, self._max_results, _MAX_API_RESULTS)
+                min(params.num_results, self._max_results, _MAX_API_RESULTS),
             ),
             "suggestions": "1",
             "wt_unit": "celsius",

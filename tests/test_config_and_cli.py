@@ -105,7 +105,7 @@ def test_validate_serpbase_key_rejects_errors_and_exceptions(monkeypatch):
     assert cli.validate_serpbase_key("bad-key") is False
 
     def boom(*args, **kwargs):
-        raise RuntimeError("network")
+        raise cli.httpx.ConnectError("network")
 
     monkeypatch.setattr(cli.httpx, "post", boom)
     assert cli.validate_serpbase_key("bad-key") is False

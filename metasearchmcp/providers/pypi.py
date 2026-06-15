@@ -4,12 +4,11 @@ from __future__ import annotations
 
 import logging
 from http import HTTPStatus
-from typing import TYPE_CHECKING, Any, ClassVar
+from typing import Any, ClassVar
 
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
 
-if TYPE_CHECKING:
-    import httpx
+import httpx
 
 from .base import BaseProvider
 

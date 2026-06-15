@@ -6,9 +6,9 @@ import logging
 from http import HTTPStatus
 from typing import Any, ClassVar
 
-from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
-
 import httpx
+
+from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
 
 from .base import BaseProvider
 

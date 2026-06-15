@@ -6,55 +6,55 @@ from typing import TYPE_CHECKING
 
 from metasearchmcp.config import get_settings
 
-# Google providers
-from .google import GoogleProvider
-from .google_serpbase import GoogleSerpbaseProvider
-from .google_serper import GoogleSerperProvider
+# Finance
+from .alpha_vantage import AlphaVantageProvider
+
+# Academic
+from .arxiv import ArxivProvider
 
 # General web search
 from .baidu import BaiduProvider
 from .bing import BingProvider
 from .brave import BraveProvider
-from .duckduckgo import DuckDuckGoProvider
-from .ecosia import EcosiaProvider
-from .mojeek import MojeekProvider
-from .mwmbl import MwmblProvider
-from .qwant import QwantProvider
-from .startpage import StartpageProvider
-from .yahoo import YahooProvider
-from .yandex import YandexProvider
-
-# Knowledge / reference
-from .internet_archive import InternetArchiveProvider
-from .openlibrary import OpenLibraryProvider
-from .wikipedia import WikipediaProvider
-from .wikidata import WikidataProvider
 
 # Developer
 from .crates import CratesIoProvider
+from .crossref import CrossrefProvider
 from .dockerhub import DockerHubProvider
+from .duckduckgo import DuckDuckGoProvider
+from .ecosia import EcosiaProvider
+from .finnhub import FinnhubProvider
 from .github import GitHubProvider
 from .gitlab import GitLabProvider
+
+# Google providers
+from .google import GoogleProvider
+from .google_serpbase import GoogleSerpbaseProvider
+from .google_serper import GoogleSerperProvider
 from .hackernews import HackerNewsProvider
+
+# Knowledge / reference
+from .internet_archive import InternetArchiveProvider
 from .lib_rs import LibRsProvider
 from .metacpan import MetaCPANProvider
+from .mojeek import MojeekProvider
+from .mwmbl import MwmblProvider
 from .npm import NpmProvider
+from .openlibrary import OpenLibraryProvider
 from .pkg_go_dev import PkgGoDevProvider
+from .pubmed import PubMedProvider
 from .pypi import PyPIProvider
+from .qwant import QwantProvider
 from .reddit import RedditProvider
 from .rubygems import RubyGemsProvider
-from .stackoverflow import StackOverflowProvider
-
-# Academic
-from .arxiv import ArxivProvider
-from .crossref import CrossrefProvider
-from .pubmed import PubMedProvider
 from .semanticscholar import SemanticScholarProvider
-
-# Finance
-from .alpha_vantage import AlphaVantageProvider
-from .finnhub import FinnhubProvider
+from .stackoverflow import StackOverflowProvider
+from .startpage import StartpageProvider
+from .wikidata import WikidataProvider
+from .wikipedia import WikipediaProvider
+from .yahoo import YahooProvider
 from .yahoo_finance import YahooFinanceProvider
+from .yandex import YandexProvider
 
 if TYPE_CHECKING:
     from .base import BaseProvider

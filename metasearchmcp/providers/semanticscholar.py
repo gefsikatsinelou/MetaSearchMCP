@@ -35,7 +35,7 @@ class SemanticScholarProvider(BaseProvider):
         """Initialize the Semantic Scholar provider with an optional API key."""
         super().__init__()
         settings = get_settings()
-        self._api_key: str = getattr(settings, "semantic_scholar_api_key", "")
+        self._api_key: str = settings.semantic_scholar_api_key
 
     def is_available(self) -> bool:
         """Return whether a Semantic Scholar API key is configured."""

@@ -32,7 +32,7 @@ class PubMedProvider(BaseProvider):
         """Initialize PubMed provider with API key from settings."""
         super().__init__()
         settings = get_settings()
-        self._api_key: str = getattr(settings, "ncbi_api_key", "")
+        self._api_key: str = settings.ncbi_api_key
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
         """Search PubMed biomedical literature for *query*."""

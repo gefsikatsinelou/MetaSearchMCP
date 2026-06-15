@@ -29,7 +29,7 @@ class StackOverflowProvider(BaseProvider):
         """Initialize StackOverflow provider with API key from settings."""
         super().__init__()
         settings = get_settings()
-        self._api_key: str = getattr(settings, "stackexchange_api_key", "")
+        self._api_key: str = settings.stackexchange_api_key
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
         """Search Stack Overflow questions for *query*."""

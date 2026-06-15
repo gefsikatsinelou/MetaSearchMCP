@@ -68,10 +68,11 @@ class YahooProvider(BaseProvider):
             "search.yahoo.com",
         )
         language = _LANGUAGE_MAP.get(self._language_code(params.language), "en")
+        max_results = min(params.num_results, self._max_results, _MAX_API_RESULTS)
         qp = {
             "p": query,
             "iscqry": "",
-            "n": min(params.num_results, self._max_results, _MAX_API_RESULTS),
+            "n": max_results,
             "ei": "UTF-8",
         }
         cookie = self._build_sb_cookie(
@@ -89,7 +90,6 @@ class YahooProvider(BaseProvider):
                 raise RuntimeError(_err_yahoo_blocked(resp.status_code))
             resp.raise_for_status()
 
-        max_results = min(params.num_results, self._max_results, _MAX_API_RESULTS)
         return self._parse(resp.text, max_results=max_results, domain=domain)
 
     @staticmethod

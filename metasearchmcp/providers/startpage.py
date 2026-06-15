@@ -56,6 +56,8 @@ class StartpageProvider(BaseProvider):
         }
         engine_language, engine_region = self._build_locale_settings(params)
 
+        max_results = min(params.num_results, self._max_results, _MAX_API_RESULTS)
+
         form_data = {
             "query": query,
             "cat": "web",
@@ -75,9 +77,7 @@ class StartpageProvider(BaseProvider):
             "enable_stay_control": "1",
             "instant_answers": "1",
             "lang_homepage": f"s/device/{engine_language}/",
-            "num_of_results": str(
-                min(params.num_results, self._max_results, _MAX_API_RESULTS),
-            ),
+            "num_of_results": str(max_results),
             "suggestions": "1",
             "wt_unit": "celsius",
             "language": engine_language,
@@ -116,7 +116,6 @@ class StartpageProvider(BaseProvider):
         ):
             raise RuntimeError(_ERR_STARTPAGE_BLOCKED)
 
-        max_results = min(params.num_results, self._max_results, _MAX_API_RESULTS)
         return self._parse(resp.text, max_results=max_results)
 
     @staticmethod

@@ -57,7 +57,11 @@ def install_local(args: argparse.Namespace) -> None:
 
     python = create_or_reuse_venv(ROOT / ".venv")
     run([str(python), "-m", "pip", "install", "--upgrade", "pip"])
-    run([str(python), "-m", "pip", "install", "-e", install_target(args.dev or args.test)])
+    run([
+        str(python),
+        "-m", "pip", "install",
+        "-e", install_target(args.dev or args.test),
+    ])
 
     if args.test:
         run([str(python), "-m", "pytest"])

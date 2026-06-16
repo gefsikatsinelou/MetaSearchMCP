@@ -25,18 +25,18 @@ async def execute_provider_search(
     provider: BaseProvider,
     query: str,
     options: SearchOptions,
-    timeout: float,
+    timeout_seconds: float,
 ) -> tuple[str, ProviderPayload | None, float, str | None]:
     """Run a single provider search with a timeout and return normalized results."""
     start = time.monotonic()
     try:
         payload = await asyncio.wait_for(
             provider.search(query, options),
-            timeout=timeout,
+            timeout=timeout_seconds,
         )
     except TimeoutError:
         latency_ms = (time.monotonic() - start) * 1000
-        return provider.name, None, latency_ms, f"timeout after {timeout}s"
+        return provider.name, None, latency_ms, f"timeout after {timeout_seconds}s"
     except Exception as exc:
         latency_ms = (time.monotonic() - start) * 1000
         return provider.name, None, latency_ms, str(exc)

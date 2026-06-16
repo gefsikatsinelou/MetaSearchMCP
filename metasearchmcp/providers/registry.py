@@ -130,21 +130,3 @@ def build_registry() -> dict[str, BaseProvider]:
         registry[instance.name] = instance
 
     return registry
-
-
-def filter_by_names(
-    registry: dict[str, BaseProvider],
-    names: list[str],
-) -> dict[str, BaseProvider]:
-    """Return subset of registry matching the given names, preserving order."""
-    if not names:
-        return registry
-    return {n: registry[n] for n in names if n in registry}
-
-
-def filter_by_tag(
-    registry: dict[str, BaseProvider],
-    tag: str,
-) -> dict[str, BaseProvider]:
-    """Return providers in *registry* that have *tag* in their tags."""
-    return {n: p for n, p in registry.items() if tag in p.tags}

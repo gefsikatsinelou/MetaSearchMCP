@@ -90,7 +90,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | Hacker News | `hackernews` | Algolia HN API |
 | Reddit | `reddit` | Reddit API |
 | npm | `npm` | npm registry API |
-| PyPI | `pypi` | HTML scraping |
+| PyPI | `pypi` | JSON API |
 | RubyGems | `rubygems` | RubyGems search API |
 | crates.io | `crates` | crates.io API |
 | lib.rs | `lib_rs` | HTML scraping |

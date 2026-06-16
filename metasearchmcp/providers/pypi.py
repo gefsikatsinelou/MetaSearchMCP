@@ -15,7 +15,6 @@ from .base import BaseProvider
 logger = logging.getLogger(__name__)
 
 _JSON_API = "https://pypi.org/pypi/{name}/json"
-_SEARCH_URL = "https://pypi.org/search/"
 
 
 class PyPIProvider(BaseProvider):

@@ -41,7 +41,7 @@ class MwmblProvider(BaseProvider):
             results.append(
                 SearchResult(
                     title="".join(title_parts),
-                    url=item["url"],
+                    url=item.get("url", ""),
                     snippet=content,
                     source="mwmbl.org",
                     rank=i,

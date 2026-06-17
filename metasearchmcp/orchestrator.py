@@ -29,20 +29,19 @@ async def execute_provider_search(
 ) -> tuple[str, ProviderPayload | None, float, str | None]:
     """Run a single provider search with a timeout and return normalized results."""
     start = time.monotonic()
+    error: str | None = None
+    payload: ProviderPayload | None = None
     try:
         payload = await asyncio.wait_for(
             provider.search(query, options),
             timeout=timeout_seconds,
         )
     except TimeoutError:
-        latency_ms = (time.monotonic() - start) * 1000
-        return provider.name, None, latency_ms, f"timeout after {timeout_seconds}s"
+        error = f"timeout after {timeout_seconds}s"
     except Exception as exc:
-        latency_ms = (time.monotonic() - start) * 1000
-        return provider.name, None, latency_ms, str(exc)
-    else:
-        latency_ms = (time.monotonic() - start) * 1000
-        return provider.name, payload, latency_ms, None
+        error = str(exc)
+    latency_ms = (time.monotonic() - start) * 1000
+    return provider.name, payload, latency_ms, error
 
 
 def _unique_strings(values: list[str]) -> list[str]:

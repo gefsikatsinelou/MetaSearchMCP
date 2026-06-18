@@ -10,12 +10,23 @@ if TYPE_CHECKING:
 
 _DEFAULT_PORTS = {"http": "80", "https": "443"}
 _TRACKING_QUERY_KEYS = {
+    # Meta / Facebook
     "fbclid",
+    # Google Ads / Analytics
     "gclid",
+    "gclsrc",
+    "dclid",  # DoubleClick / DV360
+    # Mailchimp
     "mc_cid",
     "mc_eid",
+    # Marketo
     "mkt_tok",
+    # Microsoft / Bing
+    "msclkid",
+    # Generic referrer
     "ref_src",
+    # Twitter / X
+    "twclid",
 }
 
 

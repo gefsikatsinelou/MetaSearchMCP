@@ -49,9 +49,12 @@ def pick_tagged_providers(
     catalog: dict[str, BaseProvider],
     tag: str,
 ) -> dict[str, BaseProvider]:
-    """Filter *catalog* to providers that include *tag* in their tags."""
+    """Filter *catalog* to providers that include *tag* in their tags (case-insensitive)."""
+    normalized_tag = tag.strip().lower()
     return {
-        name: provider for name, provider in catalog.items() if tag in provider.tags
+        name: provider
+        for name, provider in catalog.items()
+        if normalized_tag in {t.lower() for t in provider.tags}
     }
 
 

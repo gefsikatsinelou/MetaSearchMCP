@@ -17,6 +17,7 @@ _MAX_API_RESULTS = 10
 
 
 def _err_yahoo_blocked(status_code: int) -> str:
+    """Build an error message for Yahoo HTTP rejection."""
     return f"Yahoo returned HTTP {status_code}; request likely blocked upstream"
 
 
@@ -94,6 +95,7 @@ class YahooProvider(BaseProvider):
 
     @staticmethod
     def _build_sb_cookie(*, language: str, safe_search: bool) -> str:
+        """Build the ``sb`` cookie value that tells Yahoo about safe-search and language."""
         vm = "i" if safe_search else "p"
         return "&".join(
             [
@@ -109,6 +111,7 @@ class YahooProvider(BaseProvider):
 
     @staticmethod
     def _unwrap_url(url: str) -> str:
+        """Extract the target URL from Yahoo's redirect wrapper (``/RU=...``)."""
         if "/RU=" not in url:
             return url
 

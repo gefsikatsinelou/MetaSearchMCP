@@ -31,10 +31,12 @@ _catalog = build_provider_catalog()
 
 
 def _get_registry() -> dict[str, BaseProvider]:
+    """Return the module-level provider catalog (built once at import time)."""
     return _catalog
 
 
 def _build_tag_groups(registry: dict[str, BaseProvider]) -> dict[str, list[str]]:
+    """Build a mapping of tag -> sorted list of provider names."""
     groups: dict[str, list[str]] = {}
     for provider in registry.values():
         for tag in provider.tags:

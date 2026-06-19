@@ -35,6 +35,7 @@ class StartpageProvider(BaseProvider):
 
     @staticmethod
     def _country_code(country: str) -> str:
+        """Normalize a country string to lowercase two-letter code for Startpage."""
         normalized = (country or "us").strip().replace("_", "-")
         region = normalized.rsplit("-", 1)[-1].lower()
         return region or "us"
@@ -44,6 +45,7 @@ class StartpageProvider(BaseProvider):
         cls: type[Self],
         params: SearchParams,
     ) -> tuple[str, str]:
+        """Derive the language code and region string for Startpage locale prefs."""
         engine_language = cls._language_code(params.language)
         engine_region = f"{cls._country_code(params.country)}-{engine_language}"
         return engine_language, engine_region
@@ -120,6 +122,7 @@ class StartpageProvider(BaseProvider):
 
     @staticmethod
     def _extract_sc_code(html: str) -> str:
+        """Extract the anti-bot ``sc`` token from Startpage's homepage form."""
         soup = BeautifulSoup(html, "lxml")
         sc_input = soup.select_one('form#search input[name="sc"]') or soup.select_one(
             'input[name="sc"]',

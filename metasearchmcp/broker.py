@@ -391,6 +391,7 @@ async def dispatch_tool(name: str, arguments: dict[str, Any]) -> dict[str, Any]:
 
 
 async def _main() -> None:
+    """Start the MCP server loop over stdio with initialization options."""
     options = InitializationOptions(
         server_name="MetaSearchMCP",
         server_version=__version__,

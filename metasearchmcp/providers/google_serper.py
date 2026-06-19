@@ -30,6 +30,7 @@ class GoogleSerperProvider(BaseProvider):
 
     @staticmethod
     def _country_code(country: str) -> str:
+        """Normalize a country string to lowercase two-letter code for Serper."""
         normalized = (country or "us").strip().replace("_", "-")
         region = normalized.rsplit("-", 1)[-1].lower()
         return region or "us"

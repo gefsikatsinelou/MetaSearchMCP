@@ -45,6 +45,7 @@ async def execute_provider_search(
 
 
 def _unique_strings(values: list[str]) -> list[str]:
+    """Return a deduplicated list of non-empty, stripped strings in input order."""
     seen: set[str] = set()
     unique: list[str] = []
     for value in values:

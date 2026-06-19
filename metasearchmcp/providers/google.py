@@ -45,12 +45,14 @@ class GoogleProvider(BaseProvider):
 
     @staticmethod
     def _country_code(country: str) -> str:
+        """Normalize a country string to a two-letter lowercase code for Google."""
         normalized = (country or "us").strip().replace("_", "-")
         region = normalized.rsplit("-", 1)[-1].lower()
         return region or "us"
 
     @staticmethod
     def _build_user_agent(language_code: str, country_code: str) -> str:
+        """Construct a locale-aware, deterministic User-Agent for Google requests."""
         locale_suffix = f"{language_code}-{country_code.upper()}"
         chrome_patch = 1980 + ((sum(ord(char) for char in locale_suffix) % 17) + 1)
         return (
@@ -96,11 +98,13 @@ class GoogleProvider(BaseProvider):
 
     @staticmethod
     def _raise_on_blocked_response(html: str, url: str) -> None:
+        """Raise RuntimeError if the response indicates Google blocked the request."""
         lowered = html.lower()
         if "/sorry/" in url or "unusual traffic from your computer network" in lowered:
             raise RuntimeError(_ERR_GOOGLE_BLOCKED)
 
     def _parse(self, html: str, max_results: int | None = None) -> ProviderResult:
+        """Extract search results, related searches, and answer box from Google HTML."""
         soup = BeautifulSoup(html, "lxml")
         results: list[SearchResult] = []
         seen_urls: set[str] = set()
@@ -148,6 +152,7 @@ class GoogleProvider(BaseProvider):
 
     @staticmethod
     def _extract_result_url(href: str) -> str:
+        """Decode a Google result href (``/url?q=...`` or direct) to the target URL."""
         if not href:
             return ""
         if href.startswith("/url?"):
@@ -166,6 +171,7 @@ class GoogleProvider(BaseProvider):
 
     @staticmethod
     def _extract_snippet(block: Tag) -> str:
+        """Extract a text snippet from a Google result container element."""
         for selector in _SNIPPET_SELECTORS:
             snippet_node = block.select_one(selector)
             if snippet_node:
@@ -176,6 +182,7 @@ class GoogleProvider(BaseProvider):
 
     @staticmethod
     def _extract_related_searches(soup: BeautifulSoup) -> list[str]:
+        """Extract related search suggestions from Google HTML."""
         related_searches: list[str] = []
         selectors = (
             "div.gGQDvd a",
@@ -196,6 +203,7 @@ class GoogleProvider(BaseProvider):
 
     @staticmethod
     def _extract_answer_box(soup: BeautifulSoup) -> dict | None:
+        """Extract the featured answer box from Google HTML, if present."""
         for selector in _ANSWER_BOX_SELECTORS:
             node = soup.select_one(selector)
             if node:
@@ -206,4 +214,5 @@ class GoogleProvider(BaseProvider):
 
     @staticmethod
     def _normalize_text(text: str) -> str:
+        """Collapse whitespace in *text* to single spaces and strip."""
         return _WHITESPACE_RE.sub(" ", text).strip()

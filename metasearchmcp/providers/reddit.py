@@ -47,6 +47,7 @@ class RedditProvider(BaseProvider):
         return bool(self._client_id and self._client_secret)
 
     async def _get_token(self, client: httpx.AsyncClient) -> str:
+        """Request a Reddit OAuth2 application-only access token."""
         credentials = base64.b64encode(
             f"{self._client_id}:{self._client_secret}".encode(),
         ).decode()

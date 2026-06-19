@@ -31,6 +31,7 @@ _TRACKING_QUERY_KEYS = {
 
 
 def _drop_default_port(scheme: str, netloc: str) -> str:
+    """Remove the default port from *netloc* when it matches the scheme's default."""
     host, separator, port = netloc.rpartition(":")
     if not separator or _DEFAULT_PORTS.get(scheme) != port:
         return netloc
@@ -38,6 +39,7 @@ def _drop_default_port(scheme: str, netloc: str) -> str:
 
 
 def _normalize_query(query: str) -> str:
+    """Normalize query string by removing tracking parameters and sorting keys."""
     if not query:
         return ""
 

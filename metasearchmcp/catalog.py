@@ -11,6 +11,7 @@ from metasearchmcp.providers.registry import build_registry
 
 
 def _normalize_requested_values(values: list[str]) -> list[str]:
+    """Return a deduplicated list of lowered, stripped values in input order."""
     normalized: list[str] = []
     seen: set[str] = set()
     for value in values:

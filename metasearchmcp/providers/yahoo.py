@@ -95,7 +95,7 @@ class YahooProvider(BaseProvider):
 
     @staticmethod
     def _build_sb_cookie(*, language: str, safe_search: bool) -> str:
-        """Build the ``sb`` cookie value that tells Yahoo about safe-search and language."""
+        """Build the ``sb`` cookie value for Yahoo safe-search and language."""
         vm = "i" if safe_search else "p"
         return "&".join(
             [

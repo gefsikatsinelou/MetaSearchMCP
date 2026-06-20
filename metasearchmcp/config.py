@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import functools
 from pathlib import Path
 
 from pydantic_settings import BaseSettings, SettingsConfigDict
@@ -76,8 +77,7 @@ class Settings(BaseSettings):
         return enabled
 
 
+@functools.lru_cache(maxsize=1)
 def get_settings() -> Settings:
     """Return the global Settings singleton, creating it on first call."""
-    if getattr(get_settings, "_instance", None) is None:
-        get_settings._instance = Settings()
-    return get_settings._instance
+    return Settings()

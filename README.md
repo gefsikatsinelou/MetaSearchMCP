@@ -407,14 +407,19 @@ uvicorn metasearchmcp.server:app --reload
 
 The public package is organized around these modules:
 
-- `contracts.py`: request and response models
-- `catalog.py`: provider discovery and selection
-- `orchestrator.py`: concurrent search execution and response assembly
-- `merge.py`: URL normalization and deduplication
-- `server.py`: FastAPI entrypoint
-- `broker.py`: MCP entrypoint
+- `contracts.py`: request/response data models (Pydantic schemas)
+- `config.py`: application settings loaded from environment variables
+- `catalog.py`: provider discovery, filtering, and selection by name or tags
+- `orchestrator.py`: concurrent search execution across providers and result assembly
+- `merge.py`: URL canonicalization and cross-engine result deduplication
+- `server.py`: FastAPI application and Uvicorn server entrypoint
+- `broker.py`: MCP server exposing search tools over stdio
+- `api/routes.py`: HTTP endpoint handlers (search, health, providers catalog)
+- `cli.py`: interactive first-run setup wizard (metasearchmcp-setup)
 
-Legacy module names are kept as compatibility shims for earlier imports.
+Entry-point wrappers (`main.py` for HTTP, `mcp_server.py` for MCP) and legacy
+compatibility shims (`aggregator.py`, `dedup.py`, `schema.py`) are kept for
+backwards compatibility.
 
 ## Roadmap
 

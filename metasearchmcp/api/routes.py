@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from collections import defaultdict
 from http import HTTPStatus
 from typing import Annotated, Literal
 
@@ -37,10 +38,10 @@ def _get_registry() -> dict[str, BaseProvider]:
 
 def _build_tag_groups(registry: dict[str, BaseProvider]) -> dict[str, list[str]]:
     """Build a mapping of tag -> sorted list of provider names."""
-    groups: dict[str, list[str]] = {}
+    groups: dict[str, list[str]] = defaultdict(list)
     for provider in registry.values():
         for tag in provider.tags:
-            groups.setdefault(tag, []).append(provider.name)
+            groups[tag].append(provider.name)
 
     return {tag: sorted(names) for tag, names in sorted(groups.items())}
 

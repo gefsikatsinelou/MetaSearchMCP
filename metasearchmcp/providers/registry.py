@@ -112,10 +112,9 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
 def build_registry() -> dict[str, BaseProvider]:
     """Instantiate all providers and return a name -> instance mapping.
 
-    Providers whose is_available() returns False are excluded unless they
-    appear in the explicit ENABLED_PROVIDERS list (in which case they are
-    still excluded — ENABLED_PROVIDERS restricts, it does not force-enable
-    unavailable providers).
+    Providers whose ``is_available()`` returns ``False`` are always excluded
+    (unavailable providers are never force-enabled).  When ``ENABLED_PROVIDERS``
+    is set, only the explicitly listed providers are kept — all others are excluded.
     """
     settings = get_settings()
     explicit = set(settings.enabled_provider_list())

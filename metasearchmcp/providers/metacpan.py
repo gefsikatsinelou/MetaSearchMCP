@@ -51,8 +51,8 @@ class MetaCPANProvider(BaseProvider):
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
         """Search MetaCPAN for *query* and return Perl module results."""
         num = min(params.num_results, self._max_results, _MAX_API_RESULTS)
-        payload = copy.deepcopy(_QUERY_TEMPLATE)
-        payload["query"]["multi_match"]["query"] = query  # type: ignore[index]
+        payload: dict = copy.deepcopy(_QUERY_TEMPLATE)
+        payload["query"]["multi_match"]["query"] = query
         payload["size"] = num
         payload["from"] = 0
 

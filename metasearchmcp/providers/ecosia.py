@@ -48,6 +48,7 @@ class EcosiaProvider(BaseProvider):
     def _parse(self, html: str, max_results: int | None = None) -> ProviderResult:
         soup = BeautifulSoup(html, "lxml")
         results: list[SearchResult] = []
+        limit = max_results or self._max_results
 
         # Ecosia results: article.result or div.result--web
         containers = (
@@ -92,7 +93,7 @@ class EcosiaProvider(BaseProvider):
                     provider=self.name,
                 ),
             )
-            if i >= (max_results or self._max_results):
+            if i >= limit:
                 break
 
         return ProviderResult(results=results)

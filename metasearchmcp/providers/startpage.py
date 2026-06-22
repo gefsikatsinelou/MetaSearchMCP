@@ -36,9 +36,7 @@ class StartpageProvider(BaseProvider):
     @staticmethod
     def _country_code(country: str) -> str:
         """Normalize a country string to lowercase two-letter code for Startpage."""
-        normalized = (country or "us").strip().replace("_", "-")
-        region = normalized.rsplit("-", 1)[-1].lower()
-        return region or "us"
+        return BaseProvider._country_code(country).lower()
 
     @classmethod
     def _build_locale_settings(

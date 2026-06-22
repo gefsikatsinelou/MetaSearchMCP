@@ -31,9 +31,7 @@ class GoogleSerpbaseProvider(BaseProvider):
     @staticmethod
     def _country_code(country: str) -> str:
         """Normalize a country string to lowercase two-letter code for Serpbase."""
-        normalized = (country or "us").strip().replace("_", "-")
-        region = normalized.rsplit("-", 1)[-1].lower()
-        return region or "us"
+        return BaseProvider._country_code(country).lower()
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
         """Search Google for *query* via the Serpbase API."""

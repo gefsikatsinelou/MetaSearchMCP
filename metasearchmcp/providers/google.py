@@ -46,9 +46,7 @@ class GoogleProvider(BaseProvider):
     @staticmethod
     def _country_code(country: str) -> str:
         """Normalize a country string to a two-letter lowercase code for Google."""
-        normalized = (country or "us").strip().replace("_", "-")
-        region = normalized.rsplit("-", 1)[-1].lower()
-        return region or "us"
+        return BaseProvider._country_code(country).lower()
 
     @staticmethod
     def _build_user_agent(language_code: str, country_code: str) -> str:

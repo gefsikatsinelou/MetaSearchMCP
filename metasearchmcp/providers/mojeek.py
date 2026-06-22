@@ -31,7 +31,7 @@ class MojeekProvider(BaseProvider):
         qp = {
             "q": query,
             "s": min(params.num_results, self._max_results, _MAX_API_RESULTS),
-            "lb": params.language,
+            "lb": self._language_code(params.language),
         }
 
         async with self._scraper_client() as client:

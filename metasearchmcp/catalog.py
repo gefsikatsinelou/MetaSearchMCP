@@ -88,9 +88,10 @@ def pick_providers_by_tags(
     return {
         name: provider
         for name, provider in catalog.items()
+        for provider_tags in ({tag.lower() for tag in provider.tags},)
         if (
-            requested.issubset({tag.lower() for tag in provider.tags})
+            requested.issubset(provider_tags)
             if require_all
-            else bool(requested.intersection({tag.lower() for tag in provider.tags}))
+            else requested.intersection(provider_tags)
         )
     }

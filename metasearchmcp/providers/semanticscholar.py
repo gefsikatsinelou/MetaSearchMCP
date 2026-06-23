@@ -38,8 +38,8 @@ class SemanticScholarProvider(BaseProvider):
         self._api_key: str = settings.semantic_scholar_api_key
 
     def is_available(self) -> bool:
-        """Return whether a Semantic Scholar API key is configured."""
-        return bool(self._api_key)
+        """Return True — Semantic Scholar works without a key (1 req/s, 5k req/day)."""
+        return True
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
         """Search Semantic Scholar for *query* and return academic paper results."""

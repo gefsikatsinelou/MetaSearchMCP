@@ -39,6 +39,7 @@ class PkgGoDevProvider(BaseProvider):
     def _parse(self, html: str, max_results: int | None = None) -> ProviderResult:
         soup = BeautifulSoup(html, "lxml")
         results: list[SearchResult] = []
+        limit = max_results or self._max_results
 
         snippets = soup.select("div.SearchSnippet")
         for i, snip in enumerate(snippets, start=1):
@@ -67,7 +68,7 @@ class PkgGoDevProvider(BaseProvider):
                     extra={"version": version},
                 ),
             )
-            if i >= (max_results or self._max_results):
+            if i >= limit:
                 break
 
         return ProviderResult(results=results)

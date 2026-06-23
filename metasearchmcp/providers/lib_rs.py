@@ -40,6 +40,7 @@ class LibRsProvider(BaseProvider):
     def _parse(self, html: str, max_results: int | None = None) -> ProviderResult:
         soup = BeautifulSoup(html, "lxml")
         results: list[SearchResult] = []
+        limit = max_results or self._max_results
 
         # lib.rs renders results as <ol><li><a ...> per result
         for i, anchor in enumerate(soup.select("main div ol li a"), start=1):
@@ -66,7 +67,7 @@ class LibRsProvider(BaseProvider):
                     extra={"version": version},
                 ),
             )
-            if i >= (max_results or self._max_results):
+            if i >= limit:
                 break
 
         return ProviderResult(results=results)

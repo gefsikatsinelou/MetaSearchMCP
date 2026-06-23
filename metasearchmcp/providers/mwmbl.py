@@ -33,6 +33,7 @@ class MwmblProvider(BaseProvider):
 
     def _parse(self, data: list, max_results: int | None = None) -> ProviderResult:
         results: list[SearchResult] = []
+        limit = max_results or self._max_results
 
         for i, item in enumerate(data, start=1):
             title_parts = [t["value"] for t in item.get("title", [])]
@@ -48,7 +49,7 @@ class MwmblProvider(BaseProvider):
                     provider=self.name,
                 ),
             )
-            if i >= (max_results or self._max_results):
+            if i >= limit:
                 break
 
         return ProviderResult(results=results)

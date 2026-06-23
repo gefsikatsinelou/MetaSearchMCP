@@ -59,6 +59,7 @@ class GoogleSerpbaseProvider(BaseProvider):
 
     def _parse(self, data: dict, max_results: int | None = None) -> ProviderResult:
         results: list[SearchResult] = []
+        limit = max_results or self._max_results
 
         for i, item in enumerate(data.get("organic", []), start=1):
             results.append(
@@ -71,7 +72,7 @@ class GoogleSerpbaseProvider(BaseProvider):
                     published_date=item.get("date"),
                 ),
             )
-            if i >= (max_results or self._max_results):
+            if i >= limit:
                 break
 
         related: list[str] = []

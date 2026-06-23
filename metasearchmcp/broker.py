@@ -62,6 +62,7 @@ _TOOLS = [
                     "default": 10,
                     "minimum": 1,
                     "maximum": 50,
+                    "description": "Number of results per provider.",
                 },
                 "max_total_results": {
                     "type": "integer",
@@ -95,8 +96,18 @@ _TOOLS = [
                     "enum": ["google", "google_serpbase", "google_serper", ""],
                     "default": "",
                 },
-                "num_results": {"type": "integer", "default": 10},
-                "max_total_results": {"type": "integer", "default": 20},
+                "num_results": {
+                    "type": "integer",
+                    "default": 10,
+                    "description": "Number of results per provider.",
+                },
+                "max_total_results": {
+                    "type": "integer",
+                    "default": 20,
+                    "description": (
+                        "Cap the final merged result set returned to the agent."
+                    ),
+                },
                 "safe_search": {
                     "type": "boolean",
                     "default": True,
@@ -113,8 +124,18 @@ _TOOLS = [
             "type": "object",
             "properties": {
                 "query": {"type": "string", "description": "Search query"},
-                "num_results": {"type": "integer", "default": 10},
-                "max_total_results": {"type": "integer", "default": 20},
+                "num_results": {
+                    "type": "integer",
+                    "default": 10,
+                    "description": "Number of results per provider.",
+                },
+                "max_total_results": {
+                    "type": "integer",
+                    "default": 20,
+                    "description": (
+                        "Cap the final merged result set returned to the agent."
+                    ),
+                },
             },
             "required": ["query"],
         },
@@ -126,8 +147,18 @@ _TOOLS = [
             "type": "object",
             "properties": {
                 "query": {"type": "string", "description": "Search query"},
-                "num_results": {"type": "integer", "default": 10},
-                "max_total_results": {"type": "integer", "default": 20},
+                "num_results": {
+                    "type": "integer",
+                    "default": 10,
+                    "description": "Number of results per provider.",
+                },
+                "max_total_results": {
+                    "type": "integer",
+                    "default": 20,
+                    "description": (
+                        "Cap the final merged result set returned to the agent."
+                    ),
+                },
             },
             "required": ["query"],
         },
@@ -144,8 +175,18 @@ _TOOLS = [
                     "items": {"type": "string"},
                     "description": "Providers to compare. Empty = all enabled.",
                 },
-                "num_results": {"type": "integer", "default": 5},
-                "max_total_results": {"type": "integer", "default": 20},
+                "num_results": {
+                    "type": "integer",
+                    "default": 5,
+                    "description": "Number of results per provider.",
+                },
+                "max_total_results": {
+                    "type": "integer",
+                    "default": 20,
+                    "description": (
+                        "Cap the final merged result set returned to the agent."
+                    ),
+                },
             },
             "required": ["query"],
         },
@@ -165,8 +206,18 @@ _TOOLS = [
                         "Ticker symbol or company name, e.g. 'AAPL' or 'Tesla'"
                     ),
                 },
-                "num_results": {"type": "integer", "default": 10},
-                "max_total_results": {"type": "integer", "default": 20},
+                "num_results": {
+                    "type": "integer",
+                    "default": 10,
+                    "description": "Number of results per provider.",
+                },
+                "max_total_results": {
+                    "type": "integer",
+                    "default": 20,
+                    "description": (
+                        "Cap the final merged result set returned to the agent."
+                    ),
+                },
             },
             "required": ["query"],
         },
@@ -182,8 +233,18 @@ _TOOLS = [
             "type": "object",
             "properties": {
                 "query": {"type": "string", "description": "Search query"},
-                "num_results": {"type": "integer", "default": 10},
-                "max_total_results": {"type": "integer", "default": 20},
+                "num_results": {
+                    "type": "integer",
+                    "default": 10,
+                    "description": "Number of results per provider.",
+                },
+                "max_total_results": {
+                    "type": "integer",
+                    "default": 20,
+                    "description": (
+                        "Cap the final merged result set returned to the agent."
+                    ),
+                },
             },
             "required": ["query"],
         },

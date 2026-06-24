@@ -622,7 +622,7 @@ async def test_qwant_search_normalizes_locale_for_request(monkeypatch):
     monkeypatch.setattr(
         provider,
         "_parse_lite",
-        lambda html: SimpleNamespace(results=[]),
+        lambda html, max_results=None: SimpleNamespace(results=[]),
     )
 
     result = await provider.search(

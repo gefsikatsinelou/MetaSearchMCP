@@ -40,9 +40,10 @@ class QwantProvider(BaseProvider):
         language_code = self._language_code(params.language)
         country_code = self._country_code(params.country)
         locale = f"{language_code}_{country_code}"
+        limit = min(params.num_results, self._max_results, _MAX_API_RESULTS)
         qp = {
             "q": query,
-            "count": min(params.num_results, self._max_results, _MAX_API_RESULTS),
+            "count": limit,
             "locale": locale,
             "offset": 0,
             "device": "desktop",
@@ -59,7 +60,7 @@ class QwantProvider(BaseProvider):
                 resp.raise_for_status()
                 data = resp.json()
                 if data.get("status") == "success":
-                    return self._parse(data)
+                    return self._parse(data, max_results=limit)
 
             lite = await client.get(
                 _LITE_URL,
@@ -77,15 +78,16 @@ class QwantProvider(BaseProvider):
         if "Service unavailable" in lite.text or "Unavailable" in lite.text[:500]:
             raise RuntimeError(_ERR_QWANT_UNAVAILABLE)
 
-        return self._parse_lite(lite.text)
+        return self._parse_lite(lite.text, max_results=limit)
 
-    def _parse(self, data: dict) -> ProviderResult:
+    def _parse(self, data: dict, max_results: int | None = None) -> ProviderResult:
         results: list[SearchResult] = []
 
         items = (
             data.get("data", {}).get("result", {}).get("items", {}).get("mainline", [])
         )
 
+        limit = max_results or self._max_results
         rank = 0
         for section in items:
             if section.get("type") != "web":
@@ -101,14 +103,15 @@ class QwantProvider(BaseProvider):
                         provider=self.name,
                     ),
                 )
-                if rank >= self._max_results:
+                if rank >= limit:
                     return ProviderResult(results=results)
 
         return ProviderResult(results=results)
 
-    def _parse_lite(self, html: str) -> ProviderResult:
+    def _parse_lite(self, html: str, max_results: int | None = None) -> ProviderResult:
         soup = BeautifulSoup(html, "lxml")
         results: list[SearchResult] = []
+        limit = max_results or self._max_results
 
         for i, article in enumerate(soup.select("section article"), start=1):
             if article.select_one("span.tooltip"):
@@ -135,7 +138,7 @@ class QwantProvider(BaseProvider):
                     provider=self.name,
                 ),
             )
-            if i >= self._max_results:
+            if i >= limit:
                 break
 
         return ProviderResult(results=results)

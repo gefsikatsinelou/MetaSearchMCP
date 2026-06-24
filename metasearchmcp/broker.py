@@ -99,11 +99,15 @@ _TOOLS = [
                 "num_results": {
                     "type": "integer",
                     "default": 10,
+                    "minimum": 1,
+                    "maximum": 50,
                     "description": "Number of results per provider.",
                 },
                 "max_total_results": {
                     "type": "integer",
                     "default": 20,
+                    "minimum": 1,
+                    "maximum": 100,
                     "description": (
                         "Cap the final merged result set returned to the agent."
                     ),
@@ -127,11 +131,15 @@ _TOOLS = [
                 "num_results": {
                     "type": "integer",
                     "default": 10,
+                    "minimum": 1,
+                    "maximum": 50,
                     "description": "Number of results per provider.",
                 },
                 "max_total_results": {
                     "type": "integer",
                     "default": 20,
+                    "minimum": 1,
+                    "maximum": 100,
                     "description": (
                         "Cap the final merged result set returned to the agent."
                     ),
@@ -150,11 +158,15 @@ _TOOLS = [
                 "num_results": {
                     "type": "integer",
                     "default": 10,
+                    "minimum": 1,
+                    "maximum": 50,
                     "description": "Number of results per provider.",
                 },
                 "max_total_results": {
                     "type": "integer",
                     "default": 20,
+                    "minimum": 1,
+                    "maximum": 100,
                     "description": (
                         "Cap the final merged result set returned to the agent."
                     ),
@@ -178,11 +190,15 @@ _TOOLS = [
                 "num_results": {
                     "type": "integer",
                     "default": 5,
+                    "minimum": 1,
+                    "maximum": 50,
                     "description": "Number of results per provider.",
                 },
                 "max_total_results": {
                     "type": "integer",
                     "default": 20,
+                    "minimum": 1,
+                    "maximum": 100,
                     "description": (
                         "Cap the final merged result set returned to the agent."
                     ),
@@ -209,11 +225,15 @@ _TOOLS = [
                 "num_results": {
                     "type": "integer",
                     "default": 10,
+                    "minimum": 1,
+                    "maximum": 50,
                     "description": "Number of results per provider.",
                 },
                 "max_total_results": {
                     "type": "integer",
                     "default": 20,
+                    "minimum": 1,
+                    "maximum": 100,
                     "description": (
                         "Cap the final merged result set returned to the agent."
                     ),
@@ -236,11 +256,15 @@ _TOOLS = [
                 "num_results": {
                     "type": "integer",
                     "default": 10,
+                    "minimum": 1,
+                    "maximum": 50,
                     "description": "Number of results per provider.",
                 },
                 "max_total_results": {
                     "type": "integer",
                     "default": 20,
+                    "minimum": 1,
+                    "maximum": 100,
                     "description": (
                         "Cap the final merged result set returned to the agent."
                     ),

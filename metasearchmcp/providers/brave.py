@@ -36,7 +36,7 @@ class BraveProvider(BaseProvider):
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
         """Search Brave for *query* via the official Web Search API."""
         language_code = self._language_code(params.language)
-        country_code = self._country_code(params.country)
+        country_code = self.country_code(params.country)
         qp = {
             "q": query,
             "count": str(min(params.num_results, self._max_results, _MAX_API_RESULTS)),

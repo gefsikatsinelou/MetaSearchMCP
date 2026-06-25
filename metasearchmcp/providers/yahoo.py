@@ -65,7 +65,7 @@ class YahooProvider(BaseProvider):
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
         """Search Yahoo for *query* via HTML scraping and return web results."""
         domain = _REGION_TO_DOMAIN.get(
-            self._country_code(params.country),
+            self.country_code(params.country),
             "search.yahoo.com",
         )
         language = _LANGUAGE_MAP.get(self._language_code(params.language), "en")

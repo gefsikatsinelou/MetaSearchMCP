@@ -75,7 +75,7 @@ class BaseProvider(ABC):
         return primary or "en"
 
     @staticmethod
-    def _country_code(country: str) -> str:
+    def country_code(country: str) -> str:
         """Normalize a country/region string to a two-letter uppercase code."""
         normalized = (country or "us").strip().replace("_", "-")
         region = normalized.rsplit("-", 1)[-1].upper()

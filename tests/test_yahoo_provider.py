@@ -47,7 +47,7 @@ def test_yahoo_normalizes_locale_for_request():
     from metasearchmcp.providers.yahoo import YahooProvider
 
     assert YahooProvider._language_code("pt-BR") == "pt"
-    assert YahooProvider._country_code(" pt-BR ") == "BR"
+    assert YahooProvider.country_code(" pt-BR ") == "BR"
 
     assert YahooProvider._language_code("zh-CN") == "zh"
-    assert YahooProvider._country_code("zh-CN") == "CN"
+    assert YahooProvider.country_code("zh-CN") == "CN"

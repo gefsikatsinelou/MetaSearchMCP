@@ -44,9 +44,9 @@ class GoogleProvider(BaseProvider):
         return get_settings().allow_unstable_providers
 
     @staticmethod
-    def _country_code(country: str) -> str:
+    def country_code(country: str) -> str:
         """Normalize a country string to a two-letter lowercase code for Google."""
-        return BaseProvider._country_code(country).lower()
+        return BaseProvider.country_code(country).lower()
 
     @staticmethod
     def _build_user_agent(language_code: str, country_code: str) -> str:
@@ -63,7 +63,7 @@ class GoogleProvider(BaseProvider):
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
         """Search Google for *query* via the unofficial API endpoint."""
         language_code = self._language_code(params.language)
-        country_code = self._country_code(params.country)
+        country_code = self.country_code(params.country)
         request_params = {
             "q": query,
             "hl": f"{language_code}-{country_code.upper()}",

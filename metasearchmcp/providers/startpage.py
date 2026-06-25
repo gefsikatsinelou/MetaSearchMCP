@@ -34,9 +34,9 @@ class StartpageProvider(BaseProvider):
     tags: ClassVar[list[str]] = ["web", "privacy", "google"]
 
     @staticmethod
-    def _country_code(country: str) -> str:
+    def country_code(country: str) -> str:
         """Normalize a country string to lowercase two-letter code for Startpage."""
-        return BaseProvider._country_code(country).lower()
+        return BaseProvider.country_code(country).lower()
 
     @classmethod
     def _build_locale_settings(
@@ -45,7 +45,7 @@ class StartpageProvider(BaseProvider):
     ) -> tuple[str, str]:
         """Derive the language code and region string for Startpage locale prefs."""
         engine_language = cls._language_code(params.language)
-        engine_region = f"{cls._country_code(params.country)}-{engine_language}"
+        engine_region = f"{cls.country_code(params.country)}-{engine_language}"
         return engine_language, engine_region
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:

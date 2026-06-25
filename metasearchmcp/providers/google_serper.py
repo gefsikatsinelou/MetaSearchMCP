@@ -29,15 +29,15 @@ class GoogleSerperProvider(BaseProvider):
         return bool(self._api_key)
 
     @staticmethod
-    def _country_code(country: str) -> str:
+    def country_code(country: str) -> str:
         """Normalize a country string to lowercase two-letter code for Serper."""
-        return BaseProvider._country_code(country).lower()
+        return BaseProvider.country_code(country).lower()
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
         """Search Google via Serper for *query* and return web results."""
         max_results = min(params.num_results, self._max_results)
         language_code = self._language_code(params.language)
-        country_code = self._country_code(params.country)
+        country_code = self.country_code(params.country)
         payload = {
             "q": query,
             "num": max_results,

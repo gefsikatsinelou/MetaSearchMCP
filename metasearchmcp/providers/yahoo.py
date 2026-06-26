@@ -44,10 +44,6 @@ _LANGUAGE_MAP = {
     "pt": "pt",
     "ru": "ru",
     "zh": "zh_chs",
-    "zh-cn": "zh_chs",
-    "zh-hans": "zh_chs",
-    "zh-tw": "zh_cht",
-    "zh-hant": "zh_cht",
 }
 
 

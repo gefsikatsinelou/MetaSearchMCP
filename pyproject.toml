@@ -46,6 +46,34 @@ asyncio_mode = "auto"
 asyncio_default_fixture_loop_scope = "function"
 testpaths = ["tests"]
 
+[tool.ruff]
+target-version = "py311"
+line-length = 88
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "F",   # pyflakes
+    "W",   # pycodestyle warnings
+    "I",   # isort
+    "UP",  # pyupgrade
+    "B",   # flake8-bugbear
+    "SIM", # flake8-simplify
+    "RUF", # ruff-specific rules
+]
+ignore = [
+    "B904",   # raise-without-from-inside-except (intentional error propagation)
+    "SIM108", # if-else-block-instead-of-if-exp (style preference)
+]
+
+[tool.ruff.lint.isort]
+known-first-party = ["metasearchmcp"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+
 [tool.hatch.build.targets.wheel]
 packages = ["metasearchmcp"]
 

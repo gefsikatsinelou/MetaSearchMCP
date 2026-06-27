@@ -70,7 +70,7 @@ class StartpageProvider(BaseProvider):
         }
         preferences = {
             "date_time": "world",
-            "disable_family_filter": "1" if params.safe_search else "0",
+            "disable_family_filter": "0" if params.safe_search else "1",
             "disable_open_in_new_window": "0",
             "enable_post_method": "1",
             "enable_proxy_safety_suggest": "1",

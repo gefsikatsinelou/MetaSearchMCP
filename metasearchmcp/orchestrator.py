@@ -114,8 +114,8 @@ async def run_search_plan(
 
     deduplicated_hits = collapse_duplicate_hits(merged_hits)
     deduplicated_hits = deduplicated_hits[: options.max_total_results]
-    for idx, hit in enumerate(deduplicated_hits):
-        deduplicated_hits[idx] = hit.model_copy(update={"rank": idx + 1})
+    for idx, hit in enumerate(deduplicated_hits, start=1):
+        hit.rank = idx
 
     return SearchReport(
         query=query,

@@ -34,9 +34,10 @@ class BaiduProvider(BaseProvider):
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
         """Search Baidu for *query* via the JSON endpoint."""
+        max_results = min(params.num_results, self._max_results, _MAX_API_RESULTS)
         qp = {
             "wd": query,
-            "rn": min(params.num_results, self._max_results, _MAX_API_RESULTS),
+            "rn": max_results,
             "pn": 0,
             "tn": "json",
         }
@@ -51,10 +52,7 @@ class BaiduProvider(BaseProvider):
 
         data = json.loads(payload)
 
-        return self._parse(
-            data,
-            max_results=min(params.num_results, self._max_results, _MAX_API_RESULTS),
-        )
+        return self._parse(data, max_results=max_results)
 
     def _parse(self, data: dict, max_results: int | None = None) -> ProviderResult:
         results: list[SearchResult] = []

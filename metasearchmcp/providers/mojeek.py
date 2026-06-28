@@ -28,9 +28,10 @@ class MojeekProvider(BaseProvider):
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
         """Search Mojeek for *query* and return web results."""
+        max_results = min(params.num_results, self._max_results, _MAX_API_RESULTS)
         qp = {
             "q": query,
-            "s": min(params.num_results, self._max_results, _MAX_API_RESULTS),
+            "s": max_results,
             "lb": self._language_code(params.language),
         }
 
@@ -38,7 +39,6 @@ class MojeekProvider(BaseProvider):
             resp = await client.get(_SEARCH_URL, params=qp)
             resp.raise_for_status()
 
-        max_results = min(params.num_results, self._max_results, _MAX_API_RESULTS)
         return self._parse(resp.text, max_results=max_results)
 
     def _parse(self, html: str, max_results: int | None = None) -> ProviderResult:

@@ -149,6 +149,12 @@ class GoogleProvider(BaseProvider):
         )
 
     @staticmethod
+    def _is_valid_http_url(url: str) -> bool:
+        """Return True when *url* has an http/https scheme and a non-empty netloc."""
+        parsed = urlparse(url)
+        return parsed.scheme in {"http", "https"} and bool(parsed.netloc)
+
+    @staticmethod
     def _extract_result_url(href: str) -> str:
         """Decode a Google result href (``/url?q=...`` or direct) to the target URL."""
         if not href:
@@ -157,13 +163,11 @@ class GoogleProvider(BaseProvider):
             query = parse_qs(urlparse(href).query)
             target = query.get("q", [""])[0]
             target = unquote(target)
-            parsed = urlparse(target)
-            if parsed.scheme in {"http", "https"} and parsed.netloc:
+            if GoogleProvider._is_valid_http_url(target):
                 return target
             return ""
         if href.startswith("http"):
-            parsed = urlparse(href)
-            if parsed.scheme in {"http", "https"} and parsed.netloc:
+            if GoogleProvider._is_valid_http_url(href):
                 return href
         return ""
 

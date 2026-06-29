@@ -166,9 +166,8 @@ class GoogleProvider(BaseProvider):
             if GoogleProvider._is_valid_http_url(target):
                 return target
             return ""
-        if href.startswith("http"):
-            if GoogleProvider._is_valid_http_url(href):
-                return href
+        if href.startswith("http") and GoogleProvider._is_valid_http_url(href):
+            return href
         return ""
 
     @staticmethod

@@ -39,7 +39,7 @@ async def execute_provider_search(
     except TimeoutError:
         error = f"timeout after {timeout_seconds}s"
     except Exception as exc:
-        error = str(exc)
+        error = str(exc) or type(exc).__name__
     latency_ms = (time.monotonic() - start) * 1000
     return provider.name, payload, latency_ms, error
 

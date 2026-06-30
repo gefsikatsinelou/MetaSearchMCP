@@ -298,7 +298,7 @@ async def call_tool(name: str, arguments: dict[str, Any]) -> list[types.TextCont
             types.TextContent(
                 type="text",
                 text=json.dumps(
-                    {"error": str(exc), "tool": name},
+                    {"error": str(exc) or type(exc).__name__, "tool": name},
                     indent=2,
                     ensure_ascii=False,
                 ),

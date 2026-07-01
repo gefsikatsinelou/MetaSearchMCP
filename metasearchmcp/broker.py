@@ -416,7 +416,7 @@ async def _dispatch_compare_engines(
     for provider_name, response in zip(selected.keys(), responses, strict=True):
         if isinstance(response, Exception):
             comparison["engines"][provider_name] = {
-                "error": str(response) or type(response).__name__
+                "error": str(response) or type(response).__name__,
             }
         else:
             comparison["engines"][provider_name] = {

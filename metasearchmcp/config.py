@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import functools
 from pathlib import Path
+from typing import Literal
 
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
@@ -25,7 +26,7 @@ class Settings(BaseSettings):
     # Server
     host: str = "0.0.0.0"
     port: int = 8000
-    log_level: str = "info"
+    log_level: Literal["debug", "info", "warning", "error", "critical"] = "info"
 
     # CORS — comma-separated list of allowed origins. "*" allows all (dev default).
     # Production example: CORS_ORIGINS=https://app.example.com,https://admin.example.com

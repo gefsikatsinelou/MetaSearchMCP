@@ -415,7 +415,9 @@ async def _dispatch_compare_engines(
     comparison: dict[str, Any] = {"query": query, "engines": {}}
     for provider_name, response in zip(selected.keys(), responses, strict=True):
         if isinstance(response, Exception):
-            comparison["engines"][provider_name] = {"error": str(response)}
+            comparison["engines"][provider_name] = {
+                "error": str(response) or type(response).__name__
+            }
         else:
             comparison["engines"][provider_name] = {
                 "results": [result.model_dump() for result in response.results],

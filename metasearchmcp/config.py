@@ -64,18 +64,14 @@ class Settings(BaseSettings):
 
     def enabled_provider_list(self) -> list[str]:
         """Return explicit list of enabled providers, or empty list meaning 'auto'."""
-        if not self.enabled_providers.strip():
+        raw = self.enabled_providers.strip()
+        if not raw:
             return []
-
-        enabled: list[str] = []
-        seen: set[str] = set()
-        for provider in self.enabled_providers.split(","):
-            normalized = provider.strip().lower()
-            if not normalized or normalized in seen:
-                continue
-            seen.add(normalized)
-            enabled.append(normalized)
-        return enabled
+        return list(
+            dict.fromkeys(
+                p.strip().lower() for p in raw.split(",") if p.strip()
+            ),
+        )
 
 
 @functools.lru_cache(maxsize=1)

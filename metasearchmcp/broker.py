@@ -263,12 +263,12 @@ async def _run_named_search(
 async def _dispatch_search_web(
     query: str,
     arguments: dict[str, Any],
-    options: SearchOptions,
+    base: SearchOptions,
 ) -> dict[str, Any]:
     """Handle the search_web tool dispatch."""
     options = SearchOptions(
-        num_results=options.num_results,
-        max_total_results=options.max_total_results,
+        num_results=base.num_results,
+        max_total_results=base.max_total_results,
         language=arguments.get("language", "en"),
         country=arguments.get("country", "us"),
         safe_search=arguments.get("safe_search", True),
@@ -287,12 +287,12 @@ async def _dispatch_search_web(
 async def _dispatch_search_google(
     query: str,
     arguments: dict[str, Any],
-    options: SearchOptions,
+    base: SearchOptions,
 ) -> dict[str, Any]:
     """Handle the search_google tool dispatch."""
     options = SearchOptions(
-        num_results=options.num_results,
-        max_total_results=options.max_total_results,
+        num_results=base.num_results,
+        max_total_results=base.max_total_results,
         safe_search=arguments.get("safe_search", True),
     )
     selected = pick_tagged_providers(_catalog, "google")

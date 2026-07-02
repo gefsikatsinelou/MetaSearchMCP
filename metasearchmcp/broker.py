@@ -27,6 +27,24 @@ from metasearchmcp.orchestrator import run_search_plan
 server = Server("MetaSearchMCP")
 _catalog = build_provider_catalog()
 
+# Shared result-count schema properties reused across tool definitions.
+_RESULT_COUNT_PROPERTIES: dict[str, Any] = {
+    "num_results": {
+        "type": "integer",
+        "default": 10,
+        "minimum": 1,
+        "maximum": 50,
+        "description": "Number of results per provider.",
+    },
+    "max_total_results": {
+        "type": "integer",
+        "default": 20,
+        "minimum": 1,
+        "maximum": 100,
+        "description": ("Cap the final merged result set returned to the agent."),
+    },
+}
+
 _TOOLS = [
     types.Tool(
         name="search_web",
@@ -57,22 +75,7 @@ _TOOLS = [
                         "Match providers with any requested tag or require all tags."
                     ),
                 },
-                "num_results": {
-                    "type": "integer",
-                    "default": 10,
-                    "minimum": 1,
-                    "maximum": 50,
-                    "description": "Number of results per provider.",
-                },
-                "max_total_results": {
-                    "type": "integer",
-                    "default": 20,
-                    "minimum": 1,
-                    "maximum": 100,
-                    "description": (
-                        "Cap the final merged result set returned to the agent."
-                    ),
-                },
+                **_RESULT_COUNT_PROPERTIES,
                 "language": {"type": "string", "default": "en"},
                 "country": {"type": "string", "default": "us"},
                 "safe_search": {
@@ -96,22 +99,7 @@ _TOOLS = [
                     "enum": ["google", "google_serpbase", "google_serper", ""],
                     "default": "",
                 },
-                "num_results": {
-                    "type": "integer",
-                    "default": 10,
-                    "minimum": 1,
-                    "maximum": 50,
-                    "description": "Number of results per provider.",
-                },
-                "max_total_results": {
-                    "type": "integer",
-                    "default": 20,
-                    "minimum": 1,
-                    "maximum": 100,
-                    "description": (
-                        "Cap the final merged result set returned to the agent."
-                    ),
-                },
+                **_RESULT_COUNT_PROPERTIES,
                 "safe_search": {
                     "type": "boolean",
                     "default": True,
@@ -128,22 +116,7 @@ _TOOLS = [
             "type": "object",
             "properties": {
                 "query": {"type": "string", "description": "Search query"},
-                "num_results": {
-                    "type": "integer",
-                    "default": 10,
-                    "minimum": 1,
-                    "maximum": 50,
-                    "description": "Number of results per provider.",
-                },
-                "max_total_results": {
-                    "type": "integer",
-                    "default": 20,
-                    "minimum": 1,
-                    "maximum": 100,
-                    "description": (
-                        "Cap the final merged result set returned to the agent."
-                    ),
-                },
+                **_RESULT_COUNT_PROPERTIES,
             },
             "required": ["query"],
         },
@@ -155,22 +128,7 @@ _TOOLS = [
             "type": "object",
             "properties": {
                 "query": {"type": "string", "description": "Search query"},
-                "num_results": {
-                    "type": "integer",
-                    "default": 10,
-                    "minimum": 1,
-                    "maximum": 50,
-                    "description": "Number of results per provider.",
-                },
-                "max_total_results": {
-                    "type": "integer",
-                    "default": 20,
-                    "minimum": 1,
-                    "maximum": 100,
-                    "description": (
-                        "Cap the final merged result set returned to the agent."
-                    ),
-                },
+                **_RESULT_COUNT_PROPERTIES,
             },
             "required": ["query"],
         },
@@ -222,22 +180,7 @@ _TOOLS = [
                         "Ticker symbol or company name, e.g. 'AAPL' or 'Tesla'"
                     ),
                 },
-                "num_results": {
-                    "type": "integer",
-                    "default": 10,
-                    "minimum": 1,
-                    "maximum": 50,
-                    "description": "Number of results per provider.",
-                },
-                "max_total_results": {
-                    "type": "integer",
-                    "default": 20,
-                    "minimum": 1,
-                    "maximum": 100,
-                    "description": (
-                        "Cap the final merged result set returned to the agent."
-                    ),
-                },
+                **_RESULT_COUNT_PROPERTIES,
             },
             "required": ["query"],
         },
@@ -253,22 +196,7 @@ _TOOLS = [
             "type": "object",
             "properties": {
                 "query": {"type": "string", "description": "Search query"},
-                "num_results": {
-                    "type": "integer",
-                    "default": 10,
-                    "minimum": 1,
-                    "maximum": 50,
-                    "description": "Number of results per provider.",
-                },
-                "max_total_results": {
-                    "type": "integer",
-                    "default": 20,
-                    "minimum": 1,
-                    "maximum": 100,
-                    "description": (
-                        "Cap the final merged result set returned to the agent."
-                    ),
-                },
+                **_RESULT_COUNT_PROPERTIES,
             },
             "required": ["query"],
         },

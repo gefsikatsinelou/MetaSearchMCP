@@ -68,9 +68,7 @@ class Settings(BaseSettings):
         if not raw:
             return []
         return list(
-            dict.fromkeys(
-                p.strip().lower() for p in raw.split(",") if p.strip()
-            ),
+            dict.fromkeys(p.strip().lower() for p in raw.split(",") if p.strip()),
         )
 
 

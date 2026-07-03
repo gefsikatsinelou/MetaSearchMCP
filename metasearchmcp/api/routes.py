@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from collections import defaultdict
 from http import HTTPStatus
-from typing import Annotated, Literal
+from typing import Annotated, Any, Literal
 
 from fastapi import APIRouter, Depends, HTTPException, Query
 
@@ -109,7 +109,7 @@ async def search_google(
 @router.get("/health", summary="Health check")
 async def health(
     registry: Annotated[dict[str, BaseProvider], Depends(_get_registry)],
-) -> dict:
+) -> dict[str, Any]:
     """Return service health status and loaded providers."""
     provider_names = sorted(registry.keys())
     return {
@@ -128,7 +128,7 @@ async def providers(
     registry: Annotated[dict[str, BaseProvider], Depends(_get_registry)],
     tag: Annotated[list[str] | None, Query()] = None,
     tag_match: Annotated[Literal["any", "all"], Query()] = "any",
-) -> dict:
+) -> dict[str, Any]:
     """List configured providers, optionally filtered by tags."""
     filtered = pick_providers_by_tags(registry, tag or [], match=tag_match)
 

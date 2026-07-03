@@ -5,7 +5,7 @@ from __future__ import annotations
 import asyncio
 import json
 import sys
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 import mcp.server.stdio
 from mcp import types
@@ -24,8 +24,11 @@ from metasearchmcp.config import USER_CONFIG_FILE, get_settings
 from metasearchmcp.contracts import SearchOptions
 from metasearchmcp.orchestrator import run_search_plan
 
-server = Server("MetaSearchMCP")
-_catalog = build_provider_catalog()
+if TYPE_CHECKING:
+    from metasearchmcp.providers.base import BaseProvider
+
+server: Server = Server("MetaSearchMCP")
+_catalog: dict[str, BaseProvider] = build_provider_catalog()
 
 # Shared result-count schema properties reused across tool definitions.
 _RESULT_COUNT_PROPERTIES: dict[str, Any] = {
@@ -45,7 +48,7 @@ _RESULT_COUNT_PROPERTIES: dict[str, Any] = {
     },
 }
 
-_TOOLS = [
+_TOOLS: list[types.Tool] = [
     types.Tool(
         name="search_web",
         description=(

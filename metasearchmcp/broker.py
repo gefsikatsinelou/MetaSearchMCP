@@ -357,12 +357,16 @@ async def _dispatch_compare_engines(
 async def dispatch_tool(name: str, arguments: dict[str, Any]) -> dict[str, Any]:
     """Route a tool call to the appropriate search handler."""
     query = arguments["query"]
-    num_results = int(arguments.get("num_results", 10))
-    max_total_results = int(arguments.get("max_total_results", 20))
-    options = SearchOptions(
-        num_results=num_results,
-        max_total_results=max_total_results,
-    )
+    # Build SearchOptions, relying on Pydantic defaults when values are
+    # omitted or explicitly None (e.g. `"num_results": null` from JSON).
+    kwargs: dict[str, Any] = {}
+    num = arguments.get("num_results")
+    if num is not None:
+        kwargs["num_results"] = int(num)
+    max_r = arguments.get("max_total_results")
+    if max_r is not None:
+        kwargs["max_total_results"] = int(max_r)
+    options = SearchOptions(**kwargs)
 
     handlers: dict[str, Any] = {
         "search_web": lambda: _dispatch_search_web(query, arguments, options),

@@ -10,6 +10,7 @@ from .base import MAX_SNIPPET_LENGTH, BaseProvider
 
 _SEARCH_URL = "https://archive.org/advancedsearch.php"
 _MAX_API_RESULTS = 20
+_MAX_CREATORS_SHOWN = 3
 
 
 class InternetArchiveProvider(BaseProvider):
@@ -67,7 +68,7 @@ class InternetArchiveProvider(BaseProvider):
             mediatype = doc.get("mediatype", "")
             creator = doc.get("creator", "")
             if isinstance(creator, list):
-                creator = ", ".join(creator[:3])
+                creator = ", ".join(creator[:_MAX_CREATORS_SHOWN])
             date = (doc.get("date") or "")[:10]
 
             url = f"https://archive.org/details/{identifier}"

@@ -8,8 +8,8 @@ from typing import Literal
 
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
-USER_CONFIG_DIR = Path.home() / ".metasearchmcp"
-USER_CONFIG_FILE = USER_CONFIG_DIR / "config.env"
+USER_CONFIG_DIR: Path = Path.home() / ".metasearchmcp"
+USER_CONFIG_FILE: Path = USER_CONFIG_DIR / "config.env"
 
 
 class Settings(BaseSettings):

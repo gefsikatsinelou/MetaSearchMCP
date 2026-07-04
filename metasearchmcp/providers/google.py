@@ -30,6 +30,11 @@ _ANSWER_BOX_SELECTORS = (
 )
 _WHITESPACE_RE = re.compile(r"\s+")
 _ERR_GOOGLE_BLOCKED = "Google rejected the request as automated traffic"
+# Base offset and modulus for generating deterministic Chrome patch versions
+# from locale strings. Arbitrary but stable choices that produce varied,
+# realistic-looking version numbers.
+_UA_CHROME_PATCH_BASE = 1980
+_UA_CHROME_PATCH_MOD = 17
 
 
 class GoogleProvider(BaseProvider):
@@ -52,7 +57,9 @@ class GoogleProvider(BaseProvider):
     def _build_user_agent(language_code: str, country_code: str) -> str:
         """Construct a locale-aware, deterministic User-Agent for Google requests."""
         locale_suffix = f"{language_code}-{country_code.upper()}"
-        chrome_patch = 1980 + ((sum(ord(char) for char in locale_suffix) % 17) + 1)
+        chrome_patch = _UA_CHROME_PATCH_BASE + (
+            (sum(ord(char) for char in locale_suffix) % _UA_CHROME_PATCH_MOD) + 1
+        )
         return (
             "Mozilla/5.0 (Linux; Android 5.0; SM-G900P Build/LRX21T) "
             "AppleWebKit/537.36 (KHTML, like Gecko) "

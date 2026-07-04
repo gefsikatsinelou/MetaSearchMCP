@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-import functools
+from functools import lru_cache
 from pathlib import Path
 from typing import Literal
 
@@ -72,7 +72,7 @@ class Settings(BaseSettings):
         )
 
 
-@functools.lru_cache(maxsize=1)
+@lru_cache(maxsize=1)
 def get_settings() -> Settings:
     """Return the global Settings singleton, creating it on first call."""
     return Settings()

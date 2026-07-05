@@ -9,6 +9,8 @@ from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
 
 from .base import BaseProvider
 
+_MAX_API_RESULTS = 20
+
 
 class GoogleSerperProvider(BaseProvider):
     """Google search via serper.dev API."""
@@ -35,7 +37,7 @@ class GoogleSerperProvider(BaseProvider):
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
         """Search Google via Serper for *query* and return web results."""
-        max_results = min(params.num_results, self._max_results)
+        max_results = min(params.num_results, self._max_results, _MAX_API_RESULTS)
         language_code = self._language_code(params.language)
         country_code = self.country_code(params.country)
         payload = {

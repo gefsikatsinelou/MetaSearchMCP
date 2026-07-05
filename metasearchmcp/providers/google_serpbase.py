@@ -9,6 +9,9 @@ from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
 
 from .base import BaseProvider
 
+_MAX_API_RESULTS = 20
+_SERPBASE_STATUS_OK = 0
+
 
 class GoogleSerpbaseProvider(BaseProvider):
     """Google search via serpbase.dev API."""
@@ -35,7 +38,7 @@ class GoogleSerpbaseProvider(BaseProvider):
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
         """Search Google for *query* via the Serpbase API."""
-        max_results = min(params.num_results, self._max_results)
+        max_results = min(params.num_results, self._max_results, _MAX_API_RESULTS)
         language_code = self._language_code(params.language)
         country_code = self.country_code(params.country)
         payload = {
@@ -50,7 +53,7 @@ class GoogleSerpbaseProvider(BaseProvider):
             resp = await client.post(self._API_URL, json=payload, headers=headers)
             resp.raise_for_status()
             data = resp.json()
-            if data.get("status") != 0:
+            if data.get("status") != _SERPBASE_STATUS_OK:
                 raise RuntimeError(
                     data.get("error") or f"serpbase error status={data.get('status')}",
                 )

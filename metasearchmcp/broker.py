@@ -148,22 +148,7 @@ _TOOLS: list[types.Tool] = [
                     "items": {"type": "string"},
                     "description": "Providers to compare. Empty = all enabled.",
                 },
-                "num_results": {
-                    "type": "integer",
-                    "default": 5,
-                    "minimum": 1,
-                    "maximum": 50,
-                    "description": "Number of results per provider.",
-                },
-                "max_total_results": {
-                    "type": "integer",
-                    "default": 20,
-                    "minimum": 1,
-                    "maximum": 100,
-                    "description": (
-                        "Cap the final merged result set returned to the agent."
-                    ),
-                },
+                **_RESULT_COUNT_PROPERTIES,
             },
             "required": ["query"],
         },

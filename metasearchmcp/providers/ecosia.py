@@ -34,9 +34,11 @@ class EcosiaProvider(BaseProvider):
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
         """Search Ecosia for *query* and return web results."""
         max_results = min(params.num_results, self._max_results)
+        language_code = self._language_code(params.language)
         qp = {
             "q": query,
             "p": 0,
+            "lang": language_code,
         }
 
         async with self._scraper_client() as client:

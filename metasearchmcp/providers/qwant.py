@@ -78,7 +78,10 @@ class QwantProvider(BaseProvider):
             )
             lite.raise_for_status()
 
-        if "Service unavailable" in lite.text or "Unavailable" in lite.text[:_LITE_UNAVAILABLE_CHECK_LENGTH]:
+        if (
+            "Service unavailable" in lite.text
+            or "Unavailable" in lite.text[:_LITE_UNAVAILABLE_CHECK_LENGTH]
+        ):
             raise RuntimeError(_ERR_QWANT_UNAVAILABLE)
 
         return self._parse_lite(lite.text, max_results=limit)

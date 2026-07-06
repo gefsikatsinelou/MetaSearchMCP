@@ -16,6 +16,9 @@ from .base import BaseProvider
 _API_URL = "https://api.qwant.com/v3/search/web"
 _LITE_URL = "https://lite.qwant.com/"
 _MAX_API_RESULTS = 10
+# Only inspect the first N characters of the Qwant Lite HTML when checking for
+# the "Unavailable" banner — avoids scanning potentially large pages in full.
+_LITE_UNAVAILABLE_CHECK_LENGTH = 500
 _ERR_QWANT_UNAVAILABLE = "Qwant Lite is currently unavailable from this network"
 
 
@@ -75,7 +78,7 @@ class QwantProvider(BaseProvider):
             )
             lite.raise_for_status()
 
-        if "Service unavailable" in lite.text or "Unavailable" in lite.text[:500]:
+        if "Service unavailable" in lite.text or "Unavailable" in lite.text[:_LITE_UNAVAILABLE_CHECK_LENGTH]:
             raise RuntimeError(_ERR_QWANT_UNAVAILABLE)
 
         return self._parse_lite(lite.text, max_results=limit)

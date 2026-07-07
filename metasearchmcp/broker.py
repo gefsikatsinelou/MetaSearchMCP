@@ -21,6 +21,8 @@ from metasearchmcp.catalog import (
     pick_tagged_providers,
 )
 from metasearchmcp.config import USER_CONFIG_FILE, get_settings
+
+_SERPBASE_DASHBOARD_URL = "https://serpbase.dev/dashboard/api-keys"
 from metasearchmcp.contracts import SearchOptions
 from metasearchmcp.orchestrator import run_search_plan
 
@@ -423,7 +425,7 @@ def run() -> None:
             "[MetaSearchMCP] No Google provider configured.\n"
             "  Set ALLOW_UNSTABLE_PROVIDERS=true for direct Google, "
             "or run 'metasearchmcp-setup' for SerpBase.\n"
-            f"  SerpBase key dashboard: https://serpbase.dev/dashboard/api-keys\n"
+            f"  SerpBase key dashboard: {_SERPBASE_DASHBOARD_URL}\n"
             f"  Config file: {USER_CONFIG_FILE}",
             file=sys.stderr,
         )

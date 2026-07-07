@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 
-import re
 from typing import ClassVar
+
+from bs4 import BeautifulSoup
 
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
 
@@ -51,7 +52,7 @@ class WikipediaProvider(BaseProvider):
             url = f"https://en.wikipedia.org/wiki/{slug}"
             # snippet contains HTML spans — strip them simply
             raw_snippet = item.get("snippet", "")
-            snippet = BeautifulSoupStrip.strip(raw_snippet)
+            snippet = BeautifulSoup(raw_snippet, "html.parser").get_text()
 
             results.append(
                 SearchResult(
@@ -66,12 +67,3 @@ class WikipediaProvider(BaseProvider):
             )
 
         return ProviderResult(results=results)
-
-
-class BeautifulSoupStrip:
-    """Minimal HTML tag stripper without importing bs4 for a single operation."""
-
-    @staticmethod
-    def strip(html: str) -> str:
-        """Remove HTML tags from *html* and return plain text."""
-        return re.sub(r"<[^>]+>", "", html).strip()

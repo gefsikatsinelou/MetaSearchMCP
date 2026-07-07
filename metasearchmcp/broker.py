@@ -21,13 +21,13 @@ from metasearchmcp.catalog import (
     pick_tagged_providers,
 )
 from metasearchmcp.config import USER_CONFIG_FILE, get_settings
-
-_SERPBASE_DASHBOARD_URL = "https://serpbase.dev/dashboard/api-keys"
 from metasearchmcp.contracts import SearchOptions
 from metasearchmcp.orchestrator import run_search_plan
 
 if TYPE_CHECKING:
     from metasearchmcp.providers.base import BaseProvider
+
+_SERPBASE_DASHBOARD_URL = "https://serpbase.dev/dashboard/api-keys"
 
 server: Server = Server("MetaSearchMCP")
 _catalog: dict[str, BaseProvider] = build_provider_catalog()

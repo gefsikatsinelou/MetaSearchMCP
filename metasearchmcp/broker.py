@@ -423,8 +423,8 @@ def run() -> None:
     ):
         print(
             "[MetaSearchMCP] No Google provider configured.\n"
-            "  Set ALLOW_UNSTABLE_PROVIDERS=true for direct Google, "
-            "or run 'metasearchmcp-setup' for SerpBase.\n"
+            "  Set ALLOW_UNSTABLE_PROVIDERS=true for direct Google,\n"
+            "  set SERPBASE_API_KEY (run 'metasearchmcp-setup') or SERPER_API_KEY,\n"
             f"  SerpBase key dashboard: {_SERPBASE_DASHBOARD_URL}\n"
             f"  Config file: {USER_CONFIG_FILE}",
             file=sys.stderr,

@@ -16,8 +16,6 @@ from .arxiv import ArxivProvider
 from .baidu import BaiduProvider
 from .bing import BingProvider
 from .brave import BraveProvider
-
-# Developer
 from .crates import CratesIoProvider
 from .crossref import CrossrefProvider
 from .dockerhub import DockerHubProvider
@@ -55,6 +53,7 @@ from .wikipedia import WikipediaProvider
 from .yahoo import YahooProvider
 from .yahoo_finance import YahooFinanceProvider
 from .yandex import YandexProvider
+from .youcom import YouComProvider
 
 if TYPE_CHECKING:
     from .base import BaseProvider
@@ -71,6 +70,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     BingProvider,
     YahooProvider,
     BraveProvider,
+    YouComProvider,
     MwmblProvider,
     EcosiaProvider,
     MojeekProvider,

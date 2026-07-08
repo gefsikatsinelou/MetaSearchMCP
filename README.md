@@ -63,6 +63,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | Bing | `bing` | RSS feed |
 | Yahoo | `yahoo` | HTML scraping, best effort |
 | Brave | `brave` | Official Search API |
+| You.com | `youcom` | Official Search API |
 | Mwmbl | `mwmbl` | Public JSON API |
 | Ecosia | `ecosia` | HTML scraping |
 | Mojeek | `mojeek` | HTML scraping |
@@ -170,6 +171,7 @@ AGGREGATOR_TIMEOUT=15
 SERPBASE_API_KEY=
 SERPER_API_KEY=
 BRAVE_API_KEY=
+YDC_API_KEY=
 GITHUB_TOKEN=
 STACKEXCHANGE_API_KEY=
 REDDIT_CLIENT_ID=
@@ -182,6 +184,18 @@ FINNHUB_API_KEY=
 ENABLED_PROVIDERS=
 ALLOW_UNSTABLE_PROVIDERS=false
 MAX_RESULTS_PER_PROVIDER=10
+```
+
+To enable You.com, set `YDC_API_KEY` and either let it participate in the default web-provider pool or explicitly target it with `providers: ["youcom"]`.
+
+```bash
+curl -X POST http://localhost:8000/search \
+  -H "Content-Type: application/json" \
+  -d '{
+    "query": "playwright locator best practices",
+    "providers": ["youcom"],
+    "params": {"num_results": 5}
+  }'
 ```
 
 ## Running

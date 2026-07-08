@@ -11,13 +11,14 @@ import sys
 import httpx
 
 from metasearchmcp.config import (
+    SERPBASE_API_URL,
     SERPBASE_DASHBOARD_URL,
     USER_CONFIG_DIR,
     USER_CONFIG_FILE,
     get_settings,
 )
 
-_SERPBASE_VALIDATE_URL = "https://api.serpbase.dev/google/search"
+_SERPBASE_VALIDATE_URL = SERPBASE_API_URL
 
 # status codes that confirm the key itself is valid (credits may be low)
 _VALID_STATUSES = {0, 2, 3}  # ok, insufficient_credits, rate_limited

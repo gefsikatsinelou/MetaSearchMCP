@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import ClassVar
 
-from metasearchmcp.config import get_settings
+from metasearchmcp.config import SERPBASE_API_URL, get_settings
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
 
 from .base import BaseProvider
@@ -20,7 +20,7 @@ class GoogleSerpbaseProvider(BaseProvider):
     description = "Google web search proxied through the SerpBase API."
     tags: ClassVar[list[str]] = ["google", "web"]
 
-    _API_URL = "https://api.serpbase.dev/google/search"
+    _API_URL = SERPBASE_API_URL
 
     def __init__(self) -> None:
         """Initialize Serpbase provider with API key from settings."""

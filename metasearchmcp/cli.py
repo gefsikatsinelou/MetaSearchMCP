@@ -10,7 +10,12 @@ import sys
 
 import httpx
 
-from metasearchmcp.config import USER_CONFIG_DIR, USER_CONFIG_FILE, SERPBASE_DASHBOARD_URL, get_settings
+from metasearchmcp.config import (
+    SERPBASE_DASHBOARD_URL,
+    USER_CONFIG_DIR,
+    USER_CONFIG_FILE,
+    get_settings,
+)
 
 _SERPBASE_VALIDATE_URL = "https://api.serpbase.dev/google/search"
 

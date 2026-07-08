@@ -20,7 +20,7 @@ from metasearchmcp.catalog import (
     pick_providers_by_tags,
     pick_tagged_providers,
 )
-from metasearchmcp.config import USER_CONFIG_FILE, SERPBASE_DASHBOARD_URL, get_settings
+from metasearchmcp.config import SERPBASE_DASHBOARD_URL, USER_CONFIG_FILE, get_settings
 from metasearchmcp.contracts import SearchOptions
 from metasearchmcp.orchestrator import run_search_plan
 

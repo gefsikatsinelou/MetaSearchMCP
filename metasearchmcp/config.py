@@ -10,6 +10,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 USER_CONFIG_DIR: Path = Path.home() / ".metasearchmcp"
 USER_CONFIG_FILE: Path = USER_CONFIG_DIR / "config.env"
+SERPBASE_DASHBOARD_URL: str = "https://serpbase.dev/dashboard/api-keys"
 
 
 class Settings(BaseSettings):

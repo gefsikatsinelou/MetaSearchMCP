@@ -10,10 +10,9 @@ import sys
 
 import httpx
 
-from metasearchmcp.config import USER_CONFIG_DIR, USER_CONFIG_FILE, get_settings
+from metasearchmcp.config import USER_CONFIG_DIR, USER_CONFIG_FILE, SERPBASE_DASHBOARD_URL, get_settings
 
 _SERPBASE_VALIDATE_URL = "https://api.serpbase.dev/google/search"
-_DASHBOARD_URL = "https://serpbase.dev/dashboard/api-keys"
 
 # status codes that confirm the key itself is valid (credits may be low)
 _VALID_STATUSES = {0, 2, 3}  # ok, insufficient_credits, rate_limited
@@ -140,7 +139,7 @@ def setup() -> None:
                 return
         print()
 
-    print(f"Get your API key at: {_DASHBOARD_URL}\n")
+    print(f"Get your API key at: {SERPBASE_DASHBOARD_URL}\n")
 
     api_key = input("Enter your SerpBase API key: ").strip()
     if not api_key:

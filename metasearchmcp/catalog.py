@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Literal
 
 if TYPE_CHECKING:
     from metasearchmcp.providers.base import BaseProvider
@@ -65,7 +65,7 @@ def pick_tagged_providers(
 def pick_providers_by_tags(
     catalog: dict[str, BaseProvider],
     tags: list[str],
-    match: str = "any",
+    match: Literal["any", "all"] = "any",
 ) -> dict[str, BaseProvider]:
     """Filter *catalog* by one or more tags.
 

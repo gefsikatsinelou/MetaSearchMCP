@@ -20,7 +20,12 @@ from metasearchmcp.catalog import (
     pick_providers_by_tags,
     pick_tagged_providers,
 )
-from metasearchmcp.config import NO_GOOGLE_PROVIDER_MSG, SERPBASE_DASHBOARD_URL, USER_CONFIG_FILE, get_settings
+from metasearchmcp.config import (
+    NO_GOOGLE_PROVIDER_MSG,
+    SERPBASE_DASHBOARD_URL,
+    USER_CONFIG_FILE,
+    get_settings,
+)
 from metasearchmcp.contracts import SearchOptions
 from metasearchmcp.orchestrator import run_search_plan
 

@@ -15,12 +15,12 @@ from metasearchmcp.catalog import (
     pick_providers_by_tags,
     pick_tagged_providers,
 )
+from metasearchmcp.config import NO_GOOGLE_PROVIDER_MSG
 from metasearchmcp.contracts import (
     GoogleSearchEnvelope,
     SearchEnvelope,
     SearchReport,
 )
-from metasearchmcp.config import NO_GOOGLE_PROVIDER_MSG
 from metasearchmcp.orchestrator import run_search_plan
 from metasearchmcp.providers.base import (
     BaseProvider,  # Required at runtime for FastAPI Annotated[Depends(...)] resolution

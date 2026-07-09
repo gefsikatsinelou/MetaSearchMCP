@@ -43,6 +43,7 @@ class ArxivProvider(BaseProvider):
         return self._parse(xml_text)
 
     def _parse(self, xml_text: str) -> ProviderResult:
+        """Parse the XML response into structured search results."""
         results: list[SearchResult] = []
 
         try:

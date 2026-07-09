@@ -51,6 +51,7 @@ class InternetArchiveProvider(BaseProvider):
         return self._parse(data)
 
     def _parse(self, data: dict) -> ProviderResult:
+        """Parse the API response into structured search results."""
         results: list[SearchResult] = []
         docs = data.get("response", {}).get("docs", [])
 

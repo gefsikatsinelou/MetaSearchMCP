@@ -64,6 +64,7 @@ class MetaCPANProvider(BaseProvider):
         return self._parse(data)
 
     def _parse(self, data: dict) -> ProviderResult:
+        """Parse the API response into structured search results."""
         results: list[SearchResult] = []
 
         hits = data.get("hits", {}).get("hits", [])

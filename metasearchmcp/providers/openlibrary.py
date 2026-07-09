@@ -38,6 +38,7 @@ class OpenLibraryProvider(BaseProvider):
         return self._parse(data)
 
     def _parse(self, data: dict) -> ProviderResult:
+        """Parse the API response into structured search results."""
         results: list[SearchResult] = []
 
         for i, doc in enumerate(data.get("docs", []), start=1):

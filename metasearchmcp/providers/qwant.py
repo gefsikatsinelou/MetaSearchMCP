@@ -87,6 +87,7 @@ class QwantProvider(BaseProvider):
         return self._parse_lite(lite.text, max_results=limit)
 
     def _parse(self, data: dict, max_results: int | None = None) -> ProviderResult:
+        """Parse the API response into structured search results."""
         results: list[SearchResult] = []
 
         items = (
@@ -115,6 +116,7 @@ class QwantProvider(BaseProvider):
         return ProviderResult(results=results)
 
     def _parse_lite(self, html: str, max_results: int | None = None) -> ProviderResult:
+        """Parse the HTML lite response into structured search results."""
         soup = BeautifulSoup(html, "lxml")
         results: list[SearchResult] = []
         limit = max_results or self._max_results

@@ -52,6 +52,7 @@ class StackOverflowProvider(BaseProvider):
         return self._parse(data)
 
     def _parse(self, data: dict) -> ProviderResult:
+        """Parse the API response into structured search results."""
         results: list[SearchResult] = []
 
         for i, item in enumerate(data.get("items", []), start=1):

@@ -41,6 +41,7 @@ class CratesIoProvider(BaseProvider):
         return self._parse(data)
 
     def _parse(self, data: dict) -> ProviderResult:
+        """Parse the API response into structured search results."""
         results: list[SearchResult] = []
 
         for i, crate in enumerate(data.get("crates", []), start=1):

@@ -130,6 +130,7 @@ class StartpageProvider(BaseProvider):
         return sc_input["value"]
 
     def _parse(self, html: str, max_results: int | None = None) -> ProviderResult:
+        """Parse the HTML response into structured search results."""
         soup = BeautifulSoup(html, "lxml")
         results: list[SearchResult] = []
         limit = max_results or self._max_results

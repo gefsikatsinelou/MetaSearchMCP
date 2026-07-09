@@ -38,6 +38,7 @@ class HackerNewsProvider(BaseProvider):
         return self._parse(data)
 
     def _parse(self, data: dict) -> ProviderResult:
+        """Parse the API response into structured search results."""
         results: list[SearchResult] = []
 
         for i, hit in enumerate(data.get("hits", []), start=1):

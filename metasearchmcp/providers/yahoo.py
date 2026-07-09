@@ -129,6 +129,7 @@ class YahooProvider(BaseProvider):
         max_results: int | None = None,
         domain: str = "search.yahoo.com",
     ) -> ProviderResult:
+        """Parse the HTML response into structured search results."""
         soup = BeautifulSoup(html, "lxml")
         results: list[SearchResult] = []
         suggestions: list[str] = []

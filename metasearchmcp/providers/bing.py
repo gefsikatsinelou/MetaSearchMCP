@@ -40,6 +40,7 @@ class BingProvider(BaseProvider):
         return self._parse(resp.text, max_results)
 
     def _parse(self, xml_text: str, max_results: int | None = None) -> ProviderResult:
+        """Parse the XML response into structured search results."""
         results: list[SearchResult] = []
         root = ET.fromstring(xml_text)
         limit = max_results or self._max_results

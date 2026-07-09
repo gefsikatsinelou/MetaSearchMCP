@@ -43,6 +43,7 @@ class GitLabProvider(BaseProvider):
         return self._parse(data)
 
     def _parse(self, data: list) -> ProviderResult:
+        """Parse the API response into structured search results."""
         results: list[SearchResult] = []
 
         for i, item in enumerate(data, start=1):

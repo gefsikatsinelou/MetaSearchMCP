@@ -73,6 +73,7 @@ class PubMedProvider(BaseProvider):
         return self._parse(summary_data, ids)
 
     def _parse(self, data: dict, ids: list[str]) -> ProviderResult:
+        """Parse the API response into structured search results."""
         results: list[SearchResult] = []
         result_map = data.get("result", {})
 

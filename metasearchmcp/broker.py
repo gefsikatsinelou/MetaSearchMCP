@@ -20,7 +20,7 @@ from metasearchmcp.catalog import (
     pick_providers_by_tags,
     pick_tagged_providers,
 )
-from metasearchmcp.config import SERPBASE_DASHBOARD_URL, USER_CONFIG_FILE, get_settings
+from metasearchmcp.config import NO_GOOGLE_PROVIDER_MSG, SERPBASE_DASHBOARD_URL, USER_CONFIG_FILE, get_settings
 from metasearchmcp.contracts import SearchOptions
 from metasearchmcp.orchestrator import run_search_plan
 
@@ -296,11 +296,7 @@ async def _dispatch_search_google(
         selected = {first_available[0]: first_available[1]} if first_available else {}
     if not selected:
         return {
-            "error": (
-                "No Google provider available. "
-                "Enable ALLOW_UNSTABLE_PROVIDERS=true for direct Google, "
-                "or set SERPBASE_API_KEY / SERPER_API_KEY."
-            ),
+            "error": NO_GOOGLE_PROVIDER_MSG,
         }
     return (await run_search_plan(query, list(selected.values()), options)).model_dump()
 

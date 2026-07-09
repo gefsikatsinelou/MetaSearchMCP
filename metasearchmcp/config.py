@@ -13,6 +13,13 @@ USER_CONFIG_FILE: Path = USER_CONFIG_DIR / "config.env"
 SERPBASE_DASHBOARD_URL: str = "https://serpbase.dev/dashboard/api-keys"
 SERPBASE_API_URL: str = "https://api.serpbase.dev/google/search"
 
+# Shared user-facing error message used by both MCP broker and HTTP routes.
+NO_GOOGLE_PROVIDER_MSG: str = (
+    "No Google provider available. "
+    "Enable ALLOW_UNSTABLE_PROVIDERS=true for direct Google, "
+    "or set SERPBASE_API_KEY / SERPER_API_KEY."
+)
+
 
 class Settings(BaseSettings):
     """Application settings loaded from environment variables and .env files."""

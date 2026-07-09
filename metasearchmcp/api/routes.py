@@ -20,6 +20,7 @@ from metasearchmcp.contracts import (
     SearchEnvelope,
     SearchReport,
 )
+from metasearchmcp.config import NO_GOOGLE_PROVIDER_MSG
 from metasearchmcp.orchestrator import run_search_plan
 from metasearchmcp.providers.base import (
     BaseProvider,  # Required at runtime for FastAPI Annotated[Depends(...)] resolution
@@ -96,11 +97,7 @@ async def search_google(
     if not selected:
         raise HTTPException(
             status_code=HTTPStatus.SERVICE_UNAVAILABLE,
-            detail=(
-                "No Google provider available. "
-                "Enable ALLOW_UNSTABLE_PROVIDERS=true for direct Google, "
-                "or set SERPBASE_API_KEY / SERPER_API_KEY."
-            ),
+            detail=NO_GOOGLE_PROVIDER_MSG,
         )
 
     return await run_search_plan(req.query, list(selected.values()), req.params)

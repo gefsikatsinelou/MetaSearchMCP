@@ -86,8 +86,12 @@ async def search_google(
         if req.provider not in google_providers:
             raise HTTPException(
                 status_code=HTTPStatus.BAD_REQUEST,
-                detail=f"Google provider '{req.provider}' is not available. "
-                f"Available: {list(google_providers.keys())}",
+                detail=(
+                    f"Google provider '{req.provider}' is not available. "
+                    f"Available: {list(google_providers.keys())}. "
+                    f"Enable ALLOW_UNSTABLE_PROVIDERS=true for direct Google, "
+                    f"or set SERPBASE_API_KEY / SERPER_API_KEY."
+                ),
             )
         selected = {req.provider: google_providers[req.provider]}
     else:

@@ -18,10 +18,10 @@ from metasearchmcp.config import (
     get_settings,
 )
 
-_SERPBASE_VALIDATE_URL = SERPBASE_API_URL
-
-# status codes that confirm the key itself is valid (credits may be low)
-_VALID_STATUSES = {0, 2, 3}  # ok, insufficient_credits, rate_limited
+# Valid SerpBase API response status codes:
+#   0 = ok, 2 = insufficient_credits, 3 = rate_limited
+# All confirm the API key itself is valid even when credits/limits apply.
+_VALID_STATUSES: set[int] = {0, 2, 3}
 
 
 # ─── Config file helpers ──────────────────────────────────────────────────────
@@ -55,7 +55,7 @@ def validate_serpbase_key(api_key: str) -> bool:
     """Check whether a SerpBase API key is valid by calling the validation endpoint."""
     try:
         resp = httpx.post(
-            _SERPBASE_VALIDATE_URL,
+            SERPBASE_API_URL,
             json={"q": "test"},
             headers={"X-API-Key": api_key},
             timeout=get_settings().default_timeout,

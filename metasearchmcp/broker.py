@@ -291,11 +291,16 @@ async def _dispatch_search_google(
     selected = pick_tagged_providers(_catalog, "google")
     provider_name = arguments.get("provider", "")
     if provider_name:
-        selected = {
-            name: provider
-            for name, provider in selected.items()
-            if name == provider_name
-        }
+        if provider_name not in selected:
+            return {
+                "error": (
+                    f"Google provider '{provider_name}' is not available. "
+                    f"Available: {list(selected.keys())}. "
+                    f"Enable ALLOW_UNSTABLE_PROVIDERS=true for direct Google, "
+                    f"or set SERPBASE_API_KEY / SERPER_API_KEY."
+                ),
+            }
+        selected = {provider_name: selected[provider_name]}
     else:
         first_available = next(iter(selected.items()), None)
         selected = {first_available[0]: first_available[1]} if first_available else {}

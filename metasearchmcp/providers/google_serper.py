@@ -12,14 +12,15 @@ from .base import BaseProvider
 _MAX_API_RESULTS = 20
 
 
+_SERPER_API_URL = "https://google.serper.dev/search"
+
+
 class GoogleSerperProvider(BaseProvider):
     """Google search via serper.dev API."""
 
     name = "google_serper"
     description = "Google web search proxied through the Serper API."
     tags: ClassVar[list[str]] = ["google", "web"]
-
-    _API_URL = "https://google.serper.dev/search"
 
     def __init__(self) -> None:
         """Initialize the Google Serper provider with an API key."""
@@ -52,7 +53,7 @@ class GoogleSerperProvider(BaseProvider):
         }
 
         async with self._client() as client:
-            resp = await client.post(self._API_URL, json=payload, headers=headers)
+            resp = await client.post(_SERPER_API_URL, json=payload, headers=headers)
             resp.raise_for_status()
             data = resp.json()
 

@@ -20,8 +20,6 @@ class GoogleSerpbaseProvider(BaseProvider):
     description = "Google web search proxied through the SerpBase API."
     tags: ClassVar[list[str]] = ["google", "web"]
 
-    _API_URL = SERPBASE_API_URL
-
     def __init__(self) -> None:
         """Initialize Serpbase provider with API key from settings."""
         super().__init__()
@@ -50,7 +48,7 @@ class GoogleSerpbaseProvider(BaseProvider):
         headers = {"X-API-Key": self._api_key}
 
         async with self._client() as client:
-            resp = await client.post(self._API_URL, json=payload, headers=headers)
+            resp = await client.post(SERPBASE_API_URL, json=payload, headers=headers)
             resp.raise_for_status()
             data = resp.json()
             if data.get("status") != _SERPBASE_STATUS_OK:

@@ -273,7 +273,12 @@ async def _dispatch_search_web(
     )
     selected = pick_named_providers(selected, arguments.get("providers") or [])
     if not selected:
-        return {"error": "No providers available for the requested filters."}
+        return {
+            "error": (
+                "No providers available for the requested filters. "
+                "Check provider names, tags, configuration, and API keys."
+            ),
+        }
     return (await run_search_plan(query, list(selected.values()), options)).model_dump()
 
 
@@ -321,7 +326,12 @@ async def _dispatch_compare_engines(
     if not selected:
         selected = _catalog
     if not selected:
-        return {"error": "No providers available for comparison."}
+        return {
+            "error": (
+                "No providers available for comparison. "
+                "Check configuration and API keys."
+            ),
+        }
     jobs = [
         run_search_plan(
             query,

@@ -31,15 +31,19 @@ class MwmblProvider(BaseProvider):
 
         return self._parse(data, max_results)
 
-    def _parse(self, data: list, max_results: int | None = None) -> ProviderResult:
+    def _parse(
+        self, data: list[dict[str, object]], max_results: int | None = None
+    ) -> ProviderResult:
         """Parse the API response into structured search results."""
         results: list[SearchResult] = []
         limit = max_results or self._max_results
 
         for i, item in enumerate(data, start=1):
-            title_parts = [t["value"] for t in item.get("title", [])]
+            title_parts = [t.get("value", "") for t in item.get("title", [])]
             extract_parts = item.get("extract", [])
-            content = extract_parts[0]["value"] if extract_parts else ""
+            content = (
+                extract_parts[0].get("value", "") if extract_parts else ""
+            )
             results.append(
                 SearchResult(
                     title="".join(title_parts),

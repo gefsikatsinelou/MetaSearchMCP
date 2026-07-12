@@ -41,9 +41,7 @@ class MwmblProvider(BaseProvider):
         for i, item in enumerate(data, start=1):
             title_parts = [t.get("value", "") for t in item.get("title", [])]
             extract_parts = item.get("extract", [])
-            content = (
-                extract_parts[0].get("value", "") if extract_parts else ""
-            )
+            content = extract_parts[0].get("value", "") if extract_parts else ""
             results.append(
                 SearchResult(
                     title="".join(title_parts),

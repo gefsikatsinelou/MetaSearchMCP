@@ -32,7 +32,9 @@ class MwmblProvider(BaseProvider):
         return self._parse(data, max_results)
 
     def _parse(
-        self, data: list[dict[str, object]], max_results: int | None = None,
+        self,
+        data: list[dict[str, object]],
+        max_results: int | None = None,
     ) -> ProviderResult:
         """Parse the API response into structured search results."""
         results: list[SearchResult] = []

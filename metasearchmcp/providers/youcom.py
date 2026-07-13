@@ -24,13 +24,16 @@ class YouComProvider(BaseProvider):
     tags: ClassVar[list[str]] = ["web"]
 
     def __init__(self) -> None:
+        """Initialize You.com provider with API key from settings."""
         super().__init__()
         self._api_key = get_settings().ydc_api_key
 
     def is_available(self) -> bool:
+        """Return True when a You.com API key is configured."""
         return bool(self._api_key)
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
+        """Search You.com for *query* via the official Search API."""
         qp = {
             "query": query,
             "count": str(min(params.num_results, self._max_results)),

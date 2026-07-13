@@ -51,6 +51,7 @@ class Settings(BaseSettings):
 
     # API keys — web providers
     brave_api_key: str = ""
+    ydc_api_key: str = ""
 
     # API keys — developer providers
     github_token: str = ""

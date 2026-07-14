@@ -72,7 +72,7 @@ class GitLabProvider(BaseProvider):
                     extra={
                         "stars": stars,
                         "forks": item.get("forks_count", 0),
-                        "language": item.get("default_branch"),
+                        "default_branch": item.get("default_branch"),
                         "topics": item.get("topics", []),
                         "clone_url": item.get("http_url_to_repo"),
                     },

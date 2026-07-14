@@ -12,6 +12,8 @@ from .base import MAX_SNIPPET_LENGTH, BaseProvider
 _API_URL = "https://api.crossref.org/works"
 _MAX_API_RESULTS = 20
 _MAX_DISPLAY_AUTHORS = 3
+# Precompiled pattern for stripping JATS XML tags from CrossRef abstracts.
+_JATS_TAG_RE = re.compile(r"<[^>]+>")
 
 
 class CrossrefProvider(BaseProvider):
@@ -62,7 +64,7 @@ class CrossrefProvider(BaseProvider):
 
             abstract = (item.get("abstract") or "")[:MAX_SNIPPET_LENGTH]
             # CrossRef abstracts sometimes include JATS XML tags
-            abstract = re.sub(r"<[^>]+>", "", abstract).strip()
+            abstract = _JATS_TAG_RE.sub("", abstract).strip()
 
             authors_raw = item.get("author", [])
             authors = [

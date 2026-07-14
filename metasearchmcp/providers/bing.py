@@ -42,7 +42,10 @@ class BingProvider(BaseProvider):
     def _parse(self, xml_text: str, max_results: int | None = None) -> ProviderResult:
         """Parse the XML response into structured search results."""
         results: list[SearchResult] = []
-        root = ET.fromstring(xml_text)
+        try:
+            root = ET.fromstring(xml_text)
+        except ET.ParseError:
+            return ProviderResult()
         limit = max_results or self._max_results
 
         for i, item in enumerate(root.findall(".//item"), start=1):

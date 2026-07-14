@@ -17,7 +17,7 @@ def _youcom_response() -> dict:
                     "page_age": "2026-07-01T12:30:00",
                     "thumbnail_url": "https://example.com/thumb.png",
                     "favicon_url": "https://example.com/favicon.ico",
-                }
+                },
             ],
             "news": [
                 {
@@ -25,9 +25,9 @@ def _youcom_response() -> dict:
                     "title": "Example News",
                     "description": "Latest story.",
                     "page_age": "2026-07-02T09:00:00",
-                }
+                },
             ],
-        }
+        },
     }
 
 
@@ -64,9 +64,9 @@ def test_youcom_parse_falls_back_to_first_snippet_when_description_missing():
                         "title": "Example",
                         "description": "",
                         "snippets": ["Fallback snippet"],
-                    }
-                ]
-            }
+                    },
+                ],
+            },
         },
     )
 

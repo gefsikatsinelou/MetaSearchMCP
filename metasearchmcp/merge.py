@@ -10,16 +10,16 @@ if TYPE_CHECKING:
 
 _DEFAULT_PORTS = {"http": "80", "https": "443"}
 _TRACKING_QUERY_KEYS = {
-    "dclid",     # DoubleClick / DV360
-    "fbclid",    # Meta / Facebook
-    "gclid",     # Google Ads
-    "gclsrc",    # Google Ads source
-    "mc_cid",    # Mailchimp campaign ID
-    "mc_eid",    # Mailchimp email ID
-    "mkt_tok",   # Marketo
-    "msclkid",   # Microsoft / Bing
-    "ref_src",   # Generic referrer
-    "twclid",    # Twitter / X
+    "dclid",  # DoubleClick / DV360
+    "fbclid",  # Meta / Facebook
+    "gclid",  # Google Ads
+    "gclsrc",  # Google Ads source
+    "mc_cid",  # Mailchimp campaign ID
+    "mc_eid",  # Mailchimp email ID
+    "mkt_tok",  # Marketo
+    "msclkid",  # Microsoft / Bing
+    "ref_src",  # Generic referrer
+    "twclid",  # Twitter / X
 }
 
 

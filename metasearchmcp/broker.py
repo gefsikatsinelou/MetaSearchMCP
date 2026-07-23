@@ -35,7 +35,7 @@ if TYPE_CHECKING:
 server: Server = Server("MetaSearchMCP")
 _catalog: dict[str, BaseProvider] = build_provider_catalog()
 
-# Tool name constants – single source of truth for both MCP definitions
+# Tool name constants -- single source of truth for both MCP definitions
 # and the dispatch handler map, preventing name drift between the two.
 _TOOL_SEARCH_WEB = "search_web"
 _TOOL_SEARCH_GOOGLE = "search_google"
@@ -397,7 +397,9 @@ async def dispatch_tool(name: str, arguments: dict[str, Any]) -> dict[str, Any]:
             ["github"],
             "GitHub provider not available.",
         ),
-        _TOOL_COMPARE_ENGINES: lambda: _dispatch_compare_engines(query, arguments, options),
+        _TOOL_COMPARE_ENGINES: lambda: _dispatch_compare_engines(
+            query, arguments, options
+        ),
         _TOOL_SEARCH_FINANCE: lambda: _run_tagged_search(
             query,
             options,

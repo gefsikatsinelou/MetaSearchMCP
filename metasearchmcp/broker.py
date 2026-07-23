@@ -398,7 +398,7 @@ async def dispatch_tool(name: str, arguments: dict[str, Any]) -> dict[str, Any]:
             "GitHub provider not available.",
         ),
         _TOOL_COMPARE_ENGINES: lambda: _dispatch_compare_engines(
-            query, arguments, options
+            query, arguments, options,
         ),
         _TOOL_SEARCH_FINANCE: lambda: _run_tagged_search(
             query,

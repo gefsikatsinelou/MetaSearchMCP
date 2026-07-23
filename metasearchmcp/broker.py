@@ -35,6 +35,16 @@ if TYPE_CHECKING:
 server: Server = Server("MetaSearchMCP")
 _catalog: dict[str, BaseProvider] = build_provider_catalog()
 
+# Tool name constants – single source of truth for both MCP definitions
+# and the dispatch handler map, preventing name drift between the two.
+_TOOL_SEARCH_WEB = "search_web"
+_TOOL_SEARCH_GOOGLE = "search_google"
+_TOOL_SEARCH_ACADEMIC = "search_academic"
+_TOOL_SEARCH_GITHUB = "search_github"
+_TOOL_COMPARE_ENGINES = "compare_engines"
+_TOOL_SEARCH_FINANCE = "search_finance"
+_TOOL_SEARCH_CODE = "search_code"
+
 # Shared result-count schema properties reused across tool definitions.
 _RESULT_COUNT_PROPERTIES: dict[str, Any] = {
     "num_results": {
@@ -55,7 +65,7 @@ _RESULT_COUNT_PROPERTIES: dict[str, Any] = {
 
 _TOOLS: list[types.Tool] = [
     types.Tool(
-        name="search_web",
+        name=_TOOL_SEARCH_WEB,
         description=(
             "Aggregate structured web search results from all enabled providers."
         ),
@@ -96,7 +106,7 @@ _TOOLS: list[types.Tool] = [
         },
     ),
     types.Tool(
-        name="search_google",
+        name=_TOOL_SEARCH_GOOGLE,
         description="Search Google through configured hosted providers.",
         inputSchema={
             "type": "object",
@@ -118,7 +128,7 @@ _TOOLS: list[types.Tool] = [
         },
     ),
     types.Tool(
-        name="search_academic",
+        name=_TOOL_SEARCH_ACADEMIC,
         description="Search academic and reference sources for research workflows.",
         inputSchema={
             "type": "object",
@@ -130,7 +140,7 @@ _TOOLS: list[types.Tool] = [
         },
     ),
     types.Tool(
-        name="search_github",
+        name=_TOOL_SEARCH_GITHUB,
         description="Search GitHub repositories with structured metadata.",
         inputSchema={
             "type": "object",
@@ -142,7 +152,7 @@ _TOOLS: list[types.Tool] = [
         },
     ),
     types.Tool(
-        name="compare_engines",
+        name=_TOOL_COMPARE_ENGINES,
         description="Compare providers side by side for the same query.",
         inputSchema={
             "type": "object",
@@ -159,7 +169,7 @@ _TOOLS: list[types.Tool] = [
         },
     ),
     types.Tool(
-        name="search_finance",
+        name=_TOOL_SEARCH_FINANCE,
         description=(
             "Search stock tickers, company names, and financial instruments "
             "across finance providers (Yahoo Finance, Alpha Vantage, Finnhub)."
@@ -179,7 +189,7 @@ _TOOLS: list[types.Tool] = [
         },
     ),
     types.Tool(
-        name="search_code",
+        name=_TOOL_SEARCH_CODE,
         description=(
             "Search code repositories, packages, and developer resources across "
             "GitHub, GitLab, npm, PyPI, crates.io, pkg.go.dev, MetaCPAN, lib.rs, "
@@ -373,22 +383,22 @@ async def dispatch_tool(name: str, arguments: dict[str, Any]) -> dict[str, Any]:
     options = SearchOptions(**kwargs)
 
     handlers: dict[str, Any] = {
-        "search_web": lambda: _dispatch_search_web(query, arguments, options),
-        "search_google": lambda: _dispatch_search_google(query, arguments, options),
-        "search_academic": lambda: _run_tagged_search(
+        _TOOL_SEARCH_WEB: lambda: _dispatch_search_web(query, arguments, options),
+        _TOOL_SEARCH_GOOGLE: lambda: _dispatch_search_google(query, arguments, options),
+        _TOOL_SEARCH_ACADEMIC: lambda: _run_tagged_search(
             query,
             options,
             "academic",
             "No academic providers available.",
         ),
-        "search_github": lambda: _run_named_search(
+        _TOOL_SEARCH_GITHUB: lambda: _run_named_search(
             query,
             options,
             ["github"],
             "GitHub provider not available.",
         ),
-        "compare_engines": lambda: _dispatch_compare_engines(query, arguments, options),
-        "search_finance": lambda: _run_tagged_search(
+        _TOOL_COMPARE_ENGINES: lambda: _dispatch_compare_engines(query, arguments, options),
+        _TOOL_SEARCH_FINANCE: lambda: _run_tagged_search(
             query,
             options,
             "finance",
@@ -399,7 +409,7 @@ async def dispatch_tool(name: str, arguments: dict[str, Any]) -> dict[str, Any]:
                 "for additional providers."
             ),
         ),
-        "search_code": lambda: _run_tagged_search(
+        _TOOL_SEARCH_CODE: lambda: _run_tagged_search(
             query,
             options,
             "code",

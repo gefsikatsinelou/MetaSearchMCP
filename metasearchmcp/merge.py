@@ -14,12 +14,14 @@ _TRACKING_QUERY_KEYS = {
     "fbclid",  # Meta / Facebook
     "gclid",  # Google Ads
     "gclsrc",  # Google Ads source
+    "igshid",  # Instagram share ID
     "mc_cid",  # Mailchimp campaign ID
     "mc_eid",  # Mailchimp email ID
     "mkt_tok",  # Marketo
     "msclkid",  # Microsoft / Bing
     "ref_src",  # Generic referrer
     "twclid",  # Twitter / X
+    "yclid",  # Yandex click ID
 }
 
 

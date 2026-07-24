@@ -14,8 +14,6 @@ from .base import BaseProvider
 
 logger = logging.getLogger(__name__)
 
-_JSON_API = "https://pypi.org/pypi/{name}/json"
-
 
 class PyPIProvider(BaseProvider):
     """PyPI package lookup via the JSON API.
@@ -73,7 +71,7 @@ class PyPIProvider(BaseProvider):
     ) -> dict[str, Any] | None:
         """Fetch package metadata from the PyPI JSON API."""
         try:
-            resp = await client.get(_JSON_API.format(name=name))
+            resp = await client.get(f"https://pypi.org/pypi/{name}/json")
             if resp.status_code != HTTPStatus.OK:
                 return None
             return resp.json()

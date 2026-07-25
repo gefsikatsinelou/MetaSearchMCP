@@ -210,7 +210,7 @@ class GoogleProvider(BaseProvider):
         return related_searches
 
     @staticmethod
-    def _extract_answer_box(soup: BeautifulSoup) -> dict | None:
+    def _extract_answer_box(soup: BeautifulSoup) -> dict[str, str] | None:
         """Extract the featured answer box from Google HTML, if present."""
         for selector in _ANSWER_BOX_SELECTORS:
             node = soup.select_one(selector)

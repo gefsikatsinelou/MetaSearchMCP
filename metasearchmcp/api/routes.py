@@ -23,7 +23,7 @@ from metasearchmcp.contracts import (
 )
 from metasearchmcp.orchestrator import run_search_plan
 from metasearchmcp.providers.base import (
-    BaseProvider,  # Required at runtime for FastAPI Annotated[Depends(...)] resolution
+    BaseProvider,  # noqa: TC001
 )
 
 router = APIRouter()

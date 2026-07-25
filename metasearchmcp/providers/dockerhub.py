@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import ClassVar
+from typing import Any, ClassVar
 
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
 
@@ -34,7 +34,7 @@ class DockerHubProvider(BaseProvider):
 
         return self._parse(data)
 
-    def _parse(self, data: dict) -> ProviderResult:
+    def _parse(self, data: dict[str, Any]) -> ProviderResult:
         """Parse the API response into structured search results."""
         results: list[SearchResult] = []
 

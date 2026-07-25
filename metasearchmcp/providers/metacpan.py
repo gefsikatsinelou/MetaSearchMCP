@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import copy
-from typing import ClassVar
+from typing import Any, ClassVar
 
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
 
@@ -51,7 +51,7 @@ class MetaCPANProvider(BaseProvider):
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
         """Search MetaCPAN for *query* and return Perl module results."""
         num = min(params.num_results, self._max_results, _MAX_API_RESULTS)
-        payload: dict = copy.deepcopy(_QUERY_TEMPLATE)
+        payload: dict[str, Any] = copy.deepcopy(_QUERY_TEMPLATE)
         payload["query"]["multi_match"]["query"] = query
         payload["size"] = num
         payload["from"] = 0
@@ -63,7 +63,7 @@ class MetaCPANProvider(BaseProvider):
 
         return self._parse(data)
 
-    def _parse(self, data: dict) -> ProviderResult:
+    def _parse(self, data: dict[str, Any]) -> ProviderResult:
         """Parse the API response into structured search results."""
         results: list[SearchResult] = []
 

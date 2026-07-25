@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import ClassVar
+from typing import Any, ClassVar
 
 from metasearchmcp.config import get_settings
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
@@ -33,7 +33,7 @@ class StackOverflowProvider(BaseProvider):
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
         """Search Stack Overflow questions for *query*."""
-        qp: dict = {
+        qp: dict[str, Any] = {
             "q": query,
             "site": "stackoverflow",
             "pagesize": min(params.num_results, self._max_results, _MAX_API_RESULTS),
@@ -51,7 +51,7 @@ class StackOverflowProvider(BaseProvider):
 
         return self._parse(data)
 
-    def _parse(self, data: dict) -> ProviderResult:
+    def _parse(self, data: dict[str, Any]) -> ProviderResult:
         """Parse the API response into structured search results."""
         results: list[SearchResult] = []
 

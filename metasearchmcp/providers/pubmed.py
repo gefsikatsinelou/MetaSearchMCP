@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import ClassVar
+from typing import Any, ClassVar
 
 from metasearchmcp.config import get_settings
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
@@ -39,7 +39,7 @@ class PubMedProvider(BaseProvider):
         limit = min(params.num_results, self._max_results, _MAX_API_RESULTS)
 
         # Step 1: ESearch — get PMIDs
-        esearch_params: dict = {
+        esearch_params: dict[str, Any] = {
             "db": "pubmed",
             "term": query,
             "retmax": limit,
@@ -58,7 +58,7 @@ class PubMedProvider(BaseProvider):
                 return ProviderResult()
 
             # Step 2: ESummary — get article metadata
-            esummary_params: dict = {
+            esummary_params: dict[str, Any] = {
                 "db": "pubmed",
                 "id": ",".join(ids),
                 "retmode": "json",
@@ -72,7 +72,7 @@ class PubMedProvider(BaseProvider):
 
         return self._parse(summary_data, ids)
 
-    def _parse(self, data: dict, ids: list[str]) -> ProviderResult:
+    def _parse(self, data: dict[str, Any], ids: list[str]) -> ProviderResult:
         """Parse the API response into structured search results."""
         results: list[SearchResult] = []
         result_map = data.get("result", {})

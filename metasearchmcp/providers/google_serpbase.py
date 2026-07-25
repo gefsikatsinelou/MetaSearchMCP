@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import ClassVar
+from typing import Any, ClassVar
 
 from metasearchmcp.config import SERPBASE_API_URL, get_settings
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
@@ -58,7 +58,9 @@ class GoogleSerpbaseProvider(BaseProvider):
 
         return self._parse(data, max_results)
 
-    def _parse(self, data: dict, max_results: int | None = None) -> ProviderResult:
+    def _parse(
+        self, data: dict[str, Any], max_results: int | None = None
+    ) -> ProviderResult:
         """Parse the API response into structured search results."""
         results: list[SearchResult] = []
         limit = max_results or self._max_results

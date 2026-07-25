@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from http import HTTPStatus
-from typing import ClassVar
+from typing import Any, ClassVar
 
 from bs4 import BeautifulSoup
 
@@ -86,7 +86,9 @@ class QwantProvider(BaseProvider):
 
         return self._parse_lite(lite.text, max_results=limit)
 
-    def _parse(self, data: dict, max_results: int | None = None) -> ProviderResult:
+    def _parse(
+        self, data: dict[str, Any], max_results: int | None = None
+    ) -> ProviderResult:
         """Parse the API response into structured search results."""
         results: list[SearchResult] = []
 

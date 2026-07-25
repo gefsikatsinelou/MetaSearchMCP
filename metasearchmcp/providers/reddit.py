@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import base64
 import datetime
-from typing import TYPE_CHECKING, ClassVar
+from typing import TYPE_CHECKING, Any, ClassVar
 
 from metasearchmcp.config import get_settings
 
@@ -88,7 +88,7 @@ class RedditProvider(BaseProvider):
 
         return self._parse(data)
 
-    def _parse(self, data: dict) -> ProviderResult:
+    def _parse(self, data: dict[str, Any]) -> ProviderResult:
         """Parse the API response into structured search results."""
         results: list[SearchResult] = []
         children = data.get("data", {}).get("children", [])

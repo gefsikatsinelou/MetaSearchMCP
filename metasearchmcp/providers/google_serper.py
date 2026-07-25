@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import ClassVar
+from typing import Any, ClassVar
 
 from metasearchmcp.config import get_settings
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
@@ -59,7 +59,9 @@ class GoogleSerperProvider(BaseProvider):
 
         return self._parse(data, max_results)
 
-    def _parse(self, data: dict, max_results: int | None = None) -> ProviderResult:
+    def _parse(
+        self, data: dict[str, Any], max_results: int | None = None
+    ) -> ProviderResult:
         """Parse the API response into structured search results."""
         results: list[SearchResult] = []
         limit = max_results or self._max_results
@@ -87,7 +89,7 @@ class GoogleSerperProvider(BaseProvider):
             seen_related.add(query)
             related.append(query)
 
-        answer_box: dict | None = None
+        answer_box: dict[str, Any] | None = None
         if "answerBox" in data:
             answer_box = data["answerBox"]
         elif "knowledgeGraph" in data:

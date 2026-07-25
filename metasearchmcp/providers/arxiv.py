@@ -57,10 +57,14 @@ class ArxivProvider(BaseProvider):
             id_el = entry.find("atom:id", _NS)
             published_el = entry.find("atom:published", _NS)
 
-            title = title_el.text.strip() if title_el is not None else ""
-            snippet = summary_el.text.strip() if summary_el is not None else ""
-            arxiv_url = id_el.text.strip() if id_el is not None else ""
-            published = published_el.text[:10] if published_el is not None else None
+            title = (title_el.text or "").strip() if title_el is not None else ""
+            snippet = (summary_el.text or "").strip() if summary_el is not None else ""
+            arxiv_url = (id_el.text or "").strip() if id_el is not None else ""
+            published = (
+                published_el.text[:10]
+                if published_el is not None and published_el.text
+                else None
+            )
 
             # Collect authors
             authors = [

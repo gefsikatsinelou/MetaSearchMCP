@@ -16,6 +16,7 @@ from mcp.server.models import InitializationOptions
 from metasearchmcp import __version__
 from metasearchmcp.catalog import (
     build_provider_catalog,
+    pick_first_provider,
     pick_named_providers,
     pick_providers_by_tags,
     pick_tagged_providers,
@@ -317,8 +318,7 @@ async def _dispatch_search_google(
             }
         selected = {provider_name: selected[provider_name]}
     else:
-        first_available = next(iter(selected.items()), None)
-        selected = {first_available[0]: first_available[1]} if first_available else {}
+        selected = pick_first_provider(selected)
     if not selected:
         return {
             "error": NO_GOOGLE_PROVIDER_MSG,

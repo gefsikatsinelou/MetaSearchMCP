@@ -62,6 +62,21 @@ def pick_tagged_providers(
     }
 
 
+def pick_first_provider(
+    catalog: dict[str, BaseProvider],
+) -> dict[str, BaseProvider]:
+    """Return a sub-catalog containing only the first available provider.
+
+    When no specific provider is requested, this picks the highest-priority
+    provider from *catalog* (catalog insertion order is preserved by the
+    registry, so earlier-registered providers take precedence).
+    """
+    first = next(iter(catalog.items()), None)
+    if first is None:
+        return {}
+    return {first[0]: first[1]}
+
+
 def pick_providers_by_tags(
     catalog: dict[str, BaseProvider],
     tags: list[str],

@@ -11,6 +11,7 @@ from fastapi import APIRouter, Depends, HTTPException, Query
 from metasearchmcp import __version__
 from metasearchmcp.catalog import (
     build_provider_catalog,
+    pick_first_provider,
     pick_named_providers,
     pick_providers_by_tags,
     pick_tagged_providers,
@@ -95,8 +96,7 @@ async def search_google(
             )
         selected = {req.provider: google_providers[req.provider]}
     else:
-        first_available = next(iter(google_providers.items()), None)
-        selected = {first_available[0]: first_available[1]} if first_available else {}
+        selected = pick_first_provider(google_providers)
 
     if not selected:
         raise HTTPException(

@@ -23,7 +23,7 @@ from metasearchmcp.contracts import (
 )
 from metasearchmcp.orchestrator import run_search_plan
 from metasearchmcp.providers.base import (
-    BaseProvider,  # noqa: TC001
+    BaseProvider,
 )
 
 router = APIRouter()

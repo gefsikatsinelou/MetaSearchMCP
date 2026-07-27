@@ -64,6 +64,13 @@ _RESULT_COUNT_PROPERTIES: dict[str, Any] = {
     },
 }
 
+# Shared safe-search property reused across search tool definitions.
+_SAFE_SEARCH_PROPERTY: dict[str, Any] = {
+    "type": "boolean",
+    "default": True,
+    "description": "Enable safe search filtering.",
+}
+
 _TOOLS: list[types.Tool] = [
     types.Tool(
         name=_TOOL_SEARCH_WEB,
@@ -97,11 +104,7 @@ _TOOLS: list[types.Tool] = [
                 **_RESULT_COUNT_PROPERTIES,
                 "language": {"type": "string", "default": "en"},
                 "country": {"type": "string", "default": "us"},
-                "safe_search": {
-                    "type": "boolean",
-                    "default": True,
-                    "description": "Enable safe search filtering.",
-                },
+                "safe_search": _SAFE_SEARCH_PROPERTY,
             },
             "required": ["query"],
         },
@@ -119,11 +122,7 @@ _TOOLS: list[types.Tool] = [
                     "default": "",
                 },
                 **_RESULT_COUNT_PROPERTIES,
-                "safe_search": {
-                    "type": "boolean",
-                    "default": True,
-                    "description": "Enable safe search filtering.",
-                },
+                "safe_search": _SAFE_SEARCH_PROPERTY,
             },
             "required": ["query"],
         },

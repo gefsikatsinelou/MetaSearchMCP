@@ -36,7 +36,8 @@ def ensure_env_file(root: Path = ROOT, force: bool = False) -> bool:
     if env_file.exists() and not force:
         return False
     if not env_example.exists():
-        raise FileNotFoundError(f"Missing template: {env_example}")
+        msg = f"Missing template: {env_example}"
+        raise FileNotFoundError(msg)
     shutil.copyfile(env_example, env_file)
     return True
 
@@ -84,7 +85,8 @@ def install_docker(args: argparse.Namespace) -> None:
 
     docker = shutil.which("docker")
     if not docker:
-        raise RuntimeError("Docker is required for --mode docker")
+        msg = "Docker is required for --mode docker"
+        raise RuntimeError(msg)
 
     command = [docker, "compose", "up", "-d", "--build"]
     if args.no_detach:

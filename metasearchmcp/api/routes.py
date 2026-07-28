@@ -16,7 +16,7 @@ from metasearchmcp.catalog import (
     pick_providers_by_tags,
     pick_tagged_providers,
 )
-from metasearchmcp.config import NO_GOOGLE_PROVIDER_MSG
+from metasearchmcp.config import NO_GOOGLE_PROVIDER_MSG, NO_PROVIDERS_MSG
 from metasearchmcp.contracts import (
     GoogleSearchEnvelope,
     SearchEnvelope,
@@ -63,10 +63,7 @@ async def search(
     if not providers_map:
         raise HTTPException(
             status_code=HTTPStatus.SERVICE_UNAVAILABLE,
-            detail=(
-                "No providers available for the requested filters. "
-                "Check provider names, tags, configuration, and API keys."
-            ),
+            detail=NO_PROVIDERS_MSG,
         )
     return await run_search_plan(req.query, list(providers_map.values()), req.params)
 

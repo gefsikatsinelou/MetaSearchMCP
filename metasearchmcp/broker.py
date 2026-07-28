@@ -23,6 +23,7 @@ from metasearchmcp.catalog import (
 )
 from metasearchmcp.config import (
     NO_GOOGLE_PROVIDER_MSG,
+    NO_PROVIDERS_MSG,
     SERPBASE_DASHBOARD_URL,
     USER_CONFIG_FILE,
     get_settings,
@@ -284,10 +285,7 @@ async def _dispatch_search_web(
     selected = pick_named_providers(selected, arguments.get("providers") or [])
     if not selected:
         return {
-            "error": (
-                "No providers available for the requested filters. "
-                "Check provider names, tags, configuration, and API keys."
-            ),
+            "error": NO_PROVIDERS_MSG,
         }
     return (await run_search_plan(query, list(selected.values()), options)).model_dump()
 

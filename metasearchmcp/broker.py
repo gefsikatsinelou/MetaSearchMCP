@@ -22,11 +22,11 @@ from metasearchmcp.catalog import (
     pick_tagged_providers,
 )
 from metasearchmcp.config import (
+    GOOGLE_PROVIDER_UNAVAIL_TMPL,
     NO_GOOGLE_PROVIDER_MSG,
     NO_PROVIDERS_MSG,
     SERPBASE_DASHBOARD_URL,
     USER_CONFIG_FILE,
-    GOOGLE_PROVIDER_UNAVAIL_TMPL,
     get_settings,
 )
 from metasearchmcp.contracts import SearchOptions

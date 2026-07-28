@@ -16,7 +16,7 @@ from metasearchmcp.catalog import (
     pick_providers_by_tags,
     pick_tagged_providers,
 )
-from metasearchmcp.config import NO_GOOGLE_PROVIDER_MSG, NO_PROVIDERS_MSG
+from metasearchmcp.config import NO_GOOGLE_PROVIDER_MSG, NO_PROVIDERS_MSG, GOOGLE_PROVIDER_UNAVAIL_TMPL
 from metasearchmcp.contracts import (
     GoogleSearchEnvelope,
     SearchEnvelope,
@@ -84,11 +84,9 @@ async def search_google(
         if req.provider not in google_providers:
             raise HTTPException(
                 status_code=HTTPStatus.BAD_REQUEST,
-                detail=(
-                    f"Google provider '{req.provider}' is not available. "
-                    f"Available: {list(google_providers.keys())}. "
-                    f"Enable ALLOW_UNSTABLE_PROVIDERS=true for direct Google, "
-                    f"or set SERPBASE_API_KEY / SERPER_API_KEY."
+                detail=GOOGLE_PROVIDER_UNAVAIL_TMPL.format(
+                    name=req.provider,
+                    available=list(google_providers.keys()),
                 ),
             )
         selected = {req.provider: google_providers[req.provider]}

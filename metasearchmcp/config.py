@@ -24,6 +24,15 @@ NO_PROVIDERS_MSG: str = (
     "Check provider names, tags, configuration, and API keys."
 )
 
+# Template for "Google provider X is not available" error, shared by broker and routes.
+# Use .format(name=..., available=...).
+GOOGLE_PROVIDER_UNAVAIL_TMPL: str = (
+    "Google provider '{name}' is not available. "
+    "Available: {available}. "
+    "Enable ALLOW_UNSTABLE_PROVIDERS=true for direct Google, "
+    "or set SERPBASE_API_KEY / SERPER_API_KEY."
+)
+
 
 class Settings(BaseSettings):
     """Application settings loaded from environment variables and .env files."""

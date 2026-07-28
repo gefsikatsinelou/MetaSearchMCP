@@ -26,6 +26,7 @@ from metasearchmcp.config import (
     NO_PROVIDERS_MSG,
     SERPBASE_DASHBOARD_URL,
     USER_CONFIG_FILE,
+    GOOGLE_PROVIDER_UNAVAIL_TMPL,
     get_settings,
 )
 from metasearchmcp.contracts import SearchOptions
@@ -306,11 +307,9 @@ async def _dispatch_search_google(
     if provider_name:
         if provider_name not in selected:
             return {
-                "error": (
-                    f"Google provider '{provider_name}' is not available. "
-                    f"Available: {list(selected.keys())}. "
-                    f"Enable ALLOW_UNSTABLE_PROVIDERS=true for direct Google, "
-                    f"or set SERPBASE_API_KEY / SERPER_API_KEY."
+                "error": GOOGLE_PROVIDER_UNAVAIL_TMPL.format(
+                    name=provider_name,
+                    available=list(selected.keys()),
                 ),
             }
         selected = {provider_name: selected[provider_name]}

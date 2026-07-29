@@ -197,20 +197,6 @@ def test_search_google_route_prefers_first_available_provider(client):
 # ---------------------------------------------------------------------------
 
 
-def _make_app_with_catalog(catalog: dict):
-    """Return a FastAPI TestClient with a patched provider catalog."""
-    from fastapi import FastAPI
-
-    from metasearchmcp.api import routes
-
-    app = FastAPI()
-    app.include_router(routes.router)
-
-    with patch.object(routes, "_catalog", catalog):
-        client = TestClient(app)
-        yield client
-
-
 @pytest.fixture
 def client():
     from fastapi import FastAPI

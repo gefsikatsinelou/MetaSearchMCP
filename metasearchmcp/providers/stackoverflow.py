@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from datetime import UTC, datetime
 from typing import Any, ClassVar
 
 from metasearchmcp.config import get_settings
@@ -66,6 +67,16 @@ class StackOverflowProvider(BaseProvider):
             if answered:
                 snippet_parts.append("(answered)")
 
+            published_date = None
+            creation_ts = item.get("creation_date")
+            if creation_ts:
+                try:
+                    published_date = datetime.fromtimestamp(
+                        creation_ts, tz=UTC
+                    ).date().isoformat()
+                except (TypeError, ValueError, OSError):
+                    published_date = None
+
             results.append(
                 SearchResult(
                     title=item.get("title", ""),
@@ -74,7 +85,7 @@ class StackOverflowProvider(BaseProvider):
                     source="stackoverflow.com",
                     rank=i,
                     provider=self.name,
-                    published_date=None,
+                    published_date=published_date,
                     extra={
                         "score": score,
                         "answer_count": answer_count,

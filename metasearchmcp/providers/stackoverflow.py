@@ -71,9 +71,9 @@ class StackOverflowProvider(BaseProvider):
             creation_ts = item.get("creation_date")
             if creation_ts:
                 try:
-                    published_date = datetime.fromtimestamp(
-                        creation_ts, tz=UTC
-                    ).date().isoformat()
+                    published_date = (
+                        datetime.fromtimestamp(creation_ts, tz=UTC).date().isoformat()
+                    )
                 except (TypeError, ValueError, OSError):
                     published_date = None
 

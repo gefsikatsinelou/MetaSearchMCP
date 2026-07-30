@@ -73,6 +73,11 @@ select = [
     "B",   # flake8-bugbear
     "SIM", # flake8-simplify
     "RUF", # ruff-specific rules
+    "C4",  # flake8-comprehensions
+    "T10", # flake8-debugger
+    "ISC", # flake8-implicit-str-concat
+    "PIE", # flake8-pie
+    "RSE", # flake8-raise
 ]
 ignore = [
     "B904",   # raise-without-from-inside-except (intentional error propagation)

@@ -81,6 +81,18 @@ class BaseProvider(ABC):
         region = normalized.rsplit("-", 1)[-1].upper()
         return region or "US"
 
+    @staticmethod
+    def _iso_date_prefix(iso_string: str | None) -> str | None:
+        """Extract YYYY-MM-DD date prefix from an ISO-format datetime string.
+
+        Returns ``None`` when *iso_string* is None, empty, or shorter than
+        a full date prefix.
+        """
+        if not iso_string:
+            return None
+        prefix = iso_string[:10]
+        return prefix or None
+
     @abstractmethod
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
         """Execute a search and return structured results."""

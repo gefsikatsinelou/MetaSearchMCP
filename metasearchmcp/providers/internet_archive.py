@@ -70,7 +70,7 @@ class InternetArchiveProvider(BaseProvider):
             creator = doc.get("creator", "")
             if isinstance(creator, list):
                 creator = ", ".join(creator[:_MAX_CREATORS_SHOWN])
-            date = (doc.get("date") or "")[:10]
+            date = self._iso_date_prefix(doc.get("date"))
 
             url = f"https://archive.org/details/{identifier}"
 
@@ -88,7 +88,7 @@ class InternetArchiveProvider(BaseProvider):
                     source="archive.org",
                     rank=i,
                     provider=self.name,
-                    published_date=date or None,
+                    published_date=date,
                     extra={
                         "identifier": identifier,
                         "mediatype": mediatype,

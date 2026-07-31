@@ -49,7 +49,7 @@ class CratesIoProvider(BaseProvider):
             version = crate.get("newest_version", "")
             description = crate.get("description", "") or ""
             downloads = crate.get("downloads", 0)
-            updated = (crate.get("updated_at") or "")[:10]
+            updated = self._iso_date_prefix(crate.get("updated_at"))
             url = f"https://crates.io/crates/{name}"
 
             snippet_parts = [description]
@@ -64,7 +64,7 @@ class CratesIoProvider(BaseProvider):
                     source="crates.io",
                     rank=i,
                     provider=self.name,
-                    published_date=updated or None,
+                    published_date=updated,
                     extra={
                         "version": version,
                         "downloads": downloads,

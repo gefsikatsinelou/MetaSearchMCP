@@ -52,7 +52,7 @@ class GitLabProvider(BaseProvider):
             description = item.get("description") or ""
             namespace = (item.get("namespace") or {}).get("full_path", "")
             stars = item.get("star_count", 0)
-            last_active = (item.get("last_activity_at") or "")[:10]
+            last_active = self._iso_date_prefix(item.get("last_activity_at"))
 
             snippet_parts = [description]
             if namespace:
@@ -68,7 +68,7 @@ class GitLabProvider(BaseProvider):
                     source="gitlab.com",
                     rank=i,
                     provider=self.name,
-                    published_date=last_active or None,
+                    published_date=last_active,
                     extra={
                         "stars": stars,
                         "forks": item.get("forks_count", 0),

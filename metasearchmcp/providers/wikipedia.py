@@ -63,7 +63,7 @@ class WikipediaProvider(BaseProvider):
                     source="en.wikipedia.org",
                     rank=i,
                     provider=self.name,
-                    published_date=item.get("timestamp", "")[:10] or None,
+                    published_date=self._iso_date_prefix(item.get("timestamp")),
                 ),
             )
 

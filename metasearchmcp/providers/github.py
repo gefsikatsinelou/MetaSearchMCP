@@ -71,7 +71,7 @@ class GitHubProvider(BaseProvider):
                     source="github.com",
                     rank=i,
                     provider=self.name,
-                    published_date=item.get("pushed_at", "")[:10] or None,
+                    published_date=self._iso_date_prefix(item.get("pushed_at")),
                     extra={
                         "stars": stars,
                         "language": language,

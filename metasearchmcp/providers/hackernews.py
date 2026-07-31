@@ -49,7 +49,7 @@ class HackerNewsProvider(BaseProvider):
             points = hit.get("points") or 0
             comments = hit.get("num_comments") or 0
             author = hit.get("author", "")
-            created = (hit.get("created_at") or "")[:10]
+            created = self._iso_date_prefix(hit.get("created_at"))
 
             # Prefer the story URL; fall back to HN thread
             url = story_url or hn_url
@@ -69,7 +69,7 @@ class HackerNewsProvider(BaseProvider):
                     source="news.ycombinator.com",
                     rank=i,
                     provider=self.name,
-                    published_date=created or None,
+                    published_date=created,
                     extra={
                         "points": points,
                         "num_comments": comments,

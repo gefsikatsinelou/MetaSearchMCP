@@ -83,7 +83,7 @@ class PubMedProvider(BaseProvider):
                 continue
 
             title = item.get("title", "")
-            pub_date = item.get("pubdate", "")[:10]
+            pub_date = self._iso_date_prefix(item.get("pubdate"))
             journal = item.get("source", "")
             authors_raw = item.get("authors", [])
             authors = [a.get("name", "") for a in authors_raw[:_MAX_AUTHORS_SHOWN]]
@@ -106,7 +106,7 @@ class PubMedProvider(BaseProvider):
                     source="pubmed.ncbi.nlm.nih.gov",
                     rank=i,
                     provider=self.name,
-                    published_date=pub_date or None,
+                    published_date=pub_date,
                     extra={
                         "pmid": pmid,
                         "journal": journal,

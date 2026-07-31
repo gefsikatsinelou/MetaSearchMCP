@@ -46,7 +46,7 @@ class NpmProvider(BaseProvider):
             version = pkg.get("version", "")
             description = pkg.get("description", "")
             keywords = pkg.get("keywords", [])
-            date = (pkg.get("date") or "")[:10]
+            date = self._iso_date_prefix(pkg.get("date"))
             links = pkg.get("links", {})
             url = links.get("npm", f"https://www.npmjs.com/package/{name}")
 
@@ -64,7 +64,7 @@ class NpmProvider(BaseProvider):
                     source="npmjs.com",
                     rank=i,
                     provider=self.name,
-                    published_date=date or None,
+                    published_date=date,
                     extra={
                         "version": version,
                         "keywords": keywords,

@@ -29,7 +29,13 @@ from metasearchmcp.config import (
     USER_CONFIG_FILE,
     get_settings,
 )
-from metasearchmcp.contracts import SearchOptions
+from metasearchmcp.contracts import (
+    DEFAULT_MAX_TOTAL_RESULTS,
+    DEFAULT_NUM_RESULTS,
+    MAX_NUM_RESULTS,
+    MAX_TOTAL_RESULTS,
+    SearchOptions,
+)
 from metasearchmcp.orchestrator import run_search_plan
 
 if TYPE_CHECKING:
@@ -52,16 +58,16 @@ _TOOL_SEARCH_CODE = "search_code"
 _RESULT_COUNT_PROPERTIES: dict[str, Any] = {
     "num_results": {
         "type": "integer",
-        "default": 10,
+        "default": DEFAULT_NUM_RESULTS,
         "minimum": 1,
-        "maximum": 50,
+        "maximum": MAX_NUM_RESULTS,
         "description": "Number of results per provider.",
     },
     "max_total_results": {
         "type": "integer",
-        "default": 20,
+        "default": DEFAULT_MAX_TOTAL_RESULTS,
         "minimum": 1,
-        "maximum": 100,
+        "maximum": MAX_TOTAL_RESULTS,
         "description": ("Cap the final merged result set returned to the agent."),
     },
 }

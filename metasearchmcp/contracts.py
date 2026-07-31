@@ -7,6 +7,13 @@ from urllib.parse import urlparse
 
 from pydantic import BaseModel, Field, model_validator
 
+# Shared constants for result-count limits.
+# Kept in sync with the MCP tool schemas in broker.py.
+DEFAULT_NUM_RESULTS = 10
+DEFAULT_MAX_TOTAL_RESULTS = 20
+MAX_NUM_RESULTS = 50
+MAX_TOTAL_RESULTS = 100
+
 
 class SearchHit(BaseModel):
     """Normalized result item returned by any provider."""
@@ -50,8 +57,12 @@ class ProviderReport(BaseModel):
 class SearchOptions(BaseModel):
     """Common search parameters shared across providers and endpoints."""
 
-    num_results: int = Field(default=10, ge=1, le=50)
-    max_total_results: int = Field(default=20, ge=1, le=100)
+    num_results: int = Field(default=DEFAULT_NUM_RESULTS, ge=1, le=MAX_NUM_RESULTS)
+    max_total_results: int = Field(
+        default=DEFAULT_MAX_TOTAL_RESULTS,
+        ge=1,
+        le=MAX_TOTAL_RESULTS,
+    )
     language: str = "en"
     country: str = "us"
     safe_search: bool = True

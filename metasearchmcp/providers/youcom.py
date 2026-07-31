@@ -74,7 +74,7 @@ class YouComProvider(BaseProvider):
                         snippet=snippet,
                         rank=rank,
                         provider=self.name,
-                        published_date=(item.get("page_age") or "")[0:10] or None,
+                        published_date=self._iso_date_prefix(item.get("page_age")),
                         extra={
                             "snippets": item.get("snippets", []),
                             "thumbnail_url": item.get("thumbnail_url", ""),

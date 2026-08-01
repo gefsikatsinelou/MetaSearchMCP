@@ -73,7 +73,7 @@ class BraveProvider(BaseProvider):
                     rank=i,
                     provider=self.name,
                     # Brave's "age" field is a human-readable relative time string
-                    # (e.g. "2 days ago"), not an ISO date — omit it from published_date.
+                    # (e.g. "2 days ago"), not an ISO date — omit from published_date.
                     published_date=None,
                 ),
             )

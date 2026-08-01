@@ -76,7 +76,7 @@ class GoogleSerperProvider(BaseProvider):
                     snippet=item.get("snippet", ""),
                     rank=i,
                     provider=self.name,
-                    published_date=item.get("date"),
+                    published_date=self._iso_date_prefix(item.get("date")),
                 ),
             )
             if i >= limit:

@@ -61,7 +61,7 @@ class ArxivProvider(BaseProvider):
             snippet = (summary_el.text or "").strip() if summary_el is not None else ""
             arxiv_url = (id_el.text or "").strip() if id_el is not None else ""
             published = self._iso_date_prefix(
-                published_el.text if published_el is not None else None
+                published_el.text if published_el is not None else None,
             )
 
             # Collect authors

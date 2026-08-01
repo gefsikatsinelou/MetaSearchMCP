@@ -72,7 +72,9 @@ class BraveProvider(BaseProvider):
                     snippet=item.get("description", ""),
                     rank=i,
                     provider=self.name,
-                    published_date=item.get("age"),
+                    # Brave's "age" field is a human-readable relative time string
+                    # (e.g. "2 days ago"), not an ISO date — omit it from published_date.
+                    published_date=None,
                 ),
             )
 

@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import base64
-import datetime
+from datetime import UTC, datetime
 from typing import TYPE_CHECKING, Any, ClassVar
 
 from metasearchmcp.config import get_settings
@@ -106,9 +106,9 @@ class RedditProvider(BaseProvider):
 
             published = None
             if created:
-                published = datetime.datetime.fromtimestamp(
+                published = datetime.fromtimestamp(
                     created,
-                    tz=datetime.UTC,
+                    tz=UTC,
                 ).strftime("%Y-%m-%d")
 
             is_self = post.get("is_self", False)

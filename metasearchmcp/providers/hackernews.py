@@ -20,7 +20,7 @@ class HackerNewsProvider(BaseProvider):
 
     name = "hackernews"
     description = "Search Hacker News stories, comments, and discussions via Algolia."
-    tags: ClassVar[list[str]] = ["web", "developer", "news"]
+    tags: ClassVar[list[str]] = ["web", "code", "developer", "news"]
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
         """Search Hacker News stories for *query* via Algolia."""

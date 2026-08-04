@@ -36,6 +36,7 @@ from .hackernews import HackerNewsProvider
 from .internet_archive import InternetArchiveProvider
 from .lemmy import LemmyProvider
 from .lib_rs import LibRsProvider
+from .lobsters import LobstersProvider
 from .metacpan import MetaCPANProvider
 from .mojeek import MojeekProvider
 from .mwmbl import MwmblProvider
@@ -92,6 +93,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     HackerNewsProvider,
     RedditProvider,
     LemmyProvider,
+    LobstersProvider,
     NpmProvider,
     PyPIProvider,
     RubyGemsProvider,

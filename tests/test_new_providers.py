@@ -475,3 +475,106 @@ def test_codeberg_parse_no_data_key():
     p = CodebergProvider()
     result = p._parse({})
     assert result.results == []
+
+
+# ---------------------------------------------------------------------------
+# Lobste.rs
+# ---------------------------------------------------------------------------
+
+
+def _lobsters_response() -> list:
+    return [
+        {
+            "short_id": "abc123",
+            "title": "Introducing a New Systems Programming Language",
+            "url": "https://example.com/new-lang",
+            "description": "A detailed walkthrough of the design decisions.",
+            "comments_url": "https://lobste.rs/s/abc123",
+            "score": 128,
+            "comment_count": 42,
+            "submitter_user": "devuser",
+            "tags": ["programming", "systems", "compilers"],
+            "created_at": "2025-07-15T10:30:00.000Z",
+        },
+        {
+            "short_id": "def456",
+            "title": "Why We Need Better Package Management",
+            "url": "",
+            "description": "",
+            "comments_url": "https://lobste.rs/s/def456",
+            "score": 0,
+            "comment_count": 0,
+            "submitter_user": "",
+            "tags": [],
+            "created_at": None,
+        },
+        {
+            "short_id": "ghi789",
+            "title": "Rust vs Zig in 2025",
+            "url": "https://example.com/rust-vs-zig",
+            "description": "A comparison of two modern systems languages.",
+            "comments_url": "https://lobste.rs/s/ghi789",
+            "score": 256,
+            "comment_count": 89,
+            "submitter_user": "systemsnerd",
+            "tags": ["rust", "zig", "programming"],
+            "created_at": "2025-08-01T14:00:00.000Z",
+        },
+    ]
+
+
+def test_lobsters_parse_basic():
+    from metasearchmcp.providers.lobsters import LobstersProvider
+
+    p = LobstersProvider()
+    result = p._parse(_lobsters_response(), limit=10)
+
+    assert len(result.results) == 3
+    r = result.results[0]
+    assert r.title == "Introducing a New Systems Programming Language"
+    assert r.url == "https://example.com/new-lang"
+    assert "design decisions" in r.snippet
+    assert r.provider == "lobsters"
+    assert r.source == "lobste.rs"
+    assert r.published_date == "2025-07-15"
+    assert r.extra["score"] == 128
+    assert r.extra["comment_count"] == 42
+    assert r.extra["tags"] == ["programming", "systems", "compilers"]
+    assert r.extra["submitter"] == "devuser"
+
+
+def test_lobsters_parse_fallback_to_comments_url():
+    from metasearchmcp.providers.lobsters import LobstersProvider
+
+    p = LobstersProvider()
+    result = p._parse(_lobsters_response(), limit=10)
+    r = result.results[1]
+    assert r.url == "https://lobste.rs/s/def456"
+    assert r.published_date is None
+    assert r.extra["score"] == 0
+
+
+def test_lobsters_parse_ranks():
+    from metasearchmcp.providers.lobsters import LobstersProvider
+
+    p = LobstersProvider()
+    result = p._parse(_lobsters_response(), limit=10)
+    assert result.results[0].rank == 1
+    assert result.results[1].rank == 2
+    assert result.results[2].rank == 3
+
+
+def test_lobsters_parse_empty():
+    from metasearchmcp.providers.lobsters import LobstersProvider
+
+    p = LobstersProvider()
+    result = p._parse([], limit=10)
+    assert result.results == []
+
+
+def test_lobsters_parse_respects_limit():
+    from metasearchmcp.providers.lobsters import LobstersProvider
+
+    p = LobstersProvider()
+    result = p._parse(_lobsters_response(), limit=2)
+    assert len(result.results) == 2

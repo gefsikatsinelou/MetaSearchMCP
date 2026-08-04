@@ -225,7 +225,10 @@ _TOOLS: list[types.Tool] = [
             "properties": {
                 "tag": {
                     "type": "string",
-                    "description": "Optional tag to filter providers (e.g. 'web', 'academic', 'code', 'finance', 'news', 'social').",
+                    "description": (
+                        "Optional tag to filter providers "
+                        "(e.g. 'web', 'academic', 'code', 'finance', 'news', 'social')."
+                    ),
                 },
             },
         },
@@ -394,7 +397,7 @@ async def _dispatch_list_providers(
     """Return a summary of all available providers, optionally filtered by tag."""
     tag_filter = (arguments.get("tag") or "").strip().lower()
     providers_info: list[dict[str, Any]] = []
-    for pname, provider in sorted(_catalog.items()):
+    for _pname, provider in sorted(_catalog.items()):
         if tag_filter and tag_filter not in {t.lower() for t in provider.tags}:
             continue
         providers_info.append(

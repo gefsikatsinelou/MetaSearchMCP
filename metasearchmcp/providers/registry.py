@@ -16,6 +16,7 @@ from .arxiv import ArxivProvider
 from .baidu import BaiduProvider
 from .bing import BingProvider
 from .brave import BraveProvider
+from .codeberg import CodebergProvider
 from .crates import CratesIoProvider
 from .crossref import CrossrefProvider
 from .dockerhub import DockerHubProvider
@@ -86,6 +87,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     # Developer
     GitHubProvider,
     GitLabProvider,
+    CodebergProvider,
     StackOverflowProvider,
     HackerNewsProvider,
     RedditProvider,

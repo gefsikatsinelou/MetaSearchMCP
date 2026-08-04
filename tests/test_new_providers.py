@@ -363,3 +363,115 @@ def test_provider_user_agents_include_project_contact_url():
     assert PROJECT_URL in BOT_USER_AGENT
     assert "your-org" not in API_USER_AGENT
     assert "your-org" not in BOT_USER_AGENT
+
+
+# ---------------------------------------------------------------------------
+# Codeberg
+# ---------------------------------------------------------------------------
+
+
+def _codeberg_response() -> dict:
+    return {
+        "ok": True,
+        "data": [
+            {
+                "id": 1,
+                "full_name": "username/awesome-project",
+                "name": "awesome-project",
+                "html_url": "https://codeberg.org/username/awesome-project",
+                "description": "An awesome open-source project.",
+                "stars_count": 128,
+                "forks_count": 15,
+                "language": "Python",
+                "topics": ["cli", "terminal", "rust"],
+                "updated_at": "2025-08-01T12:00:00Z",
+                "clone_url": "https://codeberg.org/username/awesome-project.git",
+                "ssh_url": "git@codeberg.org:username/awesome-project.git",
+            },
+            {
+                "id": 2,
+                "full_name": "org/small-tool",
+                "name": "small-tool",
+                "html_url": "https://codeberg.org/org/small-tool",
+                "description": "",
+                "stars_count": 0,
+                "forks_count": 0,
+                "language": "",
+                "topics": [],
+                "updated_at": None,
+                "clone_url": "https://codeberg.org/org/small-tool.git",
+                "ssh_url": "git@codeberg.org:org/small-tool.git",
+            },
+            {
+                "id": 3,
+                "full_name": "dev/lib",
+                "name": "lib",
+                "html_url": "https://codeberg.org/dev/lib",
+                "description": "A utility library.",
+                "stars_count": 42,
+                "forks_count": 3,
+                "language": "Go",
+                "topics": ["library", "utilities"],
+                "updated_at": "2025-06-15T08:30:00Z",
+                "clone_url": "https://codeberg.org/dev/lib.git",
+                "ssh_url": "git@codeberg.org:dev/lib.git",
+            },
+        ],
+    }
+
+
+def test_codeberg_parse_basic():
+    from metasearchmcp.providers.codeberg import CodebergProvider
+
+    p = CodebergProvider()
+    result = p._parse(_codeberg_response())
+
+    assert len(result.results) == 3
+    r = result.results[0]
+    assert r.title == "username/awesome-project"
+    assert r.url == "https://codeberg.org/username/awesome-project"
+    assert "awesome open-source" in r.snippet
+    assert r.provider == "codeberg"
+    assert r.source == "codeberg.org"
+    assert r.published_date == "2025-08-01"
+    assert r.extra["stars"] == 128
+    assert r.extra["topics"] == ["cli", "terminal", "rust"]
+    assert r.extra["language"] == "Python"
+
+
+def test_codeberg_parse_empty_description():
+    from metasearchmcp.providers.codeberg import CodebergProvider
+
+    p = CodebergProvider()
+    result = p._parse(_codeberg_response())
+    r = result.results[1]
+    # empty description should still produce a string snippet
+    assert isinstance(r.snippet, str)
+    assert r.published_date is None
+    assert r.extra["stars"] == 0
+
+
+def test_codeberg_parse_ranks():
+    from metasearchmcp.providers.codeberg import CodebergProvider
+
+    p = CodebergProvider()
+    result = p._parse(_codeberg_response())
+    assert result.results[0].rank == 1
+    assert result.results[1].rank == 2
+    assert result.results[2].rank == 3
+
+
+def test_codeberg_parse_empty():
+    from metasearchmcp.providers.codeberg import CodebergProvider
+
+    p = CodebergProvider()
+    result = p._parse({"data": []})
+    assert result.results == []
+
+
+def test_codeberg_parse_no_data_key():
+    from metasearchmcp.providers.codeberg import CodebergProvider
+
+    p = CodebergProvider()
+    result = p._parse({})
+    assert result.results == []

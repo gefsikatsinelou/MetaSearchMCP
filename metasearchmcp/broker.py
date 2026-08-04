@@ -53,6 +53,7 @@ _TOOL_SEARCH_GITHUB = "search_github"
 _TOOL_COMPARE_ENGINES = "compare_engines"
 _TOOL_SEARCH_FINANCE = "search_finance"
 _TOOL_SEARCH_CODE = "search_code"
+_TOOL_LIST_PROVIDERS = "list_providers"
 
 # Shared result-count schema properties reused across tool definitions.
 _RESULT_COUNT_PROPERTIES: dict[str, Any] = {
@@ -210,6 +211,23 @@ _TOOLS: list[types.Tool] = [
                 **_RESULT_COUNT_PROPERTIES,
             },
             "required": ["query"],
+        },
+    ),
+    types.Tool(
+        name=_TOOL_LIST_PROVIDERS,
+        description=(
+            "List all available search providers with their names, descriptions, "
+            "and tags. Use this to discover what search backends are available "
+            "before issuing queries."
+        ),
+        inputSchema={
+            "type": "object",
+            "properties": {
+                "tag": {
+                    "type": "string",
+                    "description": "Optional tag to filter providers (e.g. 'web', 'academic', 'code', 'finance', 'news', 'social').",
+                },
+            },
         },
     ),
 ]
@@ -370,8 +388,35 @@ async def _dispatch_compare_engines(
     return comparison
 
 
+async def _dispatch_list_providers(
+    arguments: dict[str, Any],
+) -> dict[str, Any]:
+    """Return a summary of all available providers, optionally filtered by tag."""
+    tag_filter = (arguments.get("tag") or "").strip().lower()
+    providers_info: list[dict[str, Any]] = []
+    for pname, provider in sorted(_catalog.items()):
+        if tag_filter and tag_filter not in {t.lower() for t in provider.tags}:
+            continue
+        providers_info.append(
+            {
+                "name": provider.name,
+                "description": provider.description,
+                "tags": sorted(provider.tags),
+            },
+        )
+    return {
+        "providers": providers_info,
+        "count": len(providers_info),
+        "tag_filter": tag_filter or None,
+    }
+
+
 async def dispatch_tool(name: str, arguments: dict[str, Any]) -> dict[str, Any]:
     """Route a tool call to the appropriate search handler."""
+    # list_providers does not require a query.
+    if name == _TOOL_LIST_PROVIDERS:
+        return await _dispatch_list_providers(arguments)
+
     query = arguments["query"]
     # Build SearchOptions, relying on Pydantic defaults when values are
     # omitted or explicitly None (e.g. `"num_results": null` from JSON).

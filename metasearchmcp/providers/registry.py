@@ -28,6 +28,7 @@ from .gitlab import GitLabProvider
 
 # Google providers
 from .google import GoogleProvider
+from .google_news import GoogleNewsProvider
 from .google_serpbase import GoogleSerpbaseProvider
 from .google_serper import GoogleSerperProvider
 from .hackernews import HackerNewsProvider
@@ -86,6 +87,8 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     WikipediaProvider,
     WikidataProvider,
     InternetArchiveProvider,
+    # News
+    GoogleNewsProvider,
     # Media / image search
     WikimediaCommonsProvider,
     # Developer

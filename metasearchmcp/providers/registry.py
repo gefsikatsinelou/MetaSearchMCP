@@ -38,6 +38,7 @@ from .internet_archive import InternetArchiveProvider
 from .lemmy import LemmyProvider
 from .lib_rs import LibRsProvider
 from .lobsters import LobstersProvider
+from .mastodon import MastodonProvider
 from .metacpan import MetaCPANProvider
 from .mojeek import MojeekProvider
 from .mwmbl import MwmblProvider
@@ -100,6 +101,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     RedditProvider,
     LemmyProvider,
     LobstersProvider,
+    MastodonProvider,
     NpmProvider,
     PyPIProvider,
     RubyGemsProvider,

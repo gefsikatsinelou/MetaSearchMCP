@@ -52,6 +52,7 @@ from .semanticscholar import SemanticScholarProvider
 from .stackoverflow import StackOverflowProvider
 from .startpage import StartpageProvider
 from .wikidata import WikidataProvider
+from .wikimedia_commons import WikimediaCommonsProvider
 from .wikipedia import WikipediaProvider
 from .yahoo import YahooProvider
 from .yahoo_finance import YahooFinanceProvider
@@ -85,6 +86,8 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     WikipediaProvider,
     WikidataProvider,
     InternetArchiveProvider,
+    # Media / image search
+    WikimediaCommonsProvider,
     # Developer
     GitHubProvider,
     GitLabProvider,

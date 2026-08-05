@@ -52,9 +52,7 @@ class LobstersProvider(BaseProvider):
             return ""
         return ", ".join(tags[:8])
 
-    def _parse(
-        self, data: list[dict[str, Any]], limit: int
-    ) -> ProviderResult:
+    def _parse(self, data: list[dict[str, Any]], limit: int) -> ProviderResult:
         """Parse the Lobste.rs JSON response into structured search results."""
         results: list[SearchResult] = []
 

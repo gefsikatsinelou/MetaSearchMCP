@@ -308,6 +308,16 @@ curl -X POST http://localhost:8000/search/google \
   -d '{"query": "site:github.com rust tokio", "provider": "google"}'
 ```
 
+### `GET /search/suggest`
+
+Query autocomplete suggestions for a partial search term. Uses the public DuckDuckGo autocomplete endpoint — no API key required.
+
+```bash
+curl "http://localhost:8000/search/suggest?q=python&limit=5"
+```
+
+Returns `query`, `suggestions`, `count`, and `source` (`duckduckgo`). `limit` defaults to 8 and is capped at 20.
+
 ### `GET /providers`
 
 Return the currently available provider catalog.
@@ -441,7 +451,7 @@ The public package is organized around these modules:
 - `merge.py`: URL canonicalization and cross-engine result deduplication
 - `server.py`: FastAPI application and Uvicorn server entrypoint
 - `broker.py`: MCP server exposing search tools over stdio
-- `api/routes.py`: HTTP endpoint handlers (search, health, providers catalog)
+- `api/routes.py`: HTTP endpoint handlers (search, suggest, health, providers catalog)
 - `cli.py`: interactive first-run setup wizard (metasearchmcp-setup)
 
 Entry-point wrappers (`main.py` for HTTP, `mcp_server.py` for MCP) and legacy

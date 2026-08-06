@@ -30,6 +30,7 @@ from metasearchmcp.orchestrator import run_search_plan
 from metasearchmcp.providers.base import (
     BaseProvider,
 )
+from metasearchmcp.suggest import fetch_suggestions
 
 router = APIRouter()
 
@@ -104,6 +105,27 @@ async def search_google(
         )
 
     return await run_search_plan(req.query, list(selected.values()), req.params)
+
+
+@router.get(
+    "/search/suggest",
+    summary="Query autocomplete suggestions from DuckDuckGo",
+)
+async def search_suggest(
+    q: Annotated[str, Query(min_length=1, max_length=200)] = "python",
+    limit: Annotated[int, Query(ge=1, le=20)] = 8,
+) -> dict[str, Any]:
+    """Return autocomplete suggestions for a partial query.
+
+    Uses the public DuckDuckGo autocomplete endpoint — no API key required.
+    """
+    suggestions = await fetch_suggestions(q, limit=limit)
+    return {
+        "query": q,
+        "suggestions": suggestions,
+        "count": len(suggestions),
+        "source": "duckduckgo",
+    }
 
 
 @router.get("/health", summary="Health check")

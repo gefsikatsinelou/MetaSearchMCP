@@ -44,6 +44,7 @@ from .mojeek import MojeekProvider
 from .mwmbl import MwmblProvider
 from .npm import NpmProvider
 from .openlibrary import OpenLibraryProvider
+from .openverse import OpenverseProvider
 from .peertube import PeerTubeProvider
 from .pkg_go_dev import PkgGoDevProvider
 from .pubmed import PubMedProvider
@@ -93,6 +94,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     GoogleNewsProvider,
     # Media / image search
     WikimediaCommonsProvider,
+    OpenverseProvider,
     # Media / video search
     PeerTubeProvider,
     # Developer

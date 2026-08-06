@@ -128,6 +128,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | Provider | Name | Method |
 |---|---|---|
 | Wikimedia Commons | `wikimedia_commons` | MediaWiki API, no key required |
+| Openverse | `openverse` | Openverse REST API, no key required |
 | PeerTube | `peertube` | Public REST API, no key required |
 
 ### Finance Sources

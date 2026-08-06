@@ -87,6 +87,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 |---|---|---|
 | GitHub | `github` | GitHub REST API |
 | GitLab | `gitlab` | GitLab REST API |
+| Codeberg | `codeberg` | Codeberg REST API |
 | Stack Overflow | `stackoverflow` | Stack Exchange API |
 | Hacker News | `hackernews` | Algolia HN API |
 | Reddit | `reddit` | Reddit API |
@@ -113,6 +114,14 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | Provider | Name | Method |
 |---|---|---|
 | Google News | `google_news` | Public RSS feed, no key required |
+| Lobsters | `lobsters` | Lobste.rs JSON API, no key required |
+
+### Social Sources
+
+| Provider | Name | Method |
+|---|---|---|
+| Mastodon | `mastodon` | Mastodon public API, no key required |
+| Lemmy | `lemmy` | Lemmy public API, no key required |
 
 ### Media Sources
 
@@ -411,6 +420,7 @@ MetaSearchMCP exposes these MCP tools:
 - `compare_engines`
 - `search_finance`
 - `search_code`
+- `list_providers`
 
 `search_web` also accepts optional `tags` so agents can limit search to categories such as `web`, `academic`, `code`, or `google`. When multiple tags are present, `tag_match="all"` requires a provider to satisfy the full set.
 All search tools accept `max_total_results` to keep the final payload compact.

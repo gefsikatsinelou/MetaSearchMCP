@@ -109,6 +109,12 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | Semantic Scholar | `semanticscholar` | Graph API |
 | CrossRef | `crossref` | REST API |
 
+### Legal Sources
+
+| Provider | Name | Method |
+|---|---|---|
+| CourtListener | `courtlistener` | Free Law Project REST API, no key required |
+
 ### News Sources
 
 | Provider | Name | Method |

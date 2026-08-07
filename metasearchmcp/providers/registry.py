@@ -17,6 +17,7 @@ from .baidu import BaiduProvider
 from .bing import BingProvider
 from .brave import BraveProvider
 from .codeberg import CodebergProvider
+from .courtlistener import CourtListenerProvider
 from .crates import CratesIoProvider
 from .crossref import CrossrefProvider
 from .dockerhub import DockerHubProvider
@@ -90,6 +91,8 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     WikipediaProvider,
     WikidataProvider,
     InternetArchiveProvider,
+    # Legal
+    CourtListenerProvider,
     # News
     GoogleNewsProvider,
     # Media / image search

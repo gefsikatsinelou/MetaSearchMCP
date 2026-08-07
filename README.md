@@ -128,6 +128,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | Provider | Name | Method |
 |---|---|---|
 | Mastodon | `mastodon` | Mastodon public API, no key required |
+| Bluesky | `bluesky` | Bluesky AppView public API, no key required |
 | Lemmy | `lemmy` | Lemmy public API, no key required |
 
 ### Media Sources

@@ -15,6 +15,7 @@ from .arxiv import ArxivProvider
 # General web search
 from .baidu import BaiduProvider
 from .bing import BingProvider
+from .bluesky import BlueskyProvider
 from .brave import BraveProvider
 from .codeberg import CodebergProvider
 from .courtlistener import CourtListenerProvider
@@ -111,6 +112,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     LemmyProvider,
     LobstersProvider,
     MastodonProvider,
+    BlueskyProvider,
     NpmProvider,
     PyPIProvider,
     RubyGemsProvider,

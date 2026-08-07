@@ -34,6 +34,7 @@ async def fetch_suggestions(query: str, limit: int = 8) -> list[str]:
     Returns:
         A list of suggestion strings. Returns an empty list when the
         upstream request fails or returns no suggestions.
+
     """
     capped = max(1, min(int(limit), _MAX_API_SUGGESTIONS))
     params = {"q": query, "type": "list"}

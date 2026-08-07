@@ -44,6 +44,7 @@ from .metacpan import MetaCPANProvider
 from .mojeek import MojeekProvider
 from .mwmbl import MwmblProvider
 from .npm import NpmProvider
+from .openalex import OpenAlexProvider
 from .openlibrary import OpenLibraryProvider
 from .openverse import OpenverseProvider
 from .peertube import PeerTubeProvider
@@ -123,6 +124,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     PubMedProvider,
     SemanticScholarProvider,
     CrossrefProvider,
+    OpenAlexProvider,
     OpenLibraryProvider,
     # Finance
     YahooFinanceProvider,

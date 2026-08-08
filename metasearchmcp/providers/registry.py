@@ -34,6 +34,7 @@ from .google_news import GoogleNewsProvider
 from .google_serpbase import GoogleSerpbaseProvider
 from .google_serper import GoogleSerperProvider
 from .hackernews import HackerNewsProvider
+from .huggingface import HuggingFaceProvider
 
 # Knowledge / reference
 from .internet_archive import InternetArchiveProvider
@@ -108,6 +109,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     CodebergProvider,
     StackOverflowProvider,
     HackerNewsProvider,
+    HuggingFaceProvider,
     RedditProvider,
     LemmyProvider,
     LobstersProvider,

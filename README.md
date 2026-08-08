@@ -90,6 +90,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | Codeberg | `codeberg` | Codeberg REST API |
 | Stack Overflow | `stackoverflow` | Stack Exchange API |
 | Hacker News | `hackernews` | Algolia HN API |
+| Hugging Face | `huggingface` | Hub REST API, no key required |
 | Reddit | `reddit` | Reddit API |
 | npm | `npm` | npm registry API |
 | PyPI | `pypi` | JSON API |

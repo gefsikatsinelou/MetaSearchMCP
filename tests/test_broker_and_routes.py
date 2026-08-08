@@ -103,6 +103,154 @@ async def test_dispatch_search_code_no_code_providers():
     assert "error" in result
 
 
+# ---------------------------------------------------------------------------
+# search_news / search_social / search_images / search_videos tool tests
+# ---------------------------------------------------------------------------
+
+
+def _media_catalog() -> dict:
+    """A catalog covering the news/social/image/video tag families."""
+    return {
+        "google_news": _make_provider(
+            "google_news",
+            ["news", "web"],
+            "Google News",
+        ),
+        "lobsters": _make_provider(
+            "lobsters",
+            ["news", "tech", "social"],
+            "Lobsters",
+        ),
+        "bluesky": _make_provider(
+            "bluesky",
+            ["social", "web"],
+            "Bluesky",
+        ),
+        "openverse": _make_provider(
+            "openverse",
+            ["image", "media"],
+            "Openverse",
+        ),
+        "peertube": _make_provider(
+            "peertube",
+            ["video", "media"],
+            "PeerTube",
+        ),
+        "bing": _make_provider("bing", ["web"], "Bing"),
+    }
+
+
+@pytest.mark.asyncio
+async def test_dispatch_search_news_returns_results():
+    from metasearchmcp import broker
+
+    catalog = _media_catalog()
+    with patch.object(broker, "_catalog", catalog):
+        result = await broker.dispatch_tool("search_news", {"query": "python"})
+
+    assert "results" in result
+    providers_hit = {r["provider"] for r in result["results"]}
+    assert providers_hit <= {"google_news", "lobsters"}
+
+
+@pytest.mark.asyncio
+async def test_dispatch_search_news_no_news_providers():
+    from metasearchmcp import broker
+
+    catalog = {"bing": _media_catalog()["bing"]}
+    with patch.object(broker, "_catalog", catalog):
+        result = await broker.dispatch_tool("search_news", {"query": "python"})
+
+    assert "error" in result
+
+
+@pytest.mark.asyncio
+async def test_dispatch_search_social_returns_results():
+    from metasearchmcp import broker
+
+    catalog = _media_catalog()
+    with patch.object(broker, "_catalog", catalog):
+        result = await broker.dispatch_tool("search_social", {"query": "python"})
+
+    assert "results" in result
+    providers_hit = {r["provider"] for r in result["results"]}
+    assert providers_hit <= {"lobsters", "bluesky"}
+
+
+@pytest.mark.asyncio
+async def test_dispatch_search_social_no_social_providers():
+    from metasearchmcp import broker
+
+    catalog = {"bing": _media_catalog()["bing"]}
+    with patch.object(broker, "_catalog", catalog):
+        result = await broker.dispatch_tool("search_social", {"query": "python"})
+
+    assert "error" in result
+
+
+@pytest.mark.asyncio
+async def test_dispatch_search_images_returns_results():
+    from metasearchmcp import broker
+
+    catalog = _media_catalog()
+    with patch.object(broker, "_catalog", catalog):
+        result = await broker.dispatch_tool("search_images", {"query": "python"})
+
+    assert "results" in result
+    providers_hit = {r["provider"] for r in result["results"]}
+    assert providers_hit == {"openverse"}
+
+
+@pytest.mark.asyncio
+async def test_dispatch_search_images_no_image_providers():
+    from metasearchmcp import broker
+
+    catalog = {"bing": _media_catalog()["bing"]}
+    with patch.object(broker, "_catalog", catalog):
+        result = await broker.dispatch_tool("search_images", {"query": "python"})
+
+    assert "error" in result
+
+
+@pytest.mark.asyncio
+async def test_dispatch_search_videos_returns_results():
+    from metasearchmcp import broker
+
+    catalog = _media_catalog()
+    with patch.object(broker, "_catalog", catalog):
+        result = await broker.dispatch_tool("search_videos", {"query": "python"})
+
+    assert "results" in result
+    providers_hit = {r["provider"] for r in result["results"]}
+    assert providers_hit == {"peertube"}
+
+
+@pytest.mark.asyncio
+async def test_dispatch_search_videos_no_video_providers():
+    from metasearchmcp import broker
+
+    catalog = {"bing": _media_catalog()["bing"]}
+    with patch.object(broker, "_catalog", catalog):
+        result = await broker.dispatch_tool("search_videos", {"query": "python"})
+
+    assert "error" in result
+
+
+@pytest.mark.asyncio
+async def test_new_tools_registered_in_list_tools():
+    """All newly added tools should be exposed in the MCP tool list."""
+    from metasearchmcp import broker
+
+    tools = await broker.list_tools()
+    tool_names = {tool.name for tool in tools}
+    assert {
+        "search_news",
+        "search_social",
+        "search_images",
+        "search_videos",
+    } <= tool_names
+
+
 @pytest.mark.asyncio
 async def test_dispatch_compare_engines_fallback_to_all():
     """compare_engines with empty providers list should fall back to full catalog."""

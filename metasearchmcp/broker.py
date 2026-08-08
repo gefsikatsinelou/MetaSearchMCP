@@ -53,6 +53,10 @@ _TOOL_SEARCH_GITHUB = "search_github"
 _TOOL_COMPARE_ENGINES = "compare_engines"
 _TOOL_SEARCH_FINANCE = "search_finance"
 _TOOL_SEARCH_CODE = "search_code"
+_TOOL_SEARCH_NEWS = "search_news"
+_TOOL_SEARCH_SOCIAL = "search_social"
+_TOOL_SEARCH_IMAGES = "search_images"
+_TOOL_SEARCH_VIDEOS = "search_videos"
 _TOOL_LIST_PROVIDERS = "list_providers"
 
 # Shared result-count schema properties reused across tool definitions.
@@ -204,6 +208,62 @@ _TOOLS: list[types.Tool] = [
             "GitHub, GitLab, npm, PyPI, crates.io, pkg.go.dev, MetaCPAN, lib.rs, "
             "RubyGems, Docker Hub, Stack Overflow, and Hacker News."
         ),
+        inputSchema={
+            "type": "object",
+            "properties": {
+                "query": {"type": "string", "description": "Search query"},
+                **_RESULT_COUNT_PROPERTIES,
+            },
+            "required": ["query"],
+        },
+    ),
+    types.Tool(
+        name=_TOOL_SEARCH_NEWS,
+        description=(
+            "Search recent news headlines and articles across news providers "
+            "(Google News, Hacker News, Lobsters, Lemmy, Reddit)."
+        ),
+        inputSchema={
+            "type": "object",
+            "properties": {
+                "query": {"type": "string", "description": "Search query"},
+                **_RESULT_COUNT_PROPERTIES,
+            },
+            "required": ["query"],
+        },
+    ),
+    types.Tool(
+        name=_TOOL_SEARCH_SOCIAL,
+        description=(
+            "Search social media posts and community discussions across "
+            "Bluesky, Mastodon, Lemmy, and Lobsters."
+        ),
+        inputSchema={
+            "type": "object",
+            "properties": {
+                "query": {"type": "string", "description": "Search query"},
+                **_RESULT_COUNT_PROPERTIES,
+            },
+            "required": ["query"],
+        },
+    ),
+    types.Tool(
+        name=_TOOL_SEARCH_IMAGES,
+        description=(
+            "Search openly licensed images across Openverse and Wikimedia Commons."
+        ),
+        inputSchema={
+            "type": "object",
+            "properties": {
+                "query": {"type": "string", "description": "Search query"},
+                **_RESULT_COUNT_PROPERTIES,
+            },
+            "required": ["query"],
+        },
+    ),
+    types.Tool(
+        name=_TOOL_SEARCH_VIDEOS,
+        description=("Search videos and streaming media across PeerTube instances."),
         inputSchema={
             "type": "object",
             "properties": {
@@ -468,6 +528,30 @@ async def dispatch_tool(name: str, arguments: dict[str, Any]) -> dict[str, Any]:
             options,
             "code",
             "No code/developer providers available.",
+        ),
+        _TOOL_SEARCH_NEWS: lambda: _run_tagged_search(
+            query,
+            options,
+            "news",
+            "No news providers available.",
+        ),
+        _TOOL_SEARCH_SOCIAL: lambda: _run_tagged_search(
+            query,
+            options,
+            "social",
+            "No social media providers available.",
+        ),
+        _TOOL_SEARCH_IMAGES: lambda: _run_tagged_search(
+            query,
+            options,
+            "image",
+            "No image providers available.",
+        ),
+        _TOOL_SEARCH_VIDEOS: lambda: _run_tagged_search(
+            query,
+            options,
+            "video",
+            "No video providers available.",
         ),
     }
 

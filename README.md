@@ -430,6 +430,10 @@ MetaSearchMCP exposes these MCP tools:
 - `compare_engines`
 - `search_finance`
 - `search_code`
+- `search_news`
+- `search_social`
+- `search_images`
+- `search_videos`
 - `list_providers`
 
 `search_web` also accepts optional `tags` so agents can limit search to categories such as `web`, `academic`, `code`, or `google`. When multiple tags are present, `tag_match="all"` requires a provider to satisfy the full set.

@@ -89,6 +89,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | GitLab | `gitlab` | GitLab REST API |
 | Codeberg | `codeberg` | Codeberg REST API |
 | Stack Overflow | `stackoverflow` | Stack Exchange API |
+| Sourcegraph | `sourcegraph` | Streaming search API, no key required |
 | Hacker News | `hackernews` | Algolia HN API |
 | Hugging Face | `huggingface` | Hub REST API, no key required |
 | Reddit | `reddit` | Reddit API |

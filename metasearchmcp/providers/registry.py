@@ -57,6 +57,7 @@ from .qwant import QwantProvider
 from .reddit import RedditProvider
 from .rubygems import RubyGemsProvider
 from .semanticscholar import SemanticScholarProvider
+from .sourcegraph import SourcegraphProvider
 from .stackoverflow import StackOverflowProvider
 from .startpage import StartpageProvider
 from .wikidata import WikidataProvider
@@ -108,6 +109,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     GitLabProvider,
     CodebergProvider,
     StackOverflowProvider,
+    SourcegraphProvider,
     HackerNewsProvider,
     HuggingFaceProvider,
     RedditProvider,

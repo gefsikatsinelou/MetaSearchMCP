@@ -58,6 +58,7 @@ from .qwant import QwantProvider
 from .reddit import RedditProvider
 from .rubygems import RubyGemsProvider
 from .semanticscholar import SemanticScholarProvider
+from .seznam import SeznamProvider
 from .sourcegraph import SourcegraphProvider
 from .stackoverflow import StackOverflowProvider
 from .startpage import StartpageProvider
@@ -93,6 +94,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     YandexProvider,
     BaiduProvider,
     MarginaliaProvider,
+    SeznamProvider,
     # Knowledge base
     WikipediaProvider,
     WikidataProvider,

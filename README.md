@@ -72,6 +72,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | Qwant | `qwant` | Internal JSON API, best effort |
 | Yandex | `yandex` | HTML scraping, best effort |
 | Baidu | `baidu` | JSON endpoint, best effort |
+| Seznam | `seznam` | HTML scraping (Czech web), no key required |
 
 ### Knowledge And Reference
 

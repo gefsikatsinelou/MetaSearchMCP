@@ -45,6 +45,7 @@ from .marginalia import MarginaliaProvider
 from .mastodon import MastodonProvider
 from .metacpan import MetaCPANProvider
 from .mojeek import MojeekProvider
+from .musicbrainz import MusicBrainzProvider
 from .mwmbl import MwmblProvider
 from .npm import NpmProvider
 from .openalex import OpenAlexProvider
@@ -108,6 +109,8 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     OpenverseProvider,
     # Media / video search
     PeerTubeProvider,
+    # Media / music
+    MusicBrainzProvider,
     # Developer
     GitHubProvider,
     GitLabProvider,

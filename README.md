@@ -65,6 +65,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | Brave | `brave` | Official Search API |
 | You.com | `youcom` | Official Search API |
 | Mwmbl | `mwmbl` | Public JSON API |
+| Marginalia | `marginalia` | Public JSON API, no key required |
 | Ecosia | `ecosia` | HTML scraping |
 | Mojeek | `mojeek` | HTML scraping |
 | Startpage | `startpage` | HTML scraping, best effort |

@@ -41,6 +41,7 @@ from .internet_archive import InternetArchiveProvider
 from .lemmy import LemmyProvider
 from .lib_rs import LibRsProvider
 from .lobsters import LobstersProvider
+from .marginalia import MarginaliaProvider
 from .mastodon import MastodonProvider
 from .metacpan import MetaCPANProvider
 from .mojeek import MojeekProvider
@@ -91,6 +92,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     QwantProvider,
     YandexProvider,
     BaiduProvider,
+    MarginaliaProvider,
     # Knowledge base
     WikipediaProvider,
     WikidataProvider,

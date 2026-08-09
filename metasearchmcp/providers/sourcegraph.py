@@ -57,6 +57,12 @@ class SourcegraphProvider(BaseProvider):
         data_lines: list[str] = []
 
         def flush() -> None:
+            """Flush the buffered event block into the events list.
+
+            Skips blocks that have no event name or data; decodes the joined
+            data lines as JSON when possible, falling back to the raw text.
+            Resets the buffers afterwards.
+            """
             nonlocal event_name, data_lines
             if not event_name or not data_lines:
                 return

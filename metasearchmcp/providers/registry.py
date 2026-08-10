@@ -73,6 +73,7 @@ from .yahoo import YahooProvider
 from .yahoo_finance import YahooFinanceProvider
 from .yandex import YandexProvider
 from .youcom import YouComProvider
+from .zenodo import ZenodoProvider
 
 if TYPE_CHECKING:
     from .base import BaseProvider
@@ -143,6 +144,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     CrossrefProvider,
     OpenAlexProvider,
     OpenLibraryProvider,
+    ZenodoProvider,
     # Finance
     YahooFinanceProvider,
     AlphaVantageProvider,

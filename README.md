@@ -114,6 +114,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | Semantic Scholar | `semanticscholar` | Graph API |
 | CrossRef | `crossref` | REST API |
 | OpenAlex | `openalex` | OpenAlex REST API, no key required |
+| Zenodo | `zenodo` | Zenodo REST API, no key required |
 
 ### Legal Sources
 

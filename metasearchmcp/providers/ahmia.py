@@ -1,4 +1,4 @@
-"""Ahmia search — Tor hidden services (.onion) search engine.
+r"""Ahmia search — Tor hidden services (.onion) search engine.
 
 Ahmia indexes services on the Tor network and is itself reachable over
 clearnet at ``ahmia.fi``. No API key is required, but the site uses a
@@ -32,7 +32,7 @@ _SEARCH_URL = "https://ahmia.fi/search/"
 
 
 class AhmiaProvider(BaseProvider):
-    """Search Tor hidden services (.onion) via Ahmia's clearnet index.
+    r"""Search Tor hidden services (.onion) via Ahmia's clearnet index.
 
     Keyless. Fetches the homepage once per search to obtain the rotating
     anti-bot token, then queries the search endpoint. Result URLs are the

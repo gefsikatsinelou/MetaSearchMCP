@@ -46,6 +46,7 @@ from .lib_rs import LibRsProvider
 from .lobsters import LobstersProvider
 from .marginalia import MarginaliaProvider
 from .mastodon import MastodonProvider
+from .maven import MavenProvider
 from .metacpan import MetaCPANProvider
 from .mojeek import MojeekProvider
 from .musicbrainz import MusicBrainzProvider
@@ -137,6 +138,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     DockerHubProvider,
     PkgGoDevProvider,
     MetaCPANProvider,
+    MavenProvider,
     # Academic
     ArxivProvider,
     PubMedProvider,

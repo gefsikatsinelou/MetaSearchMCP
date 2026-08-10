@@ -104,6 +104,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | Docker Hub | `dockerhub` | Docker Hub search API |
 | pkg.go.dev | `pkg_go_dev` | HTML scraping |
 | MetaCPAN | `metacpan` | MetaCPAN REST API |
+| Maven Central | `maven` | Solr search API, no key required |
 
 ### Academic Sources
 

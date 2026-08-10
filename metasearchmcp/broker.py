@@ -206,7 +206,7 @@ _TOOLS: list[types.Tool] = [
         description=(
             "Search code repositories, packages, and developer resources across "
             "GitHub, GitLab, npm, PyPI, crates.io, pkg.go.dev, MetaCPAN, lib.rs, "
-            "RubyGems, Docker Hub, Stack Overflow, and Hacker News."
+            "Maven Central, RubyGems, Docker Hub, Stack Overflow, and Hacker News."
         ),
         inputSchema={
             "type": "object",

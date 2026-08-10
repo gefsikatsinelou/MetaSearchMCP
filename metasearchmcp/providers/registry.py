@@ -6,6 +6,9 @@ from typing import TYPE_CHECKING
 
 from metasearchmcp.config import get_settings
 
+# Tor / onion services
+from .ahmia import AhmiaProvider
+
 # Finance
 from .alpha_vantage import AlphaVantageProvider
 
@@ -96,6 +99,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     BaiduProvider,
     MarginaliaProvider,
     SeznamProvider,
+    AhmiaProvider,
     # Knowledge base
     WikipediaProvider,
     WikidataProvider,

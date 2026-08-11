@@ -57,7 +57,7 @@ class PeerTubeProvider(BaseProvider):
         return self._parse(data)
 
     @staticmethod
-    def _format_duration(seconds: Any) -> str:
+    def _format_duration(seconds: object) -> str:
         """Format a duration in seconds as ``MM:SS`` or ``H:MM:SS``."""
         if not seconds:
             return ""
@@ -74,7 +74,7 @@ class PeerTubeProvider(BaseProvider):
         return f"{minutes}:{secs:02d}"
 
     @staticmethod
-    def _absolute_thumbnail(path: Any) -> str:
+    def _absolute_thumbnail(path: object) -> str:
         """Prefix a relative thumbnail path with the API instance origin."""
         if not path:
             return ""
@@ -84,7 +84,7 @@ class PeerTubeProvider(BaseProvider):
         return f"{_API_ORIGIN}{value}"
 
     @staticmethod
-    def _clean_text(value: Any) -> str:
+    def _clean_text(value: object) -> str:
         """Collapse whitespace in a free-text description field."""
         if not value:
             return ""

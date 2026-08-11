@@ -45,7 +45,7 @@ class MavenProvider(BaseProvider):
         return f"https://central.sonatype.com/artifact/{group}/{artifact}"
 
     @staticmethod
-    def _timestamp_to_date(timestamp: Any) -> str | None:
+    def _timestamp_to_date(timestamp: object) -> str | None:
         """Convert a Maven epoch-millis timestamp to an ISO date string.
 
         Returns ``None`` when *timestamp* is missing or not a valid epoch

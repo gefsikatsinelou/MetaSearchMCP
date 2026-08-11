@@ -40,14 +40,14 @@ class OpenverseProvider(BaseProvider):
     tags: ClassVar[list[str]] = ["image", "media"]
 
     @staticmethod
-    def _clean_text(value: Any) -> str:
+    def _clean_text(value: object) -> str:
         """Collapse whitespace in a free-text field."""
         if not value:
             return ""
         return " ".join(str(value).split())
 
     @staticmethod
-    def _license_label(license_name: Any, version: Any) -> str:
+    def _license_label(license_name: object, version: object) -> str:
         """Build a short human-readable license label like ``CC BY 4.0``."""
         name = str(license_name or "").strip().upper()
         if not name:

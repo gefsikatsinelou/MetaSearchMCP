@@ -13,7 +13,7 @@ only the shared httpx client from the base provider.
 
 from __future__ import annotations
 
-from typing import Any, ClassVar
+from typing import ClassVar
 
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
 
@@ -43,7 +43,7 @@ class HuggingFaceProvider(BaseProvider):
     tags: ClassVar[list[str]] = ["code", "developer", "ai", "web"]
 
     @staticmethod
-    def _clean_text(value: Any) -> str:
+    def _clean_text(value: object) -> str:
         """Collapse whitespace in a free-text field."""
         if not value:
             return ""
@@ -56,7 +56,7 @@ class HuggingFaceProvider(BaseProvider):
             return ""
         return f"{_HUB_BASE}/{model_id}"
 
-    def _parse(self, data: Any) -> ProviderResult:
+    def _parse(self, data: object) -> ProviderResult:
         """Parse the Hub API response into structured search results."""
         results: list[SearchResult] = []
         if not isinstance(data, list):

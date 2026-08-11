@@ -57,7 +57,7 @@ class WikimediaCommonsProvider(BaseProvider):
         return self._parse(data)
 
     @staticmethod
-    def _clean_metadata(value: Any) -> str:
+    def _clean_metadata(value: object) -> str:
         """Strip HTML tags and collapse whitespace in an extmetadata value."""
         if not value:
             return ""

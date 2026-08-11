@@ -17,7 +17,7 @@ from __future__ import annotations
 
 from typing import ClassVar
 
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, Tag
 
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
 
@@ -91,7 +91,7 @@ class SeznamProvider(BaseProvider):
         return ProviderResult(results=results)
 
     @staticmethod
-    def _find_result_block(heading) -> object | None:
+    def _find_result_block(heading: Tag) -> Tag | None:
         """Walk up from *heading* to the enclosing div holding exactly one result.
 
         Seznam wraps each result in a ``div`` that contains exactly one
@@ -108,7 +108,7 @@ class SeznamProvider(BaseProvider):
         return None
 
     @staticmethod
-    def _is_sponsored(heading) -> bool:
+    def _is_sponsored(heading: Tag) -> bool:
         """Return True when *heading* sits inside a sponsored results block.
 
         Seznam wraps sponsored results under a section labelled
@@ -127,7 +127,7 @@ class SeznamProvider(BaseProvider):
         return False
 
     @staticmethod
-    def _extract_snippet(block, title: str, url: str) -> str:
+    def _extract_snippet(block: Tag | None, title: str, url: str) -> str:
         """Return the best snippet text found inside *block*.
 
         Candidate text nodes are the ``div`` elements of the block; the

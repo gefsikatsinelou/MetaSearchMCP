@@ -43,21 +43,21 @@ class ZenodoProvider(BaseProvider):
     tags: ClassVar[list[str]] = ["academic", "web"]
 
     @staticmethod
-    def _clean_text(value: Any) -> str:
+    def _clean_text(value: object) -> str:
         """Collapse whitespace in a free-text field."""
         if not value:
             return ""
         return " ".join(str(value).split())
 
     @staticmethod
-    def _strip_html(value: Any) -> str:
+    def _strip_html(value: object) -> str:
         """Strip HTML tags from a description and collapse whitespace."""
         if not value:
             return ""
         return " ".join(BeautifulSoup(str(value), "lxml").get_text(" ").split())
 
     @staticmethod
-    def _creator_names(creators: Any) -> list[str]:
+    def _creator_names(creators: object) -> list[str]:
         """Extract creator display names from the Zenodo creators list."""
         if not creators or not isinstance(creators, list):
             return []

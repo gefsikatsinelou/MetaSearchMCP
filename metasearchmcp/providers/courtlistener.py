@@ -42,14 +42,14 @@ class CourtListenerProvider(BaseProvider):
     tags: ClassVar[list[str]] = ["legal", "academic", "web"]
 
     @staticmethod
-    def _clean_text(value: Any) -> str:
+    def _clean_text(value: object) -> str:
         """Collapse whitespace in a free-text field."""
         if not value:
             return ""
         return " ".join(str(value).split())
 
     @staticmethod
-    def _citation_label(citations: Any) -> str:
+    def _citation_label(citations: object) -> str:
         """Join the citation list into a single human-readable label."""
         if not citations:
             return ""

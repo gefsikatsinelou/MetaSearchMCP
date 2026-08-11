@@ -44,14 +44,14 @@ class OpenAlexProvider(BaseProvider):
     tags: ClassVar[list[str]] = ["academic", "web"]
 
     @staticmethod
-    def _clean_text(value: Any) -> str:
+    def _clean_text(value: object) -> str:
         """Collapse whitespace in a free-text field."""
         if not value:
             return ""
         return " ".join(str(value).split())
 
     @staticmethod
-    def _author_list(authorships: Any) -> list[str]:
+    def _author_list(authorships: object) -> list[str]:
         """Extract author display names from the OpenAlex authorships list."""
         if not authorships or not isinstance(authorships, list):
             return []
@@ -65,7 +65,7 @@ class OpenAlexProvider(BaseProvider):
         return names
 
     @staticmethod
-    def _venue_label(location: Any) -> str:
+    def _venue_label(location: object) -> str:
         """Return the source venue name from a work's primary location."""
         if not isinstance(location, dict):
             return ""
@@ -75,7 +75,7 @@ class OpenAlexProvider(BaseProvider):
         return OpenAlexProvider._clean_text(location.get("raw_source_name"))
 
     @staticmethod
-    def _landing_url(location: Any, doi: Any) -> str:
+    def _landing_url(location: object, doi: object) -> str:
         """Return the best available landing page URL for a work."""
         if isinstance(location, dict):
             page_url = location.get("landing_page_url")

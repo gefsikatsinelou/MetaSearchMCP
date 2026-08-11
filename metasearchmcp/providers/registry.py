@@ -42,6 +42,7 @@ from .huggingface import HuggingFaceProvider
 
 # Knowledge / reference
 from .internet_archive import InternetArchiveProvider
+from .itunes import ITunesProvider
 from .lemmy import LemmyProvider
 from .lib_rs import LibRsProvider
 from .lobsters import LobstersProvider
@@ -120,6 +121,8 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     PeerTubeProvider,
     # Media / music
     MusicBrainzProvider,
+    # Media / podcasts
+    ITunesProvider,
     # Developer
     GitHubProvider,
     GitLabProvider,

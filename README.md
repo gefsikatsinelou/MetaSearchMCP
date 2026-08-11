@@ -151,6 +151,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | Wikimedia Commons | `wikimedia_commons` | MediaWiki API, no key required |
 | Openverse | `openverse` | Openverse REST API, no key required |
 | PeerTube | `peertube` | Public REST API, no key required |
+| iTunes | `itunes` | iTunes Search API (podcasts), no key required |
 
 ### Finance Sources
 

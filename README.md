@@ -123,6 +123,12 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 |---|---|---|
 | CourtListener | `courtlistener` | Free Law Project REST API, no key required |
 
+### Patent Sources
+
+| Provider | Name | Method |
+|---|---|---|
+| Google Patents | `google_patents` | Public XHR query API, no key required |
+
 ### News Sources
 
 | Provider | Name | Method |

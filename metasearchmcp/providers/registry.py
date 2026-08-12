@@ -57,6 +57,7 @@ from .npm import NpmProvider
 from .openalex import OpenAlexProvider
 from .openlibrary import OpenLibraryProvider
 from .openverse import OpenverseProvider
+from .orcid import OrcidProvider
 from .peertube import PeerTubeProvider
 from .pkg_go_dev import PkgGoDevProvider
 from .pubmed import PubMedProvider
@@ -155,6 +156,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     OpenAlexProvider,
     OpenLibraryProvider,
     ZenodoProvider,
+    OrcidProvider,
     # Finance
     YahooFinanceProvider,
     AlphaVantageProvider,

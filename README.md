@@ -136,6 +136,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | Provider | Name | Method |
 |---|---|---|
 | Google News | `google_news` | Public RSS feed, no key required |
+| Wikinews | `wikinews` | MediaWiki API, no key required |
 | Lobsters | `lobsters` | Lobste.rs JSON API, no key required |
 
 ### Social Sources

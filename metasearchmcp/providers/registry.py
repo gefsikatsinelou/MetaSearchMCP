@@ -72,6 +72,7 @@ from .stackoverflow import StackOverflowProvider
 from .startpage import StartpageProvider
 from .wikidata import WikidataProvider
 from .wikimedia_commons import WikimediaCommonsProvider
+from .wikinews import WikinewsProvider
 from .wikipedia import WikipediaProvider
 from .wikiquote import WikiquoteProvider
 from .yahoo import YahooProvider
@@ -117,6 +118,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     GooglePatentsProvider,
     # News
     GoogleNewsProvider,
+    WikinewsProvider,
     # Media / image search
     WikimediaCommonsProvider,
     OpenverseProvider,

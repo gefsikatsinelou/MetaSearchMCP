@@ -81,6 +81,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 |---|---|---|
 | Wikipedia | `wikipedia` | MediaWiki API |
 | Wikidata | `wikidata` | Wikidata API |
+| Wikiquote | `wikiquote` | MediaWiki API |
 | Internet Archive | `internet_archive` | Advanced Search API |
 | Open Library | `openlibrary` | Open Library search API |
 

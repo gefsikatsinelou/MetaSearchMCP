@@ -72,6 +72,7 @@ from .startpage import StartpageProvider
 from .wikidata import WikidataProvider
 from .wikimedia_commons import WikimediaCommonsProvider
 from .wikipedia import WikipediaProvider
+from .wikiquote import WikiquoteProvider
 from .yahoo import YahooProvider
 from .yahoo_finance import YahooFinanceProvider
 from .yandex import YandexProvider
@@ -107,6 +108,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     # Knowledge base
     WikipediaProvider,
     WikidataProvider,
+    WikiquoteProvider,
     InternetArchiveProvider,
     # Legal
     CourtListenerProvider,

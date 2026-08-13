@@ -77,6 +77,7 @@ from .wikinews import WikinewsProvider
 from .wikipedia import WikipediaProvider
 from .wikiquote import WikiquoteProvider
 from .wikisource import WikisourceProvider
+from .wikiversity import WikiversityProvider
 from .wikivoyage import WikivoyageProvider
 from .wiktionary import WiktionaryProvider
 from .yahoo import YahooProvider
@@ -119,6 +120,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     WikisourceProvider,
     WiktionaryProvider,
     WikivoyageProvider,
+    WikiversityProvider,
     InternetArchiveProvider,
     # Legal
     CourtListenerProvider,

@@ -75,6 +75,7 @@ from .wikimedia_commons import WikimediaCommonsProvider
 from .wikinews import WikinewsProvider
 from .wikipedia import WikipediaProvider
 from .wikiquote import WikiquoteProvider
+from .wikisource import WikisourceProvider
 from .wikivoyage import WikivoyageProvider
 from .yahoo import YahooProvider
 from .yahoo_finance import YahooFinanceProvider
@@ -112,6 +113,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     WikipediaProvider,
     WikidataProvider,
     WikiquoteProvider,
+    WikisourceProvider,
     WikivoyageProvider,
     InternetArchiveProvider,
     # Legal

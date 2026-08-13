@@ -77,6 +77,7 @@ from .wikipedia import WikipediaProvider
 from .wikiquote import WikiquoteProvider
 from .wikisource import WikisourceProvider
 from .wikivoyage import WikivoyageProvider
+from .wiktionary import WiktionaryProvider
 from .yahoo import YahooProvider
 from .yahoo_finance import YahooFinanceProvider
 from .yandex import YandexProvider
@@ -114,6 +115,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     WikidataProvider,
     WikiquoteProvider,
     WikisourceProvider,
+    WiktionaryProvider,
     WikivoyageProvider,
     InternetArchiveProvider,
     # Legal

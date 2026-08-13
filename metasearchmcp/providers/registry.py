@@ -70,6 +70,7 @@ from .seznam import SeznamProvider
 from .sourcegraph import SourcegraphProvider
 from .stackoverflow import StackOverflowProvider
 from .startpage import StartpageProvider
+from .wikibooks import WikibooksProvider
 from .wikidata import WikidataProvider
 from .wikimedia_commons import WikimediaCommonsProvider
 from .wikinews import WikinewsProvider
@@ -114,6 +115,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     WikipediaProvider,
     WikidataProvider,
     WikiquoteProvider,
+    WikibooksProvider,
     WikisourceProvider,
     WiktionaryProvider,
     WikivoyageProvider,

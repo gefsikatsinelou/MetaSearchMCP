@@ -90,6 +90,12 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | Internet Archive | `internet_archive` | Advanced Search API |
 | Open Library | `openlibrary` | Open Library search API |
 
+### Places And Geocoding
+
+| Provider | Name | Method |
+|---|---|---|
+| Open-Meteo Geocoding | `openmeteo` | Geocoding REST API, no key required |
+
 ### Developer Sources
 
 | Provider | Name | Method |

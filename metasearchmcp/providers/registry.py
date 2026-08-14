@@ -56,6 +56,7 @@ from .mwmbl import MwmblProvider
 from .npm import NpmProvider
 from .openalex import OpenAlexProvider
 from .openlibrary import OpenLibraryProvider
+from .openmeteo import OpenMeteoProvider
 from .openverse import OpenverseProvider
 from .orcid import OrcidProvider
 from .peertube import PeerTubeProvider
@@ -122,6 +123,8 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     WikivoyageProvider,
     WikiversityProvider,
     InternetArchiveProvider,
+    # Places / geocoding
+    OpenMeteoProvider,
     # Legal
     CourtListenerProvider,
     # Patents

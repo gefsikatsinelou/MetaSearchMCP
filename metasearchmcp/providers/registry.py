@@ -72,6 +72,7 @@ from .seznam import SeznamProvider
 from .sourcegraph import SourcegraphProvider
 from .stackoverflow import StackOverflowProvider
 from .startpage import StartpageProvider
+from .tvmaze import TVMazeProvider
 from .wikibooks import WikibooksProvider
 from .wikidata import WikidataProvider
 from .wikimedia_commons import WikimediaCommonsProvider
@@ -139,6 +140,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     FlickrProvider,
     # Media / video search
     PeerTubeProvider,
+    TVMazeProvider,
     # Media / music
     MusicBrainzProvider,
     # Media / podcasts

@@ -65,6 +65,7 @@ from .pkg_go_dev import PkgGoDevProvider
 from .pubmed import PubMedProvider
 from .pypi import PyPIProvider
 from .qwant import QwantProvider
+from .radio_browser import RadioBrowserProvider
 from .reddit import RedditProvider
 from .rubygems import RubyGemsProvider
 from .semanticscholar import SemanticScholarProvider
@@ -141,6 +142,8 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     # Media / video search
     PeerTubeProvider,
     TVMazeProvider,
+    # Media / radio
+    RadioBrowserProvider,
     # Media / music
     MusicBrainzProvider,
     # Media / podcasts

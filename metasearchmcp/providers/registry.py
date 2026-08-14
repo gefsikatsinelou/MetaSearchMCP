@@ -28,6 +28,7 @@ from .dockerhub import DockerHubProvider
 from .duckduckgo import DuckDuckGoProvider
 from .ecosia import EcosiaProvider
 from .finnhub import FinnhubProvider
+from .flickr import FlickrProvider
 from .github import GitHubProvider
 from .gitlab import GitLabProvider
 
@@ -135,6 +136,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     # Media / image search
     WikimediaCommonsProvider,
     OpenverseProvider,
+    FlickrProvider,
     # Media / video search
     PeerTubeProvider,
     # Media / music

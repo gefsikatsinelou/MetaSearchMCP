@@ -74,6 +74,7 @@ from .sourcegraph import SourcegraphProvider
 from .stackoverflow import StackOverflowProvider
 from .startpage import StartpageProvider
 from .steam import SteamProvider
+from .themealdb import TheMealDBProvider
 from .tvmaze import TVMazeProvider
 from .unsplash import UnsplashProvider
 from .wikibooks import WikibooksProvider
@@ -153,6 +154,8 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     ITunesProvider,
     # Media / games
     SteamProvider,
+    # Media / food & recipes
+    TheMealDBProvider,
     # Developer
     GitHubProvider,
     GitLabProvider,

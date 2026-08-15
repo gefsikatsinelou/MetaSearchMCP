@@ -170,6 +170,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | TVMaze | `tvmaze` | TVMaze public API, no key required |
 | Radio Browser | `radio_browser` | Radio Browser public API, no key required |
 | Steam | `steam` | Steam Store search API, no key required |
+| TheMealDB | `themealdb` | TheMealDB public API, no key required |
 | iTunes | `itunes` | iTunes Search API (podcasts), no key required |
 
 ### Finance Sources

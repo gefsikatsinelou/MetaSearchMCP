@@ -164,8 +164,11 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 |---|---|---|
 | Wikimedia Commons | `wikimedia_commons` | MediaWiki API, no key required |
 | Openverse | `openverse` | Openverse REST API, no key required |
+| Flickr | `flickr` | Public feed API, no key required |
+| Unsplash | `unsplash` | Unsplash REST API (requires `UNSPLASH_ACCESS_KEY`) |
 | PeerTube | `peertube` | Public REST API, no key required |
 | TVMaze | `tvmaze` | TVMaze public API, no key required |
+| Radio Browser | `radio_browser` | Radio Browser public API, no key required |
 | iTunes | `itunes` | iTunes Search API (podcasts), no key required |
 
 ### Finance Sources

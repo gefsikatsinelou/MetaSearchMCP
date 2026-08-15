@@ -74,6 +74,7 @@ from .sourcegraph import SourcegraphProvider
 from .stackoverflow import StackOverflowProvider
 from .startpage import StartpageProvider
 from .tvmaze import TVMazeProvider
+from .unsplash import UnsplashProvider
 from .wikibooks import WikibooksProvider
 from .wikidata import WikidataProvider
 from .wikimedia_commons import WikimediaCommonsProvider
@@ -139,6 +140,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     WikimediaCommonsProvider,
     OpenverseProvider,
     FlickrProvider,
+    UnsplashProvider,
     # Media / video search
     PeerTubeProvider,
     TVMazeProvider,

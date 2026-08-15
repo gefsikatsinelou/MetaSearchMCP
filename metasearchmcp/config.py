@@ -80,6 +80,9 @@ class Settings(BaseSettings):
     alpha_vantage_api_key: str = ""  # Alpha Vantage (optional; 25 req/day free)
     finnhub_api_key: str = ""  # Finnhub (optional; 60 req/min free)
 
+    # API keys — media providers
+    unsplash_access_key: str = ""  # Unsplash (optional; free demo tier)
+
     # Provider control
     enabled_providers: str = ""  # comma-separated; empty = auto
     allow_unstable_providers: bool = False

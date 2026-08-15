@@ -250,7 +250,8 @@ _TOOLS: list[types.Tool] = [
     types.Tool(
         name=_TOOL_SEARCH_IMAGES,
         description=(
-            "Search openly licensed images across Openverse and Wikimedia Commons."
+            "Search images across image providers (Openverse, Wikimedia "
+            "Commons, Flickr, Unsplash, NASA Image Library)."
         ),
         inputSchema={
             "type": "object",

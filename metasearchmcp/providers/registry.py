@@ -54,6 +54,7 @@ from .metacpan import MetaCPANProvider
 from .mojeek import MojeekProvider
 from .musicbrainz import MusicBrainzProvider
 from .mwmbl import MwmblProvider
+from .nasa import NasaProvider
 from .npm import NpmProvider
 from .openalex import OpenAlexProvider
 from .openlibrary import OpenLibraryProvider
@@ -143,6 +144,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     OpenverseProvider,
     FlickrProvider,
     UnsplashProvider,
+    NasaProvider,
     # Media / video search
     PeerTubeProvider,
     TVMazeProvider,

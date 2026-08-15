@@ -73,6 +73,7 @@ from .seznam import SeznamProvider
 from .sourcegraph import SourcegraphProvider
 from .stackoverflow import StackOverflowProvider
 from .startpage import StartpageProvider
+from .steam import SteamProvider
 from .tvmaze import TVMazeProvider
 from .unsplash import UnsplashProvider
 from .wikibooks import WikibooksProvider
@@ -150,6 +151,8 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     MusicBrainzProvider,
     # Media / podcasts
     ITunesProvider,
+    # Media / games
+    SteamProvider,
     # Developer
     GitHubProvider,
     GitLabProvider,

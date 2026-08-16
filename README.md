@@ -181,6 +181,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | Yahoo Finance | `yahoo_finance` | No | Unofficial endpoint, no key needed |
 | Alpha Vantage | `alpha_vantage` | `ALPHA_VANTAGE_API_KEY` | 25 req/day — [get key](https://www.alphavantage.co/support/#api-key) |
 | Finnhub | `finnhub` | `FINNHUB_API_KEY` | 60 req/min — [get key](https://finnhub.io/register) |
+| CoinGecko | `coingecko` | No | Cryptocurrency search API, no key needed |
 
 ## Installation
 

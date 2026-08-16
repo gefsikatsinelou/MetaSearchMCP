@@ -21,6 +21,7 @@ from .bing import BingProvider
 from .bluesky import BlueskyProvider
 from .brave import BraveProvider
 from .codeberg import CodebergProvider
+from .coingecko import CoinGeckoProvider
 from .courtlistener import CourtListenerProvider
 from .crates import CratesIoProvider
 from .crossref import CrossrefProvider
@@ -193,6 +194,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     YahooFinanceProvider,
     AlphaVantageProvider,
     FinnhubProvider,
+    CoinGeckoProvider,
 ]
 
 

@@ -128,6 +128,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | CrossRef | `crossref` | REST API |
 | OpenAlex | `openalex` | OpenAlex REST API, no key required |
 | DOAJ | `doaj` | DOAJ public REST API, no key required |
+| DataCite | `datacite` | DataCite DOI search API, no key required |
 | Zenodo | `zenodo` | Zenodo REST API, no key required |
 | ORCID | `orcid` | ORCID public API (researcher profiles), no key required |
 

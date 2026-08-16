@@ -25,6 +25,7 @@ from .coingecko import CoinGeckoProvider
 from .courtlistener import CourtListenerProvider
 from .crates import CratesIoProvider
 from .crossref import CrossrefProvider
+from .doaj import DoajProvider
 from .dockerhub import DockerHubProvider
 from .duckduckgo import DuckDuckGoProvider
 from .ecosia import EcosiaProvider
@@ -187,6 +188,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     SemanticScholarProvider,
     CrossrefProvider,
     OpenAlexProvider,
+    DoajProvider,
     OpenLibraryProvider,
     ZenodoProvider,
     OrcidProvider,

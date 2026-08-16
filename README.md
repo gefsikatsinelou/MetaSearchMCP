@@ -127,6 +127,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | Semantic Scholar | `semanticscholar` | Graph API |
 | CrossRef | `crossref` | REST API |
 | OpenAlex | `openalex` | OpenAlex REST API, no key required |
+| DOAJ | `doaj` | DOAJ public REST API, no key required |
 | Zenodo | `zenodo` | Zenodo REST API, no key required |
 | ORCID | `orcid` | ORCID public API (researcher profiles), no key required |
 
@@ -170,6 +171,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | PeerTube | `peertube` | Public REST API, no key required |
 | TVMaze | `tvmaze` | TVMaze public API, no key required |
 | Radio Browser | `radio_browser` | Radio Browser public API, no key required |
+| MusicBrainz | `musicbrainz` | MusicBrainz public API (recordings/artists), no key required |
 | Steam | `steam` | Steam Store search API, no key required |
 | TheMealDB | `themealdb` | TheMealDB public API, no key required |
 | iTunes | `itunes` | iTunes Search API (podcasts), no key required |

@@ -20,6 +20,8 @@ from metasearchmcp.providers.base import API_USER_AGENT
 _AC_URL = "https://duckduckgo.com/ac/"
 # DuckDuckGo autocomplete returns at most 20 phrases per request.
 _MAX_API_SUGGESTIONS = 20
+# The response is a two-element array: ["query", ["suggestion", ...]].
+_MIN_RESPONSE_ITEMS = 2
 
 _HEADERS = {"User-Agent": API_USER_AGENT}
 
@@ -50,7 +52,7 @@ async def fetch_suggestions(query: str, limit: int = 8) -> list[str]:
     except (httpx.HTTPError, ValueError, TypeError):
         return []
 
-    if not isinstance(data, list) or len(data) < 2:
+    if not isinstance(data, list) or len(data) < _MIN_RESPONSE_ITEMS:
         return []
     suggestions = data[1]
     if not isinstance(suggestions, list):

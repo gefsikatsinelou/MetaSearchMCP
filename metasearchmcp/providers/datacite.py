@@ -65,11 +65,11 @@ class DataCiteProvider(BaseProvider):
         """Extract creator names from the DataCite creators list."""
         if not creators or not isinstance(creators, list):
             return []
-        names: list[str] = []
-        for creator in creators:
-            if isinstance(creator, dict) and creator.get("name"):
-                names.append(DataCiteProvider._clean_text(creator.get("name")))
-        return names
+        return [
+            DataCiteProvider._clean_text(creator.get("name"))
+            for creator in creators
+            if isinstance(creator, dict) and creator.get("name")
+        ]
 
     @staticmethod
     def _first_description(descriptions: object) -> str:

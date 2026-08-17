@@ -61,11 +61,11 @@ class ZenodoProvider(BaseProvider):
         """Extract creator display names from the Zenodo creators list."""
         if not creators or not isinstance(creators, list):
             return []
-        names: list[str] = []
-        for creator in creators:
-            if isinstance(creator, dict) and creator.get("name"):
-                names.append(ZenodoProvider._clean_text(creator.get("name")))
-        return names
+        return [
+            ZenodoProvider._clean_text(creator.get("name"))
+            for creator in creators
+            if isinstance(creator, dict) and creator.get("name")
+        ]
 
     @staticmethod
     def _landing_url(hit: dict[str, Any]) -> str:

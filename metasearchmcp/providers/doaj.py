@@ -51,11 +51,11 @@ class DoajProvider(BaseProvider):
         """Extract author names from the DOAJ author records."""
         if not isinstance(authors, list):
             return []
-        names: list[str] = []
-        for author in authors:
-            if isinstance(author, dict) and author.get("name"):
-                names.append(DoajProvider._clean_text(author.get("name")))
-        return names
+        return [
+            DoajProvider._clean_text(author.get("name"))
+            for author in authors
+            if isinstance(author, dict) and author.get("name")
+        ]
 
     @staticmethod
     def _doi(identifiers: object) -> str:

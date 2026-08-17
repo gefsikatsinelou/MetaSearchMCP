@@ -132,6 +132,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | Zenodo | `zenodo` | Zenodo REST API, no key required |
 | OSF Preprints | `osf_preprints` | OSF API v2 (PsyArXiv, SocArXiv, etc.), no key required |
 | ORCID | `orcid` | ORCID public API (researcher profiles), no key required |
+| Google Books | `google_books` | Google Books API, no key required |
 
 ### Legal Sources
 

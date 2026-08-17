@@ -37,6 +37,7 @@ from .gitlab import GitLabProvider
 
 # Google providers
 from .google import GoogleProvider
+from .google_books import GoogleBooksProvider
 from .google_news import GoogleNewsProvider
 from .google_patents import GooglePatentsProvider
 from .google_serpbase import GoogleSerpbaseProvider
@@ -192,6 +193,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     OpenAlexProvider,
     DoajProvider,
     OpenLibraryProvider,
+    GoogleBooksProvider,
     DataCiteProvider,
     ZenodoProvider,
     OSFPreprintsProvider,

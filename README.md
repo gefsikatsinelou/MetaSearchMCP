@@ -130,6 +130,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | DOAJ | `doaj` | DOAJ public REST API, no key required |
 | DataCite | `datacite` | DataCite DOI search API, no key required |
 | Zenodo | `zenodo` | Zenodo REST API, no key required |
+| OSF Preprints | `osf_preprints` | OSF API v2 (PsyArXiv, SocArXiv, etc.), no key required |
 | ORCID | `orcid` | ORCID public API (researcher profiles), no key required |
 
 ### Legal Sources

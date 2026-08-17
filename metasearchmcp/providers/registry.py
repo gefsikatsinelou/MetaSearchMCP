@@ -64,6 +64,7 @@ from .openlibrary import OpenLibraryProvider
 from .openmeteo import OpenMeteoProvider
 from .openverse import OpenverseProvider
 from .orcid import OrcidProvider
+from .osf_preprints import OSFPreprintsProvider
 from .peertube import PeerTubeProvider
 from .pkg_go_dev import PkgGoDevProvider
 from .pubmed import PubMedProvider
@@ -190,9 +191,10 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     CrossrefProvider,
     OpenAlexProvider,
     DoajProvider,
-    DataCiteProvider,
     OpenLibraryProvider,
+    DataCiteProvider,
     ZenodoProvider,
+    OSFPreprintsProvider,
     OrcidProvider,
     # Finance
     YahooFinanceProvider,

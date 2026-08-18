@@ -62,6 +62,7 @@ from .musicbrainz import MusicBrainzProvider
 from .mwmbl import MwmblProvider
 from .nasa import NasaProvider
 from .naver import NaverProvider
+from .nominatim import NominatimProvider
 from .npm import NpmProvider
 from .openalex import OpenAlexProvider
 from .openlibrary import OpenLibraryProvider
@@ -141,6 +142,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     InternetArchiveProvider,
     # Places / geocoding
     OpenMeteoProvider,
+    NominatimProvider,
     # Legal
     CourtListenerProvider,
     # Patents

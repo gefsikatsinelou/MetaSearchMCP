@@ -96,6 +96,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | Provider | Name | Method |
 |---|---|---|
 | Open-Meteo Geocoding | `openmeteo` | Geocoding REST API, no key required |
+| OpenStreetMap (Nominatim) | `nominatim` | Nominatim public API, no key required |
 
 ### Developer Sources
 

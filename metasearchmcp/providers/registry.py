@@ -59,6 +59,7 @@ from .mojeek import MojeekProvider
 from .musicbrainz import MusicBrainzProvider
 from .mwmbl import MwmblProvider
 from .nasa import NasaProvider
+from .naver import NaverProvider
 from .npm import NpmProvider
 from .openalex import OpenAlexProvider
 from .openlibrary import OpenLibraryProvider
@@ -124,6 +125,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     BaiduProvider,
     MarginaliaProvider,
     SeznamProvider,
+    NaverProvider,
     AhmiaProvider,
     # Knowledge base
     WikipediaProvider,

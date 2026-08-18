@@ -73,6 +73,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | Yandex | `yandex` | HTML scraping, best effort |
 | Baidu | `baidu` | JSON endpoint, best effort |
 | Seznam | `seznam` | HTML scraping (Czech web), no key required |
+| Naver | `naver` | HTML scraping (Korean web), no key required |
 | Ahmia | `ahmia` | HTML scraping (Tor .onion services), no key required |
 
 ### Knowledge And Reference

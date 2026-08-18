@@ -26,6 +26,7 @@ from .coingecko import CoinGeckoProvider
 from .courtlistener import CourtListenerProvider
 from .crates import CratesIoProvider
 from .crossref import CrossrefProvider
+from .dailymotion import DailymotionProvider
 from .datacite import DataCiteProvider
 from .doaj import DoajProvider
 from .dockerhub import DockerHubProvider
@@ -156,6 +157,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     NasaProvider,
     # Media / video search
     PeerTubeProvider,
+    DailymotionProvider,
     TVMazeProvider,
     # Media / radio
     RadioBrowserProvider,

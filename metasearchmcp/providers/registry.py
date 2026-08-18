@@ -18,6 +18,7 @@ from .arxiv import ArxivProvider
 # General web search
 from .baidu import BaiduProvider
 from .bing import BingProvider
+from .bing_news import BingNewsProvider
 from .bluesky import BlueskyProvider
 from .brave import BraveProvider
 from .codeberg import CodebergProvider
@@ -146,6 +147,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     # News
     GoogleNewsProvider,
     WikinewsProvider,
+    BingNewsProvider,
     # Media / image search
     WikimediaCommonsProvider,
     OpenverseProvider,

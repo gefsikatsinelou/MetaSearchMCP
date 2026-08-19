@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import asyncio
 from collections import defaultdict
 from http import HTTPStatus
 from typing import Annotated, Any, Literal
@@ -22,6 +23,7 @@ from metasearchmcp.config import (
     NO_PROVIDERS_MSG,
 )
 from metasearchmcp.contracts import (
+    BatchSearchEnvelope,
     GoogleSearchEnvelope,
     SearchEnvelope,
     SearchReport,
@@ -71,6 +73,55 @@ async def search(
             detail=NO_PROVIDERS_MSG,
         )
     return await run_search_plan(req.query, list(providers_map.values()), req.params)
+
+
+@router.post(
+    "/search/batch",
+    response_model=dict[str, Any],
+    summary="Run multiple queries in a single round-trip",
+)
+async def search_batch(
+    req: BatchSearchEnvelope,
+    registry: Annotated[dict[str, BaseProvider], Depends(_get_registry)],
+) -> dict[str, Any]:
+    """Run several searches with the same provider/tag filters.
+
+    All queries are executed concurrently against the same filtered provider
+    set. Each query yields its own :class:`SearchReport`; a per-query error
+    (e.g. an aborted provider) does not fail the other queries.
+    """
+    providers_map = pick_providers_by_tags(registry, req.tags, match=req.tag_match)
+    providers_map = pick_named_providers(providers_map, req.providers)
+    if not providers_map:
+        raise HTTPException(
+            status_code=HTTPStatus.SERVICE_UNAVAILABLE,
+            detail=NO_PROVIDERS_MSG,
+        )
+    providers = list(providers_map.values())
+
+    responses = await asyncio.gather(
+        *(run_search_plan(query, providers, req.params) for query in req.queries),
+        return_exceptions=True,
+    )
+
+    results: list[dict[str, Any]] = []
+    for query, response in zip(req.queries, responses, strict=True):
+        if isinstance(response, Exception):
+            results.append(
+                {
+                    "query": query,
+                    "error": str(response) or type(response).__name__,
+                },
+            )
+        else:
+            report: SearchReport = response
+            results.append(report.model_dump())
+
+    return {
+        "count": len(req.queries),
+        "queries": req.queries,
+        "results": results,
+    }
 
 
 @router.post(

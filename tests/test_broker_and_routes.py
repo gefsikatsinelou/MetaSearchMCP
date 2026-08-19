@@ -538,3 +538,65 @@ def test_all_providers_have_description():
     catalog = build_provider_catalog()
     missing = [name for name, p in catalog.items() if not p.description]
     assert missing == [], f"Providers missing description: {missing}"
+
+
+# ---------------------------------------------------------------------------
+# /search/batch route tests
+# ---------------------------------------------------------------------------
+
+
+def test_search_batch_returns_reports_for_each_query(client):
+    resp = client.post(
+        "/search/batch",
+        json={"queries": ["python", "rust"]},
+    )
+    assert resp.status_code == 200
+    data = resp.json()
+    assert data["count"] == 2
+    assert data["queries"] == ["python", "rust"]
+    assert len(data["results"]) == 2
+    for entry in data["results"]:
+        assert "query" in entry
+        assert "results" in entry
+        # Each report is a full SearchReport dump.
+        assert isinstance(entry["results"], list)
+
+
+def test_search_batch_honors_tag_and_provider_filters(client):
+    resp = client.post(
+        "/search/batch",
+        json={
+            "queries": ["async", "web"],
+            "tags": ["code"],
+            "providers": [],
+        },
+    )
+    assert resp.status_code == 200
+    data = resp.json()
+    for entry in data["results"]:
+        providers_hit = {r["provider"] for r in entry["results"]}
+        assert providers_hit <= {"github", "npm"}
+
+
+def test_search_batch_single_query(client):
+    resp = client.post("/search/batch", json={"queries": ["only_one"]})
+    assert resp.status_code == 200
+    data = resp.json()
+    assert data["count"] == 1
+    assert data["results"][0]["query"] == "only_one"
+
+
+def test_search_batch_no_providers_returns_503(client):
+    from metasearchmcp.api import routes
+
+    with patch.object(routes, "_catalog", {}):
+        resp = client.post(
+            "/search/batch",
+            json={"queries": ["python"]},
+        )
+    assert resp.status_code == 503
+
+
+def test_search_batch_empty_queries_rejected(client):
+    resp = client.post("/search/batch", json={"queries": []})
+    assert resp.status_code == 422

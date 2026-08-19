@@ -87,6 +87,35 @@ class SearchEnvelope(BaseModel):
     params: SearchOptions = Field(default_factory=SearchOptions)
 
 
+class BatchSearchEnvelope(BaseModel):
+    """Request body for the aggregate /search/batch endpoint.
+
+    Runs multiple queries with the same provider/tag filters and options,
+    aggregating a single report per query. This is useful when an agent
+    needs several lookups in one round-trip (e.g. comparing several terms).
+    """
+
+    queries: list[str] = Field(
+        ...,
+        min_length=1,
+        max_length=20,
+        description="List of queries to search (1-20).",
+    )
+    providers: list[str] = Field(
+        default_factory=list,
+        description="Explicit provider list; empty = use all enabled providers",
+    )
+    tags: list[str] = Field(
+        default_factory=list,
+        description="Optional provider tags used to narrow the provider set",
+    )
+    tag_match: Literal["any", "all"] = Field(
+        default="any",
+        description="How tag filters are applied: match any tag or require all tags",
+    )
+    params: SearchOptions = Field(default_factory=SearchOptions)
+
+
 class GoogleSearchEnvelope(BaseModel):
     """Request body for the Google-specific /search/google endpoint."""
 

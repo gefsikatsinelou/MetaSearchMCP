@@ -58,6 +58,7 @@ _TOOL_SEARCH_SOCIAL = "search_social"
 _TOOL_SEARCH_IMAGES = "search_images"
 _TOOL_SEARCH_VIDEOS = "search_videos"
 _TOOL_LIST_PROVIDERS = "list_providers"
+_TOOL_PROVIDER_HEALTH = "provider_health"
 
 # Shared result-count schema properties reused across tool definitions.
 _RESULT_COUNT_PROPERTIES: dict[str, Any] = {
@@ -294,6 +295,26 @@ _TOOLS: list[types.Tool] = [
             },
         },
     ),
+    types.Tool(
+        name=_TOOL_PROVIDER_HEALTH,
+        description=(
+            "Report availability/health of search providers. For each provider, "
+            "returns whether it is enabled and configured to run (e.g. missing "
+            "API keys make a provider unavailable). Optionally filter by tag."
+        ),
+        inputSchema={
+            "type": "object",
+            "properties": {
+                "tag": {
+                    "type": "string",
+                    "description": (
+                        "Optional tag to filter providers "
+                        "(e.g. 'web', 'academic', 'code', 'finance', 'news', 'social')."
+                    ),
+                },
+            },
+        },
+    ),
 ]
 
 
@@ -475,11 +496,42 @@ async def _dispatch_list_providers(
     }
 
 
+async def _dispatch_provider_health(
+    arguments: dict[str, Any],
+) -> dict[str, Any]:
+    """Report availability of each provider, optionally filtered by tag."""
+    tag_filter = (arguments.get("tag") or "").strip().lower()
+    provider_statuses: list[dict[str, Any]] = []
+    for _pname, provider in sorted(_catalog.items()):
+        if tag_filter and tag_filter not in {t.lower() for t in provider.tags}:
+            continue
+        available = provider.is_available()
+        provider_statuses.append(
+            {
+                "name": provider.name,
+                "available": available,
+                "status": "ok" if available else "unavailable",
+                "description": provider.description,
+                "tags": sorted(provider.tags),
+            },
+        )
+    available_count = sum(1 for s in provider_statuses if s["available"])
+    return {
+        "providers": provider_statuses,
+        "count": len(provider_statuses),
+        "available_count": available_count,
+        "unavailable_count": len(provider_statuses) - available_count,
+        "tag_filter": tag_filter or None,
+    }
+
+
 async def dispatch_tool(name: str, arguments: dict[str, Any]) -> dict[str, Any]:
     """Route a tool call to the appropriate search handler."""
-    # list_providers does not require a query.
+    # list_providers and provider_health do not require a query.
     if name == _TOOL_LIST_PROVIDERS:
         return await _dispatch_list_providers(arguments)
+    if name == _TOOL_PROVIDER_HEALTH:
+        return await _dispatch_provider_health(arguments)
 
     query = arguments["query"]
     # Build SearchOptions, relying on Pydantic defaults when values are

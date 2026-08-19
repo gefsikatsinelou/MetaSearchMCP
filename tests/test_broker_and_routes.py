@@ -527,6 +527,66 @@ async def test_dispatch_search_google_passes_safe_search():
 
 
 # ---------------------------------------------------------------------------
+# provider_health dispatch tests
+# ---------------------------------------------------------------------------
+
+
+@pytest.mark.asyncio
+async def test_dispatch_provider_health_lists_availability():
+    from metasearchmcp import broker
+
+    catalog = _fake_catalog()
+    # Mark alpha_vantage as unavailable (e.g. missing API key).
+    catalog["alpha_vantage"].is_available.return_value = False
+    with patch.object(broker, "_catalog", catalog):
+        result = await broker.dispatch_tool("provider_health", {})
+
+    assert result["count"] == len(catalog)
+    assert result["available_count"] == len(catalog) - 1
+    assert result["unavailable_count"] == 1
+    statuses = {p["name"]: p for p in result["providers"]}
+    assert statuses["alpha_vantage"]["status"] == "unavailable"
+    assert statuses["alpha_vantage"]["available"] is False
+    assert statuses["yahoo_finance"]["status"] == "ok"
+    assert statuses["yahoo_finance"]["available"] is True
+
+
+@pytest.mark.asyncio
+async def test_dispatch_provider_health_filters_by_tag():
+    from metasearchmcp import broker
+
+    catalog = _fake_catalog()
+    catalog["alpha_vantage"].is_available.return_value = False
+    with patch.object(broker, "_catalog", catalog):
+        result = await broker.dispatch_tool(
+            "provider_health",
+            {"tag": "finance"},
+        )
+
+    names = {p["name"] for p in result["providers"]}
+    assert names == {"yahoo_finance", "alpha_vantage"}
+    assert result["tag_filter"] == "finance"
+    assert result["available_count"] == 1
+    assert result["unavailable_count"] == 1
+
+
+@pytest.mark.asyncio
+async def test_dispatch_provider_health_filter_ignores_case_and_whitespace():
+    from metasearchmcp import broker
+
+    catalog = _fake_catalog()
+    with patch.object(broker, "_catalog", catalog):
+        result = await broker.dispatch_tool(
+            "provider_health",
+            {"tag": "  CODE  "},
+        )
+
+    names = {p["name"] for p in result["providers"]}
+    assert names == {"github", "npm"}
+    assert result["count"] == 2
+
+
+# ---------------------------------------------------------------------------
 # provider description field tests
 # ---------------------------------------------------------------------------
 

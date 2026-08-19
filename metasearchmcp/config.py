@@ -58,6 +58,10 @@ class Settings(BaseSettings):
     default_timeout: float = 10.0
     aggregator_timeout: float = 15.0
 
+    # In-memory result cache
+    cache_enabled: bool = True
+    cache_ttl: float = 300.0  # seconds
+
     # API keys — Google providers
     serpbase_api_key: str = ""
     serper_api_key: str = ""

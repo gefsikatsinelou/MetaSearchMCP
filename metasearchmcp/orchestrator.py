@@ -6,6 +6,7 @@ import asyncio
 import time
 from typing import TYPE_CHECKING
 
+from metasearchmcp.cache import get_search_cache
 from metasearchmcp.config import get_settings
 from metasearchmcp.contracts import (
     ProviderPayload,
@@ -56,6 +57,30 @@ def _unique_strings(values: list[str]) -> list[str]:
     return unique
 
 
+def _cache_key(
+    query: str,
+    providers: Sequence[BaseProvider],
+    options: SearchOptions,
+) -> str:
+    """Build a stable cache key from the query, provider set, and options.
+
+    Provider order is significant (earlier providers take priority during
+    deduplication), so it is preserved in the key by using the original
+    input order.
+    """
+    provider_names = "|".join(p.name for p in providers)
+    options_part = "|".join(
+        [
+            f"n={options.num_results}",
+            f"m={options.max_total_results}",
+            options.language,
+            options.country,
+            f"s={int(options.safe_search)}",
+        ],
+    )
+    return f"{query}\x1f{provider_names}\x1f{options_part}"
+
+
 async def run_search_plan(
     query: str,
     providers: Sequence[BaseProvider],
@@ -65,11 +90,23 @@ async def run_search_plan(
 
     Results are deduplicated, capped to ``options.max_total_results``,
     and enriched with per-provider timing and error metadata.
+
+    Identical requests (same query, provider set, and options) are served
+    from an in-memory TTL cache when available, avoiding redundant work.
     """
     if options is None:
         options = SearchOptions()
 
     settings = get_settings()
+    cache_enabled = getattr(settings, "cache_enabled", True)
+    cache = get_search_cache() if cache_enabled else None
+    if cache is not None:
+        cache.ttl = getattr(settings, "cache_ttl", 300.0)
+        cache_key = _cache_key(query, providers, options)
+        cached = cache.get(cache_key)
+        if cached is not None:
+            return SearchReport.model_validate(cached)
+
     started_at = time.monotonic()
     jobs = [
         execute_provider_search(provider, query, options, settings.aggregator_timeout)
@@ -117,7 +154,7 @@ async def run_search_plan(
     for idx, hit in enumerate(deduplicated_hits, start=1):
         hit.rank = idx
 
-    return SearchReport(
+    report = SearchReport(
         query=query,
         results=deduplicated_hits,
         related_searches=_unique_strings(related_searches),
@@ -127,3 +164,6 @@ async def run_search_plan(
         providers=provider_reports,
         errors=errors,
     )
+    if cache is not None:
+        cache.set(cache_key, report.model_dump(mode="json"))
+    return report

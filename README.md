@@ -516,6 +516,7 @@ The public package is organized around these modules:
 - `catalog.py`: provider discovery, filtering, and selection by name or tags
 - `orchestrator.py`: concurrent search execution across providers and result assembly
 - `merge.py`: URL canonicalization and cross-engine result deduplication
+- `ranking.py`: optional consensus/relevance result re-ranking (opt-in via `RANK_RESULTS`)
 - `server.py`: FastAPI application and Uvicorn server entrypoint
 - `broker.py`: MCP server exposing search tools over stdio
 - `api/routes.py`: HTTP endpoint handlers (search, suggest, health, providers catalog)

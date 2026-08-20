@@ -62,6 +62,10 @@ class Settings(BaseSettings):
     cache_enabled: bool = True
     cache_ttl: float = 300.0  # seconds
 
+    # Consensus-based result re-ranking (cross-provider corroboration + query
+    # term relevance). Disabled by default to preserve provider-priority order.
+    rank_results: bool = False
+
     # API keys — Google providers
     serpbase_api_key: str = ""
     serper_api_key: str = ""

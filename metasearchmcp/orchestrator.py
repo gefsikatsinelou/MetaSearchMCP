@@ -15,6 +15,7 @@ from metasearchmcp.contracts import (
     SearchReport,
 )
 from metasearchmcp.merge import collapse_duplicate_hits
+from metasearchmcp.ranking import rank_and_dedup_results
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
@@ -149,7 +150,19 @@ async def run_search_plan(
             ),
         )
 
-    deduplicated_hits = collapse_duplicate_hits(merged_hits)
+    # Re-rank the raw merged hits by consensus (number of providers that
+    # returned the same canonical URL) and query-term relevance, so results
+    # corroborated by several independent providers surface above the
+    # provider-priority order. Enabled via the RANK_RESULTS setting. This
+    # performs its own deduplication, so it must run before
+    # ``collapse_duplicate_hits``.
+    if getattr(settings, "rank_results", False) and merged_hits:
+        deduplicated_hits = rank_and_dedup_results(
+            merged_hits, query, options.max_total_results
+        )
+    else:
+        deduplicated_hits = collapse_duplicate_hits(merged_hits)
+
     deduplicated_hits = deduplicated_hits[: options.max_total_results]
     for idx, hit in enumerate(deduplicated_hits, start=1):
         hit.rank = idx

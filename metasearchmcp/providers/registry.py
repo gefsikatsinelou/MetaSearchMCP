@@ -51,6 +51,7 @@ from .huggingface import HuggingFaceProvider
 # Knowledge / reference
 from .internet_archive import InternetArchiveProvider
 from .itunes import ITunesProvider
+from .kitsu import KitsuProvider
 from .lemmy import LemmyProvider
 from .lib_rs import LibRsProvider
 from .lobsters import LobstersProvider
@@ -167,6 +168,8 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     # Media / music
     MusicBrainzProvider,
     DiscogsProvider,
+    # Media / anime & manga
+    KitsuProvider,
     # Media / podcasts
     ITunesProvider,
     # Media / games

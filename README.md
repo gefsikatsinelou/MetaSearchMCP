@@ -179,6 +179,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | Radio Browser | `radio_browser` | Radio Browser public API, no key required |
 | MusicBrainz | `musicbrainz` | MusicBrainz public API (recordings/artists), no key required |
 | Discogs | `discogs` | Discogs database search API, no key required |
+| Kitsu | `kitsu` | Kitsu anime & manga catalog API (JSON:API), no key required |
 | Steam | `steam` | Steam Store search API, no key required |
 | TheMealDB | `themealdb` | TheMealDB public API, no key required |
 | iTunes | `itunes` | iTunes Search API (podcasts), no key required |

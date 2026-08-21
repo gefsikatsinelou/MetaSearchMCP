@@ -28,6 +28,7 @@ from .crates import CratesIoProvider
 from .crossref import CrossrefProvider
 from .dailymotion import DailymotionProvider
 from .datacite import DataCiteProvider
+from .discogs import DiscogsProvider
 from .doaj import DoajProvider
 from .dockerhub import DockerHubProvider
 from .duckduckgo import DuckDuckGoProvider
@@ -165,6 +166,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     RadioBrowserProvider,
     # Media / music
     MusicBrainzProvider,
+    DiscogsProvider,
     # Media / podcasts
     ITunesProvider,
     # Media / games

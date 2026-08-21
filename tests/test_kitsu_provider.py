@@ -34,7 +34,9 @@ _SAMPLE_ANIME = {
             },
             "relationships": {
                 "categories": {
-                    "links": {"related": "https://kitsu.io/api/edge/anime/1555/categories"},
+                    "links": {
+                        "related": "https://kitsu.io/api/edge/anime/1555/categories"
+                    },
                     "data": [
                         {"id": "Action", "type": "categories"},
                         {"id": "Adventure", "type": "categories"},

@@ -60,6 +60,7 @@ from .marginalia import MarginaliaProvider
 from .mastodon import MastodonProvider
 from .maven import MavenProvider
 from .metacpan import MetaCPANProvider
+from .metmuseum import MetMuseumProvider
 from .mojeek import MojeekProvider
 from .musicbrainz import MusicBrainzProvider
 from .mwmbl import MwmblProvider
@@ -159,6 +160,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     OpenverseProvider,
     FlickrProvider,
     UnsplashProvider,
+    MetMuseumProvider,
     NasaProvider,
     # Media / video search
     PeerTubeProvider,

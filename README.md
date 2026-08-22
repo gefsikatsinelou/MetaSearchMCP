@@ -182,6 +182,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | Kitsu | `kitsu` | Kitsu anime & manga catalog API (JSON:API), no key required |
 | Steam | `steam` | Steam Store search API, no key required |
 | TheMealDB | `themealdb` | TheMealDB public API, no key required |
+| TheCocktailDB | `cocktaildb` | TheCocktailDB public API, no key required |
 | iTunes | `itunes` | iTunes Search API (podcasts), no key required |
 
 ### Finance Sources

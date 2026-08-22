@@ -21,6 +21,7 @@ from .bing import BingProvider
 from .bing_news import BingNewsProvider
 from .bluesky import BlueskyProvider
 from .brave import BraveProvider
+from .cocktaildb import CocktailDBProvider
 from .codeberg import CodebergProvider
 from .coingecko import CoinGeckoProvider
 from .courtlistener import CourtListenerProvider
@@ -176,6 +177,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     SteamProvider,
     # Media / food & recipes
     TheMealDBProvider,
+    CocktailDBProvider,
     # Developer
     GitHubProvider,
     GitLabProvider,

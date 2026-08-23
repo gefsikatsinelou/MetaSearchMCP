@@ -37,6 +37,7 @@ class SearchCache:
         self._max_entries = max(1, int(max_entries))
         self._store: OrderedDict[str, tuple[float, Any]] = OrderedDict()
         self._lock = threading.Lock()
+        self._insertions = 0
 
     def get(self, key: str) -> Any | None:
         """Return the cached value for *key* if unexpired, else ``None``."""
@@ -57,6 +58,7 @@ class SearchCache:
         with self._lock:
             self._store[key] = (time.monotonic() + self.ttl, value)
             self._store.move_to_end(key)
+            self._insertions += 1
             while len(self._store) > self._max_entries:
                 self._store.popitem(last=False)
 
@@ -64,6 +66,30 @@ class SearchCache:
         """Remove all entries from the cache."""
         with self._lock:
             self._store.clear()
+
+    def stats(self) -> dict[str, Any]:
+        """Return a snapshot of cache statistics.
+
+        The snapshot includes the number of live (unexpired) entries, the
+        configured TTL, the maximum capacity, and the total number of keys
+        ever inserted since the cache was created (a monotonic counter that
+        is never reset by expiry or eviction).
+
+        This method is read-only: expired entries are purged, but no key is
+        inserted, refreshed, or evicted as a side effect of taking the
+        snapshot, so it can safely be exposed through the API.
+        """
+        with self._lock:
+            now = time.monotonic()
+            expired = [k for k, (ts, _) in self._store.items() if ts <= now]
+            for key in expired:
+                self._store.pop(key, None)
+            return {
+                "entries": len(self._store),
+                "max_entries": self._max_entries,
+                "ttl_seconds": self.ttl,
+                "insertions": self._insertions,
+            }
 
     def __len__(self) -> int:
         """Return the number of live (unexpired) entries."""

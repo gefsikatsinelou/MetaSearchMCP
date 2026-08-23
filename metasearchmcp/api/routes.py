@@ -10,6 +10,7 @@ from typing import Annotated, Any, Literal
 from fastapi import APIRouter, Depends, HTTPException, Query
 
 from metasearchmcp import __version__
+from metasearchmcp.cache import get_search_cache
 from metasearchmcp.catalog import (
     build_provider_catalog,
     pick_first_provider,
@@ -216,4 +217,28 @@ async def providers(
         "count": len(filtered),
         "tag_groups": _build_tag_groups(filtered),
         "filters": {"tags": tag or [], "tag_match": tag_match},
+    }
+
+
+@router.get(
+    "/cache/stats",
+    summary="Inspect the in-memory search result cache",
+)
+async def cache_stats() -> dict[str, Any]:
+    """Return statistics about the shared in-memory search cache.
+
+    The shared cache is a bounded FIFO TTL cache used by the orchestrator
+    to avoid re-hitting external providers for identical requests. This
+    endpoint exposes its current occupancy, capacity, TTL, and the total
+    number of insertions since process start. It never mutates the cache
+    contents.
+    """
+    cache = get_search_cache()
+    stats = cache.stats()
+    return {
+        "enabled": True,
+        "entries": stats["entries"],
+        "max_entries": stats["max_entries"],
+        "ttl_seconds": stats["ttl_seconds"],
+        "insertions": stats["insertions"],
     }

@@ -78,6 +78,47 @@ def test_cache_clear_removes_all():
     assert cache.get("a") is None
 
 
+def test_cache_stats_shape_and_insertion_counter():
+    cache = _make_search_cache(ttl=60.0, max_entries=10)
+    stats = cache.stats()
+    assert stats == {
+        "entries": 0,
+        "max_entries": 10,
+        "ttl_seconds": 60.0,
+        "insertions": 0,
+    }
+
+    cache.set("a", 1)
+    cache.set("b", 2)
+    # Overwriting an existing key still counts as a new insertion.
+    cache.set("a", 3)
+    stats = cache.stats()
+    assert stats["entries"] == 2
+    assert stats["insertions"] == 3
+
+    cache.clear()
+    stats = cache.stats()
+    # Clearing resets the occupancy but not the monotonic insertion counter.
+    assert stats["entries"] == 0
+    assert stats["insertions"] == 3
+
+
+def test_cache_stats_purges_expired_entries_without_side_effects():
+    import time
+
+    cache = _make_search_cache(ttl=0.05)
+    cache.set("a", 1)
+    cache.set("b", 2)
+    time.sleep(0.1)
+
+    stats = cache.stats()
+    assert stats["entries"] == 0
+    assert stats["insertions"] == 2
+    # Expired entries are gone; the counter is unaffected by expiry.
+    assert cache.get("a") is None
+    assert cache.get("b") is None
+
+
 def test_cache_overwrite_updates_value():
     cache = _make_search_cache()
     cache.set("k", "old")

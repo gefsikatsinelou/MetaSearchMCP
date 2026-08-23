@@ -407,6 +407,16 @@ curl "http://localhost:8000/providers?tag=code&tag=packages&tag_match=all"
 
 Simple health check endpoint. Returns service status, version, provider count, and the current provider name list.
 
+### `GET /cache/stats`
+
+Inspect the shared in-memory search result cache (used by the orchestrator to avoid re-hitting external providers for identical requests within the TTL window).
+
+```bash
+curl "http://localhost:8000/cache/stats"
+```
+
+Returns `enabled`, `entries` (live cached results), `max_entries` (capacity), `ttl_seconds`, and `insertions` (total keys written since process start — a monotonic counter unaffected by expiry or eviction).
+
 ## Response Schema
 
 Every aggregated response includes:

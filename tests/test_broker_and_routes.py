@@ -421,6 +421,36 @@ def test_providers_filters_normalize_tag_input(client):
     assert names == {"npm"}
 
 
+def test_cache_stats_route_reports_shared_cache(client):
+    """The /cache/stats endpoint reports live entries and insertions."""
+    from metasearchmcp.api import routes
+    from metasearchmcp.cache import SearchCache
+
+    cache = SearchCache(ttl_seconds=60.0, max_entries=10)
+    with (
+        patch.object(routes, "_catalog", _fake_catalog()),
+        patch(
+            "metasearchmcp.api.routes.get_search_cache",
+            return_value=cache,
+        ),
+    ):
+        resp = client.get("/cache/stats")
+
+    assert resp.status_code == 200
+    data = resp.json()
+    assert data["enabled"] is True
+    assert data["max_entries"] == cache.stats()["max_entries"]
+    assert data["ttl_seconds"] == cache.stats()["ttl_seconds"]
+    assert data["insertions"] == 0
+
+    cache.set("k1", "v1")
+    with patch("metasearchmcp.api.routes.get_search_cache", return_value=cache):
+        resp = client.get("/cache/stats")
+    data = resp.json()
+    assert data["entries"] == 1
+    assert data["insertions"] == 1
+
+
 @pytest.mark.asyncio
 async def test_dispatch_search_web_supports_all_tag_matching():
     from metasearchmcp import broker

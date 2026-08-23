@@ -153,6 +153,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | Provider | Name | Method |
 |---|---|---|
 | Google News | `google_news` | Public RSS feed, no key required |
+| Bing News | `bing_news` | Public RSS feed, no key required |
 | Wikinews | `wikinews` | MediaWiki API, no key required |
 | Lobsters | `lobsters` | Lobste.rs JSON API, no key required |
 
@@ -173,6 +174,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | Flickr | `flickr` | Public feed API, no key required |
 | Unsplash | `unsplash` | Unsplash REST API (requires `UNSPLASH_ACCESS_KEY`) |
 | NASA | `nasa` | NASA Image and Video Library API, no key required |
+| Met Museum | `metmuseum` | Met Museum public collection API, no key required |
 | PeerTube | `peertube` | Public REST API, no key required |
 | Dailymotion | `dailymotion` | Public REST API, no key required |
 | TVMaze | `tvmaze` | TVMaze public API, no key required |

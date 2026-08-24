@@ -131,6 +131,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | OpenAlex | `openalex` | OpenAlex REST API, no key required |
 | DOAJ | `doaj` | DOAJ public REST API, no key required |
 | Europe PMC | `europepmc` | Europe PMC REST API (PubMed + preprints), no key required |
+| ClinicalTrials.gov | `clinicaltrials` | ClinicalTrials.gov v2 API (clinical studies), no key required |
 | DataCite | `datacite` | DataCite DOI search API, no key required |
 | Zenodo | `zenodo` | Zenodo REST API, no key required |
 | OSF Preprints | `osf_preprints` | OSF API v2 (PsyArXiv, SocArXiv, etc.), no key required |

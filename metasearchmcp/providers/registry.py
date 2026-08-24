@@ -21,6 +21,7 @@ from .bing import BingProvider
 from .bing_news import BingNewsProvider
 from .bluesky import BlueskyProvider
 from .brave import BraveProvider
+from .clinicaltrials import ClinicalTrialsProvider
 from .cocktaildb import CocktailDBProvider
 from .codeberg import CodebergProvider
 from .coingecko import CoinGeckoProvider
@@ -206,11 +207,12 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     # Academic
     ArxivProvider,
     PubMedProvider,
+    EuropePmcProvider,
+    ClinicalTrialsProvider,
     SemanticScholarProvider,
     CrossrefProvider,
     OpenAlexProvider,
     DoajProvider,
-    EuropePmcProvider,
     OpenLibraryProvider,
     GoogleBooksProvider,
     DataCiteProvider,

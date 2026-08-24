@@ -34,6 +34,7 @@ from .doaj import DoajProvider
 from .dockerhub import DockerHubProvider
 from .duckduckgo import DuckDuckGoProvider
 from .ecosia import EcosiaProvider
+from .europepmc import EuropePmcProvider
 from .finnhub import FinnhubProvider
 from .flickr import FlickrProvider
 from .github import GitHubProvider
@@ -209,6 +210,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     CrossrefProvider,
     OpenAlexProvider,
     DoajProvider,
+    EuropePmcProvider,
     OpenLibraryProvider,
     GoogleBooksProvider,
     DataCiteProvider,

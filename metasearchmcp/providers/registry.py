@@ -30,6 +30,7 @@ from .crates import CratesIoProvider
 from .crossref import CrossrefProvider
 from .dailymotion import DailymotionProvider
 from .datacite import DataCiteProvider
+from .dblp import DBLPProvider
 from .discogs import DiscogsProvider
 from .doaj import DoajProvider
 from .dockerhub import DockerHubProvider
@@ -214,6 +215,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     CrossrefProvider,
     OpenAlexProvider,
     DoajProvider,
+    DBLPProvider,
     OpenLibraryProvider,
     GoogleBooksProvider,
     DataCiteProvider,

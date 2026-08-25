@@ -136,6 +136,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | Zenodo | `zenodo` | Zenodo REST API, no key required |
 | OSF Preprints | `osf_preprints` | OSF API v2 (PsyArXiv, SocArXiv, etc.), no key required |
 | ORCID | `orcid` | ORCID public API (researcher profiles), no key required |
+| UniProt | `uniprot` | UniProt REST API (protein knowledgebase), no key required |
 | Google Books | `google_books` | Google Books API, no key required |
 
 ### Legal Sources
@@ -494,7 +495,9 @@ MetaSearchMCP exposes these MCP tools:
 - `search_social`
 - `search_images`
 - `search_videos`
+- `search_bio`
 - `list_providers`
+- `provider_health`
 
 `search_web` also accepts optional `tags` so agents can limit search to categories such as `web`, `academic`, `code`, or `google`. When multiple tags are present, `tag_match="all"` requires a provider to satisfy the full set.
 All search tools accept `max_total_results` to keep the final payload compact.

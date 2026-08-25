@@ -37,7 +37,7 @@ class EuropePmcProvider(BaseProvider):
         "Search life-science literature (PubMed, preprints) via Europe PMC, "
         "no API key required."
     )
-    tags: ClassVar[list[str]] = ["academic", "web", "medical"]
+    tags: ClassVar[list[str]] = ["academic", "web", "medical", "bio"]
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
         """Search Europe PMC for *query* and return literature results."""

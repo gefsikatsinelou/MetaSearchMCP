@@ -26,7 +26,7 @@ class PubMedProvider(BaseProvider):
 
     name = "pubmed"
     description = "Search biomedical and life-science literature via PubMed / NCBI."
-    tags: ClassVar[list[str]] = ["academic", "web", "medical"]
+    tags: ClassVar[list[str]] = ["academic", "web", "medical", "bio"]
 
     def __init__(self) -> None:
         """Initialize PubMed provider with API key from settings."""

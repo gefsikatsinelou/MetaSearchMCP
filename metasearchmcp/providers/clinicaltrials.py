@@ -40,7 +40,7 @@ class ClinicalTrialsProvider(BaseProvider):
         "Search registered clinical trials (NCT studies) via ClinicalTrials.gov, "
         "no API key required."
     )
-    tags: ClassVar[list[str]] = ["academic", "web", "medical"]
+    tags: ClassVar[list[str]] = ["academic", "web", "medical", "bio"]
 
     async def search(self, query: str, params: SearchParams) -> ProviderResult:
         """Search ClinicalTrials.gov for *query* and return study results."""

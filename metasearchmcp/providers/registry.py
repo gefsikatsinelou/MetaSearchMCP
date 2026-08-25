@@ -92,6 +92,7 @@ from .startpage import StartpageProvider
 from .steam import SteamProvider
 from .themealdb import TheMealDBProvider
 from .tvmaze import TVMazeProvider
+from .uniprot import UniProtProvider
 from .unsplash import UnsplashProvider
 from .wikibooks import WikibooksProvider
 from .wikidata import WikidataProvider
@@ -219,6 +220,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     ZenodoProvider,
     OSFPreprintsProvider,
     OrcidProvider,
+    UniProtProvider,
     # Finance
     YahooFinanceProvider,
     AlphaVantageProvider,

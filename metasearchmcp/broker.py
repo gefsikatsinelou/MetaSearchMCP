@@ -57,6 +57,7 @@ _TOOL_SEARCH_NEWS = "search_news"
 _TOOL_SEARCH_SOCIAL = "search_social"
 _TOOL_SEARCH_IMAGES = "search_images"
 _TOOL_SEARCH_VIDEOS = "search_videos"
+_TOOL_SEARCH_BIO = "search_bio"
 _TOOL_LIST_PROVIDERS = "list_providers"
 _TOOL_PROVIDER_HEALTH = "provider_health"
 
@@ -266,6 +267,22 @@ _TOOLS: list[types.Tool] = [
     types.Tool(
         name=_TOOL_SEARCH_VIDEOS,
         description=("Search videos and streaming media across PeerTube instances."),
+        inputSchema={
+            "type": "object",
+            "properties": {
+                "query": {"type": "string", "description": "Search query"},
+                **_RESULT_COUNT_PROPERTIES,
+            },
+            "required": ["query"],
+        },
+    ),
+    types.Tool(
+        name=_TOOL_SEARCH_BIO,
+        description=(
+            "Search biomedical and life-science databases: proteins "
+            "(UniProt), clinical trials (ClinicalTrials.gov), and "
+            "literature (PubMed, Europe PMC)."
+        ),
         inputSchema={
             "type": "object",
             "properties": {
@@ -605,6 +622,12 @@ async def dispatch_tool(name: str, arguments: dict[str, Any]) -> dict[str, Any]:
             options,
             "video",
             "No video providers available.",
+        ),
+        _TOOL_SEARCH_BIO: lambda: _run_tagged_search(
+            query,
+            options,
+            "bio",
+            "No biomedical/life-science providers available.",
         ),
     }
 

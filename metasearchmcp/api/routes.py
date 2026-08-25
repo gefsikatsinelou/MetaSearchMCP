@@ -159,6 +159,31 @@ async def search_google(
     return await run_search_plan(req.query, list(selected.values()), req.params)
 
 
+@router.post(
+    "/search/bio",
+    response_model=SearchReport,
+    summary="Search biomedical and life-science databases",
+)
+async def search_bio(
+    req: SearchEnvelope,
+    registry: Annotated[dict[str, BaseProvider], Depends(_get_registry)],
+) -> SearchReport:
+    """Run a search across biomedical/life-science providers.
+
+    Targets providers tagged ``bio`` (UniProt, ClinicalTrials.gov,
+    PubMed, Europe PMC). Honors the same provider/tag filters as the
+    aggregate ``/search`` endpoint.
+    """
+    providers_map = pick_providers_by_tags(registry, req.tags or ["bio"])
+    providers_map = pick_named_providers(providers_map, req.providers)
+    if not providers_map:
+        raise HTTPException(
+            status_code=HTTPStatus.SERVICE_UNAVAILABLE,
+            detail=NO_PROVIDERS_MSG,
+        )
+    return await run_search_plan(req.query, list(providers_map.values()), req.params)
+
+
 @router.get(
     "/search/suggest",
     summary="Query autocomplete suggestions from DuckDuckGo",

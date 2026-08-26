@@ -59,6 +59,7 @@ from .kitsu import KitsuProvider
 from .lemmy import LemmyProvider
 from .lib_rs import LibRsProvider
 from .lobsters import LobstersProvider
+from .loc_gov import LocGovProvider
 from .marginalia import MarginaliaProvider
 from .mastodon import MastodonProvider
 from .maven import MavenProvider
@@ -148,6 +149,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     WikivoyageProvider,
     WikiversityProvider,
     InternetArchiveProvider,
+    LocGovProvider,
     # Places / geocoding
     OpenMeteoProvider,
     NominatimProvider,

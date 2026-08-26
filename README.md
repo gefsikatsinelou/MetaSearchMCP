@@ -181,6 +181,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | PeerTube | `peertube` | Public REST API, no key required |
 | Dailymotion | `dailymotion` | Public REST API, no key required |
 | TVMaze | `tvmaze` | TVMaze public API, no key required |
+| Library of Congress | `loc_gov` | loc.gov public JSON API, no key required |
 | Radio Browser | `radio_browser` | Radio Browser public API, no key required |
 | MusicBrainz | `musicbrainz` | MusicBrainz public API (recordings/artists), no key required |
 | Discogs | `discogs` | Discogs database search API, no key required |

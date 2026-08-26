@@ -49,6 +49,7 @@ from .google_news import GoogleNewsProvider
 from .google_patents import GooglePatentsProvider
 from .google_serpbase import GoogleSerpbaseProvider
 from .google_serper import GoogleSerperProvider
+from .gutendex import GutendexProvider
 from .hackernews import HackerNewsProvider
 from .huggingface import HuggingFaceProvider
 
@@ -220,6 +221,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     DBLPProvider,
     OpenLibraryProvider,
     GoogleBooksProvider,
+    GutendexProvider,
     DataCiteProvider,
     ZenodoProvider,
     OSFPreprintsProvider,

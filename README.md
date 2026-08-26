@@ -138,6 +138,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | ORCID | `orcid` | ORCID public API (researcher profiles), no key required |
 | UniProt | `uniprot` | UniProt REST API (protein knowledgebase), no key required |
 | Google Books | `google_books` | Google Books API, no key required |
+| Project Gutenberg | `gutendex` | Gutendex API (public-domain ebooks), no key required |
 
 ### Legal Sources
 

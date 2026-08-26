@@ -23,8 +23,10 @@ _SAMPLE_RESPONSE = {
             "online_format": ["image"],
             "subject": ["baseball", "sports & recreation", "american history"],
             "description": [
-                "Americans had been playing baseball long before they agreed "
-                "on the rules or even settled on how to spell it."
+                (
+                    "Americans had been playing baseball long before they agreed "
+                    "on the rules or even settled on how to spell it."
+                )
             ],
         },
         {

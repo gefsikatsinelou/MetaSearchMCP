@@ -94,6 +94,8 @@ class RedditProvider(BaseProvider):
         children = data.get("data", {}).get("children", [])
 
         for i, child in enumerate(children, start=1):
+            if child.get("kind") != "t3":
+                continue
             post = child.get("data", {})
             title = post.get("title", "")
             url = post.get("url", "")
@@ -113,10 +115,16 @@ class RedditProvider(BaseProvider):
 
             is_self = post.get("is_self", False)
             final_url = permalink if is_self else url
+            # The API returns the external URL for link posts; permalink is
+            # the fallback for self-posts (no external URL).
 
             snippet_parts = [subreddit, f"Score: {score} | Comments: {comments}"]
             if selftext:
                 snippet_parts.append(selftext)
+            if not selftext:
+                # No body text — keep only the subreddit as a light snippet
+                # so results are never fully empty.
+                snippet_parts = [subreddit]
 
             results.append(
                 SearchResult(
@@ -132,6 +140,7 @@ class RedditProvider(BaseProvider):
                         "score": score,
                         "num_comments": comments,
                         "permalink": permalink,
+                        "over_18": bool(post.get("over_18", False)),
                     },
                 ),
             )

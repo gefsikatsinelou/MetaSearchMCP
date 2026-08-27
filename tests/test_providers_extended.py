@@ -141,6 +141,7 @@ def _reddit_response() -> dict:
         "data": {
             "children": [
                 {
+                    "kind": "t3",
                     "data": {
                         "title": "What is the best way to learn Rust?",
                         "url": "https://www.reddit.com/r/rust/comments/abc/",

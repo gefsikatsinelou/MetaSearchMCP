@@ -73,6 +73,7 @@ from .nasa import NasaProvider
 from .naver import NaverProvider
 from .nominatim import NominatimProvider
 from .npm import NpmProvider
+from .nvd import NvdProvider
 from .openalex import OpenAlexProvider
 from .openlibrary import OpenLibraryProvider
 from .openmeteo import OpenMeteoProvider
@@ -210,6 +211,8 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     PkgGoDevProvider,
     MetaCPANProvider,
     MavenProvider,
+    # Security / vulnerabilities
+    NvdProvider,
     # Academic
     ArxivProvider,
     PubMedProvider,

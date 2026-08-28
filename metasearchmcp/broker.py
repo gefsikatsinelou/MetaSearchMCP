@@ -187,7 +187,8 @@ _TOOLS: list[types.Tool] = [
         name=_TOOL_SEARCH_FINANCE,
         description=(
             "Search stock tickers, company names, and financial instruments "
-            "across finance providers (Yahoo Finance, Alpha Vantage, Finnhub)."
+            "across finance providers (Yahoo Finance, Alpha Vantage, Finnhub, "
+            "SEC EDGAR filings)."
         ),
         inputSchema={
             "type": "object",

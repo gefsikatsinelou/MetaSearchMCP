@@ -87,6 +87,7 @@ from .qwant import QwantProvider
 from .radio_browser import RadioBrowserProvider
 from .reddit import RedditProvider
 from .rubygems import RubyGemsProvider
+from .sec_edgar import SecEdgarProvider
 from .semanticscholar import SemanticScholarProvider
 from .seznam import SeznamProvider
 from .sourcegraph import SourcegraphProvider
@@ -232,6 +233,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     AlphaVantageProvider,
     FinnhubProvider,
     CoinGeckoProvider,
+    SecEdgarProvider,
 ]
 
 

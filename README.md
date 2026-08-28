@@ -200,6 +200,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | Alpha Vantage | `alpha_vantage` | `ALPHA_VANTAGE_API_KEY` | 25 req/day — [get key](https://www.alphavantage.co/support/#api-key) |
 | Finnhub | `finnhub` | `FINNHUB_API_KEY` | 60 req/min — [get key](https://finnhub.io/register) |
 | CoinGecko | `coingecko` | No | Cryptocurrency search API, no key needed |
+| SEC EDGAR | `sec_edgar` | No | SEC full-text + company filings API (unstable flag), no key needed |
 
 ## Installation
 

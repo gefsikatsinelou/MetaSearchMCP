@@ -44,6 +44,12 @@ class MwmblProvider(BaseProvider):
             title_parts = [t.get("value", "") for t in item.get("title", [])]
             extract_parts = item.get("extract", [])
             content = extract_parts[0].get("value", "") if extract_parts else ""
+            extra: dict[str, object] = {}
+            # Each item carries an optional ``source`` field describing where
+            # the hit was indexed from (e.g. "mwmbl", "wikipedia", "user").
+            source_type = item.get("source")
+            if isinstance(source_type, str) and source_type:
+                extra["source_type"] = source_type
             results.append(
                 SearchResult(
                     title="".join(title_parts),
@@ -52,6 +58,7 @@ class MwmblProvider(BaseProvider):
                     source="mwmbl.org",
                     rank=i,
                     provider=self.name,
+                    extra=extra,
                 ),
             )
             if i >= limit:

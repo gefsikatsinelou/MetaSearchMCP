@@ -72,6 +72,30 @@ def test_mwmbl_parse_no_extract():
     assert result.results[0].snippet == ""
 
 
+def test_mwmbl_parse_source_type():
+    from metasearchmcp.providers.mwmbl import MwmblProvider
+
+    p = MwmblProvider()
+    data = [
+        {
+            "url": "https://python.org",
+            "title": [{"value": "Python"}],
+            "extract": [{"value": "Welcome to python.org"}],
+            "source": "wikipedia",
+        },
+        {
+            "url": "https://example.com",
+            "title": [{"value": "No source"}],
+            "extract": [],
+        },
+    ]
+    result = p._parse(data)
+    assert result.results[0].extra["source_type"] == "wikipedia"
+    # Missing/non-string source must not populate extra["source_type"].
+    assert "source_type" not in result.results[1].extra
+    assert result.results[1].extra == {}
+
+
 # ---------------------------------------------------------------------------
 # GitLab
 # ---------------------------------------------------------------------------

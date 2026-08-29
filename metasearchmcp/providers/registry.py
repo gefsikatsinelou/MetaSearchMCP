@@ -11,6 +11,7 @@ from .ahmia import AhmiaProvider
 
 # Finance
 from .alpha_vantage import AlphaVantageProvider
+from .artic import ArticProvider
 
 # Academic
 from .arxiv import ArxivProvider
@@ -172,6 +173,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     FlickrProvider,
     UnsplashProvider,
     MetMuseumProvider,
+    ArticProvider,
     NasaProvider,
     # Media / video search
     PeerTubeProvider,

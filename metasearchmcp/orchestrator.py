@@ -28,22 +28,38 @@ async def execute_provider_search(
     query: str,
     options: SearchOptions,
     timeout_seconds: float,
+    retries: int = 0,
+    backoff_seconds: float = 0.3,
 ) -> tuple[str, ProviderPayload | None, float, str | None]:
-    """Run a single provider search with a timeout and return normalized results."""
+    """Run a single provider search with a timeout and return normalized results.
+
+    Transient failures (timeouts, network errors, HTTP 5xx/429) are retried
+    up to *retries* extra times with an exponential backoff starting at
+    *backoff_seconds*, so a briefly flaky provider does not permanently
+    fail a search. Final errors are returned as a string; no exception
+    escapes this function.
+    """
+    attempts = max(0, retries) + 1
     start = time.monotonic()
-    error: str | None = None
     payload: ProviderPayload | None = None
-    try:
-        payload = await asyncio.wait_for(
-            provider.search(query, options),
-            timeout=timeout_seconds,
-        )
-    except TimeoutError:
-        error = f"timeout after {timeout_seconds}s"
-    except Exception as exc:
-        error = str(exc) or type(exc).__name__
+    last_error: str | None = None
+    for attempt in range(attempts):
+        try:
+            payload = await asyncio.wait_for(
+                provider.search(query, options),
+                timeout=timeout_seconds,
+            )
+        except TimeoutError:
+            last_error = f"timeout after {timeout_seconds}s"
+        except Exception as exc:
+            last_error = str(exc) or type(exc).__name__
+        else:
+            last_error = None
+            break
+        if attempt < attempts - 1:
+            await asyncio.sleep(min(backoff_seconds * (2**attempt), 2.0))
     latency_ms = (time.monotonic() - start) * 1000
-    return provider.name, payload, latency_ms, error
+    return provider.name, payload, latency_ms, last_error
 
 
 def _unique_strings(values: list[str]) -> list[str]:
@@ -110,7 +126,14 @@ async def run_search_plan(
 
     started_at = time.monotonic()
     jobs = [
-        execute_provider_search(provider, query, options, settings.aggregator_timeout)
+        execute_provider_search(
+            provider,
+            query,
+            options,
+            settings.aggregator_timeout,
+            retries=getattr(settings, "provider_retries", 0),
+            backoff_seconds=getattr(settings, "retry_backoff_seconds", 0.3),
+        )
         for provider in providers
     ]
     raw_results = await asyncio.gather(*jobs)

@@ -58,6 +58,10 @@ class Settings(BaseSettings):
     default_timeout: float = 10.0
     aggregator_timeout: float = 15.0
 
+    # Provider request retries
+    provider_retries: int = 0  # extra attempts per provider on transient failure
+    retry_backoff_seconds: float = 0.3  # base delay between retry attempts
+
     # In-memory result cache
     cache_enabled: bool = True
     cache_ttl: float = 300.0  # seconds

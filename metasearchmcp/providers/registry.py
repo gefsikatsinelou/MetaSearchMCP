@@ -39,6 +39,7 @@ from .ecosia import EcosiaProvider
 from .europepmc import EuropePmcProvider
 from .finnhub import FinnhubProvider
 from .flickr import FlickrProvider
+from .gdelt import GDELTProvider
 from .github import GitHubProvider
 from .gitlab import GitLabProvider
 
@@ -162,6 +163,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     GooglePatentsProvider,
     # News
     GoogleNewsProvider,
+    GDELTProvider,
     WikinewsProvider,
     BingNewsProvider,
     # Media / image search

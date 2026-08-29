@@ -114,9 +114,7 @@ class NvdProvider(BaseProvider):
                         "cve_id": cve_id,
                         "cvss_score": score,
                         "cvss_severity": severity,
-                        "last_modified": self._iso_date_prefix(
-                            cve.get("lastModified")
-                        ),
+                        "last_modified": self._iso_date_prefix(cve.get("lastModified")),
                     },
                 ),
             )

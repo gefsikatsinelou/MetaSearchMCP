@@ -91,6 +91,7 @@ from .pypi import PyPIProvider
 from .qwant import QwantProvider
 from .radio_browser import RadioBrowserProvider
 from .reddit import RedditProvider
+from .remoteok import RemoteOKProvider
 from .rubygems import RubyGemsProvider
 from .sec_edgar import SecEdgarProvider
 from .semanticscholar import SemanticScholarProvider
@@ -196,6 +197,8 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     TheMealDBProvider,
     CocktailDBProvider,
     OpenFoodFactsProvider,
+    # Media / jobs & careers
+    RemoteOKProvider,
     # Developer
     GitHubProvider,
     GitLabProvider,

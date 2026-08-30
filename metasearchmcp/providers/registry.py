@@ -77,6 +77,7 @@ from .nominatim import NominatimProvider
 from .npm import NpmProvider
 from .nvd import NvdProvider
 from .openalex import OpenAlexProvider
+from .openfoodfacts import OpenFoodFactsProvider
 from .openlibrary import OpenLibraryProvider
 from .openmeteo import OpenMeteoProvider
 from .openverse import OpenverseProvider
@@ -193,6 +194,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     # Media / food & recipes
     TheMealDBProvider,
     CocktailDBProvider,
+    OpenFoodFactsProvider,
     # Developer
     GitHubProvider,
     GitLabProvider,

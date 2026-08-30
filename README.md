@@ -192,6 +192,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | Steam | `steam` | Steam Store search API, no key required |
 | TheMealDB | `themealdb` | TheMealDB public API, no key required |
 | TheCocktailDB | `cocktaildb` | TheCocktailDB public API, no key required |
+| Open Food Facts | `openfoodfacts` | Open Food Facts public search API, no key required |
 | iTunes | `itunes` | iTunes Search API (podcasts), no key required |
 
 ### Finance Sources

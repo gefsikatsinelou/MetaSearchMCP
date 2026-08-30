@@ -22,6 +22,7 @@ from .bing import BingProvider
 from .bing_news import BingNewsProvider
 from .bluesky import BlueskyProvider
 from .brave import BraveProvider
+from .chembl import ChEMBLProvider
 from .clinicaltrials import ClinicalTrialsProvider
 from .cocktaildb import CocktailDBProvider
 from .codeberg import CodebergProvider
@@ -219,6 +220,8 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     MavenProvider,
     # Security / vulnerabilities
     NvdProvider,
+    # Drugs / pharma
+    ChEMBLProvider,
     # Academic
     ArxivProvider,
     PubMedProvider,

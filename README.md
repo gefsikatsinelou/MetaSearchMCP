@@ -98,6 +98,12 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | Open-Meteo Geocoding | `openmeteo` | Geocoding REST API, no key required |
 | OpenStreetMap (Nominatim) | `nominatim` | Nominatim public API, no key required |
 
+### Nature And Biodiversity
+
+| Provider | Name | Method |
+|---|---|---|
+| iNaturalist | `inaturalist` | Observations REST API, no key required |
+
 ### Developer Sources
 
 | Provider | Name | Method |

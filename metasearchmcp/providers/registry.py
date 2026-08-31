@@ -99,6 +99,7 @@ from .sec_edgar import SecEdgarProvider
 from .semanticscholar import SemanticScholarProvider
 from .seznam import SeznamProvider
 from .sourcegraph import SourcegraphProvider
+from .spaceflight_news import SpaceflightNewsProvider
 from .stackoverflow import StackOverflowProvider
 from .startpage import StartpageProvider
 from .steam import SteamProvider
@@ -174,6 +175,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     GDELTProvider,
     WikinewsProvider,
     BingNewsProvider,
+    SpaceflightNewsProvider,
     # Media / image search
     WikimediaCommonsProvider,
     OpenverseProvider,

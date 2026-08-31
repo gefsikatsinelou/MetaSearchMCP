@@ -188,6 +188,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | NASA | `nasa` | NASA Image and Video Library API, no key required |
 | Met Museum | `metmuseum` | Met Museum public collection API, no key required |
 | Art Institute of Chicago | `artic` | AIC public collection API, no key required |
+| Cleveland Museum of Art | `clevelandart` | CMA open-access API, no key required |
 | PeerTube | `peertube` | Public REST API, no key required |
 | Dailymotion | `dailymotion` | Public REST API, no key required |
 | TVMaze | `tvmaze` | TVMaze public API, no key required |

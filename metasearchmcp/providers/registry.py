@@ -23,6 +23,7 @@ from .bing_news import BingNewsProvider
 from .bluesky import BlueskyProvider
 from .brave import BraveProvider
 from .chembl import ChEMBLProvider
+from .clevelandart import ClevelandArtProvider
 from .clinicaltrials import ClinicalTrialsProvider
 from .cocktaildb import CocktailDBProvider
 from .codeberg import CodebergProvider
@@ -183,6 +184,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     UnsplashProvider,
     MetMuseumProvider,
     ArticProvider,
+    ClevelandArtProvider,
     NasaProvider,
     # Media / video search
     PeerTubeProvider,

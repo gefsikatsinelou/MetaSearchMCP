@@ -81,6 +81,7 @@ from .nominatim import NominatimProvider
 from .npm import NpmProvider
 from .nvd import NvdProvider
 from .openalex import OpenAlexProvider
+from .openfda import OpenFDADrugProvider
 from .openfoodfacts import OpenFoodFactsProvider
 from .openlibrary import OpenLibraryProvider
 from .openmeteo import OpenMeteoProvider
@@ -233,6 +234,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     NvdProvider,
     # Drugs / pharma
     ChEMBLProvider,
+    OpenFDADrugProvider,
     # Academic
     ArxivProvider,
     PubMedProvider,

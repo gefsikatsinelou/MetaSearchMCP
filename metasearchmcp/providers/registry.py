@@ -98,6 +98,7 @@ from .radio_browser import RadioBrowserProvider
 from .reddit import RedditProvider
 from .remoteok import RemoteOKProvider
 from .rubygems import RubyGemsProvider
+from .rxnorm import RxNormProvider
 from .sec_edgar import SecEdgarProvider
 from .semanticscholar import SemanticScholarProvider
 from .seznam import SeznamProvider
@@ -237,6 +238,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     # Drugs / pharma
     ChEMBLProvider,
     OpenFDADrugProvider,
+    RxNormProvider,
     # Academic
     ArxivProvider,
     PubMedProvider,

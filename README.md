@@ -103,6 +103,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | Provider | Name | Method |
 |---|---|---|
 | iNaturalist | `inaturalist` | Observations REST API, no key required |
+| GBIF | `gbif` | GBIF species backbone REST API, no key required |
 
 ### Developer Sources
 

@@ -43,6 +43,7 @@ from .europepmc import EuropePmcProvider
 from .finnhub import FinnhubProvider
 from .flickr import FlickrProvider
 from .frankfurter import FrankfurterProvider
+from .gbif import GBIFSpeciesProvider
 from .gdelt import GDELTProvider
 from .github import GitHubProvider
 from .gitlab import GitLabProvider
@@ -168,6 +169,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     NominatimProvider,
     # Nature / biodiversity
     INaturalistProvider,
+    GBIFSpeciesProvider,
     # Legal
     CourtListenerProvider,
     # Patents

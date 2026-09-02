@@ -29,6 +29,30 @@ _MAX_API_RESULTS = 50
 # Classification ranks that may appear in a taxon record.
 _RANK_KEYS = ("kingdom", "phylum", "class", "order", "family", "genus")
 
+# IUCN Red List conservation-status codes -> human-readable labels.
+_IUCN_LABELS = {
+    "EX": "Extinct",
+    "EXTINCT": "Extinct",
+    "EW": "Extinct in the Wild",
+    "EXTINCT_IN_THE_WILD": "Extinct in the Wild",
+    "CR": "Critically Endangered",
+    "CRITICALLY_ENDANGERED": "Critically Endangered",
+    "EN": "Endangered",
+    "ENDANGERED": "Endangered",
+    "VU": "Vulnerable",
+    "VULNERABLE": "Vulnerable",
+    "NT": "Near Threatened",
+    "NEAR_THREATENED": "Near Threatened",
+    "LC": "Least Concern",
+    "LEAST_CONCERN": "Least Concern",
+    "DD": "Data Deficient",
+    "DATA_DEFICIENT": "Data Deficient",
+    "NE": "Not Evaluated",
+    "NOT_EVALUATED": "Not Evaluated",
+    "NA": "Not Applicable",
+    "NOT_APPLICABLE": "Not Applicable",
+}
+
 
 class GBIFSpeciesProvider(BaseProvider):
     """Search taxon records in the GBIF species backbone.
@@ -92,11 +116,18 @@ class GBIFSpeciesProvider(BaseProvider):
             rank = self._clean(item.get("rank"))
             status = self._clean(item.get("taxonomicStatus"))
             classification = self._classification(item)
-            threat = (
-                self._clean(item.get("threatStatuses")[0])
-                if item.get("threatStatuses")
-                else ""
-            )
+            # GBIF threat statuses are a list of short IUCN codes (enum
+            # strings like ``"ENDANGERED"``/``"EN"``); keep the first and
+            # map it to a human-readable label.
+            threat_statuses = item.get("threatStatuses") or []
+            threat = ""
+            if (
+                isinstance(threat_statuses, list)
+                and threat_statuses
+                and isinstance(threat_statuses[0], str)
+            ):
+                threat = self._clean(threat_statuses[0])
+            threat_display = _IUCN_LABELS.get(threat.upper(), threat)
             common_names = [
                 self._clean(name.get("vernacularName"))
                 for name in (item.get("vernacularNames") or [])
@@ -114,7 +145,7 @@ class GBIFSpeciesProvider(BaseProvider):
             if classification:
                 snippet_parts.append(classification)
             if threat:
-                snippet_parts.append(f"Conservation: {threat}")
+                snippet_parts.append(f"Conservation: {threat_display}")
             if common_names:
                 snippet_parts.append(f"Common: {', '.join(common_names[:3])}")
 

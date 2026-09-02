@@ -74,7 +74,7 @@ def test_parse_basic() -> None:
     assert chain in r.snippet
     assert "SPECIES" in r.snippet
     assert "ACCEPTED" in r.snippet
-    assert "Conservation: VULNERABLE" in r.snippet
+    assert "Conservation: Vulnerable" in r.snippet
     assert "Common: African lion, Lion" in r.snippet
     assert r.provider == "gbif"
     assert r.source == "gbif.org"
@@ -86,6 +86,31 @@ def test_parse_basic() -> None:
     assert r.extra["threat_status"] == "VULNERABLE"
     assert r.extra["common_names"] == ["African lion", "Lion"]
     assert r.extra["num_occurrences"] == 12345
+
+
+def test_parse_long_enum_threat_labels() -> None:
+    """Long IUCN enum codes (``LEAST_CONCERN`` etc.) also map to labels."""
+    for raw, code, label in [
+        (["LEAST_CONCERN"], "LEAST_CONCERN", "Least Concern"),
+        (["CRITICALLY_ENDANGERED"], "CRITICALLY_ENDANGERED", "Critically Endangered"),
+        (["NOT_EVALUATED"], "NOT_EVALUATED", "Not Evaluated"),
+    ]:
+        response = {
+            "count": 1,
+            "results": [{"scientificName": "X", "threatStatuses": raw}],
+        }
+        result = _provider()._parse(response)
+        r = result.results[0]
+        assert r.extra["threat_status"] == code
+        assert f"Conservation: {label}" in r.snippet
+
+
+def test_parse_threat_status_not_a_list() -> None:
+    """A truthy non-list threatStatuses must not raise (regression guard)."""
+    response = {"results": [{"scientificName": "X", "threatStatuses": "EN"}]}
+    result = _provider()._parse(response)
+    assert len(result.results) == 1
+    assert result.results[0].extra["threat_status"] == ""
 
 
 def test_parse_second_record() -> None:

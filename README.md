@@ -149,6 +149,8 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | RxNorm | `rxnorm` | NLM RxNorm REST API (clinical drug terminology), no key required |
 | Google Books | `google_books` | Google Books API, no key required |
 | Project Gutenberg | `gutendex` | Gutendex API (public-domain ebooks), no key required |
+| DBLP | `dblp` | DBLP bibliography API (computer-science publications), no key required |
+| openFDA | `openfda` | openFDA drug approvals API, no key required |
 
 ### Legal Sources
 
@@ -170,6 +172,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | GDELT | `gdelt` | Public DOC 2.0 API, no key required |
 | Bing News | `bing_news` | Public RSS feed, no key required |
 | Wikinews | `wikinews` | MediaWiki API, no key required |
+| Spaceflight News | `spaceflight_news` | Spaceflight News API, no key required |
 | Lobsters | `lobsters` | Lobste.rs JSON API, no key required |
 
 ### Social Sources
@@ -215,6 +218,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | Alpha Vantage | `alpha_vantage` | `ALPHA_VANTAGE_API_KEY` | 25 req/day — [get key](https://www.alphavantage.co/support/#api-key) |
 | Finnhub | `finnhub` | `FINNHUB_API_KEY` | 60 req/min — [get key](https://finnhub.io/register) |
 | CoinGecko | `coingecko` | No | Cryptocurrency search API, no key needed |
+| NVD | `nvd` | No | NIST NVD CVE vulnerability search API, no key needed |
 | Frankfurter | `frankfurter` | No | ECB daily FX reference rates, no key needed |
 | SEC EDGAR | `sec_edgar` | No | SEC full-text + company filings API (unstable flag), no key needed |
 

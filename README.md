@@ -90,6 +90,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | Wikiversity | `wikiversity` | MediaWiki API, no key required |
 | Internet Archive | `internet_archive` | Advanced Search API |
 | Open Library | `openlibrary` | Open Library search API |
+| Datamuse | `datamuse` | Word-association/thesaurus REST API, no key required |
 
 ### Places And Geocoding
 

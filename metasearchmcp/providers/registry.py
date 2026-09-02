@@ -33,6 +33,7 @@ from .crates import CratesIoProvider
 from .crossref import CrossrefProvider
 from .dailymotion import DailymotionProvider
 from .datacite import DataCiteProvider
+from .datamuse import DatamuseProvider
 from .dblp import DBLPProvider
 from .discogs import DiscogsProvider
 from .doaj import DoajProvider
@@ -165,6 +166,8 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     WikiversityProvider,
     InternetArchiveProvider,
     LocGovProvider,
+    # Knowledge / reference
+    DatamuseProvider,
     # Places / geocoding
     OpenMeteoProvider,
     NominatimProvider,

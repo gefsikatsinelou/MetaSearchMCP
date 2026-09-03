@@ -91,6 +91,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | Internet Archive | `internet_archive` | Advanced Search API |
 | Open Library | `openlibrary` | Open Library search API |
 | Datamuse | `datamuse` | Word-association/thesaurus REST API, no key required |
+| Nobel Prize | `nobel` | Official Nobel Prize API v2 (awards by year/category), no key required |
 
 ### Places And Geocoding
 

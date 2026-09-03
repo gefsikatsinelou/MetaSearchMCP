@@ -80,6 +80,7 @@ from .mwmbl import MwmblProvider
 from .nager import NagerDateProvider
 from .nasa import NasaProvider
 from .naver import NaverProvider
+from .nobel import NobelPrizeProvider
 from .nominatim import NominatimProvider
 from .npm import NpmProvider
 from .nvd import NvdProvider
@@ -170,6 +171,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     # Knowledge / reference
     DatamuseProvider,
     NagerDateProvider,
+    NobelPrizeProvider,
     # Places / geocoding
     OpenMeteoProvider,
     NominatimProvider,

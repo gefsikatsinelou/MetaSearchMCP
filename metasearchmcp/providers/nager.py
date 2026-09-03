@@ -333,8 +333,9 @@ class NagerDateProvider(BaseProvider):
     """Search public holidays of a country via Nager.Date.
 
     Keyless. The query is resolved to an ISO 3166-1 alpha-2 country code
-    (``US``, ``DE``, ``japan``, ...); when it resolves, the country's
-    public holidays for the requested year (default: the current year) are
+    (``US``, ``DE``, ``japan``, ...) plus an optional four-digit year
+    (``2024``, ``\"germany 1990\"``); when it resolves, the country's
+    public holidays for that year (default: the current year) are
     returned. Unknown codes fall back to the upcoming holidays of every
     supported country so a caller can still discover what is coming.
     """
@@ -353,16 +354,36 @@ class NagerDateProvider(BaseProvider):
             return ""
         return " ".join(str(value).split())
 
+    @staticmethod
+    def _year_of(query: str) -> str | None:
+        """Return the first standalone 4-digit year token in *query*.
+
+        Years outside the plausible 1900-2100 window are ignored so stray
+        numbers (``\"in 1800\"``) do not shape the request. ``None`` when
+        the query carries no usable year token.
+        """
+        for token in query.split():
+            if len(token) == 4 and token.isdigit() and 1900 <= int(token) <= 2100:
+                return token
+        return None
+
     def _resolve(self, query: str) -> str:
-        """Map *query* to an ISO 3166-1 alpha-2 country code, or ``\"\"``.
+        """Map *query* to an ISO 3166-1 alpha-2 country code, or ``""``.
 
         A query that already looks like a two-letter ISO code is used
         verbatim (case-insensitive); otherwise the common English
-        names/aliases table is consulted.
+        names/aliases table is consulted. Standalone year tokens
+        (``1990``) are dropped first, so queries such as ``"germany
+        1990"`` still resolve to the country.
         """
-        q = self._clean(query).lower()
-        if not q:
+        tokens = [
+            token
+            for token in self._clean(query).lower().split()
+            if not (len(token) == 4 and token.isdigit())
+        ]
+        if not tokens:
             return ""
+        q = " ".join(tokens)
         if q in _COUNTRY_ALIASES:
             return _COUNTRY_ALIASES[q]
         if len(q) == 2 and q.isalpha():
@@ -449,19 +470,22 @@ class NagerDateProvider(BaseProvider):
         """Search Nager.Date for holidays matching *query*.
 
         The query is resolved to a country code (``US``, ``DE``,
-        ``japan``, ...). When it resolves, the country's public holidays
-        for *year* (default: the current year) are returned; otherwise the
+        ``japan``, ...) and an optional year (``2024``, ``\"germany
+        1990\"``). When the country resolves, its public holidays for
+        *year* (default: the current year) are returned; otherwise the
         upcoming holidays of every supported country are returned, which
         still lets a caller find what is coming next.
         """
         country_code = self._resolve(query)
+        year = self._year_of(query) or str(_CURRENT_YEAR)
         limit = min(params.num_results, self._max_results)
 
         async with self._client() as client:
             if country_code:
-                # The country's public holidays for the current year.
+                # The country's public holidays for the resolved year
+                # (or the current year when the query has no year).
                 resp = await client.get(
-                    f"{_API_BASE}/PublicHolidays/{_CURRENT_YEAR}/{country_code}",
+                    f"{_API_BASE}/PublicHolidays/{year}/{country_code}",
                 )
             else:
                 # Unresolved query: show upcoming holidays worldwide so the

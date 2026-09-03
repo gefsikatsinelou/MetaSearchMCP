@@ -72,6 +72,26 @@ def test_resolve_unknown_returns_empty() -> None:
     assert p._resolve("ZZ") == "ZZ"  # any 2-letter alpha token maps verbatim
 
 
+def test_year_of() -> None:
+    p = _provider()
+    assert p._year_of("germany 1990") == "1990"
+    assert p._year_of("US 2024") == "2024"
+    assert p._year_of("de") is None
+    assert p._year_of("france") is None
+    assert p._year_of("in 1800") is None  # too early for the calendar era
+    assert p._year_of("year 2999") is None  # far future
+
+
+def test_resolve_ignores_standalone_year_tokens() -> None:
+    p = _provider()
+    assert p._resolve("germany 1990") == "DE"
+    assert p._resolve("US 2024") == "US"
+    assert p._resolve("1990 germany") == "DE"
+    assert p._resolve("2024") == ""
+    assert p._resolve("US2024") == ""  # not a standalone token -> no match
+    assert p._resolve("us holidays 2024") == ""  # remainder is not an alias
+
+
 def test_parse_basic() -> None:
     result = _provider()._parse(_SAMPLE_RESPONSE, "DE")
 
@@ -169,6 +189,23 @@ async def test_search_defaults_to_current_year(respx_mock) -> None:
     result = await p.search("japan", SearchParams(num_results=5))
 
     assert result.results == []
+
+
+@pytest.mark.asyncio
+async def test_search_uses_resolved_year_from_query(respx_mock) -> None:
+    """A four-digit year in the query selects that holiday year."""
+    import respx
+
+    respx_mock.get(
+        "https://date.nager.at/api/v3/PublicHolidays/1990/DE",
+    ).mock(return_value=respx.MockResponse(200, json=_SAMPLE_RESPONSE))
+
+    p = _provider()
+    result = await p.search("germany 1990", SearchParams(num_results=5))
+
+    assert len(result.results) == 2
+    request = respx_mock.calls.last.request
+    assert request.url.path.endswith("/PublicHolidays/1990/DE")
 
 
 @pytest.mark.asyncio

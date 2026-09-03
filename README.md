@@ -98,6 +98,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 |---|---|---|
 | Open-Meteo Geocoding | `openmeteo` | Geocoding REST API, no key required |
 | OpenStreetMap (Nominatim) | `nominatim` | Nominatim public API, no key required |
+| Nager.Date | `nager` | Public-holiday calendar REST API (public holidays by country), no key required |
 
 ### Nature And Biodiversity
 

@@ -77,6 +77,7 @@ from .metmuseum import MetMuseumProvider
 from .mojeek import MojeekProvider
 from .musicbrainz import MusicBrainzProvider
 from .mwmbl import MwmblProvider
+from .nager import NagerDateProvider
 from .nasa import NasaProvider
 from .naver import NaverProvider
 from .nominatim import NominatimProvider
@@ -168,6 +169,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     LocGovProvider,
     # Knowledge / reference
     DatamuseProvider,
+    NagerDateProvider,
     # Places / geocoding
     OpenMeteoProvider,
     NominatimProvider,

@@ -59,6 +59,7 @@ from .google_serpbase import GoogleSerpbaseProvider
 from .google_serper import GoogleSerperProvider
 from .gutendex import GutendexProvider
 from .hackernews import HackerNewsProvider
+from .hex import HexProvider
 from .huggingface import HuggingFaceProvider
 
 # Knowledge / reference
@@ -237,6 +238,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     NpmProvider,
     NuGetProvider,
     PackagistProvider,
+    HexProvider,
     PyPIProvider,
     RubyGemsProvider,
     CratesIoProvider,

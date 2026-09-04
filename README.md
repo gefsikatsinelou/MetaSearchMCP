@@ -131,6 +131,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | Maven Central | `maven` | Solr search API, no key required |
 | NuGet | `nuget` | NuGet.org v3 search query API, no key required |
 | Packagist | `packagist` | Packagist search.json API (PHP/Composer), no key required |
+| Hex | `hex` | Hex.pm packages API (Elixir/Erlang), no key required |
 
 ### Academic Sources
 

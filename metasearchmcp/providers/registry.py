@@ -41,6 +41,7 @@ from .dockerhub import DockerHubProvider
 from .duckduckgo import DuckDuckGoProvider
 from .ecosia import EcosiaProvider
 from .europepmc import EuropePmcProvider
+from .figshare import FigshareProvider
 from .finnhub import FinnhubProvider
 from .flickr import FlickrProvider
 from .frankfurter import FrankfurterProvider
@@ -259,6 +260,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     OpenLibraryProvider,
     GoogleBooksProvider,
     GutendexProvider,
+    FigshareProvider,
     DataCiteProvider,
     ZenodoProvider,
     OSFPreprintsProvider,

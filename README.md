@@ -143,6 +143,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | Europe PMC | `europepmc` | Europe PMC REST API (PubMed + preprints), no key required |
 | ClinicalTrials.gov | `clinicaltrials` | ClinicalTrials.gov v2 API (clinical studies), no key required |
 | DataCite | `datacite` | DataCite DOI search API, no key required |
+| Figshare | `figshare` | Figshare public articles API (research data, datasets), no key required |
 | Zenodo | `zenodo` | Zenodo REST API, no key required |
 | OSF Preprints | `osf_preprints` | OSF API v2 (PsyArXiv, SocArXiv, etc.), no key required |
 | ORCID | `orcid` | ORCID public API (researcher profiles), no key required |

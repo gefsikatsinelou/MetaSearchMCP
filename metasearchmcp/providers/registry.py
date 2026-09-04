@@ -84,6 +84,7 @@ from .naver import NaverProvider
 from .nobel import NobelPrizeProvider
 from .nominatim import NominatimProvider
 from .npm import NpmProvider
+from .nuget import NuGetProvider
 from .nvd import NvdProvider
 from .openalex import OpenAlexProvider
 from .openfda import OpenFDADrugProvider
@@ -233,6 +234,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     MastodonProvider,
     BlueskyProvider,
     NpmProvider,
+    NuGetProvider,
     PyPIProvider,
     RubyGemsProvider,
     CratesIoProvider,

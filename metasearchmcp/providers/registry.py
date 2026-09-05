@@ -98,6 +98,7 @@ from .osf_preprints import OSFPreprintsProvider
 from .packagist import PackagistProvider
 from .peertube import PeerTubeProvider
 from .pkg_go_dev import PkgGoDevProvider
+from .pubdev import PubDevProvider
 from .pubmed import PubMedProvider
 from .pypi import PyPIProvider
 from .qwant import QwantProvider
@@ -239,6 +240,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     NuGetProvider,
     PackagistProvider,
     HexProvider,
+    PubDevProvider,
     PyPIProvider,
     RubyGemsProvider,
     CratesIoProvider,

@@ -133,6 +133,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | Packagist | `packagist` | Packagist search.json API (PHP/Composer), no key required |
 | Hex | `hex` | Hex.pm packages API (Elixir/Erlang), no key required |
 | pub.dev | `pubdev` | pub.dev JSON API (Dart/Flutter), no key required |
+| Hackage | `hackage` | Hackage packages API (Haskell/Cabal), no key required |
 
 ### Academic Sources
 

@@ -58,6 +58,7 @@ from .google_patents import GooglePatentsProvider
 from .google_serpbase import GoogleSerpbaseProvider
 from .google_serper import GoogleSerperProvider
 from .gutendex import GutendexProvider
+from .hackage import HackageProvider
 from .hackernews import HackerNewsProvider
 from .hex import HexProvider
 from .huggingface import HuggingFaceProvider
@@ -241,6 +242,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     PackagistProvider,
     HexProvider,
     PubDevProvider,
+    HackageProvider,
     PyPIProvider,
     RubyGemsProvider,
     CratesIoProvider,

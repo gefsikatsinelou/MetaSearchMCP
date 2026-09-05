@@ -134,6 +134,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | Hex | `hex` | Hex.pm packages API (Elixir/Erlang), no key required |
 | pub.dev | `pubdev` | pub.dev JSON API (Dart/Flutter), no key required |
 | Hackage | `hackage` | Hackage packages API (Haskell/Cabal), no key required |
+| Anaconda | `anaconda` | Anaconda.org search API (conda packages), no key required |
 
 ### Academic Sources
 

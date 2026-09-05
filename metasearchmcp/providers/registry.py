@@ -11,6 +11,9 @@ from .ahmia import AhmiaProvider
 
 # Finance
 from .alpha_vantage import AlphaVantageProvider
+
+# Package registries / developer
+from .anaconda import AnacondaProvider
 from .artic import ArticProvider
 
 # Academic
@@ -243,6 +246,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     HexProvider,
     PubDevProvider,
     HackageProvider,
+    AnacondaProvider,
     PyPIProvider,
     RubyGemsProvider,
     CratesIoProvider,

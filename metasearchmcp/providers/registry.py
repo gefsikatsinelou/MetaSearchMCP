@@ -18,6 +18,7 @@ from .artic import ArticProvider
 
 # Academic
 from .arxiv import ArxivProvider
+from .aur import AurProvider
 
 # General web search
 from .baidu import BaiduProvider
@@ -247,6 +248,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     PubDevProvider,
     HackageProvider,
     AnacondaProvider,
+    AurProvider,
     PyPIProvider,
     RubyGemsProvider,
     CratesIoProvider,

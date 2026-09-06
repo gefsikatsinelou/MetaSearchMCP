@@ -72,6 +72,7 @@ from .huggingface import HuggingFaceProvider
 from .inaturalist import INaturalistProvider
 from .internet_archive import InternetArchiveProvider
 from .itunes import ITunesProvider
+from .jetbrains import JetbrainsProvider
 from .kitsu import KitsuProvider
 from .lemmy import LemmyProvider
 from .lib_rs import LibRsProvider
@@ -258,6 +259,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     FlathubProvider,
     PkgGoDevProvider,
     MetaCPANProvider,
+    JetbrainsProvider,
     MavenProvider,
     # Security / vulnerabilities
     NvdProvider,

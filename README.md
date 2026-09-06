@@ -126,6 +126,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | crates.io | `crates` | crates.io API |
 | lib.rs | `lib_rs` | HTML scraping |
 | Docker Hub | `dockerhub` | Docker Hub search API |
+| Flathub | `flathub` | Flathub API v2 search (Linux desktop apps), no key required |
 | pkg.go.dev | `pkg_go_dev` | HTML scraping |
 | MetaCPAN | `metacpan` | MetaCPAN REST API |
 | Maven Central | `maven` | Solr search API, no key required |

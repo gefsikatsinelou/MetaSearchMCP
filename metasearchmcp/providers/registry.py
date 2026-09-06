@@ -47,6 +47,7 @@ from .ecosia import EcosiaProvider
 from .europepmc import EuropePmcProvider
 from .figshare import FigshareProvider
 from .finnhub import FinnhubProvider
+from .flathub import FlathubProvider
 from .flickr import FlickrProvider
 from .frankfurter import FrankfurterProvider
 from .gbif import GBIFSpeciesProvider
@@ -254,6 +255,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     CratesIoProvider,
     LibRsProvider,
     DockerHubProvider,
+    FlathubProvider,
     PkgGoDevProvider,
     MetaCPANProvider,
     MavenProvider,

@@ -94,6 +94,7 @@ from .nominatim import NominatimProvider
 from .npm import NpmProvider
 from .nuget import NuGetProvider
 from .nvd import NvdProvider
+from .open_vsx import OpenVsxProvider
 from .openalex import OpenAlexProvider
 from .openfda import OpenFDADrugProvider
 from .openfoodfacts import OpenFoodFactsProvider
@@ -260,6 +261,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     PkgGoDevProvider,
     MetaCPANProvider,
     JetbrainsProvider,
+    OpenVsxProvider,
     MavenProvider,
     # Security / vulnerabilities
     NvdProvider,

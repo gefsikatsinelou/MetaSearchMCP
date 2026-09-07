@@ -57,6 +57,7 @@ from .gbif import GBIFSpeciesProvider
 from .gdelt import GDELTProvider
 from .github import GitHubProvider
 from .gitlab import GitLabProvider
+from .gnome_extensions import GnomeExtensionsProvider
 
 # Google providers
 from .google import GoogleProvider
@@ -272,6 +273,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     AmoProvider,
     WordPressPluginsProvider,
     WordPressThemesProvider,
+    GnomeExtensionsProvider,
     MavenProvider,
     # Security / vulnerabilities
     NvdProvider,

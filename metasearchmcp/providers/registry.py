@@ -140,6 +140,9 @@ from .wikisource import WikisourceProvider
 from .wikiversity import WikiversityProvider
 from .wikivoyage import WikivoyageProvider
 from .wiktionary import WiktionaryProvider
+
+# WordPress ecosystem
+from .wordpress_plugins import WordPressPluginsProvider
 from .yahoo import YahooProvider
 from .yahoo_finance import YahooFinanceProvider
 from .yandex import YandexProvider
@@ -266,6 +269,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     JetbrainsProvider,
     OpenVsxProvider,
     AmoProvider,
+    WordPressPluginsProvider,
     MavenProvider,
     # Security / vulnerabilities
     NvdProvider,

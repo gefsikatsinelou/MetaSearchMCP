@@ -129,6 +129,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | Flathub | `flathub` | Flathub API v2 search (Linux desktop apps), no key required |
 | JetBrains Marketplace | `jetbrains` | JetBrains searchPlugins API (IDE plugins), no key required |
 | Open VSX | `open_vsx` | Open VSX search API (VS Code-compatible extensions), no key required |
+| Mozilla Add-ons (AMO) | `amo` | AMO API v5 (Firefox browser extensions), no key required |
 | pkg.go.dev | `pkg_go_dev` | HTML scraping |
 | MetaCPAN | `metacpan` | MetaCPAN REST API |
 | Maven Central | `maven` | Solr search API, no key required |

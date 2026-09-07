@@ -12,6 +12,9 @@ from .ahmia import AhmiaProvider
 # Finance
 from .alpha_vantage import AlphaVantageProvider
 
+# Browser extension registries
+from .amo import AmoProvider
+
 # Package registries / developer
 from .anaconda import AnacondaProvider
 from .artic import ArticProvider
@@ -262,6 +265,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     MetaCPANProvider,
     JetbrainsProvider,
     OpenVsxProvider,
+    AmoProvider,
     MavenProvider,
     # Security / vulnerabilities
     NvdProvider,

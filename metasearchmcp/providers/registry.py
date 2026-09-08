@@ -123,6 +123,7 @@ from .rxnorm import RxNormProvider
 from .sec_edgar import SecEdgarProvider
 from .semanticscholar import SemanticScholarProvider
 from .seznam import SeznamProvider
+from .snapcraft import SnapcraftProvider
 from .sourcegraph import SourcegraphProvider
 from .spaceflight_news import SpaceflightNewsProvider
 from .stackoverflow import StackOverflowProvider
@@ -268,6 +269,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     LibRsProvider,
     DockerHubProvider,
     FlathubProvider,
+    SnapcraftProvider,
     PkgGoDevProvider,
     MetaCPANProvider,
     JetbrainsProvider,

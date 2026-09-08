@@ -127,6 +127,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | lib.rs | `lib_rs` | HTML scraping |
 | Docker Hub | `dockerhub` | Docker Hub search API |
 | Flathub | `flathub` | Flathub API v2 search (Linux desktop apps), no key required |
+| Snapcraft | `snapcraft` | Snap Store v2 snaps/find API (Linux snaps), no key required |
 | JetBrains Marketplace | `jetbrains` | JetBrains searchPlugins API (IDE plugins), no key required |
 | Open VSX | `open_vsx` | Open VSX search API (VS Code-compatible extensions), no key required |
 | Mozilla Add-ons (AMO) | `amo` | AMO API v5 (Firefox browser extensions), no key required |

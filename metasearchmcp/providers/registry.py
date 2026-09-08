@@ -99,6 +99,7 @@ from .npm import NpmProvider
 from .nuget import NuGetProvider
 from .nvd import NvdProvider
 from .open_vsx import OpenVsxProvider
+from .openaire import OpenAIREProvider
 from .openalex import OpenAlexProvider
 from .openfda import OpenFDADrugProvider
 from .openfoodfacts import OpenFoodFactsProvider
@@ -291,6 +292,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     SemanticScholarProvider,
     CrossrefProvider,
     OpenAlexProvider,
+    OpenAIREProvider,
     DoajProvider,
     DBLPProvider,
     OpenLibraryProvider,

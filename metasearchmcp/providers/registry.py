@@ -42,6 +42,7 @@ from .dailymotion import DailymotionProvider
 from .datacite import DataCiteProvider
 from .datamuse import DatamuseProvider
 from .dblp import DBLPProvider
+from .deezer import DeezerProvider
 from .discogs import DiscogsProvider
 from .doaj import DoajProvider
 from .dockerhub import DockerHubProvider
@@ -230,6 +231,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     # Media / music
     MusicBrainzProvider,
     DiscogsProvider,
+    DeezerProvider,
     # Media / anime & manga
     KitsuProvider,
     # Media / podcasts

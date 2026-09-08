@@ -131,6 +131,7 @@ from .themealdb import TheMealDBProvider
 from .tvmaze import TVMazeProvider
 from .uniprot import UniProtProvider
 from .unsplash import UnsplashProvider
+from .vscode_marketplace import VSCodeMarketplaceProvider
 from .wikibooks import WikibooksProvider
 from .wikidata import WikidataProvider
 from .wikimedia_commons import WikimediaCommonsProvider
@@ -274,6 +275,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     WordPressPluginsProvider,
     WordPressThemesProvider,
     GnomeExtensionsProvider,
+    VSCodeMarketplaceProvider,
     MavenProvider,
     # Security / vulnerabilities
     NvdProvider,

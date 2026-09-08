@@ -133,6 +133,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | WordPress.org Plugins | `wordpress_plugins` | WordPress.org Plugins API (WP plugins), no key required |
 | WordPress.org Themes | `wordpress_themes` | WordPress.org Themes API (WP themes), no key required |
 | GNOME Extensions | `gnome_extensions` | extensions.gnome.org extension-query API (GNOME Shell extensions), no key required |
+| VS Code Marketplace | `vscode_marketplace` | Public gallery extensionquery API (VS Code extensions), no key required |
 | pkg.go.dev | `pkg_go_dev` | HTML scraping |
 | MetaCPAN | `metacpan` | MetaCPAN REST API |
 | Maven Central | `maven` | Solr search API, no key required |

@@ -144,6 +144,7 @@ from .wikinews import WikinewsProvider
 from .wikipedia import WikipediaProvider
 from .wikiquote import WikiquoteProvider
 from .wikisource import WikisourceProvider
+from .wikispecies import WikispeciesProvider
 from .wikiversity import WikiversityProvider
 from .wikivoyage import WikivoyageProvider
 from .wiktionary import WiktionaryProvider
@@ -193,6 +194,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     WiktionaryProvider,
     WikivoyageProvider,
     WikiversityProvider,
+    WikispeciesProvider,
     InternetArchiveProvider,
     LocGovProvider,
     # Knowledge / reference

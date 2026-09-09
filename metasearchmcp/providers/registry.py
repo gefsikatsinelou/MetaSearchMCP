@@ -128,6 +128,7 @@ from .seznam import SeznamProvider
 from .snapcraft import SnapcraftProvider
 from .sourcegraph import SourcegraphProvider
 from .spaceflight_news import SpaceflightNewsProvider
+from .spacelaunch import SpaceLaunchProvider
 from .stackoverflow import StackOverflowProvider
 from .startpage import StartpageProvider
 from .steam import SteamProvider
@@ -212,6 +213,8 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     CourtListenerProvider,
     # Patents
     GooglePatentsProvider,
+    # Space / launches
+    SpaceLaunchProvider,
     # News
     GoogleNewsProvider,
     GDELTProvider,

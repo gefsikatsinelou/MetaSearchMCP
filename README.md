@@ -234,6 +234,12 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | RemoteOK | `remoteok` | RemoteOK public jobs API (remote developer jobs), no key required |
 | iTunes | `itunes` | iTunes Search API (podcasts), no key required |
 
+### Space Sources
+
+| Provider | Name | Method |
+|---|---|---|
+| Launch Library 2 | `spacelaunch` | The Space Devs launch database API (historical & upcoming launches), no key required |
+
 ### Finance Sources
 
 | Provider | Name | Key Required | Free Tier |

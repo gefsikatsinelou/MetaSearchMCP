@@ -78,6 +78,7 @@ from .inaturalist import INaturalistProvider
 from .internet_archive import InternetArchiveProvider
 from .itunes import ITunesProvider
 from .jetbrains import JetbrainsProvider
+from .jisho import JishoProvider
 from .kitsu import KitsuProvider
 from .lemmy import LemmyProvider
 from .lib_rs import LibRsProvider
@@ -195,6 +196,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     LocGovProvider,
     # Knowledge / reference
     DatamuseProvider,
+    JishoProvider,
     NagerDateProvider,
     NobelPrizeProvider,
     # Places / geocoding

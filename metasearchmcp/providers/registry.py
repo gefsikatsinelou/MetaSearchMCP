@@ -132,6 +132,7 @@ from .stackoverflow import StackOverflowProvider
 from .startpage import StartpageProvider
 from .steam import SteamProvider
 from .themealdb import TheMealDBProvider
+from .thesportsdb import TheSportsDBProvider
 from .tvmaze import TVMazeProvider
 from .uniprot import UniProtProvider
 from .unsplash import UnsplashProvider
@@ -244,6 +245,8 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     TheMealDBProvider,
     CocktailDBProvider,
     OpenFoodFactsProvider,
+    # Media / sports
+    TheSportsDBProvider,
     # Media / jobs & careers
     RemoteOKProvider,
     # Developer

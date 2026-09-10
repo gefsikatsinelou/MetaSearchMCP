@@ -18,6 +18,7 @@ from .amo import AmoProvider
 # Package registries / developer
 from .anaconda import AnacondaProvider
 from .artic import ArticProvider
+from .artifacthub import ArtifactHubProvider
 
 # Academic
 from .arxiv import ArxivProvider
@@ -261,6 +262,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     StackOverflowProvider,
     SourcegraphProvider,
     HackerNewsProvider,
+    ArtifactHubProvider,
     HuggingFaceProvider,
     RedditProvider,
     LemmyProvider,

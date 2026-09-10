@@ -128,6 +128,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | crates.io | `crates` | crates.io API |
 | lib.rs | `lib_rs` | HTML scraping |
 | Docker Hub | `dockerhub` | Docker Hub search API |
+| Artifact Hub | `artifacthub` | Artifact Hub packages search API (Helm charts, operators, policies, container images), no key required |
 | Flathub | `flathub` | Flathub API v2 search (Linux desktop apps), no key required |
 | Snapcraft | `snapcraft` | Snap Store v2 snaps/find API (Linux snaps), no key required |
 | JetBrains Marketplace | `jetbrains` | JetBrains searchPlugins API (IDE plugins), no key required |

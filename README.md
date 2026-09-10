@@ -181,6 +181,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | Provider | Name | Method |
 |---|---|---|
 | CourtListener | `courtlistener` | Free Law Project REST API, no key required |
+| Federal Register | `federal_register` | federalregister.gov documents API (agency rules, proposed rules, notices, presidential documents), no key required |
 
 ### Patent Sources
 

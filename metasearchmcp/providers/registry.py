@@ -50,6 +50,7 @@ from .dockerhub import DockerHubProvider
 from .duckduckgo import DuckDuckGoProvider
 from .ecosia import EcosiaProvider
 from .europepmc import EuropePmcProvider
+from .federal_register import FederalRegisterProvider
 from .figshare import FigshareProvider
 from .finnhub import FinnhubProvider
 from .flathub import FlathubProvider
@@ -214,6 +215,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     GBIFSpeciesProvider,
     # Legal
     CourtListenerProvider,
+    FederalRegisterProvider,
     # Patents
     GooglePatentsProvider,
     # Space / launches

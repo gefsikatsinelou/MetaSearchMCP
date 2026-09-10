@@ -123,6 +123,7 @@ from .reddit import RedditProvider
 from .remoteok import RemoteOKProvider
 from .rubygems import RubyGemsProvider
 from .rxnorm import RxNormProvider
+from .scryfall import ScryfallProvider
 from .sec_edgar import SecEdgarProvider
 from .semanticscholar import SemanticScholarProvider
 from .seznam import SeznamProvider
@@ -247,6 +248,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     ITunesProvider,
     # Media / games
     SteamProvider,
+    ScryfallProvider,
     # Media / food & recipes
     TheMealDBProvider,
     CocktailDBProvider,

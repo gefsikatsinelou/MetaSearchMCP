@@ -158,6 +158,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | Semantic Scholar | `semanticscholar` | Graph API |
 | CrossRef | `crossref` | REST API |
 | OpenAlex | `openalex` | OpenAlex REST API, no key required |
+| INSPIRE-HEP | `inspirehep` | INSPIRE-HEP literature API (high-energy physics papers, preprints, citations), no key required |
 | OpenAIRE | `openaire` | OpenAIRE Graph search API (300M+ open research records from repositories & aggregators), no key required |
 | DOAJ | `doaj` | DOAJ public REST API, no key required |
 | Europe PMC | `europepmc` | Europe PMC REST API (PubMed + preprints), no key required |

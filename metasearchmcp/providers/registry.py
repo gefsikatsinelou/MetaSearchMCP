@@ -76,6 +76,7 @@ from .huggingface import HuggingFaceProvider
 
 # Knowledge / reference
 from .inaturalist import INaturalistProvider
+from .inspirehep import InspireHEPProvider
 from .internet_archive import InternetArchiveProvider
 from .itunes import ITunesProvider
 from .jetbrains import JetbrainsProvider
@@ -311,6 +312,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     CrossrefProvider,
     OpenAlexProvider,
     OpenAIREProvider,
+    InspireHEPProvider,
     DoajProvider,
     DBLPProvider,
     OpenLibraryProvider,

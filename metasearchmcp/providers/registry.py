@@ -31,6 +31,7 @@ from .bing_news import BingNewsProvider
 from .bluesky import BlueskyProvider
 from .brave import BraveProvider
 from .chembl import ChEMBLProvider
+from .cisa_kev import CisaKevProvider
 from .clevelandart import ClevelandArtProvider
 from .clinicaltrials import ClinicalTrialsProvider
 from .cocktaildb import CocktailDBProvider
@@ -302,6 +303,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     MavenProvider,
     # Security / vulnerabilities
     NvdProvider,
+    CisaKevProvider,
     # Drugs / pharma
     ChEMBLProvider,
     OpenFDADrugProvider,

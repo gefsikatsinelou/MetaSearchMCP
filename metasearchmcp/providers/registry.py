@@ -125,6 +125,7 @@ from .qwant import QwantProvider
 from .radio_browser import RadioBrowserProvider
 from .reddit import RedditProvider
 from .remoteok import RemoteOKProvider
+from .ror import RorProvider
 from .rubygems import RubyGemsProvider
 from .rxnorm import RxNormProvider
 from .scryfall import ScryfallProvider
@@ -328,6 +329,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     ZenodoProvider,
     OSFPreprintsProvider,
     OrcidProvider,
+    RorProvider,
     UniProtProvider,
     # Finance
     YahooFinanceProvider,

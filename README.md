@@ -168,6 +168,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | Zenodo | `zenodo` | Zenodo REST API, no key required |
 | OSF Preprints | `osf_preprints` | OSF API v2 (PsyArXiv, SocArXiv, etc.), no key required |
 | ORCID | `orcid` | ORCID public API (researcher profiles), no key required |
+| ROR | `ror` | Research Organization Registry API (universities, institutes, labs), no key required |
 | UniProt | `uniprot` | UniProt REST API (protein knowledgebase), no key required |
 | ChEMBL | `chembl` | ChEMBL REST API (drugs, molecular formula/SMILES/ATC), no key required |
 | RxNorm | `rxnorm` | NLM RxNorm REST API (clinical drug terminology), no key required |

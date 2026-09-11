@@ -60,6 +60,7 @@ from .gbif import GBIFSpeciesProvider
 from .gdelt import GDELTProvider
 from .github import GitHubProvider
 from .gitlab import GitLabProvider
+from .gleif import GleifProvider
 from .gnome_extensions import GnomeExtensionsProvider
 
 # Google providers
@@ -333,6 +334,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     CoinGeckoProvider,
     FrankfurterProvider,
     SecEdgarProvider,
+    GleifProvider,
 ]
 
 

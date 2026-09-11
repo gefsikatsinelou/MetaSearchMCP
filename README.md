@@ -255,6 +255,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | NVD | `nvd` | No | NIST NVD CVE vulnerability search API, no key needed |
 | Frankfurter | `frankfurter` | No | ECB daily FX reference rates, no key needed |
 | SEC EDGAR | `sec_edgar` | No | SEC full-text + company filings API (unstable flag), no key needed |
+| GLEIF | `gleif` | No | Global Legal Entity Identifier registry (company legal names, jurisdiction, status), no key needed |
 
 ## Installation
 

@@ -170,6 +170,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | ORCID | `orcid` | ORCID public API (researcher profiles), no key required |
 | ROR | `ror` | Research Organization Registry API (universities, institutes, labs), no key required |
 | UniProt | `uniprot` | UniProt REST API (protein knowledgebase), no key required |
+| MyGene.info | `mygene` | BioThings MyGene.info gene annotation API (gene symbols, names, organism, chromosome, aliases), no key required |
 | ChEMBL | `chembl` | ChEMBL REST API (drugs, molecular formula/SMILES/ATC), no key required |
 | RxNorm | `rxnorm` | NLM RxNorm REST API (clinical drug terminology), no key required |
 | Google Books | `google_books` | Google Books API, no key required |

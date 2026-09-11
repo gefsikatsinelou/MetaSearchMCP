@@ -97,6 +97,7 @@ from .metmuseum import MetMuseumProvider
 from .mojeek import MojeekProvider
 from .musicbrainz import MusicBrainzProvider
 from .mwmbl import MwmblProvider
+from .mygene import MyGeneProvider
 from .nager import NagerDateProvider
 from .nasa import NasaProvider
 from .naver import NaverProvider
@@ -331,6 +332,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     OrcidProvider,
     RorProvider,
     UniProtProvider,
+    MyGeneProvider,
     # Finance
     YahooFinanceProvider,
     AlphaVantageProvider,

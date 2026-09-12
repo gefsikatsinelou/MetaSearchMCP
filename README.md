@@ -172,6 +172,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | ROR | `ror` | Research Organization Registry API (universities, institutes, labs), no key required |
 | UniProt | `uniprot` | UniProt REST API (protein knowledgebase), no key required |
 | MyGene.info | `mygene` | BioThings MyGene.info gene annotation API (gene symbols, names, organism, chromosome, aliases), no key required |
+| RCSB PDB | `rcsb_pdb` | RCSB Protein Data Bank search + GraphQL data API (3D structures: title, method, resolution, citation), no key required |
 | ChEMBL | `chembl` | ChEMBL REST API (drugs, molecular formula/SMILES/ATC), no key required |
 | PubChem | `pubchem` | PubChem PUG REST API (compound names/synonyms, molecular formula, molecular weight, canonical SMILES, IUPAC name, InChIKey), no key required |
 | RxNorm | `rxnorm` | NLM RxNorm REST API (clinical drug terminology), no key required |

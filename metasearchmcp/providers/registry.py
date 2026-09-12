@@ -126,6 +126,7 @@ from .pubmed import PubMedProvider
 from .pypi import PyPIProvider
 from .qwant import QwantProvider
 from .radio_browser import RadioBrowserProvider
+from .rcsb_pdb import RcsbPdbProvider
 from .reddit import RedditProvider
 from .remoteok import RemoteOKProvider
 from .ror import RorProvider
@@ -337,6 +338,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     RorProvider,
     UniProtProvider,
     MyGeneProvider,
+    RcsbPdbProvider,
     # Finance
     YahooFinanceProvider,
     AlphaVantageProvider,

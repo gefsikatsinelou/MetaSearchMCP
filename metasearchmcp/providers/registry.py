@@ -74,6 +74,7 @@ from .google_serper import GoogleSerperProvider
 from .gutendex import GutendexProvider
 from .hackage import HackageProvider
 from .hackernews import HackerNewsProvider
+from .hal import HalProvider
 from .hex import HexProvider
 from .huggingface import HuggingFaceProvider
 
@@ -319,6 +320,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     CrossrefProvider,
     OpenAlexProvider,
     OpenAIREProvider,
+    HalProvider,
     InspireHEPProvider,
     DoajProvider,
     DBLPProvider,

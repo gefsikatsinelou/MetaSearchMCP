@@ -120,6 +120,7 @@ from .osf_preprints import OSFPreprintsProvider
 from .packagist import PackagistProvider
 from .peertube import PeerTubeProvider
 from .pkg_go_dev import PkgGoDevProvider
+from .pubchem import PubChemProvider
 from .pubdev import PubDevProvider
 from .pubmed import PubMedProvider
 from .pypi import PyPIProvider
@@ -309,6 +310,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     CisaKevProvider,
     # Drugs / pharma
     ChEMBLProvider,
+    PubChemProvider,
     OpenFDADrugProvider,
     RxNormProvider,
     # Academic

@@ -263,6 +263,12 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | SEC EDGAR | `sec_edgar` | No | SEC full-text + company filings API (unstable flag), no key needed |
 | GLEIF | `gleif` | No | Global Legal Entity Identifier registry (company legal names, jurisdiction, status), no key needed |
 
+### Deals And Shopping
+
+| Provider | Name | Method |
+|---|---|---|
+| CheapShark | `cheapshark` | CheapShark public deals API (current PC game price drops across digital stores: sale price, normal price, discount, store, ratings), no key required |
+
 ## Installation
 
 One-command local install:

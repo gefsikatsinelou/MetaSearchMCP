@@ -30,6 +30,7 @@ from .bing import BingProvider
 from .bing_news import BingNewsProvider
 from .bluesky import BlueskyProvider
 from .brave import BraveProvider
+from .cheapshark import CheapSharkProvider
 from .chembl import ChEMBLProvider
 from .cisa_kev import CisaKevProvider
 from .clevelandart import ClevelandArtProvider
@@ -259,6 +260,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     # Media / games
     SteamProvider,
     ScryfallProvider,
+    CheapSharkProvider,
     # Media / food & recipes
     TheMealDBProvider,
     CocktailDBProvider,

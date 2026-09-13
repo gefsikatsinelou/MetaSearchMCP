@@ -145,6 +145,7 @@ from .spacelaunch import SpaceLaunchProvider
 from .stackoverflow import StackOverflowProvider
 from .startpage import StartpageProvider
 from .steam import SteamProvider
+from .terraform import TerraformRegistryProvider
 from .themealdb import TheMealDBProvider
 from .thesportsdb import TheSportsDBProvider
 from .tvmaze import TVMazeProvider
@@ -310,6 +311,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     VSCodeMarketplaceProvider,
     MavenProvider,
     ChocolateyProvider,
+    TerraformRegistryProvider,
     # Security / vulnerabilities
     NvdProvider,
     CisaKevProvider,

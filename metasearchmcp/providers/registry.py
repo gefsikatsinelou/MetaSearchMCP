@@ -32,6 +32,7 @@ from .bluesky import BlueskyProvider
 from .brave import BraveProvider
 from .cheapshark import CheapSharkProvider
 from .chembl import ChEMBLProvider
+from .chocolatey import ChocolateyProvider
 from .cisa_kev import CisaKevProvider
 from .clevelandart import ClevelandArtProvider
 from .clinicaltrials import ClinicalTrialsProvider
@@ -308,6 +309,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     GnomeExtensionsProvider,
     VSCodeMarketplaceProvider,
     MavenProvider,
+    ChocolateyProvider,
     # Security / vulnerabilities
     NvdProvider,
     CisaKevProvider,

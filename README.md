@@ -148,6 +148,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | Hackage | `hackage` | Hackage packages API (Haskell/Cabal), no key required |
 | Anaconda | `anaconda` | Anaconda.org search API (conda packages), no key required |
 | AUR | `aur` | Arch Linux AUR RPC API (community packages), no key required |
+| Chocolatey | `chocolatey` | Chocolatey community OData search feed (Windows packages), no key required |
 
 ### Academic Sources
 

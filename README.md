@@ -243,6 +243,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | Open Food Facts | `openfoodfacts` | Open Food Facts public search API, no key required |
 | TheSportsDB | `thesportsdb` | TheSportsDB public API (teams & players), no key required |
 | RemoteOK | `remoteok` | RemoteOK public jobs API (remote developer jobs), no key required |
+| Remotive | `remotive` | Remotive public jobs API (keyword-searchable remote jobs), no key required |
 | iTunes | `itunes` | iTunes Search API (podcasts), no key required |
 
 ### Space Sources

@@ -131,6 +131,7 @@ from .radio_browser import RadioBrowserProvider
 from .rcsb_pdb import RcsbPdbProvider
 from .reddit import RedditProvider
 from .remoteok import RemoteOKProvider
+from .remotive import RemotiveProvider
 from .ror import RorProvider
 from .rubygems import RubyGemsProvider
 from .rxnorm import RxNormProvider
@@ -271,6 +272,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     TheSportsDBProvider,
     # Media / jobs & careers
     RemoteOKProvider,
+    RemotiveProvider,
     # Developer
     GitHubProvider,
     GitLabProvider,

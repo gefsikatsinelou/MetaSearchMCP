@@ -79,6 +79,7 @@ from .hackernews import HackerNewsProvider
 from .hal import HalProvider
 from .hex import HexProvider
 from .huggingface import HuggingFaceProvider
+from .ietf import IetfProvider
 
 # Knowledge / reference
 from .inaturalist import INaturalistProvider
@@ -314,6 +315,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     MavenProvider,
     ChocolateyProvider,
     TerraformRegistryProvider,
+    IetfProvider,
     # Security / vulnerabilities
     NvdProvider,
     CisaKevProvider,

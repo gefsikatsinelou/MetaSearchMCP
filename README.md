@@ -150,6 +150,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | AUR | `aur` | Arch Linux AUR RPC API (community packages), no key required |
 | Chocolatey | `chocolatey` | Chocolatey community OData search feed (Windows packages), no key required |
 | Terraform Registry | `terraform` | Terraform Registry search API (reusable modules + providers for AWS, Azure, GCP, Kubernetes, ...), no key required |
+| IETF Datatracker | `ietf` | IETF Datatracker documents API (RFCs and Internet-Drafts by title/abstract, with standards level, stream and page count), no key required |
 
 ### Academic Sources
 

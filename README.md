@@ -252,6 +252,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | Provider | Name | Method |
 |---|---|---|
 | Launch Library 2 | `spacelaunch` | The Space Devs launch database API (historical & upcoming launches), no key required |
+| NASA Exoplanet Archive | `exoplanet` | Exoplanet Archive TAP API (confirmed exoplanets by planet or host-star name: discovery year/method, orbital period, radius, mass, distance, equilibrium temperature), no key required |
 
 ### Finance Sources
 

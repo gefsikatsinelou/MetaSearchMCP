@@ -53,6 +53,7 @@ from .dockerhub import DockerHubProvider
 from .duckduckgo import DuckDuckGoProvider
 from .ecosia import EcosiaProvider
 from .europepmc import EuropePmcProvider
+from .exoplanet import ExoplanetProvider
 from .federal_register import FederalRegisterProvider
 from .figshare import FigshareProvider
 from .finnhub import FinnhubProvider
@@ -232,6 +233,8 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     GooglePatentsProvider,
     # Space / launches
     SpaceLaunchProvider,
+    # Space / astronomy
+    ExoplanetProvider,
     # News
     GoogleNewsProvider,
     GDELTProvider,

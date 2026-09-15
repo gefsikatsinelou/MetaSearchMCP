@@ -106,6 +106,7 @@ from .mygene import MyGeneProvider
 from .nager import NagerDateProvider
 from .nasa import NasaProvider
 from .naver import NaverProvider
+from .nih_reporter import NihReporterProvider
 from .nobel import NobelPrizeProvider
 from .nominatim import NominatimProvider
 from .npm import NpmProvider
@@ -354,6 +355,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     UniProtProvider,
     MyGeneProvider,
     RcsbPdbProvider,
+    NihReporterProvider,
     # Finance
     YahooFinanceProvider,
     AlphaVantageProvider,

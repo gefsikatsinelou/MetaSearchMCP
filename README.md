@@ -199,6 +199,12 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 |---|---|---|
 | Google Patents | `google_patents` | Public XHR query API, no key required |
 
+### Open Data Portals
+
+| Provider | Name | Method |
+|---|---|---|
+| European Open Data Portal | `eu_open_data` | data.europa.eu search API (public-sector datasets harvested from EU member states and institutions: description, publisher, catalogue, country, subjects, formats, licence), no key required |
+
 ### News Sources
 
 | Provider | Name | Method |

@@ -52,6 +52,7 @@ from .doaj import DoajProvider
 from .dockerhub import DockerHubProvider
 from .duckduckgo import DuckDuckGoProvider
 from .ecosia import EcosiaProvider
+from .eu_open_data import EuOpenDataProvider
 from .europepmc import EuropePmcProvider
 from .exoplanet import ExoplanetProvider
 from .federal_register import FederalRegisterProvider
@@ -233,6 +234,8 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     FederalRegisterProvider,
     # Patents
     GooglePatentsProvider,
+    # Open data portals
+    EuOpenDataProvider,
     # Space / launches
     SpaceLaunchProvider,
     # Space / astronomy

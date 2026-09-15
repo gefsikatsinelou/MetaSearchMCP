@@ -174,6 +174,7 @@ from .yahoo import YahooProvider
 from .yahoo_finance import YahooFinanceProvider
 from .yandex import YandexProvider
 from .youcom import YouComProvider
+from .zbmath import ZbMathProvider
 from .zenodo import ZenodoProvider
 
 if TYPE_CHECKING:
@@ -340,6 +341,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     InspireHEPProvider,
     DoajProvider,
     DBLPProvider,
+    ZbMathProvider,
     OpenLibraryProvider,
     GoogleBooksProvider,
     GutendexProvider,

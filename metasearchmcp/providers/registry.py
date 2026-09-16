@@ -83,6 +83,7 @@ from .hackernews import HackerNewsProvider
 from .hal import HalProvider
 from .hex import HexProvider
 from .huggingface import HuggingFaceProvider
+from .iconify import IconifyProvider
 from .ietf import IetfProvider
 
 # Knowledge / reference
@@ -251,6 +252,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     # Media / image search
     WikimediaCommonsProvider,
     OpenverseProvider,
+    IconifyProvider,
     FlickrProvider,
     UnsplashProvider,
     MetMuseumProvider,

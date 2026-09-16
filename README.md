@@ -232,6 +232,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 |---|---|---|
 | Wikimedia Commons | `wikimedia_commons` | MediaWiki API, no key required |
 | Openverse | `openverse` | Openverse REST API, no key required |
+| Iconify | `iconify` | Iconify search API (200,000+ open-source vector icons from 150+ icon sets: keywords, set name, author, licence, SVG URL), no key required |
 | Flickr | `flickr` | Public feed API, no key required |
 | Unsplash | `unsplash` | Unsplash REST API (requires `UNSPLASH_ACCESS_KEY`) |
 | NASA | `nasa` | NASA Image and Video Library API, no key required |

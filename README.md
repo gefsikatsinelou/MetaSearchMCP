@@ -146,6 +146,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | Hex | `hex` | Hex.pm packages API (Elixir/Erlang), no key required |
 | pub.dev | `pubdev` | pub.dev JSON API (Dart/Flutter), no key required |
 | Hackage | `hackage` | Hackage packages API (Haskell/Cabal), no key required |
+| R (CRAN / r-universe) | `runiverse` | r-universe search API (R packages on CRAN, Bioconductor and r-universe universes: title, description, maintainer, stars, reverse dependencies, topics, last update), no key required |
 | Anaconda | `anaconda` | Anaconda.org search API (conda packages), no key required |
 | AUR | `aur` | Arch Linux AUR RPC API (community packages), no key required |
 | Chocolatey | `chocolatey` | Chocolatey community OData search feed (Windows packages), no key required |

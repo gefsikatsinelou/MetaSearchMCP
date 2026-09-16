@@ -141,6 +141,7 @@ from .remoteok import RemoteOKProvider
 from .remotive import RemotiveProvider
 from .ror import RorProvider
 from .rubygems import RubyGemsProvider
+from .runiverse import RUniverseProvider
 from .rxnorm import RxNormProvider
 from .scryfall import ScryfallProvider
 from .sec_edgar import SecEdgarProvider
@@ -310,6 +311,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     AurProvider,
     PyPIProvider,
     RubyGemsProvider,
+    RUniverseProvider,
     CratesIoProvider,
     LibRsProvider,
     DockerHubProvider,

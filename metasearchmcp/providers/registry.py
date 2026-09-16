@@ -48,6 +48,7 @@ from .datamuse import DatamuseProvider
 from .dblp import DBLPProvider
 from .deezer import DeezerProvider
 from .discogs import DiscogsProvider
+from .doab import DoabProvider
 from .doaj import DoajProvider
 from .dockerhub import DockerHubProvider
 from .duckduckgo import DuckDuckGoProvider
@@ -345,6 +346,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     HalProvider,
     InspireHEPProvider,
     DoajProvider,
+    DoabProvider,
     DBLPProvider,
     ZbMathProvider,
     OpenLibraryProvider,

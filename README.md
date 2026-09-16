@@ -165,6 +165,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | OpenAIRE | `openaire` | OpenAIRE Graph search API (300M+ open research records from repositories & aggregators), no key required |
 | HAL Open Science | `hal` | HAL search API (French national open-access repository: articles, preprints, theses, book chapters), no key required |
 | DOAJ | `doaj` | DOAJ public REST API, no key required |
+| DOAB | `doab` | DOAB public REST API (peer-reviewed open-access books and monographs), no key required |
 | Europe PMC | `europepmc` | Europe PMC REST API (PubMed + preprints), no key required |
 | ClinicalTrials.gov | `clinicaltrials` | ClinicalTrials.gov v2 API (clinical studies), no key required |
 | DataCite | `datacite` | DataCite DOI search API, no key required |

@@ -185,6 +185,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | zbMATH Open | `zbmath` | zbMATH Open REST API (mathematical literature: Zbl number, authors, venue, MSC classification, reviews), no key required |
 | openFDA | `openfda` | openFDA drug approvals API, no key required |
 | NIH RePORTER | `nih_reporter` | NIH RePORTER v2 API (U.S. federally funded research projects: title, abstract, principal investigators, funding institute, fiscal-year award amount, organization, project period), no key required |
+| Grants.gov | `grants_gov` | Grants.gov search API (U.S. federal funding opportunities: description, agency, posted/forecasted status, open and close dates, CFDA numbers, award ceiling/floor, funding instruments, eligible applicants), no key required |
 
 ### Legal Sources
 

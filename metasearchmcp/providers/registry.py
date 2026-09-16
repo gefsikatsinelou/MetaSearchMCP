@@ -75,6 +75,7 @@ from .google_news import GoogleNewsProvider
 from .google_patents import GooglePatentsProvider
 from .google_serpbase import GoogleSerpbaseProvider
 from .google_serper import GoogleSerperProvider
+from .grants_gov import GrantsGovProvider
 from .gutendex import GutendexProvider
 from .hackage import HackageProvider
 from .hackernews import HackerNewsProvider
@@ -359,6 +360,8 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     MyGeneProvider,
     RcsbPdbProvider,
     NihReporterProvider,
+    # Funding / grants
+    GrantsGovProvider,
     # Finance
     YahooFinanceProvider,
     AlphaVantageProvider,

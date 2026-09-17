@@ -178,6 +178,9 @@ from .wiktionary import WiktionaryProvider
 # WordPress ecosystem
 from .wordpress_plugins import WordPressPluginsProvider
 from .wordpress_themes import WordPressThemesProvider
+
+# World Bank development research
+from .world_bank_documents import WorldBankDocumentsProvider
 from .yahoo import YahooProvider
 from .yahoo_finance import YahooFinanceProvider
 from .yandex import YandexProvider
@@ -243,6 +246,8 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     GooglePatentsProvider,
     # Open data portals
     EuOpenDataProvider,
+    # Development / research
+    WorldBankDocumentsProvider,
     # Nonprofits / charities
     ProPublicaNonprofitsProvider,
     # Space / launches

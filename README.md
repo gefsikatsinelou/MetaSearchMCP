@@ -197,6 +197,12 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | CourtListener | `courtlistener` | Free Law Project REST API, no key required |
 | Federal Register | `federal_register` | federalregister.gov documents API (agency rules, proposed rules, notices, presidential documents), no key required |
 
+### Nonprofit Sources
+
+| Provider | Name | Method |
+|---|---|---|
+| ProPublica Nonprofit Explorer | `propublica_nonprofits` | ProPublica Nonprofit Explorer v2 search API (IRS register of U.S. tax-exempt organizations: EIN, legal and secondary names, city/state, NTEE category, IRS subsection, Form 990 filing history), no key required |
+
 ### Patent Sources
 
 | Provider | Name | Method |

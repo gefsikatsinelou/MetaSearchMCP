@@ -130,6 +130,7 @@ from .osf_preprints import OSFPreprintsProvider
 from .packagist import PackagistProvider
 from .peertube import PeerTubeProvider
 from .pkg_go_dev import PkgGoDevProvider
+from .propublica_nonprofits import ProPublicaNonprofitsProvider
 from .pubchem import PubChemProvider
 from .pubdev import PubDevProvider
 from .pubmed import PubMedProvider
@@ -242,6 +243,8 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     GooglePatentsProvider,
     # Open data portals
     EuOpenDataProvider,
+    # Nonprofits / charities
+    ProPublicaNonprofitsProvider,
     # Space / launches
     SpaceLaunchProvider,
     # Space / astronomy

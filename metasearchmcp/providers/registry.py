@@ -150,6 +150,7 @@ from .sec_edgar import SecEdgarProvider
 from .semanticscholar import SemanticScholarProvider
 from .seznam import SeznamProvider
 from .snapcraft import SnapcraftProvider
+from .software_heritage import SoftwareHeritageProvider
 from .sourcegraph import SourcegraphProvider
 from .spaceflight_news import SpaceflightNewsProvider
 from .spacelaunch import SpaceLaunchProvider
@@ -327,6 +328,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     DockerHubProvider,
     FlathubProvider,
     SnapcraftProvider,
+    SoftwareHeritageProvider,
     PkgGoDevProvider,
     MetaCPANProvider,
     JetbrainsProvider,

@@ -116,6 +116,7 @@ class HackageProvider(BaseProvider):
         # strings lexicographically is wrong across widths, so compare on
         # the parsed numeric components.
         def key(v: str) -> tuple[int, ...]:
+            """Return a version string as a comparable tuple of numeric parts."""
             parts: list[int] = []
             for chunk in v.replace("-", ".").split("."):
                 try:

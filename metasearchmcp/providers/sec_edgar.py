@@ -19,12 +19,15 @@ accession number for every hit.
 
 from __future__ import annotations
 
-from typing import Any, ClassVar
+from typing import TYPE_CHECKING, Any, ClassVar
 from urllib.parse import quote
 
 from metasearchmcp.contracts import ProviderResult, SearchParams, SearchResult
 
 from .base import BaseProvider
+
+if TYPE_CHECKING:
+    import httpx
 
 _FTS_URL = "https://efts.sec.gov/LATEST/search-index"
 _SUBMISSIONS_URL = "https://data.sec.gov/submissions/CIK{cik:010d}.json"
@@ -70,7 +73,7 @@ class SecEdgarProvider(BaseProvider):
 
         return get_settings().allow_unstable_providers
 
-    def _sec_client(self):
+    def _sec_client(self) -> httpx.AsyncClient:
         """Return an HTTP client with SEC's required browser-like headers."""
         import httpx
 

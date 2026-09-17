@@ -116,6 +116,7 @@ from .nominatim import NominatimProvider
 from .npm import NpmProvider
 from .nuget import NuGetProvider
 from .nvd import NvdProvider
+from .oeis import OeisProvider
 from .open_vsx import OpenVsxProvider
 from .openaire import OpenAIREProvider
 from .openalex import OpenAlexProvider
@@ -227,6 +228,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     JishoProvider,
     NagerDateProvider,
     NobelPrizeProvider,
+    OeisProvider,
     # Places / geocoding
     OpenMeteoProvider,
     NominatimProvider,

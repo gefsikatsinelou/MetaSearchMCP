@@ -102,6 +102,7 @@ from .lemmy import LemmyProvider
 from .lib_rs import LibRsProvider
 from .lobsters import LobstersProvider
 from .loc_gov import LocGovProvider
+from .mangadex import MangaDexProvider
 from .marginalia import MarginaliaProvider
 from .mastodon import MastodonProvider
 from .maven import MavenProvider
@@ -288,6 +289,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     # Media / anime & manga
     KitsuProvider,
     AniListProvider,
+    MangaDexProvider,
     # Media / podcasts
     ITunesProvider,
     # Media / games

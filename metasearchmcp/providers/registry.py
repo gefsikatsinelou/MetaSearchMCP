@@ -51,6 +51,7 @@ from .discogs import DiscogsProvider
 from .doab import DoabProvider
 from .doaj import DoajProvider
 from .dockerhub import DockerHubProvider
+from .dryad import DryadProvider
 from .duckduckgo import DuckDuckGoProvider
 from .ecosia import EcosiaProvider
 from .eu_open_data import EuOpenDataProvider
@@ -371,6 +372,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     FigshareProvider,
     DataCiteProvider,
     ZenodoProvider,
+    DryadProvider,
     OSFPreprintsProvider,
     OrcidProvider,
     RorProvider,

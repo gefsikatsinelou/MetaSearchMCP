@@ -174,6 +174,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | DataCite | `datacite` | DataCite DOI search API, no key required |
 | Figshare | `figshare` | Figshare public articles API (research data, datasets), no key required |
 | Zenodo | `zenodo` | Zenodo REST API, no key required |
+| Dryad | `dryad` | Dryad REST API v2 (curated open-access research datasets with authors, abstract, keywords, field of science and licence, plus DOI and download link), no key required |
 | OSF Preprints | `osf_preprints` | OSF API v2 (PsyArXiv, SocArXiv, etc.), no key required |
 | ORCID | `orcid` | ORCID public API (researcher profiles), no key required |
 | ROR | `ror` | Research Organization Registry API (universities, institutes, labs), no key required |

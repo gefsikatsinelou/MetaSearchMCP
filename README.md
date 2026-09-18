@@ -264,6 +264,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | Discogs | `discogs` | Discogs database search API, no key required |
 | Deezer | `deezer` | Deezer public search API (streaming-catalog tracks with previews), no key required |
 | Kitsu | `kitsu` | Kitsu anime & manga catalog API (JSON:API), no key required |
+| AniList | `anilist` | AniList GraphQL API (anime, manga & light novels with synopsis, format, status, genres, community scores, popularity, studio and cover image), no key required |
 | Steam | `steam` | Steam Store search API, no key required |
 | Scryfall | `scryfall` | Scryfall Magic: The Gathering card search API (names, rules text, sets, prices), no key required |
 | TheMealDB | `themealdb` | TheMealDB public API, no key required |

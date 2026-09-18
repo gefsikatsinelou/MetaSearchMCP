@@ -17,6 +17,9 @@ from .amo import AmoProvider
 
 # Package registries / developer
 from .anaconda import AnacondaProvider
+
+# Media / anime & manga
+from .anilist import AniListProvider
 from .artic import ArticProvider
 from .artifacthub import ArtifactHubProvider
 
@@ -284,6 +287,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     DeezerProvider,
     # Media / anime & manga
     KitsuProvider,
+    AniListProvider,
     # Media / podcasts
     ITunesProvider,
     # Media / games

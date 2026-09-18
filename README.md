@@ -251,6 +251,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | Iconify | `iconify` | Iconify search API (200,000+ open-source vector icons from 150+ icon sets: keywords, set name, author, licence, SVG URL), no key required |
 | Flickr | `flickr` | Public feed API, no key required |
 | Unsplash | `unsplash` | Unsplash REST API (requires `UNSPLASH_ACCESS_KEY`) |
+| Wallhaven | `wallhaven` | Wallhaven public JSON API (high-resolution desktop wallpapers: resolution and aspect ratio, file size/type, category, purity, colours, views/favourites, full-size image and thumbnail URLs), no key required |
 | NASA | `nasa` | NASA Image and Video Library API, no key required |
 | Met Museum | `metmuseum` | Met Museum public collection API, no key required |
 | Art Institute of Chicago | `artic` | AIC public collection API, no key required |

@@ -169,6 +169,7 @@ from .tvmaze import TVMazeProvider
 from .uniprot import UniProtProvider
 from .unsplash import UnsplashProvider
 from .vscode_marketplace import VSCodeMarketplaceProvider
+from .wallhaven import WallhavenProvider
 from .wikibooks import WikibooksProvider
 from .wikidata import WikidataProvider
 from .wikimedia_commons import WikimediaCommonsProvider
@@ -272,6 +273,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     IconifyProvider,
     FlickrProvider,
     UnsplashProvider,
+    WallhavenProvider,
     MetMuseumProvider,
     ArticProvider,
     ClevelandArtProvider,

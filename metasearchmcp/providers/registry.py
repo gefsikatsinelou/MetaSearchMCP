@@ -130,6 +130,7 @@ from .openfda import OpenFDADrugProvider
 from .openfoodfacts import OpenFoodFactsProvider
 from .openlibrary import OpenLibraryProvider
 from .openmeteo import OpenMeteoProvider
+from .openreview import OpenReviewProvider
 from .openverse import OpenverseProvider
 from .orcid import OrcidProvider
 from .osf_preprints import OSFPreprintsProvider
@@ -373,6 +374,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     CrossrefProvider,
     OpenAlexProvider,
     OpenAIREProvider,
+    OpenReviewProvider,
     HalProvider,
     InspireHEPProvider,
     DoajProvider,

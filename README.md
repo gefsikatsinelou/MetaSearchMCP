@@ -189,6 +189,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | Google Books | `google_books` | Google Books API, no key required |
 | Project Gutenberg | `gutendex` | Gutendex API (public-domain ebooks), no key required |
 | DBLP | `dblp` | DBLP bibliography API (computer-science publications), no key required |
+| OpenReview | `openreview` | OpenReview API v2 note search (submissions to ICLR, NeurIPS, ICML, COLM and workshops: title, authors, abstract, keywords, venue and review status, primary area, TLDR, discussion and PDF links), no key required |
 | zbMATH Open | `zbmath` | zbMATH Open REST API (mathematical literature: Zbl number, authors, venue, MSC classification, reviews), no key required |
 | openFDA | `openfda` | openFDA drug approvals API, no key required |
 | NIH RePORTER | `nih_reporter` | NIH RePORTER v2 API (U.S. federally funded research projects: title, abstract, principal investigators, funding institute, fiscal-year award amount, organization, project period), no key required |

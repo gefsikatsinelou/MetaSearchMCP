@@ -93,6 +93,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | Open Library | `openlibrary` | Open Library search API |
 | Datamuse | `datamuse` | Word-association/thesaurus REST API, no key required |
 | Jisho | `jisho` | Japanese-English dictionary API (JMDict/JMNedict lookups with readings and JLPT level), no key required |
+| Tatoeba | `tatoeba` | Tatoeba public JSON API (collaborative example sentences with translations in hundreds of languages: sentence text, language, contributor, licence, alternative-script transcription, audio and translations into other languages), no key required |
 | Nobel Prize | `nobel` | Official Nobel Prize API v2 (awards by year/category), no key required |
 | OEIS | `oeis` | OEIS JSON search API (integer sequences by terms, A-number or keywords: sequence name, terms, offset, keyword flags, author), no key required |
 

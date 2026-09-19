@@ -162,6 +162,7 @@ from .spacelaunch import SpaceLaunchProvider
 from .stackoverflow import StackOverflowProvider
 from .startpage import StartpageProvider
 from .steam import SteamProvider
+from .tatoeba import TatoebaProvider
 from .terraform import TerraformRegistryProvider
 from .themealdb import TheMealDBProvider
 from .thesportsdb import TheSportsDBProvider
@@ -237,6 +238,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     # Knowledge / reference
     DatamuseProvider,
     JishoProvider,
+    TatoebaProvider,
     NagerDateProvider,
     NobelPrizeProvider,
     OeisProvider,

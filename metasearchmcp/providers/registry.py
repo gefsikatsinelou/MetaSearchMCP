@@ -169,6 +169,7 @@ from .thesportsdb import TheSportsDBProvider
 from .tvmaze import TVMazeProvider
 from .uniprot import UniProtProvider
 from .unsplash import UnsplashProvider
+from .vam import VamProvider
 from .vscode_marketplace import VSCodeMarketplaceProvider
 from .wallhaven import WallhavenProvider
 from .wikibooks import WikibooksProvider
@@ -279,6 +280,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     MetMuseumProvider,
     ArticProvider,
     ClevelandArtProvider,
+    VamProvider,
     NasaProvider,
     # Media / video search
     PeerTubeProvider,

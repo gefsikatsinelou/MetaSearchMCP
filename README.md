@@ -257,6 +257,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | Met Museum | `metmuseum` | Met Museum public collection API, no key required |
 | Art Institute of Chicago | `artic` | AIC public collection API, no key required |
 | Cleveland Museum of Art | `clevelandart` | CMA open-access API, no key required |
+| Victoria and Albert Museum | `vam` | V&A public collection API (decorative arts, design, fashion and sculpture: object type, title, maker with association, production date and place, current location and on-display status, IIIF image URLs), no key required |
 | PeerTube | `peertube` | Public REST API, no key required |
 | Dailymotion | `dailymotion` | Public REST API, no key required |
 | TVMaze | `tvmaze` | TVMaze public API, no key required |

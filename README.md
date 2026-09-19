@@ -182,6 +182,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | UniProt | `uniprot` | UniProt REST API (protein knowledgebase), no key required |
 | MyGene.info | `mygene` | BioThings MyGene.info gene annotation API (gene symbols, names, organism, chromosome, aliases), no key required |
 | RCSB PDB | `rcsb_pdb` | RCSB Protein Data Bank search + GraphQL data API (3D structures: title, method, resolution, citation), no key required |
+| EBI Ontology Lookup Service | `ols` | EMBL-EBI OLS4 full-text search over 250+ biomedical and biological ontologies (Gene Ontology, MeSH, ChEBI, HGNC, HPO, MONDO, NCIT): term labels, stable identifiers such as `GO:0006915`, definitions, synonyms and the ontology each term belongs to, no key required |
 | ChEMBL | `chembl` | ChEMBL REST API (drugs, molecular formula/SMILES/ATC), no key required |
 | PubChem | `pubchem` | PubChem PUG REST API (compound names/synonyms, molecular formula, molecular weight, canonical SMILES, IUPAC name, InChIKey), no key required |
 | RxNorm | `rxnorm` | NLM RxNorm REST API (clinical drug terminology), no key required |

@@ -122,6 +122,7 @@ from .npm import NpmProvider
 from .nuget import NuGetProvider
 from .nvd import NvdProvider
 from .oeis import OeisProvider
+from .ols import OlsProvider
 from .open_vsx import OpenVsxProvider
 from .openaire import OpenAIREProvider
 from .openalex import OpenAlexProvider
@@ -391,6 +392,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     UniProtProvider,
     MyGeneProvider,
     RcsbPdbProvider,
+    OlsProvider,
     NihReporterProvider,
     # Funding / grants
     GrantsGovProvider,

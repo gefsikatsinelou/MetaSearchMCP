@@ -85,6 +85,7 @@ from .gutendex import GutendexProvider
 from .hackage import HackageProvider
 from .hackernews import HackerNewsProvider
 from .hal import HalProvider
+from .harvard_dataverse import HarvardDataverseProvider
 from .hex import HexProvider
 from .huggingface import HuggingFaceProvider
 from .iconify import IconifyProvider
@@ -390,6 +391,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     DataCiteProvider,
     ZenodoProvider,
     DryadProvider,
+    HarvardDataverseProvider,
     OSFPreprintsProvider,
     OrcidProvider,
     RorProvider,

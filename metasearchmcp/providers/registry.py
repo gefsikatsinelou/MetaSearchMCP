@@ -174,6 +174,7 @@ from .thesportsdb import TheSportsDBProvider
 from .tvmaze import TVMazeProvider
 from .uniprot import UniProtProvider
 from .unsplash import UnsplashProvider
+from .urbandictionary import UrbanDictionaryProvider
 from .vam import VamProvider
 from .vscode_marketplace import VSCodeMarketplaceProvider
 from .wallhaven import WallhavenProvider
@@ -245,6 +246,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     DatamuseProvider,
     JishoProvider,
     TatoebaProvider,
+    UrbanDictionaryProvider,
     NagerDateProvider,
     NobelPrizeProvider,
     OeisProvider,

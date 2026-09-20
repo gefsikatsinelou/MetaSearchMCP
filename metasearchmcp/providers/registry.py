@@ -102,6 +102,7 @@ from .lemmy import LemmyProvider
 from .lib_rs import LibRsProvider
 from .lobsters import LobstersProvider
 from .loc_gov import LocGovProvider
+from .macports import MacPortsProvider
 from .mangadex import MangaDexProvider
 from .marginalia import MarginaliaProvider
 from .mastodon import MastodonProvider
@@ -343,6 +344,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     DockerHubProvider,
     FlathubProvider,
     SnapcraftProvider,
+    MacPortsProvider,
     SoftwareHeritageProvider,
     PkgGoDevProvider,
     MetaCPANProvider,

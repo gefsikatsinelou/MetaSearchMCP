@@ -123,6 +123,7 @@ from .nih_reporter import NihReporterProvider
 from .nobel import NobelPrizeProvider
 from .nominatim import NominatimProvider
 from .npm import NpmProvider
+from .nsf_awards import NsfAwardsProvider
 from .nuget import NuGetProvider
 from .nvd import NvdProvider
 from .oeis import OeisProvider
@@ -408,6 +409,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     JStageProvider,
     # Funding / grants
     GrantsGovProvider,
+    NsfAwardsProvider,
     # Finance
     YahooFinanceProvider,
     AlphaVantageProvider,

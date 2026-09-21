@@ -198,6 +198,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | NIH RePORTER | `nih_reporter` | NIH RePORTER v2 API (U.S. federally funded research projects: title, abstract, principal investigators, funding institute, fiscal-year award amount, organization, project period), no key required |
 | Grants.gov | `grants_gov` | Grants.gov search API (U.S. federal funding opportunities: description, agency, posted/forecasted status, open and close dates, CFDA numbers, award ceiling/floor, funding instruments, eligible applicants), no key required |
 | J-STAGE | `jstage` | J-STAGE Web API article search (Japanese scholarly journals: English and Japanese titles, authors, journal, ISSN, volume/number/pages, publication year and DOI), no key required |
+| NSF Awards | `nsf_awards` | NSF awards API (U.S. National Science Foundation funded research: award id, title, abstract, principal investigators and co-PIs, awardee organisation and location, programme, directorate and division, start/end dates, obligated and estimated-total amounts, award type, CFDA number, programme officer), no key required |
 
 ### Legal Sources
 

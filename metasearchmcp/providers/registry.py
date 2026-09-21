@@ -177,6 +177,7 @@ from .tvmaze import TVMazeProvider
 from .uniprot import UniProtProvider
 from .unsplash import UnsplashProvider
 from .urbandictionary import UrbanDictionaryProvider
+from .usaspending import UsaSpendingProvider
 from .vam import VamProvider
 from .vscode_marketplace import VSCodeMarketplaceProvider
 from .wallhaven import WallhavenProvider
@@ -410,6 +411,8 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     # Funding / grants
     GrantsGovProvider,
     NsfAwardsProvider,
+    # Federal spending / awards
+    UsaSpendingProvider,
     # Finance
     YahooFinanceProvider,
     AlphaVantageProvider,

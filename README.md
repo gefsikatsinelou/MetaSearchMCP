@@ -307,6 +307,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | Frankfurter | `frankfurter` | No | ECB daily FX reference rates, no key needed |
 | SEC EDGAR | `sec_edgar` | No | SEC full-text + company filings API (unstable flag), no key needed |
 | GLEIF | `gleif` | No | Global Legal Entity Identifier registry (company legal names, jurisdiction, status), no key needed |
+| USAspending | `usaspending` | No | Federal award search API (U.S. government contracts and grants: award id, recipient, awarded amount, description, awarding/funding agency, award type, start and end dates), no key needed |
 
 ### Deals And Shopping
 

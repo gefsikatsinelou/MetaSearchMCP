@@ -177,8 +177,10 @@ def test_parse_sparse_record() -> None:
 def test_parse_skips_nameless_and_non_dict_items() -> None:
     result = _provider()._parse(_SAMPLE_RESPONSE)
     assert [r.title for r in result.results] == [
-        "Seafloor Phosphorus Weathering and Earth System Response to Geologic "
-        "Perturbations",
+        (
+            "Seafloor Phosphorus Weathering and Earth System Response to Geologic "
+            "Perturbations"
+        ),
         "REU Site: Interdisciplinary Research Experiences",
     ]
     # The duplicate award id is dropped, so ranks stay contiguous.

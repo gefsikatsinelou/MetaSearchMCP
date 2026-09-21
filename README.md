@@ -277,6 +277,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | MangaDex | `mangadex` | MangaDex public REST API (manga titles & alternate titles with synopsis, status, year, content rating, demographic, chapter/volume counts, genres, authors/artists and cover image), no key required |
 | Steam | `steam` | Steam Store search API, no key required |
 | Scryfall | `scryfall` | Scryfall Magic: The Gathering card search API (names, rules text, sets, prices), no key required |
+| Modrinth | `modrinth` | Modrinth search API (Minecraft mods, plugins, modpacks, shaders, resource packs and datapacks: summary, author, categories, mod loaders, supported Minecraft versions, download/follower counts, licence and client/server side support), no key required |
 | TheMealDB | `themealdb` | TheMealDB public API, no key required |
 | TheCocktailDB | `cocktaildb` | TheCocktailDB public API, no key required |
 | Open Food Facts | `openfoodfacts` | Open Food Facts public search API, no key required |

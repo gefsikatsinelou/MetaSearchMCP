@@ -111,6 +111,7 @@ from .mastodon import MastodonProvider
 from .maven import MavenProvider
 from .metacpan import MetaCPANProvider
 from .metmuseum import MetMuseumProvider
+from .modrinth import ModrinthProvider
 from .mojeek import MojeekProvider
 from .musicbrainz import MusicBrainzProvider
 from .mwmbl import MwmblProvider
@@ -309,6 +310,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     SteamProvider,
     ScryfallProvider,
     CheapSharkProvider,
+    ModrinthProvider,
     # Media / food & recipes
     TheMealDBProvider,
     CocktailDBProvider,

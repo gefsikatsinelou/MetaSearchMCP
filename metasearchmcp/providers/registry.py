@@ -139,6 +139,7 @@ from .openreview import OpenReviewProvider
 from .openverse import OpenverseProvider
 from .orcid import OrcidProvider
 from .osf_preprints import OSFPreprintsProvider
+from .overpass import OverpassProvider
 from .packagist import PackagistProvider
 from .peertube import PeerTubeProvider
 from .pkg_go_dev import PkgGoDevProvider
@@ -256,6 +257,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     # Places / geocoding
     OpenMeteoProvider,
     NominatimProvider,
+    OverpassProvider,
     # Nature / biodiversity
     INaturalistProvider,
     GBIFSpeciesProvider,

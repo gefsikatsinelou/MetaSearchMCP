@@ -49,6 +49,7 @@ from .dailymotion import DailymotionProvider
 from .datacite import DataCiteProvider
 from .datamuse import DatamuseProvider
 from .dblp import DBLPProvider
+from .debian import DebianProvider
 from .deezer import DeezerProvider
 from .discogs import DiscogsProvider
 from .doab import DoabProvider
@@ -367,6 +368,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     VSCodeMarketplaceProvider,
     MavenProvider,
     ChocolateyProvider,
+    DebianProvider,
     TerraformRegistryProvider,
     IetfProvider,
     # Security / vulnerabilities

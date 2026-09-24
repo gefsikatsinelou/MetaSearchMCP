@@ -155,6 +155,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | Anaconda | `anaconda` | Anaconda.org search API (conda packages), no key required |
 | AUR | `aur` | Arch Linux AUR RPC API (community packages), no key required |
 | Chocolatey | `chocolatey` | Chocolatey community OData search feed (Windows packages), no key required |
+| Debian Sources | `debian` | sources.debian.org search API (Debian source packages with version history per suite — stable/testing/sid/backports — and archive area), no key required |
 | Terraform Registry | `terraform` | Terraform Registry search API (reusable modules + providers for AWS, Azure, GCP, Kubernetes, ...), no key required |
 | IETF Datatracker | `ietf` | IETF Datatracker documents API (RFCs and Internet-Drafts by title/abstract, with standards level, stream and page count), no key required |
 | Software Heritage | `software_heritage` | Software Heritage origin search API (universal archive of public source code: repository URLs by keyword across GitHub, GitLab, Bitbucket, ... with visit types, snapshot availability, visit count, last-visited date and a link to the archived record), no key required |

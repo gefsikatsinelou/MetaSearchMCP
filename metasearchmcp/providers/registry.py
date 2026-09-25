@@ -96,6 +96,7 @@ from .ietf import IetfProvider
 from .inaturalist import INaturalistProvider
 from .inspirehep import InspireHEPProvider
 from .internet_archive import InternetArchiveProvider
+from .internetdb import InternetDbProvider
 from .itunes import ITunesProvider
 from .jetbrains import JetbrainsProvider
 from .jisho import JishoProvider
@@ -377,6 +378,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     # Security / vulnerabilities
     NvdProvider,
     CisaKevProvider,
+    InternetDbProvider,
     # Drugs / pharma
     ChEMBLProvider,
     PubChemProvider,

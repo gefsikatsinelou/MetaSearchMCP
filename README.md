@@ -308,6 +308,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | CoinGecko | `coingecko` | No | Cryptocurrency search API, no key needed |
 | NVD | `nvd` | No | NIST NVD CVE vulnerability search API, no key needed |
 | CISA KEV | `cisa_kev` | No | CISA Known Exploited Vulnerabilities catalog (CVEs exploited in the wild), no key needed |
+| Shodan InternetDB | `internetdb` | No | Host exposure lookup for an IP address (open ports, reverse-DNS hostnames, CPEs, tags and known CVEs), no key needed |
 | Frankfurter | `frankfurter` | No | ECB daily FX reference rates, no key needed |
 | SEC EDGAR | `sec_edgar` | No | SEC full-text + company filings API (unstable flag), no key needed |
 | GLEIF | `gleif` | No | Global Legal Entity Identifier registry (company legal names, jurisdiction, status), no key needed |

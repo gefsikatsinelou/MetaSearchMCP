@@ -154,6 +154,7 @@ from .pypi import PyPIProvider
 from .qwant import QwantProvider
 from .radio_browser import RadioBrowserProvider
 from .rcsb_pdb import RcsbPdbProvider
+from .rdap import RdapProvider
 from .reddit import RedditProvider
 from .remoteok import RemoteOKProvider
 from .remotive import RemotiveProvider
@@ -379,6 +380,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     NvdProvider,
     CisaKevProvider,
     InternetDbProvider,
+    RdapProvider,
     # Drugs / pharma
     ChEMBLProvider,
     PubChemProvider,

@@ -103,6 +103,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | Provider | Name | Method |
 |---|---|---|
 | Open-Meteo Geocoding | `openmeteo` | Geocoding REST API, no key required |
+| Open-Meteo Weather | `weather` | Forecast API (current conditions — temperature, apparent temperature, humidity, wind, WMO weather description — plus the daily high/low and precipitation probability for a place name, with the resolved coordinates and timezone), no key required |
 | OpenStreetMap (Nominatim) | `nominatim` | Nominatim public API, no key required |
 | OpenStreetMap (Overpass) | `overpass` | Overpass API feature search (named OpenStreetMap features — shops, amenities, museums, stations, parks and other tagged places — scoped to a country: category, address, opening hours, contact details and coordinates, plus a link to the OSM feature page), no key required |
 | Nager.Date | `nager` | Public-holiday calendar REST API (public holidays by country), no key required |

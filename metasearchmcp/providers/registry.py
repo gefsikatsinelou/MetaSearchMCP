@@ -183,6 +183,7 @@ from .usaspending import UsaSpendingProvider
 from .vam import VamProvider
 from .vscode_marketplace import VSCodeMarketplaceProvider
 from .wallhaven import WallhavenProvider
+from .weather import WeatherProvider
 from .wikibooks import WikibooksProvider
 from .wikidata import WikidataProvider
 from .wikimedia_commons import WikimediaCommonsProvider
@@ -259,6 +260,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     OpenMeteoProvider,
     NominatimProvider,
     OverpassProvider,
+    WeatherProvider,
     # Nature / biodiversity
     INaturalistProvider,
     GBIFSpeciesProvider,

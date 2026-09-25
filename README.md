@@ -192,6 +192,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | ChEMBL | `chembl` | ChEMBL REST API (drugs, molecular formula/SMILES/ATC), no key required |
 | PubChem | `pubchem` | PubChem PUG REST API (compound names/synonyms, molecular formula, molecular weight, canonical SMILES, IUPAC name, InChIKey), no key required |
 | RxNorm | `rxnorm` | NLM RxNorm REST API (clinical drug terminology), no key required |
+| MyChem.info | `mychem` | BioThings MyChem.info API (chemical and drug annotations aggregated from ChEMBL, DrugBank, ChEBI, DrugCentral, PubChem, UNII: preferred name, formula, weight, SMILES, CAS, approval phase, cross-references), no key required |
 | Google Books | `google_books` | Google Books API, no key required |
 | Project Gutenberg | `gutendex` | Gutendex API (public-domain ebooks), no key required |
 | DBLP | `dblp` | DBLP bibliography API (computer-science publications), no key required |

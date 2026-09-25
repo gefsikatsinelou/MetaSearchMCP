@@ -116,6 +116,7 @@ from .modrinth import ModrinthProvider
 from .mojeek import MojeekProvider
 from .musicbrainz import MusicBrainzProvider
 from .mwmbl import MwmblProvider
+from .mychem import MyChemProvider
 from .mygene import MyGeneProvider
 from .nager import NagerDateProvider
 from .nasa import NasaProvider
@@ -381,6 +382,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     PubChemProvider,
     OpenFDADrugProvider,
     RxNormProvider,
+    MyChemProvider,
     # Academic
     ArxivProvider,
     PubMedProvider,

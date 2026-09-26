@@ -184,6 +184,7 @@ from .tvmaze import TVMazeProvider
 from .uniprot import UniProtProvider
 from .unsplash import UnsplashProvider
 from .urbandictionary import UrbanDictionaryProvider
+from .urlscan import UrlscanProvider
 from .usaspending import UsaSpendingProvider
 from .vam import VamProvider
 from .vscode_marketplace import VSCodeMarketplaceProvider
@@ -387,6 +388,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     RdapProvider,
     DnsProvider,
     CrtShProvider,
+    UrlscanProvider,
     # Drugs / pharma
     ChEMBLProvider,
     PubChemProvider,

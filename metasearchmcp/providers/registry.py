@@ -188,6 +188,7 @@ from .usaspending import UsaSpendingProvider
 from .vam import VamProvider
 from .vscode_marketplace import VSCodeMarketplaceProvider
 from .wallhaven import WallhavenProvider
+from .wayback import WaybackProvider
 from .weather import WeatherProvider
 from .wikibooks import WikibooksProvider
 from .wikidata import WikidataProvider
@@ -252,6 +253,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     WikiversityProvider,
     WikispeciesProvider,
     InternetArchiveProvider,
+    WaybackProvider,
     LocGovProvider,
     # Knowledge / reference
     DatamuseProvider,

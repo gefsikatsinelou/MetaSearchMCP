@@ -45,6 +45,7 @@ from .coingecko import CoinGeckoProvider
 from .courtlistener import CourtListenerProvider
 from .crates import CratesIoProvider
 from .crossref import CrossrefProvider
+from .crtsh import CrtShProvider
 from .dailymotion import DailymotionProvider
 from .datacite import DataCiteProvider
 from .datamuse import DatamuseProvider
@@ -383,6 +384,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     InternetDbProvider,
     RdapProvider,
     DnsProvider,
+    CrtShProvider,
     # Drugs / pharma
     ChEMBLProvider,
     PubChemProvider,

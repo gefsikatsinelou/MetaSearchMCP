@@ -311,6 +311,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | Shodan InternetDB | `internetdb` | No | Host exposure lookup for an IP address (open ports, reverse-DNS hostnames, CPEs, tags and known CVEs), no key needed |
 | RDAP | `rdap` | No | Domain registration lookup (registrar, registry status flags, registration/expiry/update dates, delegated nameservers, DNSSEC state), no key needed |
 | DNS (DNS-over-HTTPS) | `dns` | No | DNS record lookup for a hostname over DNS-over-HTTPS (address records A/AAAA, mail exchangers MX, name servers NS, text records TXT, aliases CNAME and other record types, with answer TTLs and DNSSEC authentication state); accepts `example.com`, `example.com MX` or `MX example.com`, no key needed |
+| crt.sh (Certificate Transparency) | `crtsh` | No | Certificate Transparency log search (TLS certificates issued for a domain, deduplicated by serial: certificate common name and subject alternative names for subdomain discovery, issuing CA, validity window and serial number); accepts `example.com`, `https://example.com/path` or `*.example.com`, no key needed |
 | Frankfurter | `frankfurter` | No | ECB daily FX reference rates, no key needed |
 | SEC EDGAR | `sec_edgar` | No | SEC full-text + company filings API (unstable flag), no key needed |
 | GLEIF | `gleif` | No | Global Legal Entity Identifier registry (company legal names, jurisdiction, status), no key needed |

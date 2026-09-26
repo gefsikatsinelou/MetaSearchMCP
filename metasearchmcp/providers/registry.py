@@ -52,6 +52,7 @@ from .dblp import DBLPProvider
 from .debian import DebianProvider
 from .deezer import DeezerProvider
 from .discogs import DiscogsProvider
+from .dns import DnsProvider
 from .doab import DoabProvider
 from .doaj import DoajProvider
 from .dockerhub import DockerHubProvider
@@ -381,6 +382,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     CisaKevProvider,
     InternetDbProvider,
     RdapProvider,
+    DnsProvider,
     # Drugs / pharma
     ChEMBLProvider,
     PubChemProvider,

@@ -91,6 +91,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | Wikispecies | `wikispecies` | MediaWiki API, no key required |
 | Internet Archive | `internet_archive` | Advanced Search API |
 | Wayback Machine | `wayback` | Internet Archive capture profile (how a URL or domain was archived over time: per-year capture counts, the months inside each year, first/latest capture dates and links replaying each year, with optional trailing year such as `example.com 2015`), no key required |
+| Common Crawl | `common_crawl` | Common Crawl open web index (what the monthly crawls contain for a URL, domain or path prefix: each crawled URL with its capture count, first/latest capture dates, HTTP statuses, MIME types, languages, distinct content versions, and the WARC file plus byte range that stores the page body, with an optional trailing crawl such as `example.com CC-MAIN-2024-10`), no key required |
 | Open Library | `openlibrary` | Open Library search API |
 | Datamuse | `datamuse` | Word-association/thesaurus REST API, no key required |
 | Jisho | `jisho` | Japanese-English dictionary API (JMDict/JMNedict lookups with readings and JLPT level), no key required |

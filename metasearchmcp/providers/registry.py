@@ -42,6 +42,7 @@ from .clinicaltrials import ClinicalTrialsProvider
 from .cocktaildb import CocktailDBProvider
 from .codeberg import CodebergProvider
 from .coingecko import CoinGeckoProvider
+from .common_crawl import CommonCrawlProvider
 from .courtlistener import CourtListenerProvider
 from .crates import CratesIoProvider
 from .crossref import CrossrefProvider
@@ -256,6 +257,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     WikispeciesProvider,
     InternetArchiveProvider,
     WaybackProvider,
+    CommonCrawlProvider,
     LocGovProvider,
     # Knowledge / reference
     DatamuseProvider,

@@ -157,6 +157,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | R (CRAN / r-universe) | `runiverse` | r-universe search API (R packages on CRAN, Bioconductor and r-universe universes: title, description, maintainer, stars, reverse dependencies, topics, last update), no key required |
 | Anaconda | `anaconda` | Anaconda.org search API (conda packages), no key required |
 | AUR | `aur` | Arch Linux AUR RPC API (community packages), no key required |
+| Arch Linux (official) | `archlinux` | Arch Linux packages JSON search API (official core/extra repos: version, repo, arch, maintainers, licences, dependencies, update dates), no key required |
 | Chocolatey | `chocolatey` | Chocolatey community OData search feed (Windows packages), no key required |
 | Debian Sources | `debian` | sources.debian.org search API (Debian source packages with version history per suite — stable/testing/sid/backports — and archive area), no key required |
 | Terraform Registry | `terraform` | Terraform Registry search API (reusable modules + providers for AWS, Azure, GCP, Kubernetes, ...), no key required |

@@ -20,6 +20,9 @@ from .anaconda import AnacondaProvider
 
 # Media / anime & manga
 from .anilist import AniListProvider
+
+# Package registries / developer
+from .archlinux import ArchLinuxProvider
 from .artic import ArticProvider
 from .artifacthub import ArtifactHubProvider
 
@@ -359,6 +362,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     PubDevProvider,
     HackageProvider,
     AnacondaProvider,
+    ArchLinuxProvider,
     AurProvider,
     PyPIProvider,
     RubyGemsProvider,

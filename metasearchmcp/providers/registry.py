@@ -144,6 +144,7 @@ from .openreview import OpenReviewProvider
 from .openverse import OpenverseProvider
 from .orcid import OrcidProvider
 from .osf_preprints import OSFPreprintsProvider
+from .osv import OsvProvider
 from .overpass import OverpassProvider
 from .packagist import PackagistProvider
 from .peertube import PeerTubeProvider
@@ -384,6 +385,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     # Security / vulnerabilities
     NvdProvider,
     CisaKevProvider,
+    OsvProvider,
     InternetDbProvider,
     RdapProvider,
     DnsProvider,

@@ -293,6 +293,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | RemoteOK | `remoteok` | RemoteOK public jobs API (remote developer jobs), no key required |
 | Remotive | `remotive` | Remotive public jobs API (keyword-searchable remote jobs), no key required |
 | iTunes | `itunes` | iTunes Search API (podcasts), no key required |
+| fyyd | `fyyd` | fyyd podcast episode search API (episode-level search across the keyless fyyd directory: episode title, description, audio enclosure URL and MIME type, duration, season/episode numbers, publication date and artwork, falling back to a show-level search for programme names), no key required |
 
 ### Space Sources
 

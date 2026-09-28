@@ -73,6 +73,7 @@ from .finnhub import FinnhubProvider
 from .flathub import FlathubProvider
 from .flickr import FlickrProvider
 from .frankfurter import FrankfurterProvider
+from .fyyd import FyydProvider
 from .gbif import GBIFSpeciesProvider
 from .gdelt import GDELTProvider
 from .github import GitHubProvider
@@ -327,6 +328,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     MangaDexProvider,
     # Media / podcasts
     ITunesProvider,
+    FyydProvider,
     # Media / games
     SteamProvider,
     ScryfallProvider,

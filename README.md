@@ -295,6 +295,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | Remotive | `remotive` | Remotive public jobs API (keyword-searchable remote jobs), no key required |
 | iTunes | `itunes` | iTunes Search API (podcasts), no key required |
 | fyyd | `fyyd` | fyyd podcast episode search API (episode-level search across the keyless fyyd directory: episode title, description, audio enclosure URL and MIME type, duration, season/episode numbers, publication date and artwork, falling back to a show-level search for programme names), no key required |
+| PoetryDB | `poetrydb` | PoetryDB keyless API (public-domain poetry searchable by title, author or full text of the poem's lines, returning the title, author, line count and lines), no key required |
 
 ### Space Sources
 

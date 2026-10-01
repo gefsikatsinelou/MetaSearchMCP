@@ -155,6 +155,7 @@ from .overpass import OverpassProvider
 from .packagist import PackagistProvider
 from .peertube import PeerTubeProvider
 from .pkg_go_dev import PkgGoDevProvider
+from .poetrydb import PoetryDbProvider
 from .propublica_nonprofits import ProPublicaNonprofitsProvider
 from .pubchem import PubChemProvider
 from .pubdev import PubDevProvider
@@ -331,6 +332,8 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     # Media / podcasts
     ITunesProvider,
     FyydProvider,
+    # Media / poetry
+    PoetryDbProvider,
     # Media / games
     SteamProvider,
     ScryfallProvider,

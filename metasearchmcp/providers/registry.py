@@ -28,6 +28,7 @@ from .artifacthub import ArtifactHubProvider
 
 # Academic
 from .arxiv import ArxivProvider
+from .audius import AudiusProvider
 from .aur import AurProvider
 
 # General web search
@@ -322,6 +323,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     MusicBrainzProvider,
     DiscogsProvider,
     DeezerProvider,
+    AudiusProvider,
     # Media / anime & manga
     KitsuProvider,
     AniListProvider,

@@ -65,6 +65,7 @@ from .doaj import DoajProvider
 from .dockerhub import DockerHubProvider
 from .dryad import DryadProvider
 from .duckduckgo import DuckDuckGoProvider
+from .earthquake import EarthquakeProvider
 from .ecosia import EcosiaProvider
 from .eu_open_data import EuOpenDataProvider
 from .europepmc import EuropePmcProvider
@@ -284,6 +285,8 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     # Nature / biodiversity
     INaturalistProvider,
     GBIFSpeciesProvider,
+    # Natural hazards / seismology
+    EarthquakeProvider,
     # Legal
     CourtListenerProvider,
     FederalRegisterProvider,

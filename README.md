@@ -118,6 +118,12 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | iNaturalist | `inaturalist` | Observations REST API, no key required |
 | GBIF | `gbif` | GBIF species backbone REST API, no key required |
 
+### Natural Hazards And Seismology
+
+| Provider | Name | Method |
+|---|---|---|
+| USGS Earthquake Catalog | `earthquake` | USGS FDSN event search API (recent earthquakes by place name, or by minimum magnitude for a numeric query: magnitude, location, depth, coordinates, time, tsunami and alert metadata, plus a link to the event page), no key required |
+
 ### Developer Sources
 
 | Provider | Name | Method |

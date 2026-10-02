@@ -57,6 +57,7 @@ from .datamuse import DatamuseProvider
 from .dblp import DBLPProvider
 from .debian import DebianProvider
 from .deezer import DeezerProvider
+from .dictionaryapi import DictionaryApiProvider
 from .discogs import DiscogsProvider
 from .dns import DnsProvider
 from .doab import DoabProvider
@@ -267,6 +268,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     LocGovProvider,
     # Knowledge / reference
     DatamuseProvider,
+    DictionaryApiProvider,
     JishoProvider,
     TatoebaProvider,
     UrbanDictionaryProvider,

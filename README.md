@@ -94,6 +94,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | Common Crawl | `common_crawl` | Common Crawl open web index (what the monthly crawls contain for a URL, domain or path prefix: each crawled URL with its capture count, first/latest capture dates, HTTP statuses, MIME types, languages, distinct content versions, and the WARC file plus byte range that stores the page body, with an optional trailing crawl such as `example.com CC-MAIN-2024-10`), no key required |
 | Open Library | `openlibrary` | Open Library search API |
 | Datamuse | `datamuse` | Word-association/thesaurus REST API, no key required |
+| DictionaryAPI | `dictionaryapi` | dictionaryapi.dev keyless English dictionary API (Wiktionary-derived definitions per sense: part of speech, definition text, usage example, synonyms/antonyms and phonetic/audio pronunciation, with one ranked hit per definition), no key required |
 | Jisho | `jisho` | Japanese-English dictionary API (JMDict/JMNedict lookups with readings and JLPT level), no key required |
 | Tatoeba | `tatoeba` | Tatoeba public JSON API (collaborative example sentences with translations in hundreds of languages: sentence text, language, contributor, licence, alternative-script transcription, audio and translations into other languages), no key required |
 | Urban Dictionary | `urbandictionary` | Urban Dictionary public JSON API (crowd-sourced slang and idiom definitions: definition, example usage, author, up/down votes and submission date) with autocomplete term suggestions, no key required |

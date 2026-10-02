@@ -196,6 +196,7 @@ from .urbandictionary import UrbanDictionaryProvider
 from .urlscan import UrlscanProvider
 from .usaspending import UsaSpendingProvider
 from .vam import VamProvider
+from .vndb import VNDBProvider
 from .vscode_marketplace import VSCodeMarketplaceProvider
 from .wallhaven import WallhavenProvider
 from .wayback import WaybackProvider
@@ -341,6 +342,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     ScryfallProvider,
     CheapSharkProvider,
     ModrinthProvider,
+    VNDBProvider,
     # Media / food & recipes
     TheMealDBProvider,
     CocktailDBProvider,

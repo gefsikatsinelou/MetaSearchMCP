@@ -224,6 +224,7 @@ from .yahoo import YahooProvider
 from .yahoo_finance import YahooFinanceProvider
 from .yandex import YandexProvider
 from .youcom import YouComProvider
+from .yugioh import YuGiOhProvider
 from .zbmath import ZbMathProvider
 from .zenodo import ZenodoProvider
 
@@ -343,6 +344,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     # Media / games
     SteamProvider,
     ScryfallProvider,
+    YuGiOhProvider,
     CheapSharkProvider,
     ModrinthProvider,
     VNDBProvider,

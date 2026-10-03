@@ -121,6 +121,7 @@ from .mangadex import MangaDexProvider
 from .marginalia import MarginaliaProvider
 from .mastodon import MastodonProvider
 from .maven import MavenProvider
+from .medlineplus import MedlinePlusProvider
 from .metacpan import MetaCPANProvider
 from .metmuseum import MetMuseumProvider
 from .modrinth import ModrinthProvider
@@ -419,6 +420,8 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     OpenFDADrugProvider,
     RxNormProvider,
     MyChemProvider,
+    # Health / consumer medical
+    MedlinePlusProvider,
     # Academic
     ArxivProvider,
     PubMedProvider,

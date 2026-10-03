@@ -214,6 +214,12 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | J-STAGE | `jstage` | J-STAGE Web API article search (Japanese scholarly journals: English and Japanese titles, authors, journal, ISSN, volume/number/pages, publication year and DOI), no key required |
 | NSF Awards | `nsf_awards` | NSF awards API (U.S. National Science Foundation funded research: award id, title, abstract, principal investigators and co-PIs, awardee organisation and location, programme, directorate and division, start/end dates, obligated and estimated-total amounts, award type, CFDA number, programme officer), no key required |
 
+### Health Sources
+
+| Provider | Name | Method |
+|---|---|---|
+| MedlinePlus | `medlineplus` | MedlinePlus/NLM web service (consumer health topics: plain-language summary, publishing organization, alternative names, MeSH terms, topic groups), no key required |
+
 ### Legal Sources
 
 | Provider | Name | Method |

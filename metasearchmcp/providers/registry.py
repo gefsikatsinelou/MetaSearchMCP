@@ -196,6 +196,7 @@ from .uniprot import UniProtProvider
 from .unsplash import UnsplashProvider
 from .urbandictionary import UrbanDictionaryProvider
 from .urlscan import UrlscanProvider
+from .us_open_data import UsOpenDataProvider
 from .usaspending import UsaSpendingProvider
 from .vam import VamProvider
 from .vndb import VNDBProvider
@@ -296,6 +297,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     GooglePatentsProvider,
     # Open data portals
     EuOpenDataProvider,
+    UsOpenDataProvider,
     # Development / research
     WorldBankDocumentsProvider,
     # Nonprofits / charities

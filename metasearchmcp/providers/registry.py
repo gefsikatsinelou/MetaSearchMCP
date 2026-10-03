@@ -67,6 +67,7 @@ from .dryad import DryadProvider
 from .duckduckgo import DuckDuckGoProvider
 from .earthquake import EarthquakeProvider
 from .ecosia import EcosiaProvider
+from .eric import EricProvider
 from .eu_open_data import EuOpenDataProvider
 from .europepmc import EuropePmcProvider
 from .exoplanet import ExoplanetProvider
@@ -438,6 +439,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     InspireHEPProvider,
     DoajProvider,
     DoabProvider,
+    EricProvider,
     DBLPProvider,
     ZbMathProvider,
     OpenLibraryProvider,

@@ -169,6 +169,9 @@ from .qwant import QwantProvider
 from .radio_browser import RadioBrowserProvider
 from .rcsb_pdb import RcsbPdbProvider
 from .rdap import RdapProvider
+
+# Biology / pathways
+from .reactome import ReactomeProvider
 from .reddit import RedditProvider
 from .remoteok import RemoteOKProvider
 from .remotive import RemotiveProvider
@@ -457,6 +460,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     MyGeneProvider,
     RcsbPdbProvider,
     OlsProvider,
+    ReactomeProvider,
     NihReporterProvider,
     JStageProvider,
     # Funding / grants

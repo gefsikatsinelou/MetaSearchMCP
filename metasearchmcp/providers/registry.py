@@ -51,6 +51,7 @@ from .courtlistener import CourtListenerProvider
 from .crates import CratesIoProvider
 from .crossref import CrossrefProvider
 from .crtsh import CrtShProvider
+from .dailymed import DailyMedProvider
 from .dailymotion import DailymotionProvider
 from .datacite import DataCiteProvider
 from .datamuse import DatamuseProvider
@@ -426,6 +427,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     OpenFDADrugProvider,
     RxNormProvider,
     MyChemProvider,
+    DailyMedProvider,
     # Health / consumer medical
     MedlinePlusProvider,
     # Academic

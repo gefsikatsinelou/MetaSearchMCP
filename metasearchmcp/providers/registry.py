@@ -28,6 +28,9 @@ from .artifacthub import ArtifactHubProvider
 
 # Academic
 from .arxiv import ArxivProvider
+
+# Open data portals
+from .au_open_data import AuOpenDataProvider
 from .audius import AudiusProvider
 from .aur import AurProvider
 
@@ -304,6 +307,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     # Open data portals
     EuOpenDataProvider,
     UsOpenDataProvider,
+    AuOpenDataProvider,
     # Development / research
     WorldBankDocumentsProvider,
     # Nonprofits / charities

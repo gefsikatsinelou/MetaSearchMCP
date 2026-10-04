@@ -117,6 +117,9 @@ from .itunes import ITunesProvider
 from .jetbrains import JetbrainsProvider
 from .jisho import JishoProvider
 from .jstage import JStageProvider
+
+# Genes / pathways / diseases / drugs
+from .kegg import KeggProvider
 from .kitsu import KitsuProvider
 from .lemmy import LemmyProvider
 from .lib_rs import LibRsProvider
@@ -469,6 +472,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     OlsProvider,
     ReactomeProvider,
     InterProProvider,
+    KeggProvider,
     NihReporterProvider,
     JStageProvider,
     # Funding / grants

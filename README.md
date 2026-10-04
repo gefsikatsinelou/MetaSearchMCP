@@ -200,6 +200,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | MyGene.info | `mygene` | BioThings MyGene.info gene annotation API (gene symbols, names, organism, chromosome, aliases), no key required |
 | RCSB PDB | `rcsb_pdb` | RCSB Protein Data Bank search + GraphQL data API (3D structures: title, method, resolution, citation), no key required |
 | Reactome | `reactome` | Reactome Content Service search API (curated biological pathways, reactions, proteins and small molecules: stable identifier such as `R-HSA-70171`, entity type, species, compartment and pathway summary), no key required |
+| InterPro | `interpro` | EMBL-EBI InterPro API (protein families, domains and functional sites integrated from Pfam, PANTHER, PRINTS, PROSITE, CDD, SMART and others: stable accession such as `IPR000023`, entry type, integrating member-database signatures and Gene Ontology terms), no key required |
 | EBI Ontology Lookup Service | `ols` | EMBL-EBI OLS4 full-text search over 250+ biomedical and biological ontologies (Gene Ontology, MeSH, ChEBI, HGNC, HPO, MONDO, NCIT): term labels, stable identifiers such as `GO:0006915`, definitions, synonyms and the ontology each term belongs to, no key required |
 | ChEMBL | `chembl` | ChEMBL REST API (drugs, molecular formula/SMILES/ATC), no key required |
 | PubChem | `pubchem` | PubChem PUG REST API (compound names/synonyms, molecular formula, molecular weight, canonical SMILES, IUPAC name, InChIKey), no key required |

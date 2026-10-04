@@ -109,6 +109,7 @@ from .inaturalist import INaturalistProvider
 from .inspirehep import InspireHEPProvider
 from .internet_archive import InternetArchiveProvider
 from .internetdb import InternetDbProvider
+from .interpro import InterProProvider
 from .itunes import ITunesProvider
 from .jetbrains import JetbrainsProvider
 from .jisho import JishoProvider
@@ -463,6 +464,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     RcsbPdbProvider,
     OlsProvider,
     ReactomeProvider,
+    InterProProvider,
     NihReporterProvider,
     JStageProvider,
     # Funding / grants

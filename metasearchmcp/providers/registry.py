@@ -201,6 +201,7 @@ from .spacelaunch import SpaceLaunchProvider
 from .stackoverflow import StackOverflowProvider
 from .startpage import StartpageProvider
 from .steam import SteamProvider
+from .swapi import SwapiProvider
 from .tatoeba import TatoebaProvider
 from .terraform import TerraformRegistryProvider
 from .themealdb import TheMealDBProvider
@@ -359,6 +360,8 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     FyydProvider,
     # Media / poetry
     PoetryDbProvider,
+    # Media / fiction
+    SwapiProvider,
     # Media / games
     SteamProvider,
     ScryfallProvider,

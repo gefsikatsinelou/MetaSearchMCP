@@ -185,6 +185,7 @@ from .reactome import ReactomeProvider
 from .reddit import RedditProvider
 from .remoteok import RemoteOKProvider
 from .remotive import RemotiveProvider
+from .restcountries import RestCountriesProvider
 from .ror import RorProvider
 from .rubygems import RubyGemsProvider
 from .runiverse import RUniverseProvider
@@ -300,6 +301,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     NominatimProvider,
     OverpassProvider,
     WeatherProvider,
+    RestCountriesProvider,
     # Nature / biodiversity
     INaturalistProvider,
     GBIFSpeciesProvider,

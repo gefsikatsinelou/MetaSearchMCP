@@ -46,6 +46,7 @@ from .chocolatey import ChocolateyProvider
 from .cisa_kev import CisaKevProvider
 from .clevelandart import ClevelandArtProvider
 from .clinicaltrials import ClinicalTrialsProvider
+from .clinvar import ClinVarProvider
 from .cocktaildb import CocktailDBProvider
 from .codeberg import CodebergProvider
 from .coingecko import CoinGeckoProvider
@@ -473,6 +474,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     ReactomeProvider,
     InterProProvider,
     KeggProvider,
+    ClinVarProvider,
     NihReporterProvider,
     JStageProvider,
     # Funding / grants

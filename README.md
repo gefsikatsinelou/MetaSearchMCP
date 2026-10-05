@@ -250,6 +250,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 |---|---|---|
 | European Open Data Portal | `eu_open_data` | data.europa.eu search API (public-sector datasets harvested from EU member states and institutions: description, publisher, catalogue, country, subjects, formats, licence), no key required |
 | U.S. Open Data Catalog | `us_open_data` | catalog.data.gov Catalog API (U.S. public-sector datasets harvested from federal, state, local, tribal, university and non-profit publishers: description, organization, publisher, keywords, themes, distribution formats, popularity), no key required |
+| DBnomics | `dbnomics` | DBnomics search API (economic and financial datasets and time series from official statistical organisations — OECD, Eurostat, IMF, BIS, World Bank, national statistics offices: dataset name, description, provider and series counts), no key required |
 
 ### Development Sources
 

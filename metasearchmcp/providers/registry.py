@@ -60,6 +60,7 @@ from .dailymotion import DailymotionProvider
 from .datacite import DataCiteProvider
 from .datamuse import DatamuseProvider
 from .dblp import DBLPProvider
+from .dbnomics import DBnomicsProvider
 from .debian import DebianProvider
 from .deezer import DeezerProvider
 from .dictionaryapi import DictionaryApiProvider
@@ -490,6 +491,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     FrankfurterProvider,
     SecEdgarProvider,
     GleifProvider,
+    DBnomicsProvider,
 ]
 
 

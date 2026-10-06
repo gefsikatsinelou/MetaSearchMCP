@@ -65,6 +65,9 @@ from .debian import DebianProvider
 from .deezer import DeezerProvider
 from .dictionaryapi import DictionaryApiProvider
 from .discogs import DiscogsProvider
+
+# Media / games (tabletop reference)
+from .dnd5e import Dnd5eProvider
 from .dns import DnsProvider
 from .doab import DoabProvider
 from .doaj import DoajProvider
@@ -373,6 +376,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     ModrinthProvider,
     VNDBProvider,
     PokeapiProvider,
+    Dnd5eProvider,
     # Media / food & recipes
     TheMealDBProvider,
     CocktailDBProvider,

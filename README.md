@@ -320,6 +320,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | PoetryDB | `poetrydb` | PoetryDB keyless API (public-domain poetry searchable by title, author or full text of the poem's lines, returning the title, author, line count and lines), no key required |
 | Star Wars (SWAPI) | `swapi` | The Star Wars API (SWAPI) keyless search across all six canon collections — people, films, planets, species, starships and vehicles — interleaving hits round-robin with each record's canonical swapi.dev link and a compact fact snippet, no key required |
 | PokéAPI | `pokeapi` | PokéAPI keyless National Pokédex search (1300+ Pokémon species by name: National Pokédex number, types, abilities, height, weight, base experience and a sprite link), no key required |
+| D&D 5e API | `dnd5e` | The keyless D&D 5e API (dnd5eapi.co) for Dungeons & Dragons System Reference Document reference content — spells (with level), monsters and equipment by name — with each hit linked to its canonical dnd5eapi.co record, no key required |
 
 ### Space Sources
 

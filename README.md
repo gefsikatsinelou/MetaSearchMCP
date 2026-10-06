@@ -319,6 +319,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | fyyd | `fyyd` | fyyd podcast episode search API (episode-level search across the keyless fyyd directory: episode title, description, audio enclosure URL and MIME type, duration, season/episode numbers, publication date and artwork, falling back to a show-level search for programme names), no key required |
 | PoetryDB | `poetrydb` | PoetryDB keyless API (public-domain poetry searchable by title, author or full text of the poem's lines, returning the title, author, line count and lines), no key required |
 | Star Wars (SWAPI) | `swapi` | The Star Wars API (SWAPI) keyless search across all six canon collections — people, films, planets, species, starships and vehicles — interleaving hits round-robin with each record's canonical swapi.dev link and a compact fact snippet, no key required |
+| PokéAPI | `pokeapi` | PokéAPI keyless National Pokédex search (1300+ Pokémon species by name: National Pokédex number, types, abilities, height, weight, base experience and a sprite link), no key required |
 
 ### Space Sources
 

@@ -170,6 +170,7 @@ from .packagist import PackagistProvider
 from .peertube import PeerTubeProvider
 from .pkg_go_dev import PkgGoDevProvider
 from .poetrydb import PoetryDbProvider
+from .pokeapi import PokeapiProvider
 from .propublica_nonprofits import ProPublicaNonprofitsProvider
 from .pubchem import PubChemProvider
 from .pubdev import PubDevProvider
@@ -371,6 +372,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     CheapSharkProvider,
     ModrinthProvider,
     VNDBProvider,
+    PokeapiProvider,
     # Media / food & recipes
     TheMealDBProvider,
     CocktailDBProvider,

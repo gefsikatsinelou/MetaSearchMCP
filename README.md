@@ -226,6 +226,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | Provider | Name | Method |
 |---|---|---|
 | MedlinePlus | `medlineplus` | MedlinePlus/NLM web service (consumer health topics: plain-language summary, publishing organization, alternative names, MeSH terms, topic groups), no key required |
+| DailyMed | `dailymed` | DailyMed/NLM Content Service (the official repository of FDA Structured Product Labeling documents — current prescription and OTC drug labels by drug name: title, SPL version, published date and stable setid), no key required |
 
 ### Legal Sources
 
@@ -252,6 +253,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 |---|---|---|
 | European Open Data Portal | `eu_open_data` | data.europa.eu search API (public-sector datasets harvested from EU member states and institutions: description, publisher, catalogue, country, subjects, formats, licence), no key required |
 | U.S. Open Data Catalog | `us_open_data` | catalog.data.gov Catalog API (U.S. public-sector datasets harvested from federal, state, local, tribal, university and non-profit publishers: description, organization, publisher, keywords, themes, distribution formats, popularity), no key required |
+| Australian Open Data Portal | `au_open_data` | data.gov.au CKAN Action API (Australian public-sector datasets harvested from federal, state and local publishers: description, organization, author, tags, distribution formats, resource count, licence), no key required |
 | DBnomics | `dbnomics` | DBnomics search API (economic and financial datasets and time series from official statistical organisations — OECD, Eurostat, IMF, BIS, World Bank, national statistics offices: dataset name, description, provider and series counts), no key required |
 
 ### Development Sources
@@ -306,6 +308,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | Kitsu | `kitsu` | Kitsu anime & manga catalog API (JSON:API), no key required |
 | AniList | `anilist` | AniList GraphQL API (anime, manga & light novels with synopsis, format, status, genres, community scores, popularity, studio and cover image), no key required |
 | MangaDex | `mangadex` | MangaDex public REST API (manga titles & alternate titles with synopsis, status, year, content rating, demographic, chapter/volume counts, genres, authors/artists and cover image), no key required |
+| VNDB | `vndb` | VNDB Kana API (the Visual Novel Database: visual novels by keyword with alternate title, release date, rating and vote count, cover image, description, developers and platforms), no key required |
 | Steam | `steam` | Steam Store search API, no key required |
 | Scryfall | `scryfall` | Scryfall Magic: The Gathering card search API (names, rules text, sets, prices), no key required |
 | Yu-Gi-Oh! (YGOPRODeck) | `yugioh` | YGOPRODeck Yu-Gi-Oh! Trading Card Game database (fuzzy card-name search: card type, attribute/race, ATK/DEF, level or link rating, rules text, archetype, banlist status, first printing and market price), no key required |
@@ -535,6 +538,34 @@ curl -X POST http://localhost:8000/search/google \
   -H "Content-Type: application/json" \
   -d '{"query": "site:github.com rust tokio", "provider": "google"}'
 ```
+
+### `POST /search/batch`
+
+Run several queries in a single round-trip against the same provider/tag filters.
+
+```bash
+curl -X POST http://localhost:8000/search/batch \
+  -H "Content-Type: application/json" \
+  -d '{
+    "queries": ["rust async runtime", "python asyncio"],
+    "providers": ["duckduckgo", "wikipedia"],
+    "params": {"num_results": 3, "max_total_results": 5}
+  }'
+```
+
+Queries (1-20) are executed concurrently and each yields its own `SearchReport`. A per-query error (e.g. an aborted provider) does not fail the other queries; the response is `{"count": N, "queries": [...], "results": [...]}`, where each entry is either a report or `{"query": ..., "error": ...}`.
+
+### `POST /search/bio`
+
+Run a search across biomedical/life-science providers tagged `bio` (UniProt, ClinicalTrials.gov, PubMed, Europe PMC).
+
+```bash
+curl -X POST http://localhost:8000/search/bio \
+  -H "Content-Type: application/json" \
+  -d '{"query": "BRCA1 protein structure", "params": {"num_results": 5}}'
+```
+
+It honors the same provider/tag filters as the aggregate `/search` endpoint; when no tags are supplied it defaults to `["bio"]`.
 
 ### `GET /search/suggest`
 

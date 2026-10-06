@@ -142,6 +142,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | RubyGems | `rubygems` | RubyGems search API |
 | crates.io | `crates` | crates.io API |
 | lib.rs | `lib_rs` | HTML scraping |
+| Clojars | `clojars` | Clojars JSON search API (Clojure libraries with latest version and description), no key required |
 | Docker Hub | `dockerhub` | Docker Hub search API |
 | Artifact Hub | `artifacthub` | Artifact Hub packages search API (Helm charts, operators, policies, container images), no key required |
 | Flathub | `flathub` | Flathub API v2 search (Linux desktop apps), no key required |

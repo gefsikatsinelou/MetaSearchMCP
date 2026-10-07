@@ -121,6 +121,7 @@ from .internetdb import InternetDbProvider
 from .interpro import InterProProvider
 from .itunes import ITunesProvider
 from .jetbrains import JetbrainsProvider
+from .jikan import JikanProvider
 from .jisho import JishoProvider
 from .jstage import JStageProvider
 
@@ -361,6 +362,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     # Media / anime & manga
     KitsuProvider,
     AniListProvider,
+    JikanProvider,
     MangaDexProvider,
     # Media / podcasts
     ITunesProvider,

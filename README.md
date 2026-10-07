@@ -307,6 +307,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | Audius | `audius` | Audius public REST API (independent, artist-uploaded music tracks with artist, genre, mood, duration, play counts and a direct stream URL when the track is streamable), no key required |
 | Kitsu | `kitsu` | Kitsu anime & manga catalog API (JSON:API), no key required |
 | AniList | `anilist` | AniList GraphQL API (anime, manga & light novels with synopsis, format, status, genres, community scores, popularity, studio and cover image), no key required |
+| MyAnimeList (Jikan) | `jikan` | Jikan keyless REST API mirroring MyAnimeList (anime by keyword: type, source, release status, air dates, episode count, rating, community score, rank, popularity, members, season, studios, genres, synopsis and cover image), no key required |
 | MangaDex | `mangadex` | MangaDex public REST API (manga titles & alternate titles with synopsis, status, year, content rating, demographic, chapter/volume counts, genres, authors/artists and cover image), no key required |
 | VNDB | `vndb` | VNDB Kana API (the Visual Novel Database: visual novels by keyword with alternate title, release date, rating and vote count, cover image, description, developers and platforms), no key required |
 | Steam | `steam` | Steam Store search API, no key required |

@@ -130,6 +130,7 @@ from .kegg import KeggProvider
 from .kitsu import KitsuProvider
 from .lemmy import LemmyProvider
 from .lib_rs import LibRsProvider
+from .librivox import LibriVoxProvider
 from .lobsters import LobstersProvider
 from .loc_gov import LocGovProvider
 from .macports import MacPortsProvider
@@ -367,6 +368,8 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     # Media / podcasts
     ITunesProvider,
     FyydProvider,
+    # Media / audiobooks
+    LibriVoxProvider,
     # Media / poetry
     PoetryDbProvider,
     # Media / fiction

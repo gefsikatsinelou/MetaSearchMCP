@@ -212,6 +212,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | MyChem.info | `mychem` | BioThings MyChem.info API (chemical and drug annotations aggregated from ChEMBL, DrugBank, ChEBI, DrugCentral, PubChem, UNII: preferred name, formula, weight, SMILES, CAS, approval phase, cross-references), no key required |
 | Google Books | `google_books` | Google Books API, no key required |
 | Project Gutenberg | `gutendex` | Gutendex API (public-domain ebooks), no key required |
+| LibriVox | `librivox` | LibriVox keyless API for free public-domain audiobooks (full-text keyword search: authors with birth/death years, language, copyright year, section count, total running time, description and links to the canonical page, Project Gutenberg source text, RSS feed and zip download), no key required |
 | DBLP | `dblp` | DBLP bibliography API (computer-science publications), no key required |
 | OpenReview | `openreview` | OpenReview API v2 note search (submissions to ICLR, NeurIPS, ICML, COLM and workshops: title, authors, abstract, keywords, venue and review status, primary area, TLDR, discussion and PDF links), no key required |
 | zbMATH Open | `zbmath` | zbMATH Open REST API (mathematical literature: Zbl number, authors, venue, MSC classification, reviews), no key required |

@@ -215,6 +215,7 @@ from .terraform import TerraformRegistryProvider
 from .themealdb import TheMealDBProvider
 from .thesportsdb import TheSportsDBProvider
 from .tvmaze import TVMazeProvider
+from .uk_open_data import UkOpenDataProvider
 from .uniprot import UniProtProvider
 from .unsplash import UnsplashProvider
 from .urbandictionary import UrbanDictionaryProvider
@@ -323,6 +324,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     EuOpenDataProvider,
     UsOpenDataProvider,
     AuOpenDataProvider,
+    UkOpenDataProvider,
     # Development / research
     WorldBankDocumentsProvider,
     # Nonprofits / charities

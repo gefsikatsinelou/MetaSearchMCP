@@ -121,6 +121,7 @@ from .inspirehep import InspireHEPProvider
 from .internet_archive import InternetArchiveProvider
 from .internetdb import InternetDbProvider
 from .interpro import InterProProvider
+from .it_open_data import ItOpenDataProvider
 from .itunes import ITunesProvider
 from .jetbrains import JetbrainsProvider
 from .jikan import JikanProvider
@@ -329,6 +330,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     UkOpenDataProvider,
     CaOpenDataProvider,
     IeOpenDataProvider,
+    ItOpenDataProvider,
     # Development / research
     WorldBankDocumentsProvider,
     # Nonprofits / charities

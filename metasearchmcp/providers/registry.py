@@ -112,6 +112,7 @@ from .harvard_dataverse import HarvardDataverseProvider
 from .hex import HexProvider
 from .huggingface import HuggingFaceProvider
 from .iconify import IconifyProvider
+from .ie_open_data import IeOpenDataProvider
 from .ietf import IetfProvider
 
 # Knowledge / reference
@@ -327,6 +328,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     AuOpenDataProvider,
     UkOpenDataProvider,
     CaOpenDataProvider,
+    IeOpenDataProvider,
     # Development / research
     WorldBankDocumentsProvider,
     # Nonprofits / charities

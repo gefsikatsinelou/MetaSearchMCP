@@ -87,6 +87,7 @@ from .figshare import FigshareProvider
 from .finnhub import FinnhubProvider
 from .flathub import FlathubProvider
 from .flickr import FlickrProvider
+from .fr_open_data import FrOpenDataProvider
 from .frankfurter import FrankfurterProvider
 from .fyyd import FyydProvider
 from .gbif import GBIFSpeciesProvider
@@ -331,6 +332,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     CaOpenDataProvider,
     IeOpenDataProvider,
     ItOpenDataProvider,
+    FrOpenDataProvider,
     # Development / research
     WorldBankDocumentsProvider,
     # Nonprofits / charities

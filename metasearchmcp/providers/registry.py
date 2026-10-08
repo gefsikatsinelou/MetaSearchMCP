@@ -40,6 +40,7 @@ from .bing import BingProvider
 from .bing_news import BingNewsProvider
 from .bluesky import BlueskyProvider
 from .brave import BraveProvider
+from .ca_open_data import CaOpenDataProvider
 from .cheapshark import CheapSharkProvider
 from .chembl import ChEMBLProvider
 from .chocolatey import ChocolateyProvider
@@ -325,6 +326,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     UsOpenDataProvider,
     AuOpenDataProvider,
     UkOpenDataProvider,
+    CaOpenDataProvider,
     # Development / research
     WorldBankDocumentsProvider,
     # Nonprofits / charities

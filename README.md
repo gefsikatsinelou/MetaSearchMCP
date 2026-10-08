@@ -256,6 +256,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | U.S. Open Data Catalog | `us_open_data` | catalog.data.gov Catalog API (U.S. public-sector datasets harvested from federal, state, local, tribal, university and non-profit publishers: description, organization, publisher, keywords, themes, distribution formats, popularity), no key required |
 | Australian Open Data Portal | `au_open_data` | data.gov.au CKAN Action API (Australian public-sector datasets harvested from federal, state and local publishers: description, organization, author, tags, distribution formats, resource count, licence), no key required |
 | UK Open Data Catalogue | `uk_open_data` | ckan.publishing.service.gov.uk CKAN Action API (UK public-sector datasets harvested from central government, agencies, local authorities and other public bodies: description, organization, author, tags, distribution formats, resource count, licence), no key required |
+| Canadian Open Data Portal | `ca_open_data` | open.canada.ca CKAN Action API (Canadian public-sector datasets harvested from federal, provincial, territorial and municipal publishers: description, organization, author, keywords, subjects, distribution formats, resource count, licence), no key required |
 | DBnomics | `dbnomics` | DBnomics search API (economic and financial datasets and time series from official statistical organisations — OECD, Eurostat, IMF, BIS, World Bank, national statistics offices: dataset name, description, provider and series counts), no key required |
 
 ### Development Sources

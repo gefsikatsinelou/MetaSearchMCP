@@ -105,6 +105,7 @@ from .google_patents import GooglePatentsProvider
 from .google_serpbase import GoogleSerpbaseProvider
 from .google_serper import GoogleSerperProvider
 from .gov_uk import GovUkProvider
+from .govdata_de import GovDataDeProvider
 from .grants_gov import GrantsGovProvider
 from .gutendex import GutendexProvider
 from .hackage import HackageProvider
@@ -334,6 +335,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     IeOpenDataProvider,
     ItOpenDataProvider,
     FrOpenDataProvider,
+    GovDataDeProvider,
     # Government content
     GovUkProvider,
     # Development / research

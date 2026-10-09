@@ -79,6 +79,7 @@ from .duckduckgo import DuckDuckGoProvider
 from .earthquake import EarthquakeProvider
 from .ecosia import EcosiaProvider
 from .eric import EricProvider
+from .es_open_data import EsOpenDataProvider
 from .eu_open_data import EuOpenDataProvider
 from .europepmc import EuropePmcProvider
 from .exoplanet import ExoplanetProvider
@@ -338,6 +339,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     FrOpenDataProvider,
     GovDataDeProvider,
     NlOpenDataProvider,
+    EsOpenDataProvider,
     # Government content
     GovUkProvider,
     # Development / research

@@ -262,6 +262,12 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | French Open Data Portal | `fr_open_data` | data.gouv.fr udata search API (French public-sector datasets harvested from ministries, public agencies, regions, local authorities and other public bodies: description, organization, tags, distribution formats, resource count, licence), no key required |
 | DBnomics | `dbnomics` | DBnomics search API (economic and financial datasets and time series from official statistical organisations — OECD, Eurostat, IMF, BIS, World Bank, national statistics offices: dataset name, description, provider and series counts), no key required |
 
+### Government Sources
+
+| Provider | Name | Method |
+|---|---|---|
+| GOV.UK | `gov_uk` | GOV.UK Search API (UK government guidance, publications, announcements, consultations and detailed guides from departments and public bodies: title, link, description, format, organisations, world locations, update date), no key required |
+
 ### Development Sources
 
 | Provider | Name | Method |

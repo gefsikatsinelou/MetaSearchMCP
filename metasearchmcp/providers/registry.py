@@ -157,6 +157,7 @@ from .nager import NagerDateProvider
 from .nasa import NasaProvider
 from .naver import NaverProvider
 from .nih_reporter import NihReporterProvider
+from .nl_open_data import NlOpenDataProvider
 from .nobel import NobelPrizeProvider
 from .nominatim import NominatimProvider
 from .npm import NpmProvider
@@ -336,6 +337,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     ItOpenDataProvider,
     FrOpenDataProvider,
     GovDataDeProvider,
+    NlOpenDataProvider,
     # Government content
     GovUkProvider,
     # Development / research

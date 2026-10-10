@@ -41,6 +41,7 @@ from .bing_news import BingNewsProvider
 from .bluesky import BlueskyProvider
 from .brave import BraveProvider
 from .ca_open_data import CaOpenDataProvider
+from .cern_opendata import CernOpenDataProvider
 from .cheapshark import CheapSharkProvider
 from .chembl import ChEMBLProvider
 from .chocolatey import ChocolateyProvider
@@ -340,6 +341,8 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     GovDataDeProvider,
     NlOpenDataProvider,
     EsOpenDataProvider,
+    # Open research data
+    CernOpenDataProvider,
     # Government content
     GovUkProvider,
     # Development / research

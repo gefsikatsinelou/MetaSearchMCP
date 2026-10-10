@@ -131,6 +131,7 @@ from .itunes import ITunesProvider
 from .jetbrains import JetbrainsProvider
 from .jikan import JikanProvider
 from .jisho import JishoProvider
+from .jobicy import JobicyProvider
 from .jstage import JStageProvider
 
 # Genes / pathways / diseases / drugs
@@ -414,6 +415,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     # Media / jobs & careers
     RemoteOKProvider,
     RemotiveProvider,
+    JobicyProvider,
     # Developer
     GitHubProvider,
     GitLabProvider,

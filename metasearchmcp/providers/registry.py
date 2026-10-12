@@ -159,6 +159,7 @@ from .mygene import MyGeneProvider
 from .nager import NagerDateProvider
 from .nasa import NasaProvider
 from .naver import NaverProvider
+from .nhtsa import NhtsaProvider
 from .nih_reporter import NihReporterProvider
 from .nl_open_data import NlOpenDataProvider
 from .nobel import NobelPrizeProvider
@@ -314,6 +315,8 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     NagerDateProvider,
     NobelPrizeProvider,
     OeisProvider,
+    # Vehicles / automotive reference
+    NhtsaProvider,
     # Places / geocoding
     OpenMeteoProvider,
     NominatimProvider,

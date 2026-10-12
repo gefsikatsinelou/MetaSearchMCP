@@ -200,6 +200,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | ROR | `ror` | Research Organization Registry API (universities, institutes, labs), no key required |
 | UniProt | `uniprot` | UniProt REST API (protein knowledgebase), no key required |
 | MyGene.info | `mygene` | BioThings MyGene.info gene annotation API (gene symbols, names, organism, chromosome, aliases), no key required |
+| MyVariant.info | `myvariant` | BioThings MyVariant.info variant annotation API (dbSNP rsID, gene, protein/coding change, ClinVar significance and conditions, CADD score), no key required |
 | RCSB PDB | `rcsb_pdb` | RCSB Protein Data Bank search + GraphQL data API (3D structures: title, method, resolution, citation), no key required |
 | Reactome | `reactome` | Reactome Content Service search API (curated biological pathways, reactions, proteins and small molecules: stable identifier such as `R-HSA-70171`, entity type, species, compartment and pathway summary), no key required |
 | InterPro | `interpro` | EMBL-EBI InterPro API (protein families, domains and functional sites integrated from Pfam, PANTHER, PRINTS, PROSITE, CDD, SMART and others: stable accession such as `IPR000023`, entry type, integrating member-database signatures and Gene Ontology terms), no key required |

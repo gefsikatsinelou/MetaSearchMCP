@@ -156,6 +156,7 @@ from .musicbrainz import MusicBrainzProvider
 from .mwmbl import MwmblProvider
 from .mychem import MyChemProvider
 from .mygene import MyGeneProvider
+from .myvariant import MyVariantProvider
 from .nager import NagerDateProvider
 from .nasa import NasaProvider
 from .naver import NaverProvider
@@ -515,6 +516,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     RorProvider,
     UniProtProvider,
     MyGeneProvider,
+    MyVariantProvider,
     RcsbPdbProvider,
     OlsProvider,
     ReactomeProvider,

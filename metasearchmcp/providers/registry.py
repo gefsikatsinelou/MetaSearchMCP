@@ -185,6 +185,9 @@ from .osf_preprints import OSFPreprintsProvider
 from .osv import OsvProvider
 from .overpass import OverpassProvider
 from .packagist import PackagistProvider
+
+# Paleontology / fossil record
+from .pbdb import PbdbProvider
 from .peertube import PeerTubeProvider
 from .pkg_go_dev import PkgGoDevProvider
 from .poetrydb import PoetryDbProvider
@@ -327,6 +330,8 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     # Nature / biodiversity
     INaturalistProvider,
     GBIFSpeciesProvider,
+    # Paleontology / fossil record
+    PbdbProvider,
     # Natural hazards / seismology
     EarthquakeProvider,
     # Legal

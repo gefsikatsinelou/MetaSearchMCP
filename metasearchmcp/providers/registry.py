@@ -126,6 +126,7 @@ from .inspirehep import InspireHEPProvider
 from .internet_archive import InternetArchiveProvider
 from .internetdb import InternetDbProvider
 from .interpro import InterProProvider
+from .ipwhois import IpWhoisProvider
 from .it_open_data import ItOpenDataProvider
 from .itunes import ITunesProvider
 from .jetbrains import JetbrainsProvider
@@ -478,6 +479,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     CisaKevProvider,
     OsvProvider,
     InternetDbProvider,
+    IpWhoisProvider,
     RdapProvider,
     DnsProvider,
     CrtShProvider,

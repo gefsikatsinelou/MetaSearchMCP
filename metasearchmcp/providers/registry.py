@@ -46,6 +46,7 @@ from .cheapshark import CheapSharkProvider
 from .chembl import ChEMBLProvider
 from .chocolatey import ChocolateyProvider
 from .cisa_kev import CisaKevProvider
+from .civitai import CivitaiProvider
 from .clevelandart import ClevelandArtProvider
 from .clinicaltrials import ClinicalTrialsProvider
 from .clinvar import ClinVarProvider
@@ -377,6 +378,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     FlickrProvider,
     UnsplashProvider,
     WallhavenProvider,
+    CivitaiProvider,
     MetMuseumProvider,
     ArticProvider,
     ClevelandArtProvider,

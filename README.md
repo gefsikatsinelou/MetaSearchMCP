@@ -308,6 +308,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | Flickr | `flickr` | Public feed API, no key required |
 | Unsplash | `unsplash` | Unsplash REST API (requires `UNSPLASH_ACCESS_KEY`) |
 | Wallhaven | `wallhaven` | Wallhaven public JSON API (high-resolution desktop wallpapers: resolution and aspect ratio, file size/type, category, purity, colours, views/favourites, full-size image and thumbnail URLs), no key required |
+| Civitai | `civitai` | Civitai public REST API (community generative-AI image models — Stable Diffusion checkpoints, LoRAs and more by keyword: model type, tags, creator, download/like counts and the newest version's base model, trained words, download URL and preview image), no key required |
 | NASA | `nasa` | NASA Image and Video Library API, no key required |
 | Met Museum | `metmuseum` | Met Museum public collection API, no key required |
 | Art Institute of Chicago | `artic` | AIC public collection API, no key required |

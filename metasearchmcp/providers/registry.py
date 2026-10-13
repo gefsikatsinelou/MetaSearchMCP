@@ -176,6 +176,7 @@ from .ols import OlsProvider
 from .open_vsx import OpenVsxProvider
 from .openaire import OpenAIREProvider
 from .openalex import OpenAlexProvider
+from .openbrewerydb import OpenBreweryDbProvider
 from .openfda import OpenFDADrugProvider
 from .openfoodfacts import OpenFoodFactsProvider
 from .openlibrary import OpenLibraryProvider
@@ -422,6 +423,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     TheMealDBProvider,
     CocktailDBProvider,
     OpenFoodFactsProvider,
+    OpenBreweryDbProvider,
     # Media / sports
     TheSportsDBProvider,
     # Media / jobs & careers

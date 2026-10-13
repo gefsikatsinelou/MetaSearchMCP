@@ -335,6 +335,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | TheMealDB | `themealdb` | TheMealDB public API, no key required |
 | TheCocktailDB | `cocktaildb` | TheCocktailDB public API, no key required |
 | Open Food Facts | `openfoodfacts` | Open Food Facts public search API, no key required |
+| Open Brewery DB | `openbrewerydb` | Open Brewery DB public search API (breweries worldwide by name, city or region: type, full address, coordinates, phone and website), no key required |
 | TheSportsDB | `thesportsdb` | TheSportsDB public API (teams & players), no key required |
 | RemoteOK | `remoteok` | RemoteOK public jobs API (remote developer jobs), no key required |
 | Remotive | `remotive` | Remotive public jobs API (keyword-searchable remote jobs), no key required |

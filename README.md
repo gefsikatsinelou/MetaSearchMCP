@@ -112,6 +112,12 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | Nager.Date | `nager` | Public-holiday calendar REST API (public holidays by country), no key required |
 | REST Countries | `restcountries` | REST Countries API (countries and territories by name: common and official names, ISO 3166 codes, capital, region and subregion, population, area, currencies and languages, plus the country record link), no key required |
 
+### Education Sources
+
+| Provider | Name | Method |
+|---|---|---|
+| Hipolabs Universities | `universities` | Hipolabs Universities directory search (higher-education institutions by name: country, state/province, website and e-mail domain), no key required |
+
 ### Nature And Biodiversity
 
 | Provider | Name | Method |

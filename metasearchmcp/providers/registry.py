@@ -235,6 +235,7 @@ from .thesportsdb import TheSportsDBProvider
 from .tvmaze import TVMazeProvider
 from .uk_open_data import UkOpenDataProvider
 from .uniprot import UniProtProvider
+from .universities import UniversitiesProvider
 from .unsplash import UnsplashProvider
 from .urbandictionary import UrbanDictionaryProvider
 from .urlscan import UrlscanProvider
@@ -330,6 +331,8 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     OverpassProvider,
     WeatherProvider,
     RestCountriesProvider,
+    # Education / universities
+    UniversitiesProvider,
     # Nature / biodiversity
     INaturalistProvider,
     GBIFSpeciesProvider,

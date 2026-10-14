@@ -101,6 +101,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | Nobel Prize | `nobel` | Official Nobel Prize API v2 (awards by year/category), no key required |
 | OEIS | `oeis` | OEIS JSON search API (integer sequences by terms, A-number or keywords: sequence name, terms, offset, keyword flags, author), no key required |
 | Bible (bible-api.com) | `bible` | bible-api.com keyless scripture lookup (Bible passages by reference such as `john 3:16`, `romans 8:28` or a whole chapter like `psalms 23`: each verse returned with its book, chapter, verse number and World English Bible text), no key required |
+| Qur'an (quran.com) | `quran` | quran.com keyless scripture search (Qur'an verses by keyword such as `mercy` or `patience`: each result returned with its surah:ayah reference, the Arabic verse text and a translated verse text), no key required |
 
 ### Places And Geocoding
 

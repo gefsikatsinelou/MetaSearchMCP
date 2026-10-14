@@ -201,6 +201,7 @@ from .pubchem import PubChemProvider
 from .pubdev import PubDevProvider
 from .pubmed import PubMedProvider
 from .pypi import PyPIProvider
+from .quran import QuranProvider
 from .qwant import QwantProvider
 from .radio_browser import RadioBrowserProvider
 from .rcsb_pdb import RcsbPdbProvider
@@ -323,6 +324,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     UrbanDictionaryProvider,
     # Scripture
     BibleProvider,
+    QuranProvider,
     NagerDateProvider,
     NobelPrizeProvider,
     OeisProvider,

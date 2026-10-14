@@ -42,6 +42,7 @@ from .bing_news import BingNewsProvider
 from .bluesky import BlueskyProvider
 from .brave import BraveProvider
 from .ca_open_data import CaOpenDataProvider
+from .cdnjs import CdnjsProvider
 from .cern_opendata import CernOpenDataProvider
 from .cheapshark import CheapSharkProvider
 from .chembl import ChEMBLProvider
@@ -453,6 +454,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     MastodonProvider,
     BlueskyProvider,
     NpmProvider,
+    CdnjsProvider,
     NuGetProvider,
     PackagistProvider,
     HexProvider,

@@ -195,6 +195,7 @@ from .packagist import PackagistProvider
 from .pbdb import PbdbProvider
 from .peertube import PeerTubeProvider
 from .pkg_go_dev import PkgGoDevProvider
+from .plos import PlosProvider
 from .poetrydb import PoetryDbProvider
 from .pokeapi import PokeapiProvider
 from .propublica_nonprofits import ProPublicaNonprofitsProvider
@@ -517,6 +518,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     OpenAlexProvider,
     OpenAIREProvider,
     OpenReviewProvider,
+    PlosProvider,
     HalProvider,
     InspireHEPProvider,
     DoajProvider,

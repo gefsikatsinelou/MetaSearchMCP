@@ -197,6 +197,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | DOAB | `doab` | DOAB public REST API (peer-reviewed open-access books and monographs), no key required |
 | ERIC | `eric` | ERIC (Education Resources Information Center) search API (education research: journal articles, reports and conference papers, with accession id, authors, journal/source, abstract, subject descriptors, publication type and year, peer-review status, education level and ISSN), no key required |
 | Europe PMC | `europepmc` | Europe PMC REST API (PubMed + preprints), no key required |
+| PLOS | `plos` | PLOS keyless open-access search API (full-text search across PLOS journals — PLOS ONE, PLOS Biology, PLOS Medicine and others: article title, journal, publication date, authors and abstract, with a DOI resolver link), no key required |
 | ClinicalTrials.gov | `clinicaltrials` | ClinicalTrials.gov v2 API (clinical studies), no key required |
 | DataCite | `datacite` | DataCite DOI search API, no key required |
 | Figshare | `figshare` | Figshare public articles API (research data, datasets), no key required |

@@ -36,6 +36,7 @@ from .aur import AurProvider
 
 # General web search
 from .baidu import BaiduProvider
+from .bible import BibleProvider
 from .bing import BingProvider
 from .bing_news import BingNewsProvider
 from .bluesky import BlueskyProvider
@@ -320,6 +321,8 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     JishoProvider,
     TatoebaProvider,
     UrbanDictionaryProvider,
+    # Scripture
+    BibleProvider,
     NagerDateProvider,
     NobelPrizeProvider,
     OeisProvider,

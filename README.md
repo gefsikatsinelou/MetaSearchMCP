@@ -100,6 +100,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | Urban Dictionary | `urbandictionary` | Urban Dictionary public JSON API (crowd-sourced slang and idiom definitions: definition, example usage, author, up/down votes and submission date) with autocomplete term suggestions, no key required |
 | Nobel Prize | `nobel` | Official Nobel Prize API v2 (awards by year/category), no key required |
 | OEIS | `oeis` | OEIS JSON search API (integer sequences by terms, A-number or keywords: sequence name, terms, offset, keyword flags, author), no key required |
+| Bible (bible-api.com) | `bible` | bible-api.com keyless scripture lookup (Bible passages by reference such as `john 3:16`, `romans 8:28` or a whole chapter like `psalms 23`: each verse returned with its book, chapter, verse number and World English Bible text), no key required |
 
 ### Places And Geocoding
 

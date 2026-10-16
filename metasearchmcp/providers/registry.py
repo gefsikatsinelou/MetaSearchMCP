@@ -167,6 +167,7 @@ from .myvariant import MyVariantProvider
 from .nager import NagerDateProvider
 from .nasa import NasaProvider
 from .naver import NaverProvider
+from .ncbi_gene import NcbiGeneProvider
 from .nhtsa import NhtsaProvider
 from .nih_reporter import NihReporterProvider
 from .nl_open_data import NlOpenDataProvider
@@ -544,6 +545,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     UniProtProvider,
     MyGeneProvider,
     MyVariantProvider,
+    NcbiGeneProvider,
     RcsbPdbProvider,
     OlsProvider,
     ReactomeProvider,

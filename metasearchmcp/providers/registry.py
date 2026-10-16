@@ -178,6 +178,7 @@ from .nuget import NuGetProvider
 from .nvd import NvdProvider
 from .oeis import OeisProvider
 from .ols import OlsProvider
+from .open_targets import OpenTargetsProvider
 from .open_vsx import OpenVsxProvider
 from .openaire import OpenAIREProvider
 from .openalex import OpenAlexProvider
@@ -548,6 +549,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     ReactomeProvider,
     InterProProvider,
     KeggProvider,
+    OpenTargetsProvider,
     ClinVarProvider,
     NihReporterProvider,
     JStageProvider,

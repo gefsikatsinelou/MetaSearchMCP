@@ -281,6 +281,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | Provider | Name | Method |
 |---|---|---|
 | GOV.UK | `gov_uk` | GOV.UK Search API (UK government guidance, publications, announcements, consultations and detailed guides from departments and public bodies: title, link, description, format, organisations, world locations, update date), no key required |
+| CPSC Recalls | `cpsc` | saferproducts.gov recall web service (U.S. Consumer Product Safety Commission recalls of consumer products by keyword: recall title, number, description, hazard, recalling firm, product category, units, country of manufacture and a cpsc.gov link), no key required |
 
 ### Development Sources
 

@@ -58,6 +58,9 @@ from .codeberg import CodebergProvider
 from .coingecko import CoinGeckoProvider
 from .common_crawl import CommonCrawlProvider
 from .courtlistener import CourtListenerProvider
+
+# Consumer product safety / recalls
+from .cpsc import CpscProvider
 from .crates import CratesIoProvider
 from .crossref import CrossrefProvider
 from .crtsh import CrtShProvider
@@ -553,6 +556,8 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     NsfAwardsProvider,
     # Federal spending / awards
     UsaSpendingProvider,
+    # Consumer product safety / recalls
+    CpscProvider,
     # Finance
     YahooFinanceProvider,
     AlphaVantageProvider,

@@ -85,6 +85,7 @@ from .dryad import DryadProvider
 from .duckduckgo import DuckDuckGoProvider
 from .earthquake import EarthquakeProvider
 from .ecosia import EcosiaProvider
+from .endoflife import EndOfLifeProvider
 from .eric import EricProvider
 from .es_open_data import EsOpenDataProvider
 from .eu_open_data import EuOpenDataProvider
@@ -497,6 +498,8 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     DebianProvider,
     TerraformRegistryProvider,
     IetfProvider,
+    # Software lifecycle / end-of-life
+    EndOfLifeProvider,
     # Security / vulnerabilities
     NvdProvider,
     CisaKevProvider,

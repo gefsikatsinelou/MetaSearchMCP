@@ -180,6 +180,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | Terraform Registry | `terraform` | Terraform Registry search API (reusable modules + providers for AWS, Azure, GCP, Kubernetes, ...), no key required |
 | IETF Datatracker | `ietf` | IETF Datatracker documents API (RFCs and Internet-Drafts by title/abstract, with standards level, stream and page count), no key required |
 | Software Heritage | `software_heritage` | Software Heritage origin search API (universal archive of public source code: repository URLs by keyword across GitHub, GitLab, Bitbucket, ... with visit types, snapshot availability, visit count, last-visited date and a link to the archived record), no key required |
+| endoflife.date | `endoflife` | endoflife.date JSON API (software release lifecycles and end-of-life dates for languages, runtimes, frameworks, databases and operating systems: latest release, active-support end, EOL, LTS status and the full release-cycle history), no key required |
 
 ### Academic Sources
 

@@ -149,6 +149,7 @@ from .lib_rs import LibRsProvider
 from .librivox import LibriVoxProvider
 from .lobsters import LobstersProvider
 from .loc_gov import LocGovProvider
+from .lrclib import LrclibProvider
 from .macports import MacPortsProvider
 from .mangadex import MangaDexProvider
 from .marginalia import MarginaliaProvider
@@ -412,6 +413,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     DiscogsProvider,
     DeezerProvider,
     AudiusProvider,
+    LrclibProvider,
     # Media / anime & manga
     KitsuProvider,
     AniListProvider,

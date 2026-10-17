@@ -336,6 +336,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | Discogs | `discogs` | Discogs database search API, no key required |
 | Deezer | `deezer` | Deezer public search API (streaming-catalog tracks with previews), no key required |
 | Audius | `audius` | Audius public REST API (independent, artist-uploaded music tracks with artist, genre, mood, duration, play counts and a direct stream URL when the track is streamable), no key required |
+| LRCLIB | `lrclib` | LRCLIB keyless lyrics API (song search by title or artist: track, artist, album, duration, instrumental flag, whether synced lyrics exist and a plain-lyrics preview, with the full lyrics in the result payload and a link to each track's LRCLIB page), no key required |
 | Kitsu | `kitsu` | Kitsu anime & manga catalog API (JSON:API), no key required |
 | AniList | `anilist` | AniList GraphQL API (anime, manga & light novels with synopsis, format, status, genres, community scores, popularity, studio and cover image), no key required |
 | MyAnimeList (Jikan) | `jikan` | Jikan keyless REST API mirroring MyAnimeList (anime by keyword: type, source, release status, air dates, episode count, rating, community score, rank, popularity, members, season, studios, genres, synopsis and cover image), no key required |

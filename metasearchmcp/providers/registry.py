@@ -197,6 +197,7 @@ from .osf_preprints import OSFPreprintsProvider
 from .osv import OsvProvider
 from .overpass import OverpassProvider
 from .packagist import PackagistProvider
+from .parallel import ParallelProvider
 
 # Paleontology / fossil record
 from .pbdb import PbdbProvider
@@ -300,6 +301,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     YahooProvider,
     BraveProvider,
     YouComProvider,
+    ParallelProvider,
     MwmblProvider,
     EcosiaProvider,
     MojeekProvider,

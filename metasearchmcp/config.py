@@ -78,6 +78,9 @@ class Settings(BaseSettings):
     brave_api_key: str = ""
     ydc_api_key: str = ""
 
+    # Anonymous Parallel MCP search is explicitly opt-in.
+    parallel_enabled: bool = False
+
     # API keys — developer providers
     github_token: str = ""
     stackexchange_api_key: str = ""  # optional; 10k req/day vs 300 without

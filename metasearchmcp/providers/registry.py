@@ -140,6 +140,7 @@ from .jetbrains import JetbrainsProvider
 from .jikan import JikanProvider
 from .jisho import JishoProvider
 from .jobicy import JobicyProvider
+from .jsr import JsrProvider
 from .jstage import JStageProvider
 
 # Genes / pathways / diseases / drugs
@@ -464,6 +465,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     MastodonProvider,
     BlueskyProvider,
     NpmProvider,
+    JsrProvider,
     CdnjsProvider,
     NuGetProvider,
     PackagistProvider,

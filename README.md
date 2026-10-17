@@ -146,6 +146,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | Hugging Face | `huggingface` | Hub REST API, no key required |
 | Reddit | `reddit` | Reddit API |
 | npm | `npm` | npm registry API |
+| JSR | `jsr` | JSR (@jsr) packages search API (ESM-native JavaScript/TypeScript registry for Deno, Node.js, Bun and browsers: `@scope/name` identifier, latest version, description, relevance score, version/dependency/dependent counts, runtime compatibility and linked source repository), no key required |
 | PyPI | `pypi` | JSON API |
 | RubyGems | `rubygems` | RubyGems search API |
 | crates.io | `crates` | crates.io API |

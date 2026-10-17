@@ -240,6 +240,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 |---|---|---|
 | MedlinePlus | `medlineplus` | MedlinePlus/NLM web service (consumer health topics: plain-language summary, publishing organization, alternative names, MeSH terms, topic groups), no key required |
 | DailyMed | `dailymed` | DailyMed/NLM Content Service (the official repository of FDA Structured Product Labeling documents — current prescription and OTC drug labels by drug name: title, SPL version, published date and stable setid), no key required |
+| NLM Clinical Tables | `medical_codes` | NLM Clinical Tables API (medical code sets: ICD-10-CM and ICD-11 diagnosis codes plus HCPCS procedure/supply codes, searchable by code or keyword; each hit carries the coding system, code and official description), no key required |
 
 ### Legal Sources
 

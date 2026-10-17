@@ -154,6 +154,7 @@ from .mangadex import MangaDexProvider
 from .marginalia import MarginaliaProvider
 from .mastodon import MastodonProvider
 from .maven import MavenProvider
+from .medical_codes import MedicalCodesProvider
 from .medlineplus import MedlinePlusProvider
 from .metacpan import MetaCPANProvider
 from .metmuseum import MetMuseumProvider
@@ -513,6 +514,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     DailyMedProvider,
     # Health / consumer medical
     MedlinePlusProvider,
+    MedicalCodesProvider,
     # Academic
     ArxivProvider,
     PubMedProvider,

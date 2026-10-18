@@ -170,6 +170,7 @@ from .musicbrainz import MusicBrainzProvider
 from .mwmbl import MwmblProvider
 from .mychem import MyChemProvider
 from .mygene import MyGeneProvider
+from .mymemory import MyMemoryProvider
 from .myvariant import MyVariantProvider
 from .nager import NagerDateProvider
 from .nasa import NasaProvider
@@ -336,6 +337,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     DictionaryApiProvider,
     JishoProvider,
     TatoebaProvider,
+    MyMemoryProvider,
     UrbanDictionaryProvider,
     # Scripture
     BibleProvider,

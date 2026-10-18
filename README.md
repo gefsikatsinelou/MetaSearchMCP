@@ -98,6 +98,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | Jisho | `jisho` | Japanese-English dictionary API (JMDict/JMNedict lookups with readings and JLPT level), no key required |
 | Tatoeba | `tatoeba` | Tatoeba public JSON API (collaborative example sentences with translations in hundreds of languages: sentence text, language, contributor, licence, alternative-script transcription, audio and translations into other languages), no key required |
 | Urban Dictionary | `urbandictionary` | Urban Dictionary public JSON API (crowd-sourced slang and idiom definitions: definition, example usage, author, up/down votes and submission date) with autocomplete term suggestions, no key required |
+| MyMemory | `mymemory` | MyMemory translation API (keyless phrase translation across 100+ language pairs: the machine translation plus ranked crowd-sourced alternatives, into the target language set via `language` with the source auto-detected), no key required |
 | Nobel Prize | `nobel` | Official Nobel Prize API v2 (awards by year/category), no key required |
 | OEIS | `oeis` | OEIS JSON search API (integer sequences by terms, A-number or keywords: sequence name, terms, offset, keyword flags, author), no key required |
 | Bible (bible-api.com) | `bible` | bible-api.com keyless scripture lookup (Bible passages by reference such as `john 3:16`, `romans 8:28` or a whole chapter like `psalms 23`: each verse returned with its book, chapter, verse number and World English Bible text), no key required |

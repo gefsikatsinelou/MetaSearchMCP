@@ -226,6 +226,7 @@ from .reactome import ReactomeProvider
 from .reddit import RedditProvider
 from .remoteok import RemoteOKProvider
 from .remotive import RemotiveProvider
+from .repology import RepologyProvider
 from .restcountries import RestCountriesProvider
 from .ror import RorProvider
 from .rubygems import RubyGemsProvider
@@ -480,6 +481,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     AurProvider,
     PyPIProvider,
     RubyGemsProvider,
+    RepologyProvider,
     RUniverseProvider,
     CratesIoProvider,
     LibRsProvider,

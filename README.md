@@ -211,6 +211,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | ORCID | `orcid` | ORCID public API (researcher profiles), no key required |
 | ROR | `ror` | Research Organization Registry API (universities, institutes, labs), no key required |
 | UniProt | `uniprot` | UniProt REST API (protein knowledgebase), no key required |
+| PRIDE Archive | `pride` | EMBL-EBI PRIDE Archive search API (mass-spectrometry proteomics datasets: project accession such as `PXD039769`, title, description, organisms, instruments, principal investigators and affiliations, experiment and quantification methods and download counts), no key required |
 | MyGene.info | `mygene` | BioThings MyGene.info gene annotation API (gene symbols, names, organism, chromosome, aliases), no key required |
 | NCBI Gene | `ncbi_gene` | NCBI Gene E-utilities API (genes across all sequenced organisms, free-text search by symbol, name, disease, chromosome or organism: NCBI Gene id, official symbol, description, source organism, chromosome, map location and aliases), no key required |
 | MyVariant.info | `myvariant` | BioThings MyVariant.info variant annotation API (dbSNP rsID, gene, protein/coding change, ClinVar significance and conditions, CADD score), no key required |

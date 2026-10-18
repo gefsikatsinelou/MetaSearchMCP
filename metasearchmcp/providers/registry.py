@@ -211,6 +211,7 @@ from .pkg_go_dev import PkgGoDevProvider
 from .plos import PlosProvider
 from .poetrydb import PoetryDbProvider
 from .pokeapi import PokeapiProvider
+from .pride import PrideProvider
 from .propublica_nonprofits import ProPublicaNonprofitsProvider
 from .pubchem import PubChemProvider
 from .pubdev import PubDevProvider
@@ -564,6 +565,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     MyVariantProvider,
     NcbiGeneProvider,
     RcsbPdbProvider,
+    PrideProvider,
     OlsProvider,
     ReactomeProvider,
     InterProProvider,

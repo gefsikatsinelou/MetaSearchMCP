@@ -21,6 +21,9 @@ from .anaconda import AnacondaProvider
 # Media / anime & manga
 from .anilist import AniListProvider
 
+# Infrastructure-as-code / configuration management
+from .ansible_galaxy import AnsibleGalaxyProvider
+
 # Package registries / developer
 from .archlinux import ArchLinuxProvider
 from .artic import ArticProvider
@@ -499,6 +502,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     ChocolateyProvider,
     DebianProvider,
     TerraformRegistryProvider,
+    AnsibleGalaxyProvider,
     IetfProvider,
     # Software lifecycle / end-of-life
     EndOfLifeProvider,

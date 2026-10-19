@@ -64,6 +64,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | Yahoo | `yahoo` | HTML scraping, best effort |
 | Brave | `brave` | Official Search API |
 | You.com | `youcom` | Official Search API |
+| [Parallel](https://docs.parallel.ai/integrations/mcp/search-mcp) | `parallel` | Anonymous Search MCP, Fast mode; opt-in with `PARALLEL_ENABLED=true` |
 | Mwmbl | `mwmbl` | Public JSON API |
 | Marginalia | `marginalia` | Public JSON API, no key required |
 | Ecosia | `ecosia` | HTML scraping |
@@ -518,6 +519,38 @@ Or with Compose:
 ```bash
 docker compose up --build
 ```
+
+### Optional Parallel web search
+
+[Parallel Search MCP](https://docs.parallel.ai/integrations/mcp/search-mcp)
+provides free web search in Fast mode without an account or API key. It is
+disabled by default. Add this to `.env` (or your MCP server's `env` configuration)
+and restart MetaSearchMCP:
+
+```dotenv
+PARALLEL_ENABLED=true
+```
+
+If you use the `ENABLED_PROVIDERS` allowlist, include `parallel` alongside your
+other choices. Then select it through the HTTP API:
+
+```bash
+curl -X POST http://localhost:8000/search \
+  -H "Content-Type: application/json" \
+  -d '{"query":"Python asyncio task cancellation","providers":["parallel"],"params":{"num_results":5}}'
+```
+
+For MCP, call `search_web` with
+`{"query":"Python asyncio task cancellation","providers":["parallel"],"num_results":5}`.
+Results include URLs, titles, excerpts and publication dates when available.
+`num_results` and `MAX_RESULTS_PER_PROVIDER` cap results locally;
+`max_total_results` still caps the merged response. Full excerpts are retained
+in each result's `extra.excerpts`.
+
+This provider uses Streamable HTTP and requires `mcp>=1.24.0,<2`, included by the
+normal installation. Anonymous usage has service rate limits. Language, country
+and safe-search settings are not forwarded because the anonymous endpoint does
+not expose those controls. This adapter provides search only.
 
 ## HTTP API
 

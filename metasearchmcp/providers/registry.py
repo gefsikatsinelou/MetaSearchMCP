@@ -74,6 +74,7 @@ from .datacite import DataCiteProvider
 from .datamuse import DatamuseProvider
 from .dblp import DBLPProvider
 from .dbnomics import DBnomicsProvider
+from .dbpedia import DBpediaProvider
 from .debian import DebianProvider
 from .deezer import DeezerProvider
 from .dictionaryapi import DictionaryApiProvider
@@ -335,6 +336,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     CommonCrawlProvider,
     LocGovProvider,
     # Knowledge / reference
+    DBpediaProvider,
     DatamuseProvider,
     DictionaryApiProvider,
     JishoProvider,

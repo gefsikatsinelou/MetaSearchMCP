@@ -82,6 +82,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 |---|---|---|
 | Wikipedia | `wikipedia` | MediaWiki API |
 | Wikidata | `wikidata` | Wikidata API |
+| DBpedia | `dbpedia` | DBpedia Lookup API (linked-data entities extracted from Wikipedia: entity label, abstract, ontology types, inbound-link reference count and category memberships, linking to the DBpedia resource page), no key required |
 | Wikiquote | `wikiquote` | MediaWiki API |
 | Wikisource | `wikisource` | MediaWiki API, no key required |
 | Wikibooks | `wikibooks` | MediaWiki API, no key required |

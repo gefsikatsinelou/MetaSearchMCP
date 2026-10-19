@@ -29,6 +29,12 @@ from metasearchmcp.contracts import (
     SearchEnvelope,
     SearchReport,
 )
+from metasearchmcp.health import (
+    DEFAULT_MAX_PROBES,
+    DEFAULT_PROBE_QUERY,
+    DEFAULT_PROBE_TIMEOUT,
+    probe_providers,
+)
 from metasearchmcp.orchestrator import run_search_plan
 from metasearchmcp.providers.base import (
     BaseProvider,
@@ -217,6 +223,43 @@ async def health(
         "provider_count": len(registry),
         "providers": provider_names,
     }
+
+
+@router.get(
+    "/health/providers",
+    summary="Actively probe providers with a minimal live search request",
+)
+async def provider_health(
+    registry: Annotated[dict[str, BaseProvider], Depends(_get_registry)],
+    providers: Annotated[list[str] | None, Query()] = None,
+    tag: Annotated[list[str] | None, Query()] = None,
+    tag_match: Annotated[Literal["any", "all"], Query()] = "any",
+    q: Annotated[str, Query(min_length=1, max_length=200)] = DEFAULT_PROBE_QUERY,
+    timeout: Annotated[float, Query(gt=0, le=30)] = DEFAULT_PROBE_TIMEOUT,
+    limit: Annotated[int, Query(ge=1, le=50)] = DEFAULT_MAX_PROBES,
+) -> dict[str, Any]:
+    """Probe each selected provider with a real, minimal search.
+
+    ``GET /health`` only reports which providers are loaded, and the
+    configuration-level ``provider_health`` MCP tool only checks whether a
+    provider could run (e.g. API key present). This endpoint performs an
+    actual search so callers can tell whether the upstream APIs are
+    reachable. Probes run concurrently, share one per-provider timeout, and
+    are capped by ``limit`` to avoid hammering dozens of upstreams at once.
+    """
+    selected = pick_providers_by_tags(registry, tag or [], match=tag_match)
+    selected = pick_named_providers(selected, providers or [])
+    if not selected:
+        raise HTTPException(
+            status_code=HTTPStatus.SERVICE_UNAVAILABLE,
+            detail=NO_PROVIDERS_MSG,
+        )
+    return await probe_providers(
+        list(selected.values()),
+        query=q,
+        timeout_seconds=timeout,
+        max_providers=limit,
+    )
 
 
 @router.get(

@@ -641,6 +641,26 @@ curl "http://localhost:8000/providers?tag=code&tag=packages&tag_match=all"
 
 Simple health check endpoint. Returns service status, version, provider count, and the current provider name list.
 
+### `GET /health/providers`
+
+Actively probe providers with a single, minimal live search request each. Unlike `GET /health` (which only lists what is loaded) and the configuration-level `provider_health` MCP tool (which only checks whether a provider *could* run, e.g. an API key is present), this endpoint proves the upstream API is reachable.
+
+```bash
+curl "http://localhost:8000/health/providers?tag=academic&limit=5&timeout=5"
+```
+
+Query parameters:
+
+| Parameter | Default | Description |
+|-----------|---------|-------------|
+| `providers` | all | Repeatable provider name filter |
+| `tag` | all | Repeatable tag filter (combine with `tag_match=all` to require every tag) |
+| `q` | `test` | Probe query sent to each provider |
+| `timeout` | `5` | Per-provider timeout in seconds (max 30) |
+| `limit` | `10` | Maximum number of providers to contact (max 50); the rest are listed under `skipped` |
+
+Probes run concurrently. Each entry in `providers` reports `name`, `status` (`ok`, `error`, `timeout`, or `unavailable`), `available`, `latency_ms`, `result_count`, `error`, `description`, and `tags`. The top level reports `status` (`ok` when nothing failed, otherwise `degraded`), `total`, `probed`, `ok_count`, `failed_count`, `unavailable_count`, and `skipped`.
+
 ### `GET /cache/stats`
 
 Inspect the shared in-memory search result cache (used by the orchestrator to avoid re-hitting external providers for identical requests within the TTL window).
@@ -768,6 +788,7 @@ The public package is organized around these modules:
 - `orchestrator.py`: concurrent search execution across providers and result assembly
 - `merge.py`: URL canonicalization and cross-engine result deduplication
 - `ranking.py`: optional consensus/relevance result re-ranking (opt-in via `RANK_RESULTS`)
+- `health.py`: active provider probes (minimal live search per provider, used by `/health/providers`)
 - `server.py`: FastAPI application and Uvicorn server entrypoint
 - `broker.py`: MCP server exposing search tools over stdio
 - `api/routes.py`: HTTP endpoint handlers (search, suggest, health, providers catalog)

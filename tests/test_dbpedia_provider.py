@@ -15,8 +15,10 @@ _SAMPLE_RESPONSE: dict[str, object] = {
             "resource": ["http://dbpedia.org/resource/Berlin"],
             "typeName": ["Settlement", "City", "Place"],
             "comment": [
-                "<B>Berlin</B> is the capital and largest city of Germany by "
-                "both area and population."
+                (
+                    "<B>Berlin</B> is the capital and largest city of Germany by "
+                    "both area and population."
+                )
             ],
             "label": ["<B>Berlin</B>"],
             "id": ["http://dbpedia.org/resource/Berlin"],

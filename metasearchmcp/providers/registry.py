@@ -59,6 +59,7 @@ from .clojars import ClojarsProvider
 from .cocktaildb import CocktailDBProvider
 from .codeberg import CodebergProvider
 from .coingecko import CoinGeckoProvider
+from .col import ColProvider
 from .common_crawl import CommonCrawlProvider
 from .courtlistener import CourtListenerProvider
 
@@ -359,6 +360,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     # Nature / biodiversity
     INaturalistProvider,
     GBIFSpeciesProvider,
+    ColProvider,
     # Paleontology / fossil record
     PbdbProvider,
     # Natural hazards / seismology

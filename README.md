@@ -127,6 +127,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 |---|---|---|
 | iNaturalist | `inaturalist` | Observations REST API, no key required |
 | GBIF | `gbif` | GBIF species backbone REST API, no key required |
+| Catalogue of Life | `col` | Catalogue of Life / ChecklistBank name-usage search API (the global index of the world's known species by scientific or common name: matched taxon, authorship, rank, nomenclatural status, full ancestor classification from kingdom to genus, taxonomic group and vernacular names), no key required |
 
 ### Natural Hazards And Seismology
 

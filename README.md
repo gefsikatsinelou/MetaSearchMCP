@@ -63,6 +63,7 @@ Provider priority for `/search/google` is now `google` first, then `google_serpb
 | Bing | `bing` | RSS feed |
 | Yahoo | `yahoo` | HTML scraping, best effort |
 | Brave | `brave` | Official Search API |
+| Keenable | `keenable` | Official Search API (`KEENABLE_API_KEY`) |
 | You.com | `youcom` | Official Search API |
 | Mwmbl | `mwmbl` | Public JSON API |
 | Marginalia | `marginalia` | Public JSON API, no key required |
@@ -457,6 +458,7 @@ AGGREGATOR_TIMEOUT=15
 SERPBASE_API_KEY=
 SERPER_API_KEY=
 BRAVE_API_KEY=
+KEENABLE_API_KEY=
 YDC_API_KEY=
 GITHUB_TOKEN=
 STACKEXCHANGE_API_KEY=

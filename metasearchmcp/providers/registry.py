@@ -147,6 +147,7 @@ from .jisho import JishoProvider
 from .jobicy import JobicyProvider
 from .jsr import JsrProvider
 from .jstage import JStageProvider
+from .keenable import KeenableProvider
 
 # Genes / pathways / diseases / drugs
 from .kegg import KeggProvider
@@ -310,6 +311,7 @@ _ALL_PROVIDER_CLASSES: list[type[BaseProvider]] = [
     YahooProvider,
     BraveProvider,
     YouComProvider,
+    KeenableProvider,
     MwmblProvider,
     EcosiaProvider,
     MojeekProvider,
